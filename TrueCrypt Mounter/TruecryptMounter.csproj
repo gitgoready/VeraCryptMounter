@@ -23,7 +23,8 @@
     <SccProvider>SubversionScc</SccProvider>
     <SignManifests>false</SignManifests>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <AssemblyOriginatorKeyFile>TruecryptMounter.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -236,7 +237,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="TruecryptMounter.pfx" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
