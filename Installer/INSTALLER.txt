@@ -1,0 +1,2 @@
+After compile of release place following files into "install files" folder to make installer.
+
