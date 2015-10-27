@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrueCrypt_Mounter
@@ -34,12 +28,11 @@ namespace TrueCrypt_Mounter
             {
                 if (textBoxPassword_first.Text == textBoxPassword_second.Text)
                 {
-                    bool res = passwordTest();
-                    if (res == true)
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        Close();
-                    }
+                    _config.Password = textBoxPassword_first.Text;
+                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordtest, "Waldmann");
+                    this.DialogResult = DialogResult.OK;
+                    Close();
+                    
                 }
             }
             else
