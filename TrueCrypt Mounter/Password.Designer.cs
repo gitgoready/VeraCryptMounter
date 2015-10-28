@@ -36,7 +36,9 @@
             this.labelPassword_first = new System.Windows.Forms.Label();
             this.labelPassword_second = new System.Windows.Forms.Label();
             this.buttonReset = new System.Windows.Forms.Button();
-            this.labelState = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxPassword_first
@@ -46,6 +48,7 @@
             this.textBoxPassword_first.Size = new System.Drawing.Size(257, 20);
             this.textBoxPassword_first.TabIndex = 0;
             this.textBoxPassword_first.UseSystemPasswordChar = true;
+            this.textBoxPassword_first.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPassword_first_KeyPress);
             // 
             // textBoxPassword_second
             // 
@@ -55,10 +58,11 @@
             this.textBoxPassword_second.TabIndex = 1;
             this.textBoxPassword_second.UseSystemPasswordChar = true;
             this.textBoxPassword_second.TextChanged += new System.EventHandler(this.textBoxPassword_second_TextChanged);
+            this.textBoxPassword_second.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPassword_second_KeyPress);
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(113, 106);
+            this.buttonOK.Location = new System.Drawing.Point(113, 92);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 2;
@@ -68,7 +72,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(194, 106);
+            this.buttonCancel.Location = new System.Drawing.Point(194, 92);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 3;
@@ -90,13 +94,13 @@
             this.labelPassword_second.AutoSize = true;
             this.labelPassword_second.Location = new System.Drawing.Point(9, 52);
             this.labelPassword_second.Name = "labelPassword_second";
-            this.labelPassword_second.Size = new System.Drawing.Size(53, 13);
+            this.labelPassword_second.Size = new System.Drawing.Size(90, 13);
             this.labelPassword_second.TabIndex = 6;
-            this.labelPassword_second.Text = "Password";
+            this.labelPassword_second.Text = "Retype Password";
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(13, 106);
+            this.buttonReset.Location = new System.Drawing.Point(13, 92);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 4;
@@ -104,22 +108,29 @@
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
-            // labelState
+            // statusStrip1
             // 
-            this.labelState.AutoSize = true;
-            this.labelState.ForeColor = System.Drawing.Color.Red;
-            this.labelState.Location = new System.Drawing.Point(234, 89);
-            this.labelState.Name = "labelState";
-            this.labelState.Size = new System.Drawing.Size(20, 13);
-            this.labelState.TabIndex = 7;
-            this.labelState.Text = "fail";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 137);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(284, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // Password
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 143);
-            this.Controls.Add(this.labelState);
+            this.ClientSize = new System.Drawing.Size(284, 159);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.labelPassword_second);
             this.Controls.Add(this.labelPassword_first);
@@ -127,9 +138,12 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.textBoxPassword_second);
             this.Controls.Add(this.textBoxPassword_first);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Password";
-            this.Text = "Password";
+            this.Text = "Input Password";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,6 +158,7 @@
         private System.Windows.Forms.Label labelPassword_first;
         private System.Windows.Forms.Label labelPassword_second;
         private System.Windows.Forms.Button buttonReset;
-        private System.Windows.Forms.Label labelState;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

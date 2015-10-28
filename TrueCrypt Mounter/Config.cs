@@ -37,16 +37,6 @@ namespace TrueCrypt_Mounter
         private string _mGroupName = "profile";
         private string _xmlPathName;
 
-        private static string _password;
-
-        /// <summary>
-        /// encryption password
-        /// </summary>
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; }
-        }
 
         /// <summary>
         /// Get or set the path to the xml config file.
@@ -233,7 +223,7 @@ namespace TrueCrypt_Mounter
                 writer.WriteStartElement("add");
                 writer.WriteAttributeString("key", null, entry);
                 //encode string with aes
-                writer.WriteAttributeString("value", null, StringCipher.Encrypt(value.ToString(), _password));
+                writer.WriteAttributeString("value", null, StringCipher.Encrypt(value.ToString(), Password_helper.Password));
 
                 writer.WriteEndElement();
                 writer.WriteEndElement();
@@ -329,7 +319,7 @@ namespace TrueCrypt_Mounter
 
                 // Update the value attribute
                 attribute = doc.CreateAttribute("value");
-                attribute.Value = value.ToString();
+                attribute.Value = StringCipher.Encrypt(value.ToString(), Password_helper.Password);
                 entryNode.Attributes.Append(attribute);
             }
 
@@ -551,7 +541,8 @@ namespace TrueCrypt_Mounter
                 {
                     XmlNode entryNode = root.SelectSingleNode(GroupNameSlash + section + "/add[@key=\"" + entry + "\"]");
                     string value = entryNode.Attributes["value"].Value;
-                    value = StringCipher.Decrypt(value, _password);
+                    //encrypt value
+                    value = StringCipher.Decrypt(value, Password_helper.Password);
                     return value;
                 }
                 return null;

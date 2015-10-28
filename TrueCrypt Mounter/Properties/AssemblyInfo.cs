@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TrueCrypt Mounter")]
-[assembly: AssemblyCopyright("Copyright © 2009 Rafael Grothmann")]
+[assembly: AssemblyCopyright("Copyright © 2015 Rafael Grothmann")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

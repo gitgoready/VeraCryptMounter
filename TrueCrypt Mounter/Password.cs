@@ -14,7 +14,7 @@ namespace TrueCrypt_Mounter
         public Password()
         {
             InitializeComponent();
-            //_config = Singleton<ConfigManager>.Instance.Init(_config);
+            toolStripStatusLabel1.Text = "";
             
             if (File.Exists(string.Format("{0}\\TRM.config", Application.StartupPath)))
             {
@@ -29,27 +29,23 @@ namespace TrueCrypt_Mounter
             {
                 if (textBoxPassword_first.Text == textBoxPassword_second.Text)
                 {
-                    //_config.Password = textBoxPassword_first.Text;
-                    //_config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordtest, "Waldmann");
-                    var init = new Password_helper(textBoxPassword_first.Text);
+                    Password_helper.Password = textBoxPassword_first.Text;
                     this.DialogResult = DialogResult.OK;
-                    Close();
-                    
+                    Close();                  
                 }
+                return;
             }
             else
             {
-                var init = new Password_helper(textBoxPassword_first.Text);
-                //var storedValue = (string)_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordtest);
-                if (init.Check_password())
+                Password_helper.Password = textBoxPassword_first.Text;
+                if (Password_helper.Check_password())
                 {
                     this.DialogResult = DialogResult.OK;
                     Close();
                 }
                 else
                 {
-                    labelState.Text = "Password Wrong";
-                    labelState.ForeColor = Color.Red;
+                    Set_wrong();
                     return;
                 }
             }
@@ -63,20 +59,52 @@ namespace TrueCrypt_Mounter
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
+            var result = MessageBox.Show("to reset the password config will be deleted", "Delete Config", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
+            if (result == DialogResult.Cancel)
+                return;
+
+            if (File.Exists(string.Format("{0}\\TRM.config", Application.StartupPath)))
+            {
+                File.Delete(string.Format("{0}\\TRM.config", Application.StartupPath));
+            }
+            Application.Restart();
         }
 
         private void textBoxPassword_second_TextChanged(object sender, EventArgs e)
         {
             if (textBoxPassword_first.Text == textBoxPassword_second.Text)
             {
-                labelState.Text = "equel";
-                labelState.ForeColor = Color.Green;
+                toolStripStatusLabel1.Text = "equel";
+                toolStripStatusLabel1.ForeColor = Color.Green;
             }
             else
             {
-                labelState.Text = "not equel";
-                labelState.ForeColor = Color.Red;
+                toolStripStatusLabel1.Text = "not equel";
+                toolStripStatusLabel1.ForeColor = Color.Red;
+            }
+        }
+
+        private void Set_wrong()
+        {
+            toolStripStatusLabel1.Text = "wrong password";
+            toolStripStatusLabel1.ForeColor = Color.Red;
+            return;
+        }
+
+        private void textBoxPassword_first_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                buttonOK_Click(sender, new EventArgs());
+            }
+        }
+
+        private void textBoxPassword_second_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                buttonOK_Click(sender, new EventArgs());
             }
         }
     }
