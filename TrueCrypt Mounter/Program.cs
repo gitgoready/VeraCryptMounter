@@ -74,7 +74,7 @@ namespace TrueCrypt_Mounter
             //{
             //    Console.WriteLine(e.Message);
             //}
-            _driveliste = DrivelettersHelper.GetUsedDriveletter();
+            //_driveliste = DrivelettersHelper.GetUsedDriveletter();
             bool createdNew;
             using (var mutex = new Mutex(true, "TrueCryptMounter", out createdNew))
             {

@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automountusb.cs" />
+    <Compile Include="Password_helper.cs" />
     <Compile Include="Password.cs">
       <SubType>Form</SubType>
     </Compile>

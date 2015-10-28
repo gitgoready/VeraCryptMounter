@@ -232,7 +232,9 @@ namespace TrueCrypt_Mounter
                 writer.WriteStartElement(section);
                 writer.WriteStartElement("add");
                 writer.WriteAttributeString("key", null, entry);
-                writer.WriteAttributeString("value", null, value.ToString());
+                //encode string with aes
+                writer.WriteAttributeString("value", null, StringCipher.Encrypt(value.ToString(), _password));
+
                 writer.WriteEndElement();
                 writer.WriteEndElement();
                 if (hasGroupName)
@@ -548,7 +550,9 @@ namespace TrueCrypt_Mounter
                 if (root != null)
                 {
                     XmlNode entryNode = root.SelectSingleNode(GroupNameSlash + section + "/add[@key=\"" + entry + "\"]");
-                    return entryNode.Attributes["value"].Value;
+                    string value = entryNode.Attributes["value"].Value;
+                    value = StringCipher.Decrypt(value, _password);
+                    return value;
                 }
                 return null;
             }

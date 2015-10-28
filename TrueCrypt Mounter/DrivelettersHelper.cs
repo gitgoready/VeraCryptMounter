@@ -68,9 +68,7 @@ namespace TrueCrypt_Mounter
 
         public static string[] GetUsedDriveletter()
         {
-            string[] useddriveletters = Directory.GetLogicalDrives();
-
-            return useddriveletters;
+            return Directory.GetLogicalDrives();
         }
 
         public static bool IsDriveletterFree(string letter)

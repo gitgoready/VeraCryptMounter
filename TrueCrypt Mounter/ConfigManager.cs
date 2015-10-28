@@ -73,6 +73,56 @@ namespace TrueCrypt_Mounter
 
             return conf;
         }
+
+        /// <summary>
+        /// initialized the singelton.
+        /// </summary>
+        /// <param name="conf"></param>
+        /// <returns></returns>
+        public Config Init(Config conf, string password)
+        {
+            conf.XmlPathName = string.Format("{0}\\TRM.config", Application.StartupPath);
+            conf.GroupName = null;
+            conf.Password = password;
+
+            if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Type))
+                conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Type, ConfigTrm.Automount.Typename);
+
+            if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Useusbautomount))
+                conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Useusbautomount, false);
+
+            if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Usestartautomount))
+                conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Usestartautomount, false);
+
+            if (!conf.HasEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Type))
+                conf.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Type, ConfigTrm.Mainconfig.Typename);
+
+            if (!conf.HasEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Defaultlanguage))
+                conf.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Defaultlanguage, "E");
+
+            if (!conf.HasEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language))
+                conf.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language,
+                              Application.StartupPath + "\\language.xml");
+
+            if (conf.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Languagefile, "") !=
+                Application.StartupPath + "\\language.xml")
+            {
+                conf.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Languagefile,
+                              Application.StartupPath + "\\language.xml");
+            }
+
+            if (conf.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Potable, false))
+            {
+                if (conf.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, "") !=
+                    Application.StartupPath + "\\TrueCrypt\\TrueCrypt.exe")
+                {
+                    conf.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath,
+                                  Application.StartupPath + "\\TrueCrypt\\TrueCrypt.exe");
+                }
+            }
+
+            return conf;
+        }
     }
 
     /// <summary>
