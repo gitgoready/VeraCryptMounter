@@ -137,7 +137,7 @@ namespace TrueCrypt_Mounter
             {
                 DisableKeyfilekontainer();
             }
-
+            
             _cbdrive.Clear();
             _cbkontainer.Clear();
             _mounteddrives.Clear();
@@ -389,14 +389,14 @@ namespace TrueCrypt_Mounter
             if (!TrueCrypt_Mounter.Validate.ValidateConfig())
             {
                 Busy();
-                labelNotification.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ValidateMessage", _language);
-                labelNotification.ForeColor = Color.Red;
-                labelNotification.Visible = true;
+                toolStripLabelNotification.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ValidateMessage", _language);
+                toolStripLabelNotification.ForeColor = Color.Red;
+                toolStripLabelNotification.Visible = true;
             }
             else
             {
                 Normal();
-                labelNotification.Visible = false;
+                toolStripLabelNotification.Visible = false;
             }
         }     
 
@@ -466,7 +466,7 @@ namespace TrueCrypt_Mounter
             const bool beep = false;
             const bool force = false;
 
-            labelNotification.Visible = false;
+            toolStripLabelNotification.Visible = false;
 
             try
             {
@@ -575,7 +575,7 @@ namespace TrueCrypt_Mounter
 
         private void ButtonDismountDrive_Click(object sender, EventArgs e)
         {
-            labelNotification.Visible = false;
+            toolStripLabelNotification.Visible = false;
             try
             {
                 // Test if entry in driverbox is chosen. 
@@ -628,7 +628,7 @@ namespace TrueCrypt_Mounter
             string key = null;
             
 
-            labelNotification.Visible = false;
+            toolStripLabelNotification.Visible = false;
 
             try
             {
@@ -738,7 +738,7 @@ namespace TrueCrypt_Mounter
 
         private void ButtonDismountContainer_Click(object sender, EventArgs e)
         {
-            labelNotification.Visible = false;
+            toolStripLabelNotification.Visible = false;
 
             try
             {
@@ -789,7 +789,7 @@ namespace TrueCrypt_Mounter
 
         private void ButtonKeyfileContainerMount_Click(object sender, EventArgs e)
         {
-            labelNotification.Visible = false;
+            toolStripLabelNotification.Visible = false;
             try
             {
                 //Test if Keyfilecontainer is mounted or driveletter is used.
@@ -836,7 +836,7 @@ namespace TrueCrypt_Mounter
 
         private void ButtonKeyfileContainerDismount_Click(object sender, EventArgs e)
         {
-            labelNotification.Visible = false;
+            toolStripLabelNotification.Visible = false;
             try
             {
                 //Test if Keyfilecontainer is mounted.
@@ -1305,16 +1305,16 @@ namespace TrueCrypt_Mounter
         {
             if (result == 0)
             {
-                labelNotification.ForeColor = Color.Green;
-                labelNotification.Text = _lablesuccseed;
-                labelNotification.Visible = true;
+                toolStripLabelNotification.ForeColor = Color.Green;
+                toolStripLabelNotification.Text = _lablesuccseed;
+                toolStripLabelNotification.Visible = true;
 
             }
             else
             {
-                labelNotification.ForeColor = Color.Red;
-                labelNotification.Text = _lablefailed;
-                labelNotification.Visible = true;
+                toolStripLabelNotification.ForeColor = Color.Red;
+                toolStripLabelNotification.Text = _lablefailed;
+                toolStripLabelNotification.Visible = true;
             }
 
         }
@@ -1355,7 +1355,7 @@ namespace TrueCrypt_Mounter
             {
                 StopProgressbar();
             }
-            if (labelNotification.InvokeRequired)
+            if (statusStrip1.InvokeRequired)
             {
                 SetLableNotificationDelegate set = SetLableNotification;
                 Invoke(set, new object[] { completion });
@@ -1399,7 +1399,7 @@ namespace TrueCrypt_Mounter
             {
                 StopProgressbar();
             }
-            if (labelNotification.InvokeRequired)
+            if (statusStrip1.InvokeRequired)
             {
                 SetLableNotificationDelegate set = SetLableNotification;
                 Invoke(set, new object[] { completion });
@@ -1444,7 +1444,7 @@ namespace TrueCrypt_Mounter
             {
                 StopProgressbar();
             }
-            if (labelNotification.InvokeRequired)
+            if (statusStrip1.InvokeRequired)
             {
                 SetLableNotificationDelegate set = SetLableNotification;
                 Invoke(set, new object[] { completion });
@@ -1489,7 +1489,7 @@ namespace TrueCrypt_Mounter
             {
                 StopProgressbar();
             }
-            if (labelNotification.InvokeRequired)
+            if (statusStrip1.InvokeRequired)
             {
                 SetLableNotificationDelegate set = SetLableNotification;
                 Invoke(set, new object[] { completion });

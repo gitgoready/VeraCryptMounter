@@ -87,8 +87,6 @@ namespace TrueCrypt_Mounter
                                     byte[] plainTextBytes = new byte[cipherTextBytes.Length];
                                     int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
                                     return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
-
-
                                 }
                             }
                         }

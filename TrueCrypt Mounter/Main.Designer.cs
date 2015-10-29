@@ -73,12 +73,16 @@ namespace TrueCrypt_Mounter
             this.buttonDismountContainer = new System.Windows.Forms.Button();
             this.buttonMountContainer = new System.Windows.Forms.Button();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripLabelNotification = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1.SuspendLayout();
             this.groupBoxDrive.SuspendLayout();
             this.groupBoxNotification.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.groupBoxKeyfileContainer.SuspendLayout();
             this.groupBoxContainer.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -204,7 +208,7 @@ namespace TrueCrypt_Mounter
             // toolStripMenuVersion
             // 
             this.toolStripMenuVersion.Name = "toolStripMenuVersion";
-            this.toolStripMenuVersion.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuVersion.Size = new System.Drawing.Size(112, 22);
             this.toolStripMenuVersion.Text = "Version";
             this.toolStripMenuVersion.Click += new System.EventHandler(this.ToolStripMenuVersion_Click);
             // 
@@ -435,11 +439,34 @@ namespace TrueCrypt_Mounter
             this.buttonMountContainer.UseVisualStyleBackColor = true;
             this.buttonMountContainer.Click += new System.EventHandler(this.ButtonMountContainer_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabelNotification,
+            this.toolStripProgressBar});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 315);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(394, 22);
+            this.statusStrip1.TabIndex = 14;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripLabelNotification
+            // 
+            this.toolStripLabelNotification.Name = "toolStripLabelNotification";
+            this.toolStripLabelNotification.Size = new System.Drawing.Size(118, 17);
+            this.toolStripLabelNotification.Text = "toolStripStatusLabel1";
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
             // TrueCryptMounter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 312);
+            this.ClientSize = new System.Drawing.Size(394, 337);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBoxContainer);
             this.Controls.Add(this.groupBoxDrive);
             this.Controls.Add(this.menuStrip1);
@@ -464,6 +491,8 @@ namespace TrueCrypt_Mounter
             this.groupBoxKeyfileContainer.ResumeLayout(false);
             this.groupBoxContainer.ResumeLayout(false);
             this.groupBoxContainer.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -511,6 +540,9 @@ namespace TrueCrypt_Mounter
         private ToolTip toolTipMain;
         private CheckBox checkBoxClearPasswordContainer;
         private ToolStripMenuItem automountConfigToolStripMenuItem;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripLabelNotification;
+        private ToolStripProgressBar toolStripProgressBar;
     }
 }
 
