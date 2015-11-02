@@ -54,6 +54,7 @@ namespace TrueCrypt_Mounter
         private string _language;
         private string _passwordDrive;
         private string _passwordContainer;
+        private string _pim;
         private string _lablefailed;
         private string _lablesuccseed;
         private TaskbarManager windowsTaskbar;
@@ -74,6 +75,12 @@ namespace TrueCrypt_Mounter
             set { _passwordContainer = value; }
         }
 
+        public string Pim
+        {
+            get { return null; }
+            set { _pim = value; }
+        }
+
         #endregion
 
         #region Delegates
@@ -86,7 +93,7 @@ namespace TrueCrypt_Mounter
                                                 bool beep, bool force, bool readOnly, bool removable, int iterations);
 
         public delegate int MountContainerDelegate(string path, string driveletter, string keyfile, string password, bool silent,
-                                                   bool beep, bool force, bool readOnly, bool removable);
+                                                   bool beep, bool force, bool readOnly, bool removable, bool tc, string pim);
 
         public delegate int DismountDelegate(string driveletter, bool silent, bool beep, bool force);
 
@@ -243,9 +250,6 @@ namespace TrueCrypt_Mounter
                     groupBoxKeyfileContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
                                                                                          "groupBoxKeyfileContainer",
                                                                                          _language);
-                    groupBoxNotification.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                     "groupBoxNotification",
-                                                                                     _language);
                     checkBoxClearPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
                                                                                       "checkBoxClearPassword",
                                                                                       _language);
@@ -509,7 +513,8 @@ namespace TrueCrypt_Mounter
                 {
                     try
                     {
-                        ShowPassworteingabe(ConfigTrm.Drive.Typename);
+                        ShowPassworteingabe(ConfigTrm.Drive.Typename, 
+                            _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Pim, false));
                     }
                     catch (Exception ex)
                     {
@@ -675,7 +680,8 @@ namespace TrueCrypt_Mounter
                 {
                     try
                     {
-                        ShowPassworteingabe(ConfigTrm.Container.Typename);
+                        ShowPassworteingabe(ConfigTrm.Container.Typename, 
+                            _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, false));
                     }
                     catch (Exception ex)
                     {
@@ -712,14 +718,18 @@ namespace TrueCrypt_Mounter
 
             string path = '\u0022' + _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Kontainerpath, "") +
                           '\u0022';
-            bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable,
-                                              false);
-            bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly,
-                                             false);
+            bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable, false);
+            bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly, false);
+            bool tc = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Truecrypt, false);
+
+            //if pim isnt used set to null
+            if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, false))
+                _pim = null;
+
 
             MountContainerDelegate mountcontainer = Mount.MountContainer;
 
-            mountcontainer.BeginInvoke(path, dletter, key, _passwordContainer, silent, beep, force, readOnly, removable,
+            mountcontainer.BeginInvoke(path, dletter, key, _passwordContainer, silent, beep, force, readOnly, removable, tc, _pim,
                                        CallbackHandlerMountContainer, mountcontainer);
 
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
@@ -1159,10 +1169,14 @@ namespace TrueCrypt_Mounter
         #endregion
 
         #region Passwordinput
-
-        public void ShowPassworteingabe(string chosen)
+        /// <summary>
+        /// Window for password input and pim
+        /// </summary>
+        /// <param name="chosen">string for drive or container</param>
+        /// <param name="pim">bool pim used or not</param>
+        public void ShowPassworteingabe(string chosen, bool pim)
         {
-            var passwortDialog = new Passwordinput(this, chosen);
+            var passwortDialog = new Passwordinput(this, chosen, pim);
 
             // Call Passwordinput form.
             passwortDialog.ShowDialog();
@@ -1516,14 +1530,12 @@ namespace TrueCrypt_Mounter
    
         void EnableKeyfilekontainer()
         {
-            groupBoxNotification.Location = new Point(7, 250);
-            this.Size = new Size(400, 340);
+            this.Size = new Size(410, 308);
         }
 
         void DisableKeyfilekontainer()
         {
-            groupBoxNotification.Location = new Point(7, 198);
-            this.Size = new Size(400, 288);
+            this.Size = new Size(410, 250);
             
         }
     }

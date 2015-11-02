@@ -54,6 +54,7 @@ namespace TrueCrypt_Mounter
         private void LanguageFill()
         {
             Text = LanguagePool.GetInstance().GetString(LanguageRegion, "Form", _language);
+            checkBoxPim.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPim", _language);
             labelTruecryptPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelTruecryptPath", _language);
             buttonTruecryptPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonTruecryptPath", _language);
             buttonContainerPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonContainerPath", _language);
@@ -124,6 +125,7 @@ namespace TrueCrypt_Mounter
             checkBoxNoKeyfilecontainer.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
             checkBoxPasswordcache.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
             checkBoxAutomount.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, false);
+            checkBoxPim.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, false);
 
             // Fill lists for the comboboxdriveletter
             foreach (string element in DrivelettersHelper.GetDriveletters())
@@ -210,6 +212,7 @@ namespace TrueCrypt_Mounter
                     if (usedriveletter != null && usedriveletter != ConfigTrm.Mainconfig.Section)
                         throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDrivletterIsUsed", _language)+usedriveletter);
 
+                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, checkBoxPim.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Kontainerpath, textBoxContainerPath.Text);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, checkBoxRemovable.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, checkBoxReadonly.Checked);

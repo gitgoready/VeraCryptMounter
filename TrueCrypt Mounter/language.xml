@@ -45,10 +45,6 @@
       <D>Schlüsselkontainer</D>
       <E>Keyfilecontainer</E>    
     </Text>
-    <Text key="groupBoxNotification">
-      <D>Statusanzeige</D>
-      <E>Notifications</E>
-    </Text>
     <Text key="checkBoxClearPassword">
       <D>Passwortspeicher löschen</D>
       <E>Clear Passwordcache</E>
@@ -360,8 +356,8 @@
         <E>Mainsettings</E>
       </Text>
       <Text key="labelTruecryptPath">
-        <D>Pfad zur Truecrypt.exe</D>
-        <E>Path to Truecrypt.exe</E>
+        <D>Pfad zur VeraCrypt.exe</D>
+        <E>Path to VeraCrypt.exe</E>
       </Text>
       <Text key="buttonTruecryptPath">
         <D>Auswählen</D>
@@ -382,6 +378,10 @@
       <Text key="labelDriveletter">
         <D>Laufwerksbuchstabe</D>
         <E>Driveletter</E>
+      </Text>
+      <Text key="checkBoxPim">
+        <D>PIM</D>
+        <E>PIM</E>
       </Text>
       <Text key="checkBoxReadonly">
         <D>Schreibgeschützt</D>
@@ -542,6 +542,10 @@
     <Text key="Form">
       <D>Passworteingabe</D>
       <E>Passwordinput</E>
+    </Text>
+    <Text key="labelPim">
+      <D>PIM</D>
+      <E>PIM</E>
     </Text>
     <Text key="labelPassword">
       <D>Bitte Passwort eingeben</D>

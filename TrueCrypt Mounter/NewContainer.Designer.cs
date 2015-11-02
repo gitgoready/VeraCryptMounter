@@ -49,6 +49,8 @@
             this.checkBoxAutomountStart = new System.Windows.Forms.CheckBox();
             this.checkBoxRemovable = new System.Windows.Forms.CheckBox();
             this.checkBoxReadonly = new System.Windows.Forms.CheckBox();
+            this.checkBoxPim = new System.Windows.Forms.CheckBox();
+            this.checkBoxTrueCrypt = new System.Windows.Forms.CheckBox();
             this.groupBoxDescription.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.groupBoxKyfilename.SuspendLayout();
@@ -62,6 +64,7 @@
             this.openFileDialogKontainer.CheckFileExists = false;
             this.openFileDialogKontainer.FileName = "openFileDialogKontainer";
             this.openFileDialogKontainer.RestoreDirectory = true;
+            this.openFileDialogKontainer.ValidateNames = false;
             this.openFileDialogKontainer.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialogKontainerFileOK);
             // 
             // buttonOpenContainer
@@ -132,7 +135,7 @@
             // checkBoxAutomountUsb
             // 
             this.checkBoxAutomountUsb.AutoSize = true;
-            this.checkBoxAutomountUsb.Location = new System.Drawing.Point(6, 50);
+            this.checkBoxAutomountUsb.Location = new System.Drawing.Point(6, 53);
             this.checkBoxAutomountUsb.Name = "checkBoxAutomountUsb";
             this.checkBoxAutomountUsb.Size = new System.Drawing.Size(116, 17);
             this.checkBoxAutomountUsb.TabIndex = 6;
@@ -222,13 +225,15 @@
             // 
             // groupBoxMountoptions
             // 
+            this.groupBoxMountoptions.Controls.Add(this.checkBoxTrueCrypt);
+            this.groupBoxMountoptions.Controls.Add(this.checkBoxPim);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountStart);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxRemovable);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountUsb);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxReadonly);
             this.groupBoxMountoptions.Location = new System.Drawing.Point(223, 230);
             this.groupBoxMountoptions.Name = "groupBoxMountoptions";
-            this.groupBoxMountoptions.Size = new System.Drawing.Size(205, 88);
+            this.groupBoxMountoptions.Size = new System.Drawing.Size(205, 98);
             this.groupBoxMountoptions.TabIndex = 14;
             this.groupBoxMountoptions.TabStop = false;
             this.groupBoxMountoptions.Text = "Mounteinstellungen";
@@ -236,7 +241,7 @@
             // checkBoxAutomountStart
             // 
             this.checkBoxAutomountStart.AutoSize = true;
-            this.checkBoxAutomountStart.Location = new System.Drawing.Point(6, 69);
+            this.checkBoxAutomountStart.Location = new System.Drawing.Point(6, 72);
             this.checkBoxAutomountStart.Name = "checkBoxAutomountStart";
             this.checkBoxAutomountStart.Size = new System.Drawing.Size(152, 17);
             this.checkBoxAutomountStart.TabIndex = 7;
@@ -246,7 +251,7 @@
             // checkBoxRemovable
             // 
             this.checkBoxRemovable.AutoSize = true;
-            this.checkBoxRemovable.Location = new System.Drawing.Point(6, 12);
+            this.checkBoxRemovable.Location = new System.Drawing.Point(6, 15);
             this.checkBoxRemovable.Name = "checkBoxRemovable";
             this.checkBoxRemovable.Size = new System.Drawing.Size(80, 17);
             this.checkBoxRemovable.TabIndex = 15;
@@ -256,12 +261,33 @@
             // checkBoxReadonly
             // 
             this.checkBoxReadonly.AutoSize = true;
-            this.checkBoxReadonly.Location = new System.Drawing.Point(6, 31);
+            this.checkBoxReadonly.Location = new System.Drawing.Point(6, 34);
             this.checkBoxReadonly.Name = "checkBoxReadonly";
             this.checkBoxReadonly.Size = new System.Drawing.Size(108, 17);
             this.checkBoxReadonly.TabIndex = 16;
             this.checkBoxReadonly.Text = "Schreibgeschützt";
             this.checkBoxReadonly.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPim
+            // 
+            this.checkBoxPim.AutoSize = true;
+            this.checkBoxPim.Location = new System.Drawing.Point(121, 15);
+            this.checkBoxPim.Name = "checkBoxPim";
+            this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
+            this.checkBoxPim.TabIndex = 17;
+            this.checkBoxPim.Text = "PIM";
+            this.checkBoxPim.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTrueCrypt
+            // 
+            this.checkBoxTrueCrypt.AutoSize = true;
+            this.checkBoxTrueCrypt.Location = new System.Drawing.Point(121, 34);
+            this.checkBoxTrueCrypt.Name = "checkBoxTrueCrypt";
+            this.checkBoxTrueCrypt.Size = new System.Drawing.Size(72, 17);
+            this.checkBoxTrueCrypt.TabIndex = 18;
+            this.checkBoxTrueCrypt.Text = "TrueCrypt";
+            this.checkBoxTrueCrypt.UseVisualStyleBackColor = true;
+            this.checkBoxTrueCrypt.CheckedChanged += new System.EventHandler(this.checkBoxTrueCrypt_CheckedChanged);
             // 
             // NewContainer
             // 
@@ -321,5 +347,7 @@
         private System.Windows.Forms.ComboBox comboBoxDriveletter;
         private System.Windows.Forms.CheckBox checkBoxAutomountUsb;
         private System.Windows.Forms.CheckBox checkBoxAutomountStart;
+        private System.Windows.Forms.CheckBox checkBoxTrueCrypt;
+        private System.Windows.Forms.CheckBox checkBoxPim;
     }
 }

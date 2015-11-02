@@ -129,7 +129,7 @@ namespace TrueCrypt_Mounter
 
 
                                 int ret = Mount.MountContainer(path, driveletter, keyfile, _password, silent, beep,
-                                                               force, ro, rm);
+                                                               force, ro, rm, false, null);
 
                                 if (ret == 0)
                                 {

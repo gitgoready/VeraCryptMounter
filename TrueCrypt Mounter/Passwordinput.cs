@@ -35,7 +35,7 @@ namespace TrueCrypt_Mounter
         /// Constructor for the passwordform.
         /// Initialize the form and the config also the language string.
         /// </summary>
-        public Passwordinput(TrueCryptMounter main, string chosen)
+        public Passwordinput(TrueCryptMounter main, string chosen, bool pim)
         {
             InitializeComponent();
             _config = Singleton<ConfigManager>.Instance.Init(_config);
@@ -43,6 +43,12 @@ namespace TrueCrypt_Mounter
             LanguageFill();
             _chosen = chosen;
             _main = main;
+            if (pim)
+            {
+                labelPim.Visible = true;
+                textBoxPim.Visible = true;
+            }
+
         }
 
         /// <summary>
@@ -53,15 +59,21 @@ namespace TrueCrypt_Mounter
             Text = LanguagePool.GetInstance().GetString(LanguageRegion, "Form", _language);
             labelPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelPassword", _language);
             buttonOk.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOk", _language);
+            labelPim.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelPim", _language);
         }
 
         private void button_ok_Click(object sender, EventArgs e)
         {
             if (_chosen == ConfigTrm.Container.Typename)
+            {
                 _main.PasswordContainer = textBoxPassword.Text;
-
+                _main.Pim = textBoxPim.Text;
+            }
             if (_chosen == ConfigTrm.Drive.Typename)
+            {
                 _main.PasswordDrive = textBoxPassword.Text;
+                _main.Pim = textBoxPim.Text;
+            }
 
             Close();
         }
@@ -69,6 +81,12 @@ namespace TrueCrypt_Mounter
         private void PasswortEingabe_KexDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+                button_ok_Click(sender, e);
+        }
+
+        private void textBoxPim_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
                 button_ok_Click(sender, e);
         }
     }

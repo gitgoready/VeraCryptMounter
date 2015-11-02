@@ -31,6 +31,8 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.buttonOk = new System.Windows.Forms.Button();
+            this.textBoxPim = new System.Windows.Forms.TextBox();
+            this.labelPim = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxPassword
@@ -63,11 +65,33 @@
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.button_ok_Click);
             // 
+            // textBoxPim
+            // 
+            this.textBoxPim.Location = new System.Drawing.Point(40, 57);
+            this.textBoxPim.Name = "textBoxPim";
+            this.textBoxPim.Size = new System.Drawing.Size(116, 20);
+            this.textBoxPim.TabIndex = 3;
+            this.textBoxPim.UseSystemPasswordChar = true;
+            this.textBoxPim.Visible = false;
+            this.textBoxPim.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPim_KeyPress);
+            // 
+            // labelPim
+            // 
+            this.labelPim.AutoSize = true;
+            this.labelPim.Location = new System.Drawing.Point(8, 60);
+            this.labelPim.Name = "labelPim";
+            this.labelPim.Size = new System.Drawing.Size(26, 13);
+            this.labelPim.TabIndex = 4;
+            this.labelPim.Text = "PIM";
+            this.labelPim.Visible = false;
+            // 
             // Passwordinput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(249, 93);
+            this.Controls.Add(this.labelPim);
+            this.Controls.Add(this.textBoxPim);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.textBoxPassword);
@@ -87,5 +111,7 @@
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.TextBox textBoxPassword;
+        private System.Windows.Forms.TextBox textBoxPim;
+        private System.Windows.Forms.Label labelPim;
     }
 }

@@ -53,6 +53,7 @@
             this.checkBoxNoKeyfilecontainer = new System.Windows.Forms.CheckBox();
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
+            this.checkBoxPim = new System.Windows.Forms.CheckBox();
             this.groupBoxDebug.SuspendLayout();
             this.groupBoxKeyfileContainer.SuspendLayout();
             this.groupBoxTruecryptPath.SuspendLayout();
@@ -109,7 +110,7 @@
             this.labelTruecryptPath.Name = "labelTruecryptPath";
             this.labelTruecryptPath.Size = new System.Drawing.Size(92, 13);
             this.labelTruecryptPath.TabIndex = 20;
-            this.labelTruecryptPath.Text = "Pfad zu TrueCrypt";
+            this.labelTruecryptPath.Text = "Pfad zu VeraCrypt";
             // 
             // labelKeyfilecontainer
             // 
@@ -166,6 +167,7 @@
             // 
             // groupBoxKeyfileContainer
             // 
+            this.groupBoxKeyfileContainer.Controls.Add(this.checkBoxPim);
             this.groupBoxKeyfileContainer.Controls.Add(this.checkBoxAutomount);
             this.groupBoxKeyfileContainer.Controls.Add(this.comboBoxDriveletter);
             this.groupBoxKeyfileContainer.Controls.Add(this.checkBoxRemovable);
@@ -307,6 +309,16 @@
             this.comboBoxLanguage.Size = new System.Drawing.Size(119, 21);
             this.comboBoxLanguage.TabIndex = 14;
             // 
+            // checkBoxPim
+            // 
+            this.checkBoxPim.AutoSize = true;
+            this.checkBoxPim.Location = new System.Drawing.Point(256, 58);
+            this.checkBoxPim.Name = "checkBoxPim";
+            this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
+            this.checkBoxPim.TabIndex = 15;
+            this.checkBoxPim.Text = "PIM";
+            this.checkBoxPim.UseVisualStyleBackColor = true;
+            // 
             // Mainsettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -366,5 +378,6 @@
         private System.Windows.Forms.GroupBox groupBoxLanguage;
         private System.Windows.Forms.ComboBox comboBoxLanguage;
         private System.Windows.Forms.CheckBox checkBoxAutomount;
+        private System.Windows.Forms.CheckBox checkBoxPim;
     }
 }

@@ -139,6 +139,8 @@ namespace TrueCrypt_Mounter
             checkBoxRemovable.Checked = _config.GetValue(description, ConfigTrm.Container.Removable, false);
             checkBoxAutomountStart.Checked = _config.GetValue(description, ConfigTrm.Container.Automountstart, false);
             checkBoxAutomountUsb.Checked = _config.GetValue(description, ConfigTrm.Container.Automountusb, false);
+            checkBoxTrueCrypt.Checked = _config.GetValue(description, ConfigTrm.Container.Truecrypt, false);
+            checkBoxPim.Checked = _config.GetValue(description, ConfigTrm.Container.Pim, false);
 
             foreach (string element in DrivelettersHelper.GetDriveletters())
                 _driveletters.Add(element);
@@ -252,6 +254,8 @@ namespace TrueCrypt_Mounter
                 _config.SetValue(description, ConfigTrm.Container.Nodrive, checkBoxNoDrive.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Automountstart, checkBoxAutomountStart.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Automountusb, checkBoxAutomountUsb.Checked);
+                _config.SetValue(description, ConfigTrm.Container.Pim, checkBoxPim.Checked);
+                _config.SetValue(description, ConfigTrm.Container.Truecrypt, checkBoxTrueCrypt.Checked);
 
 
             }
@@ -300,6 +304,17 @@ namespace TrueCrypt_Mounter
 
             // Draw the focus rectangle if the mouse hovers over an item.
             e.DrawFocusRectangle();
+        }
+
+        private void checkBoxTrueCrypt_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxTrueCrypt.Checked)
+            {
+                checkBoxPim.Enabled = false;
+                checkBoxPim.Checked = false;
+            }
+            else
+                checkBoxPim.Enabled = true;
         }
     }
 }

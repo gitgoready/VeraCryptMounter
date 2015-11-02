@@ -41,6 +41,8 @@ namespace TrueCrypt_Mounter
         private const string Quit = " /q ";
         private const string Silent = " /s ";
         private const string Volume = " /v ";
+        private const string Pim = " /pim ";
+        private const string Truecrypt = " /tc ";
         private static readonly Config _config = new Config();
         private static readonly ProcessStartInfo Tc = new ProcessStartInfo();
         private static readonly Process Tcprocess = new Process();
@@ -282,7 +284,7 @@ namespace TrueCrypt_Mounter
         }
 
         public static int MountContainer(string path, string driveletter, string keyfile, string password, bool silent,
-                                         bool beep, bool force, bool readOnly, bool removable)
+                                         bool beep, bool force, bool readOnly, bool removable, bool tc, string pim)
         {
             int output = 2;
 
@@ -293,6 +295,7 @@ namespace TrueCrypt_Mounter
             const string status = "Die Vareable ist null oder leer:";
             try
             {
+
                 if (string.IsNullOrEmpty(path))
                 {
                     throw new Exception(status + "(path)");
@@ -332,6 +335,8 @@ namespace TrueCrypt_Mounter
 
             if (!string.IsNullOrEmpty(keyfile))
                 argumentstring += Keyfile + Quote + keyfile + Quote;
+            if (!string.IsNullOrEmpty(pim))
+                argumentstring += Pim + Quote + pim + Quote;
             if (silent)
                 argumentstring += Silent;
             if (beep)
@@ -342,6 +347,9 @@ namespace TrueCrypt_Mounter
                 argumentstring += Mountoption + MountoptionReadonly;
             if (removable)
                 argumentstring += Mountoption + MountoptionRemovable;
+            if (tc)
+                argumentstring += Truecrypt;
+
 # if DEBUG
             DialogResult result = MessageBox.Show(argumentstring, "Mountstring", MessageBoxButtons.RetryCancel);
             if (result == DialogResult.Cancel)

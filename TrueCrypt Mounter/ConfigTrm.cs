@@ -45,6 +45,7 @@ namespace TrueCrypt_Mounter
             public const string Typename = "config";
             public const string Automount = "Automount";
             public const string Passwordtest = "Passwordtest";
+            public const string Pim = "Pim";
 
         }
 
@@ -63,6 +64,7 @@ namespace TrueCrypt_Mounter
             public const string Typename = "Drive";
             public const string Automountusb = "Automountusb";
             public const string Automountstart = "Automountstart";
+            public const string Pim = "Pim";
         }
 
         /// <summary>
@@ -82,6 +84,8 @@ namespace TrueCrypt_Mounter
             public const string Typename = "Container";
             public const string Automountusb = "Automountusb";
             public const string Automountstart = "Automountstart";
+            public const string Pim = "Pim";
+            public const string Truecrypt = "Truecrypt";
  
         }
 
