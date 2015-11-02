@@ -43,6 +43,7 @@ namespace TrueCrypt_Mounter
         private const string Volume = " /v ";
         private const string Pim = " /pim ";
         private const string Truecrypt = " /tc ";
+        private const string Hash = " /hash ";
         private static readonly Config _config = new Config();
         private static readonly ProcessStartInfo Tc = new ProcessStartInfo();
         private static readonly Process Tcprocess = new Process();
