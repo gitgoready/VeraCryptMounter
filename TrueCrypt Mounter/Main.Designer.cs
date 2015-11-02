@@ -53,11 +53,8 @@ namespace TrueCrypt_Mounter
             this.comboBoxDrives = new System.Windows.Forms.ComboBox();
             this.buttonKeyfileContainerMount = new System.Windows.Forms.Button();
             this.checkBoxClearPassword = new System.Windows.Forms.CheckBox();
-            this.progressBarMountDrive = new System.Windows.Forms.ProgressBar();
-            this.labelNotification = new System.Windows.Forms.Label();
             this.buttonDismount = new System.Windows.Forms.Button();
             this.groupBoxDrive = new System.Windows.Forms.GroupBox();
-            this.groupBoxNotification = new System.Windows.Forms.GroupBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemNotifyKeyfilecontainer = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,7 +75,6 @@ namespace TrueCrypt_Mounter
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1.SuspendLayout();
             this.groupBoxDrive.SuspendLayout();
-            this.groupBoxNotification.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.groupBoxKeyfileContainer.SuspendLayout();
             this.groupBoxContainer.SuspendLayout();
@@ -254,27 +250,6 @@ namespace TrueCrypt_Mounter
             this.checkBoxClearPassword.Text = "Passwortspeicher löschen";
             this.checkBoxClearPassword.UseVisualStyleBackColor = true;
             // 
-            // progressBarMountDrive
-            // 
-            this.progressBarMountDrive.Location = new System.Drawing.Point(4, 19);
-            this.progressBarMountDrive.MarqueeAnimationSpeed = 0;
-            this.progressBarMountDrive.Name = "progressBarMountDrive";
-            this.progressBarMountDrive.Size = new System.Drawing.Size(367, 21);
-            this.progressBarMountDrive.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBarMountDrive.TabIndex = 15;
-            this.progressBarMountDrive.Visible = false;
-            // 
-            // labelNotification
-            // 
-            this.labelNotification.AutoSize = true;
-            this.labelNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNotification.Location = new System.Drawing.Point(11, 23);
-            this.labelNotification.Name = "labelNotification";
-            this.labelNotification.Size = new System.Drawing.Size(96, 17);
-            this.labelNotification.TabIndex = 16;
-            this.labelNotification.Text = "statusanzeige";
-            this.labelNotification.Visible = false;
-            // 
             // buttonDismount
             // 
             this.buttonDismount.Location = new System.Drawing.Point(271, 50);
@@ -297,17 +272,6 @@ namespace TrueCrypt_Mounter
             this.groupBoxDrive.TabIndex = 0;
             this.groupBoxDrive.TabStop = false;
             this.groupBoxDrive.Text = "Laufwerksauswahl";
-            // 
-            // groupBoxNotification
-            // 
-            this.groupBoxNotification.Controls.Add(this.labelNotification);
-            this.groupBoxNotification.Controls.Add(this.progressBarMountDrive);
-            this.groupBoxNotification.Location = new System.Drawing.Point(7, 250);
-            this.groupBoxNotification.Name = "groupBoxNotification";
-            this.groupBoxNotification.Size = new System.Drawing.Size(380, 58);
-            this.groupBoxNotification.TabIndex = 13;
-            this.groupBoxNotification.TabStop = false;
-            this.groupBoxNotification.Text = "Statusanzeige";
             // 
             // notifyIcon1
             // 
@@ -444,9 +408,10 @@ namespace TrueCrypt_Mounter
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabelNotification,
             this.toolStripProgressBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 315);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 249);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(394, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 14;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -459,19 +424,20 @@ namespace TrueCrypt_Mounter
             // toolStripProgressBar
             // 
             this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
+            this.toolStripProgressBar.Size = new System.Drawing.Size(200, 16);
+            this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.toolStripProgressBar.Visible = false;
             // 
             // TrueCryptMounter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 337);
+            this.ClientSize = new System.Drawing.Size(394, 271);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBoxContainer);
             this.Controls.Add(this.groupBoxDrive);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBoxKeyfileContainer);
-            this.Controls.Add(this.groupBoxNotification);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -485,8 +451,6 @@ namespace TrueCrypt_Mounter
             this.menuStrip1.PerformLayout();
             this.groupBoxDrive.ResumeLayout(false);
             this.groupBoxDrive.PerformLayout();
-            this.groupBoxNotification.ResumeLayout(false);
-            this.groupBoxNotification.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);
             this.groupBoxKeyfileContainer.ResumeLayout(false);
             this.groupBoxContainer.ResumeLayout(false);
@@ -514,11 +478,8 @@ namespace TrueCrypt_Mounter
         private ToolStripMenuItem ToolStripMenuItemEdit;
         private ToolStripMenuItem ToolStripMenuItemEditDrive;
         private ToolStripMenuItem ToolStripMenuItemNewDrive;
-        private ProgressBar progressBarMountDrive;
-        private Label labelNotification;
         private Button buttonDismount;
         private GroupBox groupBoxDrive;
-        private GroupBox groupBoxNotification;
         private NotifyIcon notifyIcon1;
         private ContextMenuStrip contextMenuStrip;
         private ToolStripMenuItem ToolStripMenuItemNotifyRestore;

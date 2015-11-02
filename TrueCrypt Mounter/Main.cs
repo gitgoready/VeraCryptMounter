@@ -554,13 +554,13 @@ namespace TrueCrypt_Mounter
             bool removable = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Removable, false);
             bool readOnly = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Readonly, false);
 
-            progressBarMountDrive.Visible = true;
+            toolStripProgressBar.Visible = true;
 
             MountDriveDelegate mountdrive = Mount.MountDrive;
             
             mountdrive.BeginInvoke(partition, dletter, key, _passwordDrive, silent, beep, force, readOnly, removable,
                                    iterations, CallbackHandlerMountDrive, mountdrive);
-            progressBarMountDrive.MarqueeAnimationSpeed = 30;
+            toolStripProgressBar.MarqueeAnimationSpeed = 30;
 
             _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveSucceed",
                                                                                   _language);
@@ -607,8 +607,8 @@ namespace TrueCrypt_Mounter
                                                                  _language);
             _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveDismountFaild",
                                                                _language);
-            progressBarMountDrive.Visible = true;
-            progressBarMountDrive.MarqueeAnimationSpeed = 30;
+            toolStripProgressBar.Visible = true;
+            toolStripProgressBar.MarqueeAnimationSpeed = 30;
 
             Busy();
 
@@ -699,7 +699,7 @@ namespace TrueCrypt_Mounter
 
             _cachedKontainer = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
 
-            progressBarMountDrive.Visible = true;
+            toolStripProgressBar.Visible = true;
             TaskBarWindows7("start");
 
             string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter,
@@ -722,7 +722,7 @@ namespace TrueCrypt_Mounter
             mountcontainer.BeginInvoke(path, dletter, key, _passwordContainer, silent, beep, force, readOnly, removable,
                                        CallbackHandlerMountContainer, mountcontainer);
 
-            progressBarMountDrive.MarqueeAnimationSpeed = 30;
+            toolStripProgressBar.MarqueeAnimationSpeed = 30;
 
             _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerSucceed",
                                                                                   _language);
@@ -762,7 +762,7 @@ namespace TrueCrypt_Mounter
                 return;
             }
 
-            progressBarMountDrive.Visible = true;
+            toolStripProgressBar.Visible = true;
 
             string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter,
                                               "");
@@ -777,7 +777,7 @@ namespace TrueCrypt_Mounter
             _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerDismountFaild",
                                                                _language);
 
-            progressBarMountDrive.MarqueeAnimationSpeed = 30;
+            toolStripProgressBar.MarqueeAnimationSpeed = 30;
             Busy();
             Cursor = Cursors.WaitCursor;
             return;
@@ -807,7 +807,7 @@ namespace TrueCrypt_Mounter
                 return;
             }
 
-            progressBarMountDrive.Visible = true;
+            toolStripProgressBar.Visible = true;
             bool ro = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, true);
             bool rm = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, false);
 
@@ -825,7 +825,7 @@ namespace TrueCrypt_Mounter
                                                                  _language);
             _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationKeyfilecontainerFaild",
                                                                _language);
-            progressBarMountDrive.MarqueeAnimationSpeed = 30;
+            toolStripProgressBar.MarqueeAnimationSpeed = 30;
 
             Busy();
 
@@ -854,7 +854,7 @@ namespace TrueCrypt_Mounter
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            progressBarMountDrive.Visible = true;
+            toolStripProgressBar.Visible = true;
 
             string dletter = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "");
 
@@ -868,7 +868,7 @@ namespace TrueCrypt_Mounter
             _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion,
                                                                "NotificationKeyfilecontainerDismountFaild",
                                                                _language);
-            progressBarMountDrive.MarqueeAnimationSpeed = 30;
+            toolStripProgressBar.MarqueeAnimationSpeed = 30;
             Busy();
             Cursor = Cursors.WaitCursor;
 
@@ -1291,8 +1291,8 @@ namespace TrueCrypt_Mounter
         private void StopProgressbar()
         {
 
-            progressBarMountDrive.MarqueeAnimationSpeed = 0;
-            progressBarMountDrive.Visible = false;
+            toolStripProgressBar.MarqueeAnimationSpeed = 0;
+            toolStripProgressBar.Visible = false;
             TaskBarWindows7("stop");
 
         }
@@ -1346,7 +1346,7 @@ namespace TrueCrypt_Mounter
             int completion = mountmethode.EndInvoke(result);
 
 
-            if (progressBarMountDrive.InvokeRequired)
+            if (statusStrip1.InvokeRequired)
             {
                 StopProgressbarDelegate stop = StopProgressbar;
                 Invoke(stop);
@@ -1390,7 +1390,7 @@ namespace TrueCrypt_Mounter
 
             int completion = dismount.EndInvoke(result);
 
-            if (progressBarMountDrive.InvokeRequired)
+            if (statusStrip1.InvokeRequired)
             {
                 StopProgressbarDelegate stop = StopProgressbar;
                 Invoke(stop);
@@ -1435,7 +1435,7 @@ namespace TrueCrypt_Mounter
             int completion = mountdrive.EndInvoke(result);
 
 
-            if (progressBarMountDrive.InvokeRequired)
+            if (statusStrip1.InvokeRequired)
             {
                 StopProgressbarDelegate stop = StopProgressbar;
                 Invoke(stop);
@@ -1480,7 +1480,7 @@ namespace TrueCrypt_Mounter
             int completion = mountcontainer.EndInvoke(result);
 
 
-            if (progressBarMountDrive.InvokeRequired)
+            if (statusStrip1.InvokeRequired)
             {
                 StopProgressbarDelegate stop = StopProgressbar;
                 Invoke(stop);
