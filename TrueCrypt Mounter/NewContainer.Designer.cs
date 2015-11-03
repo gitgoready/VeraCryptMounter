@@ -46,17 +46,20 @@
             this.groupBoxDriveletter = new System.Windows.Forms.GroupBox();
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
             this.groupBoxMountoptions = new System.Windows.Forms.GroupBox();
+            this.checkBoxTrueCrypt = new System.Windows.Forms.CheckBox();
+            this.checkBoxPim = new System.Windows.Forms.CheckBox();
             this.checkBoxAutomountStart = new System.Windows.Forms.CheckBox();
             this.checkBoxRemovable = new System.Windows.Forms.CheckBox();
             this.checkBoxReadonly = new System.Windows.Forms.CheckBox();
-            this.checkBoxPim = new System.Windows.Forms.CheckBox();
-            this.checkBoxTrueCrypt = new System.Windows.Forms.CheckBox();
+            this.groupBoxHash = new System.Windows.Forms.GroupBox();
+            this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.groupBoxDescription.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.groupBoxKyfilename.SuspendLayout();
             this.groupBoxDrive.SuspendLayout();
             this.groupBoxDriveletter.SuspendLayout();
             this.groupBoxMountoptions.SuspendLayout();
+            this.groupBoxHash.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialogKontainer
@@ -238,6 +241,27 @@
             this.groupBoxMountoptions.TabStop = false;
             this.groupBoxMountoptions.Text = "Mounteinstellungen";
             // 
+            // checkBoxTrueCrypt
+            // 
+            this.checkBoxTrueCrypt.AutoSize = true;
+            this.checkBoxTrueCrypt.Location = new System.Drawing.Point(121, 34);
+            this.checkBoxTrueCrypt.Name = "checkBoxTrueCrypt";
+            this.checkBoxTrueCrypt.Size = new System.Drawing.Size(72, 17);
+            this.checkBoxTrueCrypt.TabIndex = 18;
+            this.checkBoxTrueCrypt.Text = "TrueCrypt";
+            this.checkBoxTrueCrypt.UseVisualStyleBackColor = true;
+            this.checkBoxTrueCrypt.CheckedChanged += new System.EventHandler(this.checkBoxTrueCrypt_CheckedChanged);
+            // 
+            // checkBoxPim
+            // 
+            this.checkBoxPim.AutoSize = true;
+            this.checkBoxPim.Location = new System.Drawing.Point(121, 15);
+            this.checkBoxPim.Name = "checkBoxPim";
+            this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
+            this.checkBoxPim.TabIndex = 17;
+            this.checkBoxPim.Text = "PIM";
+            this.checkBoxPim.UseVisualStyleBackColor = true;
+            // 
             // checkBoxAutomountStart
             // 
             this.checkBoxAutomountStart.AutoSize = true;
@@ -268,32 +292,31 @@
             this.checkBoxReadonly.Text = "Schreibgeschützt";
             this.checkBoxReadonly.UseVisualStyleBackColor = true;
             // 
-            // checkBoxPim
+            // groupBoxHash
             // 
-            this.checkBoxPim.AutoSize = true;
-            this.checkBoxPim.Location = new System.Drawing.Point(121, 15);
-            this.checkBoxPim.Name = "checkBoxPim";
-            this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxPim.TabIndex = 17;
-            this.checkBoxPim.Text = "PIM";
-            this.checkBoxPim.UseVisualStyleBackColor = true;
+            this.groupBoxHash.Controls.Add(this.comboBoxHash);
+            this.groupBoxHash.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupBoxHash.Location = new System.Drawing.Point(12, 283);
+            this.groupBoxHash.Name = "groupBoxHash";
+            this.groupBoxHash.Size = new System.Drawing.Size(205, 45);
+            this.groupBoxHash.TabIndex = 18;
+            this.groupBoxHash.TabStop = false;
+            this.groupBoxHash.Text = "Hash";
             // 
-            // checkBoxTrueCrypt
+            // comboBoxHash
             // 
-            this.checkBoxTrueCrypt.AutoSize = true;
-            this.checkBoxTrueCrypt.Location = new System.Drawing.Point(121, 34);
-            this.checkBoxTrueCrypt.Name = "checkBoxTrueCrypt";
-            this.checkBoxTrueCrypt.Size = new System.Drawing.Size(72, 17);
-            this.checkBoxTrueCrypt.TabIndex = 18;
-            this.checkBoxTrueCrypt.Text = "TrueCrypt";
-            this.checkBoxTrueCrypt.UseVisualStyleBackColor = true;
-            this.checkBoxTrueCrypt.CheckedChanged += new System.EventHandler(this.checkBoxTrueCrypt_CheckedChanged);
+            this.comboBoxHash.FormattingEnabled = true;
+            this.comboBoxHash.Location = new System.Drawing.Point(48, 15);
+            this.comboBoxHash.Name = "comboBoxHash";
+            this.comboBoxHash.Size = new System.Drawing.Size(95, 21);
+            this.comboBoxHash.TabIndex = 0;
             // 
             // NewContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 369);
+            this.Controls.Add(this.groupBoxHash);
             this.Controls.Add(this.groupBoxMountoptions);
             this.Controls.Add(this.groupBoxDriveletter);
             this.Controls.Add(this.buttonOk);
@@ -320,6 +343,7 @@
             this.groupBoxDriveletter.ResumeLayout(false);
             this.groupBoxMountoptions.ResumeLayout(false);
             this.groupBoxMountoptions.PerformLayout();
+            this.groupBoxHash.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -349,5 +373,7 @@
         private System.Windows.Forms.CheckBox checkBoxAutomountStart;
         private System.Windows.Forms.CheckBox checkBoxTrueCrypt;
         private System.Windows.Forms.CheckBox checkBoxPim;
+        private System.Windows.Forms.GroupBox groupBoxHash;
+        private System.Windows.Forms.ComboBox comboBoxHash;
     }
 }

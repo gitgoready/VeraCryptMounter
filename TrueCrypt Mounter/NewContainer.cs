@@ -104,6 +104,8 @@ namespace TrueCrypt_Mounter
             foreach (string elemnt in DrivelettersHelper.GetUsedDriveletter())
                 _useddriveletters.Add(elemnt);
 
+            comboBoxHash.Items.AddRange(new object[] { "sha512", "sha256", "wirlpool", "ripemd160" });
+
             comboBoxDriveletter.DataSource = _driveletters;
 
             comboBoxDrives.SelectedItem = _driveletters[0];
@@ -131,6 +133,8 @@ namespace TrueCrypt_Mounter
         {
             _oldName = description;
             textBoxDescription.Text = description;
+            comboBoxHash.Items.AddRange(new object[] { "sha512", "sha256", "wirlpool", "ripemd160" });
+            comboBoxHash.SelectedItem = _config.GetValue(description, ConfigTrm.Container.Hash, "");
             checkBoxNoKeyfile.Checked = _config.GetValue(description, ConfigTrm.Container.Nokeyfile, false);
             checkBoxNoDrive.Checked = _config.GetValue(description, ConfigTrm.Container.Nodrive, false);
             textBoxKontainer.Text = _config.GetValue(description, ConfigTrm.Container.Kontainerpath, "");
@@ -256,6 +260,7 @@ namespace TrueCrypt_Mounter
                 _config.SetValue(description, ConfigTrm.Container.Automountusb, checkBoxAutomountUsb.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Pim, checkBoxPim.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Truecrypt, checkBoxTrueCrypt.Checked);
+                _config.SetValue(description, ConfigTrm.Container.Hash, comboBoxHash.SelectedItem.ToString());
 
 
             }

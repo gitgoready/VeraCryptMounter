@@ -41,6 +41,7 @@
             this.groupBoxDebug = new System.Windows.Forms.GroupBox();
             this.checkBoxSilentMode = new System.Windows.Forms.CheckBox();
             this.groupBoxKeyfileContainer = new System.Windows.Forms.GroupBox();
+            this.checkBoxPim = new System.Windows.Forms.CheckBox();
             this.checkBoxAutomount = new System.Windows.Forms.CheckBox();
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
             this.checkBoxRemovable = new System.Windows.Forms.CheckBox();
@@ -53,7 +54,7 @@
             this.checkBoxNoKeyfilecontainer = new System.Windows.Forms.CheckBox();
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
-            this.checkBoxPim = new System.Windows.Forms.CheckBox();
+            this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.groupBoxDebug.SuspendLayout();
             this.groupBoxKeyfileContainer.SuspendLayout();
             this.groupBoxTruecryptPath.SuspendLayout();
@@ -167,6 +168,7 @@
             // 
             // groupBoxKeyfileContainer
             // 
+            this.groupBoxKeyfileContainer.Controls.Add(this.comboBoxHash);
             this.groupBoxKeyfileContainer.Controls.Add(this.checkBoxPim);
             this.groupBoxKeyfileContainer.Controls.Add(this.checkBoxAutomount);
             this.groupBoxKeyfileContainer.Controls.Add(this.comboBoxDriveletter);
@@ -182,6 +184,16 @@
             this.groupBoxKeyfileContainer.TabIndex = 4;
             this.groupBoxKeyfileContainer.TabStop = false;
             this.groupBoxKeyfileContainer.Text = "Keyfile Kontainer Optionen";
+            // 
+            // checkBoxPim
+            // 
+            this.checkBoxPim.AutoSize = true;
+            this.checkBoxPim.Location = new System.Drawing.Point(256, 58);
+            this.checkBoxPim.Name = "checkBoxPim";
+            this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
+            this.checkBoxPim.TabIndex = 15;
+            this.checkBoxPim.Text = "PIM";
+            this.checkBoxPim.UseVisualStyleBackColor = true;
             // 
             // checkBoxAutomount
             // 
@@ -309,15 +321,13 @@
             this.comboBoxLanguage.Size = new System.Drawing.Size(119, 21);
             this.comboBoxLanguage.TabIndex = 14;
             // 
-            // checkBoxPim
+            // comboBoxHash
             // 
-            this.checkBoxPim.AutoSize = true;
-            this.checkBoxPim.Location = new System.Drawing.Point(256, 58);
-            this.checkBoxPim.Name = "checkBoxPim";
-            this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxPim.TabIndex = 15;
-            this.checkBoxPim.Text = "PIM";
-            this.checkBoxPim.UseVisualStyleBackColor = true;
+            this.comboBoxHash.FormattingEnabled = true;
+            this.comboBoxHash.Location = new System.Drawing.Point(354, 74);
+            this.comboBoxHash.Name = "comboBoxHash";
+            this.comboBoxHash.Size = new System.Drawing.Size(87, 21);
+            this.comboBoxHash.TabIndex = 16;
             // 
             // Mainsettings
             // 
@@ -379,5 +389,6 @@
         private System.Windows.Forms.ComboBox comboBoxLanguage;
         private System.Windows.Forms.CheckBox checkBoxAutomount;
         private System.Windows.Forms.CheckBox checkBoxPim;
+        private System.Windows.Forms.ComboBox comboBoxHash;
     }
 }

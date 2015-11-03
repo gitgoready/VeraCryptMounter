@@ -46,6 +46,7 @@ namespace TrueCrypt_Mounter
             public const string Automount = "Automount";
             public const string Passwordtest = "Passwordtest";
             public const string Pim = "Pim";
+            public const string Hash = "Hash";
 
         }
 
@@ -65,6 +66,7 @@ namespace TrueCrypt_Mounter
             public const string Automountusb = "Automountusb";
             public const string Automountstart = "Automountstart";
             public const string Pim = "Pim";
+            public const string Hash = "Hash";
         }
 
         /// <summary>
@@ -86,7 +88,8 @@ namespace TrueCrypt_Mounter
             public const string Automountstart = "Automountstart";
             public const string Pim = "Pim";
             public const string Truecrypt = "Truecrypt";
- 
+            public const string Hash = "Hash";
+
         }
 
         /// <summary>

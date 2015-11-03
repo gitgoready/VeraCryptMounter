@@ -139,6 +139,9 @@ namespace TrueCrypt_Mounter
 
             comboBoxDriveletter.DataSource = _driveletters;
             comboBoxDriveletter.SelectedItem = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "");
+
+            comboBoxHash.Items.AddRange(new object[] { "sha512", "sha256","wirlpool", "ripemd160" });
+            comboBoxHash.SelectedItem = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, "");
         }
 
         /// <summary>
@@ -198,6 +201,8 @@ namespace TrueCrypt_Mounter
                     _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable);
                     _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly);
                     _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter);
+                    _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash);
+
                 }
                 else
                 {
@@ -218,6 +223,7 @@ namespace TrueCrypt_Mounter
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, checkBoxReadonly.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter,
                                      comboBoxDriveletter.SelectedItem.ToString());
+                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, comboBoxHash.SelectedItem.ToString());
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, checkBoxAutomount.Checked);
                 }
