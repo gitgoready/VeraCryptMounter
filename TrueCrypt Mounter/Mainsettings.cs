@@ -34,6 +34,7 @@ namespace TrueCrypt_Mounter
         private readonly List<string> _useddriveletters = new List<string>();
         private List<string[]> _languages;
         private const string LanguageRegion = "Mainsettings";
+        private object[] _hashes = { "", "sha512", "sha256", "wirlpool", "ripemd160" };
         private string _language;
 
         /// <summary>
@@ -55,6 +56,7 @@ namespace TrueCrypt_Mounter
         {
             Text = LanguagePool.GetInstance().GetString(LanguageRegion, "Form", _language);
             checkBoxPim.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPim", _language);
+            labelHash.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelHash", _language);
             labelTruecryptPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelTruecryptPath", _language);
             buttonTruecryptPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonTruecryptPath", _language);
             buttonContainerPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonContainerPath", _language);
@@ -140,7 +142,7 @@ namespace TrueCrypt_Mounter
             comboBoxDriveletter.DataSource = _driveletters;
             comboBoxDriveletter.SelectedItem = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "");
 
-            comboBoxHash.Items.AddRange(new object[] { "sha512", "sha256","wirlpool", "ripemd160" });
+            comboBoxHash.Items.AddRange(_hashes);
             comboBoxHash.SelectedItem = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, "");
         }
 
@@ -202,6 +204,7 @@ namespace TrueCrypt_Mounter
                     _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly);
                     _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter);
                     _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash);
+                    _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim);
 
                 }
                 else
@@ -224,6 +227,7 @@ namespace TrueCrypt_Mounter
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter,
                                      comboBoxDriveletter.SelectedItem.ToString());
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, comboBoxHash.SelectedItem.ToString());
+                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, checkBoxPim.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, checkBoxAutomount.Checked);
                 }

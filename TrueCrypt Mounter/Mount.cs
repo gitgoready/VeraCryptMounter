@@ -18,7 +18,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace TrueCrypt_Mounter
@@ -162,7 +161,7 @@ namespace TrueCrypt_Mounter
         }
 
         public static int MountKeyfileContainer(string path, string driveletter, bool silent, bool beep, bool force,
-                                                bool readOnly, bool removable)
+                                                bool readOnly, bool removable, string hash, bool pim)
         {
             int output;
 
@@ -199,6 +198,10 @@ namespace TrueCrypt_Mounter
 
             string argumentstring = Volume + path + Letter + driveletter + Quit;
 
+            if (!string.IsNullOrEmpty(hash))
+                argumentstring += Hash + Quote + hash + Quote;
+            if (pim)
+                argumentstring += Pim + Quote + "0" + Quote; 
             if (silent)
                 argumentstring += Silent;
             if (beep)
@@ -285,7 +288,7 @@ namespace TrueCrypt_Mounter
         }
 
         public static int MountContainer(string path, string driveletter, string keyfile, string password, bool silent,
-                                         bool beep, bool force, bool readOnly, bool removable, bool tc, string pim)
+                                         bool beep, bool force, bool readOnly, bool removable, bool tc, string pim, string hash)
         {
             int output = 2;
 
@@ -338,6 +341,8 @@ namespace TrueCrypt_Mounter
                 argumentstring += Keyfile + Quote + keyfile + Quote;
             if (!string.IsNullOrEmpty(pim))
                 argumentstring += Pim + Quote + pim + Quote;
+            if (!string.IsNullOrEmpty(hash))
+                argumentstring += Hash + Quote + hash + Quote;
             if (silent)
                 argumentstring += Silent;
             if (beep)

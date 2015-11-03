@@ -41,6 +41,7 @@
             this.groupBoxDebug = new System.Windows.Forms.GroupBox();
             this.checkBoxSilentMode = new System.Windows.Forms.CheckBox();
             this.groupBoxKeyfileContainer = new System.Windows.Forms.GroupBox();
+            this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.checkBoxPim = new System.Windows.Forms.CheckBox();
             this.checkBoxAutomount = new System.Windows.Forms.CheckBox();
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
@@ -54,7 +55,7 @@
             this.checkBoxNoKeyfilecontainer = new System.Windows.Forms.CheckBox();
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
-            this.comboBoxHash = new System.Windows.Forms.ComboBox();
+            this.labelHash = new System.Windows.Forms.Label();
             this.groupBoxDebug.SuspendLayout();
             this.groupBoxKeyfileContainer.SuspendLayout();
             this.groupBoxTruecryptPath.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             this.select_truecrypt.DefaultExt = "exe";
             this.select_truecrypt.FileName = "VeraCrypt.exe";
+            this.select_truecrypt.Filter = "truecrypt.exe|veracrypt.exe";
             this.select_truecrypt.FileOk += new System.ComponentModel.CancelEventHandler(this.select_truecrypt_FileOk);
             // 
             // textBoxTruecryptPath
@@ -168,6 +170,7 @@
             // 
             // groupBoxKeyfileContainer
             // 
+            this.groupBoxKeyfileContainer.Controls.Add(this.labelHash);
             this.groupBoxKeyfileContainer.Controls.Add(this.comboBoxHash);
             this.groupBoxKeyfileContainer.Controls.Add(this.checkBoxPim);
             this.groupBoxKeyfileContainer.Controls.Add(this.checkBoxAutomount);
@@ -184,6 +187,14 @@
             this.groupBoxKeyfileContainer.TabIndex = 4;
             this.groupBoxKeyfileContainer.TabStop = false;
             this.groupBoxKeyfileContainer.Text = "Keyfile Kontainer Optionen";
+            // 
+            // comboBoxHash
+            // 
+            this.comboBoxHash.FormattingEnabled = true;
+            this.comboBoxHash.Location = new System.Drawing.Point(354, 74);
+            this.comboBoxHash.Name = "comboBoxHash";
+            this.comboBoxHash.Size = new System.Drawing.Size(87, 21);
+            this.comboBoxHash.TabIndex = 16;
             // 
             // checkBoxPim
             // 
@@ -321,13 +332,14 @@
             this.comboBoxLanguage.Size = new System.Drawing.Size(119, 21);
             this.comboBoxLanguage.TabIndex = 14;
             // 
-            // comboBoxHash
+            // labelHash
             // 
-            this.comboBoxHash.FormattingEnabled = true;
-            this.comboBoxHash.Location = new System.Drawing.Point(354, 74);
-            this.comboBoxHash.Name = "comboBoxHash";
-            this.comboBoxHash.Size = new System.Drawing.Size(87, 21);
-            this.comboBoxHash.TabIndex = 16;
+            this.labelHash.AutoSize = true;
+            this.labelHash.Location = new System.Drawing.Point(351, 59);
+            this.labelHash.Name = "labelHash";
+            this.labelHash.Size = new System.Drawing.Size(30, 13);
+            this.labelHash.TabIndex = 17;
+            this.labelHash.Text = "hash";
             // 
             // Mainsettings
             // 
@@ -390,5 +402,6 @@
         private System.Windows.Forms.CheckBox checkBoxAutomount;
         private System.Windows.Forms.CheckBox checkBoxPim;
         private System.Windows.Forms.ComboBox comboBoxHash;
+        private System.Windows.Forms.Label labelHash;
     }
 }

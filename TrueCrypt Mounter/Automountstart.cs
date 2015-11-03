@@ -33,6 +33,8 @@ namespace TrueCrypt_Mounter
             if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, false))
             {
                 string driveletter = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "");
+                string hash = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, "");
+                bool pim = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, false);
                 _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "KeyfilecontainerTryMount", _language), true);
 
                 if (DrivelettersHelper.IsDriveletterFree(driveletter))
@@ -47,7 +49,7 @@ namespace TrueCrypt_Mounter
 
                         _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "KeyfilecontainerState", _language), false);
 
-                        int ret = Mount.MountKeyfileContainer(path, driveletter, false, false, false, ro, rm);
+                        int ret = Mount.MountKeyfileContainer(path, driveletter, false, false, false, ro, rm, hash, pim);
 
                         if (ret == 0)
                         {
@@ -87,6 +89,7 @@ namespace TrueCrypt_Mounter
                             if (DrivelettersHelper.IsDriveletterFree(driveletter))
                             {
                                 bool ro = _config.GetValue(container, ConfigTrm.Container.Readonly, false);
+                                string hash = _config.GetValue(container, ConfigTrm.Container.Hash, "");
                                 string keyfile = null;
                                 bool rm = _config.GetValue(container, ConfigTrm.Container.Removable, false);
                                 bool beep = false;
@@ -129,7 +132,7 @@ namespace TrueCrypt_Mounter
 
 
                                 int ret = Mount.MountContainer(path, driveletter, keyfile, _password, silent, beep,
-                                                               force, ro, rm, false, null);
+                                                               force, ro, rm, false, null, hash);
 
                                 if (ret == 0)
                                 {

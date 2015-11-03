@@ -355,6 +355,10 @@
         <D>Grundeinstellungen</D>
         <E>Mainsettings</E>
       </Text>
+      <Text key="labelHash">
+        <D>hash</D>
+        <E>hash</E>
+      </Text>
       <Text key="labelTruecryptPath">
         <D>Pfad zur VeraCrypt.exe</D>
         <E>Path to VeraCrypt.exe</E>
@@ -468,6 +472,10 @@
     <Text key="Form">
       <D>Neuer Kontainer</D>
       <E>New Container</E>
+    </Text>
+    <Text key="groupBoxHash">
+      <D>hash</D>
+      <E>hash</E>
     </Text>
     <Text key="groupBoxDescription">
       <D>Beschreibung des Kontainers</D>

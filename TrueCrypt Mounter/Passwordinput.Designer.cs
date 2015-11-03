@@ -60,7 +60,7 @@
             this.buttonOk.Location = new System.Drawing.Point(162, 55);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 2;
+            this.buttonOk.TabIndex = 3;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.button_ok_Click);
@@ -70,7 +70,7 @@
             this.textBoxPim.Location = new System.Drawing.Point(40, 57);
             this.textBoxPim.Name = "textBoxPim";
             this.textBoxPim.Size = new System.Drawing.Size(116, 20);
-            this.textBoxPim.TabIndex = 3;
+            this.textBoxPim.TabIndex = 2;
             this.textBoxPim.UseSystemPasswordChar = true;
             this.textBoxPim.Visible = false;
             this.textBoxPim.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPim_KeyPress);

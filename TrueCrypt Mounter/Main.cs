@@ -86,14 +86,14 @@ namespace TrueCrypt_Mounter
         #region Delegates
 
         public delegate int MountKeyfilecontainerDelegate(string path, string driveletter, bool silent, bool beep, bool force,
-                                                          bool readOnly, bool removable);
+                                                          bool readOnly, bool removable, string hash, bool pim);
 
 
         public delegate int MountDriveDelegate(string partition, string driveletter, string keyfile, string password, bool silent,
                                                 bool beep, bool force, bool readOnly, bool removable, int iterations);
 
         public delegate int MountContainerDelegate(string path, string driveletter, string keyfile, string password, bool silent,
-                                                   bool beep, bool force, bool readOnly, bool removable, bool tc, string pim);
+                                                   bool beep, bool force, bool readOnly, bool removable, bool tc, string pim,string hash);
 
         public delegate int DismountDelegate(string driveletter, bool silent, bool beep, bool force);
 
@@ -721,6 +721,7 @@ namespace TrueCrypt_Mounter
             bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable, false);
             bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly, false);
             bool tc = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Truecrypt, false);
+            string hash = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Hash, "");
 
             //if pim isnt used set to null
             if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, false))
@@ -729,7 +730,7 @@ namespace TrueCrypt_Mounter
 
             MountContainerDelegate mountcontainer = Mount.MountContainer;
 
-            mountcontainer.BeginInvoke(path, dletter, key, _passwordContainer, silent, beep, force, readOnly, removable, tc, _pim,
+            mountcontainer.BeginInvoke(path, dletter, key, _passwordContainer, silent, beep, force, readOnly, removable, tc, _pim, hash,
                                        CallbackHandlerMountContainer, mountcontainer);
 
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
@@ -829,7 +830,10 @@ namespace TrueCrypt_Mounter
 
             MountKeyfilecontainerDelegate mountmethode = Mount.MountKeyfileContainer;
 
-            mountmethode.BeginInvoke(path, dletter, false, false, false, ro, rm, CallbackHandlerMountKyfilecontainer, mountmethode);
+            string hash = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, "");
+            bool pim = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, false);
+
+            mountmethode.BeginInvoke(path, dletter, false, false, false, ro, rm, hash, pim, CallbackHandlerMountKyfilecontainer, mountmethode);
 
             _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationKeyfilecontainerSucceed",
                                                                  _language);

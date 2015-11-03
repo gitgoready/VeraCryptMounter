@@ -34,6 +34,7 @@ namespace TrueCrypt_Mounter
         private const string LanguageRegion = "NewContainer";
         private readonly string _language;
         private string _oldName;
+        private object[] _hashes = { "", "sha512", "sha256", "wirlpool", "ripemd160" };
 
         /// <summary>
         /// Constructor for creating a new container.
@@ -84,6 +85,7 @@ namespace TrueCrypt_Mounter
                 comboBoxDrives.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxDrives", _language);
                 checkBoxAutomountUsb.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountUsb", _language);
                 checkBoxAutomountStart.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountStart", _language);
+                groupBoxHash.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxHash", _language);
                 //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
             }
             catch (Exception ex)
@@ -104,7 +106,7 @@ namespace TrueCrypt_Mounter
             foreach (string elemnt in DrivelettersHelper.GetUsedDriveletter())
                 _useddriveletters.Add(elemnt);
 
-            comboBoxHash.Items.AddRange(new object[] { "sha512", "sha256", "wirlpool", "ripemd160" });
+            comboBoxHash.Items.AddRange(_hashes);
 
             comboBoxDriveletter.DataSource = _driveletters;
 
@@ -133,7 +135,7 @@ namespace TrueCrypt_Mounter
         {
             _oldName = description;
             textBoxDescription.Text = description;
-            comboBoxHash.Items.AddRange(new object[] { "sha512", "sha256", "wirlpool", "ripemd160" });
+            comboBoxHash.Items.AddRange(new object[] { "", "sha512", "sha256", "wirlpool", "ripemd160" });
             comboBoxHash.SelectedItem = _config.GetValue(description, ConfigTrm.Container.Hash, "");
             checkBoxNoKeyfile.Checked = _config.GetValue(description, ConfigTrm.Container.Nokeyfile, false);
             checkBoxNoDrive.Checked = _config.GetValue(description, ConfigTrm.Container.Nodrive, false);
