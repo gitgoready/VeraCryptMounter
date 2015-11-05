@@ -21,13 +21,15 @@ namespace TrueCrypt_Mounter
         private string _drive;
         private static List<string> _drives = new List<string>();
         private static List<Partition> _partitionInfos = new List<Partition>();
-        private static List<string> _driveInfos = new List<string>();
+        private List<string> _driveInfos = new List<string>();
 
+        /// <summary>
+        /// Returns generic list (MediaType,model,serial,interface,partitions,index)
+        /// </summary>
         public List<string> DriveInfos
         {
             get
-            {
-                _driveInfos.AddRange(new List<String> { _model, _mediaType, _serial, _interface});
+            { 
                 return _driveInfos;
             }
         }
@@ -154,7 +156,8 @@ namespace TrueCrypt_Mounter
                 {              
                     throw new Exception("Error getting drivenames (" + ex.Message + ")");
                 }
-                _drives.Add(drivename);
+                if (!_drives.Contains(drivename))
+                    _drives.Add(drivename);
             }
         }
 
@@ -234,6 +237,8 @@ namespace TrueCrypt_Mounter
                 }
                 
             }
+            _driveInfos.Clear();
+            _driveInfos.AddRange(new List<String> { _mediaType, _model, _serial, _interface, _partitions, _index });
             GetPartitionInfo();
         }
 
