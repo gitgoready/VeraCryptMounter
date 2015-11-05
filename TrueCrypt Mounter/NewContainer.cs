@@ -34,7 +34,7 @@ namespace TrueCrypt_Mounter
         private const string LanguageRegion = "NewContainer";
         private readonly string _language;
         private string _oldName;
-        private object[] _hashes = { "", "sha512", "sha256", "wirlpool", "ripemd160" };
+        private object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160" };
 
         /// <summary>
         /// Constructor for creating a new container.

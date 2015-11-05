@@ -34,7 +34,7 @@ namespace TrueCrypt_Mounter
         private readonly List<string> _useddriveletters = new List<string>();
         private List<string[]> _languages;
         private const string LanguageRegion = "Mainsettings";
-        private object[] _hashes = { "", "sha512", "sha256", "wirlpool", "ripemd160" };
+        private object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160" };
         private string _language;
 
         /// <summary>
