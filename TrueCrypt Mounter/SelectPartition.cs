@@ -7,7 +7,7 @@ namespace TrueCrypt_Mounter
     {
         private WmiDriveInfo _driveInfo;
         
-        public SelectPartition()
+        public SelectPartition(object root)
         {
             InitializeComponent();
             _driveInfo = new WmiDriveInfo();
@@ -30,6 +30,11 @@ namespace TrueCrypt_Mounter
             foreach (Partition part in _driveInfo.PartitonInfos)
             {
                 comboBoxPartitions.Items.Add(part.DeviceId);
+            }
+            foreach (var info in _driveInfo.DriveInfos)
+            {
+                TreeNode trenod = new TreeNode(info);
+                treeViewInfos.Nodes.Add(trenod);
             }
         }
     }

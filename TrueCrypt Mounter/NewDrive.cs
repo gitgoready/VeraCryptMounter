@@ -337,7 +337,7 @@ namespace TrueCrypt_Mounter
 
         private void buttonChosePartition_Click(object sender, EventArgs e)
         {
-            var dialogBox = new SelectPartition();
+            var dialogBox = new SelectPartition(this);
             dialogBox.ShowDialog();
         }
     }

@@ -21,6 +21,16 @@ namespace TrueCrypt_Mounter
         private string _drive;
         private static List<string> _drives = new List<string>();
         private static List<Partition> _partitionInfos = new List<Partition>();
+        private static List<string> _driveInfos = new List<string>();
+
+        public List<string> DriveInfos
+        {
+            get
+            {
+                _driveInfos.AddRange(new List<String> { _model, _mediaType, _serial, _interface});
+                return _driveInfos;
+            }
+        }
 
         /// <summary>
         /// The name of the drive where the info is requested from.
