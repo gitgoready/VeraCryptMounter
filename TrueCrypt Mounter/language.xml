@@ -286,8 +286,16 @@
       <E>Readonly</E>
     </Text>
     <Text key="lableDriveletter">
-      <D>Lauferksbuchstabe für das Laufwerk</D>
-      <E>Driveletter for the drive</E>
+      <D>Lauferksbuchstaben und Hash</D>
+      <E>Driveletter and hash</E>
+    </Text>
+    <Text key="checkBoxPim">
+      <D>PIM</D>
+      <E>PIM</E>
+    </Text>
+    <Text key="checkBoxTruecrypt">
+      <D>TrueCrypt</D>
+      <E>TrueCrypt</E>
     </Text>
     <Text key="buttonOk">
       <D>OK</D>
@@ -330,12 +338,16 @@
       <E>Keyfile does not be empty.</E>
     </Text>
     <Text key="MessagePartitionWrongFormat">
-      <D>Partition benötigt folgendes Format: \n PartitionX \n X= Nummer der Partition.</D>
-      <E>Partition nedded following format: \n PartitionX \n X= Number of partition.</E>
+      <D>Partition benötigt folgendes Format: \n \Device\HarddiskX\PartitionX \n X= Nummer der Partition und Disk.</D>
+      <E>Partition format must be: \n \Device\HarddiskX\PartitionX \n X= Number of partition and disk.</E>
     </Text>
-    <Text key="MessagePartitonEndsWithLetter">
-      <D>Hinter dem Wort 'Partition' dürfen nur Zahlen folgen.</D>
-      <E>Behind the word 'Partition' are only digits permitted.</E>
+    <Text key ="MessagePartnumberEmpty">
+      <D>Partitionsnummer konnte nicht ermittelt werden.</D>
+      <E>Failed to get number of partition</E>
+    </Text>
+    <Text key="MessageDisknumberEmpty">
+      <D>Disknummer konnte nicht ermittelt werden.</D>
+      <E>Failed to get number of disk.</E>
     </Text>
     <Text key="Error">
       <D>Fehler</D>

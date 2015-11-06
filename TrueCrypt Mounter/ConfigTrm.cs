@@ -67,6 +67,9 @@ namespace TrueCrypt_Mounter
             public const string Automountstart = "Automountstart";
             public const string Pim = "Pim";
             public const string Hash = "Hash";
+            public const string Truecrypt = "Truecrypt";
+            public const string Diskmodel = "Diskmodel";
+            public const string Diskserial = "Diskserial";
         }
 
         /// <summary>

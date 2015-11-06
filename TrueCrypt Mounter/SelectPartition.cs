@@ -8,14 +8,16 @@ namespace TrueCrypt_Mounter
         private WmiDriveInfo _driveInfo;
         private static string[] _driveinfosnames = { "MediaType: ", "Model: ", "Serial: ", "Interface: ", "Partitions: ", "Index: " };
         private static string[] _partitioninfonames = { "Description: ", "DeviceId: ", "DiskIndex: ", "Index: ", "Name: ", "Size: ", "Type: " };
+        private NewDrive _root;
         
         /// <summary>
         /// 
         /// </summary>
         /// <param name="root"></param>
-        public SelectPartition(object root)
+        public SelectPartition(NewDrive root)
         {
             InitializeComponent();
+            _root = root;
             _driveInfo = new WmiDriveInfo();
 
             foreach (string drive in _driveInfo.DriveList)
@@ -28,8 +30,6 @@ namespace TrueCrypt_Mounter
         {
             Close();
         }
-
-        
 
         private void comboBoxDisks_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -62,9 +62,21 @@ namespace TrueCrypt_Mounter
 
         private void SelectPartition_FormClosed(object sender, FormClosedEventArgs e)
         {
-            comboBoxPartitions.Items.Clear();
-            comboBoxDisks.Items.Clear();
-            treeViewInfos.Nodes.Clear();
+            comboBoxPartitions.Dispose();
+            comboBoxDisks.Dispose();
+            treeViewInfos.Dispose();
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            _driveInfo.Driveinfo(comboBoxDisks.SelectedItem.ToString());
+            string partnummber = comboBoxPartitions.SelectedItem.ToString();
+
+            _root.Diskmodel =_driveInfo.Model;
+            _root.Disknummber = _driveInfo.Index;
+            _root.Diskserial = _driveInfo.Serial;
+            _root.Partnummber = partnummber.Substring(partnummber.Length -1, 1);
+            Close();
         }
     }
 }

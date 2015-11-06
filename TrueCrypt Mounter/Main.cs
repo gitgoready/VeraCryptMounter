@@ -90,7 +90,7 @@ namespace TrueCrypt_Mounter
 
 
         public delegate int MountDriveDelegate(string partition, string driveletter, string keyfile, string password, bool silent,
-                                                bool beep, bool force, bool readOnly, bool removable, int iterations);
+                                                bool beep, bool force, bool readOnly, bool removable, string pim, string hash, bool tc);
 
         public delegate int MountContainerDelegate(string path, string driveletter, string keyfile, string password, bool silent,
                                                    bool beep, bool force, bool readOnly, bool removable, bool tc, string pim,string hash);
@@ -507,6 +507,7 @@ namespace TrueCrypt_Mounter
                     _cached = false;
                     checkBoxClearPassword.CheckState = CheckState.Unchecked;
                     _passwordDrive = null;
+                    _pim = null;
                 }
                 // If a password is cached, the paswordform isn´t show 
                 if (_cached == false)
@@ -554,17 +555,20 @@ namespace TrueCrypt_Mounter
                          _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Keyfile);
             }
 
-            string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition,
-                                                "Partition0");
+            string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition, "");
             bool removable = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Removable, false);
             bool readOnly = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Readonly, false);
+            string hash = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Hash, "");
+            bool tc = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Truecrypt, false);
+
+            //TODO CHECK DISKNUMBER IS CORRECK!!!!
 
             toolStripProgressBar.Visible = true;
 
             MountDriveDelegate mountdrive = Mount.MountDrive;
             
-            mountdrive.BeginInvoke(partition, dletter, key, _passwordDrive, silent, beep, force, readOnly, removable,
-                                   iterations, CallbackHandlerMountDrive, mountdrive);
+            mountdrive.BeginInvoke(partition, dletter, key, _passwordDrive, silent, beep, force, readOnly, removable, _pim, hash, tc,
+                                   CallbackHandlerMountDrive, mountdrive);
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
 
             _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveSucceed",

@@ -54,7 +54,7 @@ namespace TrueCrypt_Mounter
 
 
         internal static int MountDrive(string partition, string driveletter, string keyfile, string password, bool silent,
-                                          bool beep, bool force, bool readOnly, bool removable, int iterations)
+                                          bool beep, bool force, bool readOnly, bool removable, string pim, string hash, bool tc)
         {
             int output;
             Tc.FileName = _config.GetValue("Grundeinstellungen", "Truecryptpath", "");
@@ -78,10 +78,6 @@ namespace TrueCrypt_Mounter
                     throw new Exception(status + "(keyfile)");
                 }
 
-                //if (string.IsNullOrEmpty(password))
-                //{
-                //    throw new Exception(status + "(password)");
-                //}
                 if (!DrivelettersHelper.IsDriveletterFree(driveletter))
                 {
                     throw new Exception("Laufwerksbuchstabe ist belegt");
@@ -110,14 +106,16 @@ namespace TrueCrypt_Mounter
                 MessageBox.Show(e.Message, text);
                 return 2;
             }
-            //
-            
 
             string argumentstring = Letter + driveletter + Password + password +
                                     Quit;
 
             if (!string.IsNullOrEmpty(keyfile))
                 argumentstring += Keyfile + Quote + keyfile + Quote;
+            if (!string.IsNullOrEmpty(pim))
+                argumentstring += Pim + Quote + pim + Quote;
+            if (!string.IsNullOrEmpty(hash))
+                argumentstring += Hash + Quote + hash + Quote;
             if (silent)
                 argumentstring += Silent;
             if (beep)
@@ -128,36 +126,34 @@ namespace TrueCrypt_Mounter
                 argumentstring += Mountoption + MountoptionRemovable;
             if (readOnly)
                 argumentstring += Mountoption + MountoptionReadonly;
+            if (tc)
+                argumentstring += Truecrypt;
 
-            
-            for(int i = 0 ;iterations >= i; i++)
-            {
-                string path = Volume + "\\Device\\Harddisk" + i + "\\" + partition;
-                Tc.Arguments = path + argumentstring;
+            string path = Volume + partition;
+            Tc.Arguments = path + argumentstring;
 # if DEBUG
-                DialogResult result = MessageBox.Show(Tc.Arguments, "Mountstring", MessageBoxButtons.RetryCancel);
-                if (result == DialogResult.Cancel)
-                    return 2;
-                //Clipboard.SetDataObject(argumentstring, true);
+            DialogResult result = MessageBox.Show(Tc.Arguments, "Mountstring", MessageBoxButtons.RetryCancel);
+            if (result == DialogResult.Cancel)
+                return 2;
+            //Clipboard.SetDataObject(argumentstring, true);
 #endif
-                try
-                {
-                    Tcprocess.StartInfo = Tc;
-                    Tcprocess.Start();
-                    Tcprocess.WaitForExit();
-                    output = Tcprocess.ExitCode;
-                    Tcprocess.Close();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                    return 1;
-                }
-                if (output == 0)
-                    return 0;
+            try
+            {
+                Tcprocess.StartInfo = Tc;
+                Tcprocess.Start();
+                Tcprocess.WaitForExit();
+                output = Tcprocess.ExitCode;
+                Tcprocess.Close();
             }
-
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 1;
+            }
+            if (output == 0)
+                return 0;
             return 1;
+
         }
 
         public static int MountKeyfileContainer(string path, string driveletter, bool silent, bool beep, bool force,

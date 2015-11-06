@@ -58,7 +58,9 @@ namespace TrueCrypt_Mounter
             _config = Singleton<ConfigManager>.Instance.Init(_config);
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             LanguageFill();
-            if (description != null) NewKontainerEdit(description);
+            if (string.IsNullOrEmpty(description))
+                Close();
+            NewKontainerEdit(description);
         }
 
         /// <summary>

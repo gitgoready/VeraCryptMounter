@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace TrueCrypt_Mounter
@@ -31,11 +32,44 @@ namespace TrueCrypt_Mounter
         private readonly Config _config = new Config();
         private readonly List<string> _driveletters = new List<string>();
         private readonly List<string> _useddriveletters = new List<string>();
+        private static object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160" };
         private bool _edit;
         private readonly string _language; 
         private const string LanguageRegion = "NewDrive";
         private string _oldName;
+        private string _disknummber;
+        private string _partnummber;
+        private string _diskmodel;
+        private string _diskserial;
 
+        /// <summary>
+        /// Set the disknumber for the Drive
+        /// </summary>
+        public string Disknummber
+        {
+            set { _disknummber = value; }
+        }
+        /// <summary>
+        /// Set the partition number on the drive
+        /// </summary>
+        public string Partnummber
+        {
+            set { _partnummber = value; }
+        }
+        /// <summary>
+        /// Set the name of the drive
+        /// </summary>
+        public string Diskmodel
+        {
+            set { _diskmodel = value; }
+        }
+        /// <summary>
+        /// set the serial of the drive
+        /// </summary>
+        public string Diskserial
+        {
+            set { _diskserial = value; }
+        }
         ///<summary>
         /// Constructor for new drive element.
         ///</summary>
@@ -57,7 +91,9 @@ namespace TrueCrypt_Mounter
             _config = Singleton<ConfigManager>.Instance.Init(_config);
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "E");
             LanguageFill();
-            if (driveName != null) NewDriveEdit(driveName);
+            if (string.IsNullOrEmpty(driveName))
+               Close();
+            NewDriveEdit(driveName);
         }
 
         /// <summary>
@@ -74,11 +110,13 @@ namespace TrueCrypt_Mounter
                 groupBoxMountoptions.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxMountoptions", _language);
                 checkBoxRemovable.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxRemovable", _language);
                 checkBoxReadonly.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxReadonly", _language);
-                lableDriveletter.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "lableDriveletter", _language);
+                groupBoxDriveletter.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "lableDriveletter", _language);
                 buttonOk.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOk", _language);
                 buttonCancel.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonCancel", _language);
                 checkBoxAutomountUsb.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountUsb", _language);
                 checkBoxAutomountStart.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountStart", _language);
+                checkBoxTruecrypt.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxTruecrypt", _language);
+                checkBoxPim.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPim", _language);
                 //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
             }
             catch (Exception ex)
@@ -105,6 +143,7 @@ namespace TrueCrypt_Mounter
             // Set the datasource for the drivelettercobobox and select the first. 
             comboBoxDriveletter.DataSource = _driveletters;
             comboBoxDriveletter.SelectedItem = _driveletters[0];
+            comboBoxHash.Items.AddRange(_hashes);
         }
 
         /// <summary>
@@ -121,15 +160,19 @@ namespace TrueCrypt_Mounter
             foreach (string elemnt in DrivelettersHelper.GetUsedDriveletter())
                 _useddriveletters.Add(elemnt);
             comboBoxDriveletter.DataSource = _driveletters;
+            comboBoxHash.Items.AddRange(_hashes);
 
             textBoxDescription.Text = driveName;
-            textBoxPartition.Text = _config.GetValue(driveName, ConfigTrm.Drive.Partition, "Partition");
+            textBoxPartition.Text = _config.GetValue(driveName, ConfigTrm.Drive.Partition, "\\Device\\Harddisk\\Partition");
             textBoxKeyfile.Text = _config.GetValue(driveName, ConfigTrm.Drive.Keyfile, "");
             checkBoxNoKeyfile.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Nokeyfile, false);
             checkBoxReadonly.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Readonly, false);
             checkBoxRemovable.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Removable, false);
             checkBoxAutomountStart.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Automountstart, false);
             checkBoxAutomountUsb.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Automountusb, false);
+            checkBoxPim.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Pim, false);
+            checkBoxTruecrypt.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Truecrypt, false);
+            comboBoxHash.SelectedItem = _config.GetValue(driveName, ConfigTrm.Drive.Hash, "");
 
             comboBoxDriveletter.SelectedItem = _config.GetValue(driveName, ConfigTrm.Drive.Driveletter, "");
         }
@@ -224,23 +267,15 @@ namespace TrueCrypt_Mounter
                 //    throw new Exception("Laufwerkbuchstabe darf nicht leer sein");
                 //}
 
+                string pat = @"\\Device\\Harddisk\d+\\Partition\d+$";
+                Regex r = new Regex(pat);
+                            
                 // Check if partiton has the right format.
-                if (part.Length < 10)
+                if (!r.IsMatch(part))
                 {
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePartitionWrongFormat", _language));
                 }
-                if (part.Substring(0, 9) != "Partition")
-                {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePartitionWrongFormat", _language));
-                }
-                char[] partChar = part.Substring(9, part.Length - 9).ToCharArray();
-                foreach (char c in partChar)
-                {
-                    if (!char.IsNumber(c))
-                    {
-                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePartitonEndsWithLetter", _language));
-                    }
-                }
+               
             }
             catch (Exception ex)
             {
@@ -260,6 +295,10 @@ namespace TrueCrypt_Mounter
                 _config.SetValue(beschr, ConfigTrm.Drive.Readonly, checkBoxReadonly.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Automountusb, checkBoxAutomountUsb.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Automountstart, checkBoxAutomountStart.Checked);
+                _config.SetValue(beschr, ConfigTrm.Drive.Diskmodel, _diskmodel);
+                _config.SetValue(beschr, ConfigTrm.Drive.Diskserial, _diskserial);
+                _config.SetValue(beschr, ConfigTrm.Drive.Pim, checkBoxPim.Checked);
+                _config.SetValue(beschr, ConfigTrm.Drive.Truecrypt, checkBoxTruecrypt.Checked);
             }
             catch (Exception ex)
             {
@@ -271,7 +310,7 @@ namespace TrueCrypt_Mounter
         }
 
         /// <summary>
-        /// Handle the event for the nkkeyfile checkbox.
+        /// Handle the event for the nokeyfile checkbox.
         /// Clears the textbox for keyfiel and make it readonly.
         /// </summary>
         /// <param name="sender"></param>
@@ -300,7 +339,6 @@ namespace TrueCrypt_Mounter
         {
             // ItemHeight shout be font size + 4 
             e.ItemHeight = 12;
-            //e.ItemWidth = 120;
         }
 
         /// <summary>
@@ -338,7 +376,17 @@ namespace TrueCrypt_Mounter
         private void buttonChosePartition_Click(object sender, EventArgs e)
         {
             var dialogBox = new SelectPartition(this);
-            dialogBox.ShowDialog();
+            DialogResult res = dialogBox.ShowDialog();
+
+            if (res == DialogResult.OK)
+            {
+                if (string.IsNullOrEmpty(_partnummber))
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePartnumberEmpty", _language));
+                if (string.IsNullOrEmpty(_disknummber))
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDisknumberEmpty", _language));
+
+                textBoxPartition.Text = "\\Device\\Harddisk" + _disknummber + "\\Partition" + _partnummber;
+            }
         }
     }
 }

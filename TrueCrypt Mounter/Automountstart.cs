@@ -161,6 +161,8 @@ namespace TrueCrypt_Mounter
                 _mystart.Password = null;
                 _mystart.PasswordCached = null;
 
+                string pim = null;
+
                 drives = GetAutoDrives();
                 if (drives != null)
                     foreach (string drive in drives)
@@ -175,6 +177,9 @@ namespace TrueCrypt_Mounter
                             string partition = _config.GetValue(drive, ConfigTrm.Drive.Partition, "");
                             bool ro = _config.GetValue(drive, ConfigTrm.Drive.Readonly, false);
                             bool rm = _config.GetValue(drive, ConfigTrm.Drive.Removable, false);
+                            bool tc = _config.GetValue(drive, ConfigTrm.Drive.Truecrypt, false);
+                            string hash = _config.GetValue(drive, ConfigTrm.Drive.Hash, "");
+
 
                             _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "Password", _language) + drive, true);
 
@@ -204,7 +209,7 @@ namespace TrueCrypt_Mounter
 
                             _mystart.SetFirstText(drive + LanguagePool.GetInstance().GetString(LanguageRegion, "State", _language), false);
 
-                            int ret = Mount.MountDrive(partition, driveletter, keyfile, _password, true, false, false, ro, rm, 26);
+                            int ret = Mount.MountDrive(partition, driveletter, keyfile, _password, true, false, false, ro, rm, pim, hash, tc);
 
                             if (ret == 0)
                             {
