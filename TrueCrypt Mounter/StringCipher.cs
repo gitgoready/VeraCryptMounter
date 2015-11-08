@@ -1,100 +1,66 @@
 ﻿using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
+using SecurityDriven.Inferno;
 
 namespace TrueCrypt_Mounter
 {
     /// <summary>
-    /// Encode and decode strings with aes.
+    /// Encode and decode strings with aes-256.
     /// </summary>
     public static class StringCipher
     {
 
-        // This constant is used to determine the keysize of the encryption algorithm.
-        private const int keysize = 256;
+        // This constant is used to determine the rounds used for AES.
+        private const int rounds = 50000;
         /// <summary>
-        /// Encrypt string with aes. Retrun base 64 string with salt.
+        /// Encrypt string with aes-256. Retrun base 64 string with salt(chars 88).
         /// </summary>
         /// <param name="plainText">The plain text string.</param>
         /// <param name="passPhrase">The password for the encryption.</param>
         /// <returns></returns>
         public static string Encrypt(string plainText, string passPhrase)
         {
-            byte[] initVectorBytes = new byte[32]; 
-            byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-            using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null))
-            {
-                byte[] keyBytes = password.GetBytes(keysize / 8);
-                using (RijndaelManaged symmetricKey = new RijndaelManaged())
-                {
-                    symmetricKey.Mode = CipherMode.CBC;
-                    symmetricKey.BlockSize = keysize;
-                    symmetricKey.GenerateIV();
-                    initVectorBytes = symmetricKey.IV;
-                    using (ICryptoTransform encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes))
-                    {
-                        using (MemoryStream memoryStream = new MemoryStream())
-                        {
-                            using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-                            {
-                                cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
-                                cryptoStream.FlushFinalBlock();
-                                byte[] cipherTextBytes = memoryStream.ToArray();
-                                string value = Convert.ToBase64String(cipherTextBytes);
-                                string salt = Convert.ToBase64String(initVectorBytes);
-                                var ret = string.Concat(value, salt);
-                                return ret;
-                            }
-                        }
-                    }
-                }
-            }
+            //get nedded form of passphrase and plaintest
+            byte[] key = Utils.SafeUTF8.GetBytes(passPhrase);
+            ArraySegment<byte> plain = new ArraySegment<byte>(Utils.SafeUTF8.GetBytes(plainText));
+            //generate random salt
+            CryptoRandom rng = new CryptoRandom();
+            byte[] rand = rng.NextBytes(64);
+            ArraySegment<byte> salt = new ArraySegment<byte>(rand);
+            string ssalt = Convert.ToBase64String(rand);
+
+            byte[] output = null;
+    
+            output = EtM_CTR.Encrypt(key, plain, salt, rounds);
+
+            if (output == null)
+                return null;
+
+            string sout = Convert.ToBase64String(output);
+
+            return sout + ssalt;
         }
 
         /// <summary>
-        /// Decrypt base64 string with salt
+        /// Decrypt base64 string with salt (chars 88)
         /// </summary>
         /// <param name="cipherText"></param>
         /// <param name="passPhrase"></param>
         /// <returns></returns>
         public static string Decrypt(string cipherText, string passPhrase)
         {
-            byte[] initVectorBytes = new byte[32];
-            string salt = cipherText.Substring(cipherText.Length - 44);
-            cipherText = cipherText.Substring(0, cipherText.Length - 44);
-            initVectorBytes = Convert.FromBase64String(salt);
+            //get nedded form of passphrase and cyphertext
+            byte[] key = Utils.SafeUTF8.GetBytes(passPhrase);
+            string salt = cipherText.Substring(cipherText.Length - 88);
+            cipherText = cipherText.Substring(0, cipherText.Length - 88);
+            ArraySegment<byte> bytecyphertext = new ArraySegment<byte>(Convert.FromBase64String(cipherText));
+            ArraySegment<byte> bytesalt = new ArraySegment<byte>(Convert.FromBase64String(salt));
 
-            byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
-            try
-            {
-                using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null))
-                {
-                    byte[] keyBytes = password.GetBytes(keysize / 8);
-                    using (RijndaelManaged symmetricKey = new RijndaelManaged())
-                    {
-                        symmetricKey.Mode = CipherMode.CBC;
-                        symmetricKey.BlockSize = keysize;
-                        using (ICryptoTransform decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes))
-                        {
-                            using (MemoryStream memoryStream = new MemoryStream(cipherTextBytes))
-                            {
-                                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
-                                {
-                                    byte[] plainTextBytes = new byte[cipherTextBytes.Length];
-                                    int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
-                                    return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                //Console.WriteLine(ex.Message);
+            byte[] decout = EtM_CTR.Decrypt(key, bytecyphertext, bytesalt, rounds);
+
+            if (decout == null)
                 return null;
-            }
+
+            return Utils.SafeUTF8.GetString(decout);
         }
     }
 }
