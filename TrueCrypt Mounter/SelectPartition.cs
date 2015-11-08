@@ -40,15 +40,16 @@ namespace TrueCrypt_Mounter
             var i = 0;
             foreach (Partition part in _driveInfo.PartitonInfos)
             {
-                comboBoxPartitions.Items.Add(part.DeviceId);
+                int intpartindex = int.Parse(part.Index) + 1;
+                comboBoxPartitions.Items.Add(intpartindex.ToString());
                 TreeNode[] partitionnodestree = { new TreeNode(_partitioninfonames[0] + part.Description),
                                         new TreeNode(_partitioninfonames[1] + part.DeviceId),
                                         new TreeNode(_partitioninfonames[2] + part.DiskIndex),
-                                        new TreeNode(_partitioninfonames[3] + part.Index),
+                                        new TreeNode(_partitioninfonames[3] + intpartindex.ToString()),
                                         new TreeNode(_partitioninfonames[4] + part.Name),
                                         new TreeNode(_partitioninfonames[5] + part.Size),
                                         new TreeNode(_partitioninfonames[6] + part.Type), };
-                treeViewInfos.Nodes.Add(new TreeNode ("Partition" + part.Index, partitionnodestree));
+                treeViewInfos.Nodes.Add(new TreeNode ("Partition" + intpartindex.ToString(), partitionnodestree));
             }
             foreach (var info in _driveInfo.DriveInfos)
             {
@@ -75,7 +76,7 @@ namespace TrueCrypt_Mounter
             _root.Diskmodel =_driveInfo.Model;
             _root.Disknummber = _driveInfo.Index;
             _root.Diskserial = _driveInfo.Serial;
-            _root.Partnummber = partnummber.Substring(partnummber.Length -1, 1);
+            _root.Partnummber = partnummber;
             Close();
         }
     }

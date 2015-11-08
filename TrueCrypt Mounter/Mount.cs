@@ -73,11 +73,6 @@ namespace TrueCrypt_Mounter
                     throw new Exception(status + "(driveletter)");
                 }
 
-                if (string.IsNullOrEmpty(keyfile))
-                {
-                    throw new Exception(status + "(keyfile)");
-                }
-
                 if (!DrivelettersHelper.IsDriveletterFree(driveletter))
                 {
                     throw new Exception("Laufwerksbuchstabe ist belegt");

@@ -299,6 +299,7 @@ namespace TrueCrypt_Mounter
                 _config.SetValue(beschr, ConfigTrm.Drive.Diskserial, _diskserial);
                 _config.SetValue(beschr, ConfigTrm.Drive.Pim, checkBoxPim.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Truecrypt, checkBoxTruecrypt.Checked);
+                _config.SetValue(beschr, ConfigTrm.Drive.Hash, comboBoxHash.SelectedItem.ToString());
             }
             catch (Exception ex)
             {

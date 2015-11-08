@@ -563,6 +563,11 @@ namespace TrueCrypt_Mounter
 
             //TODO CHECK DISKNUMBER IS CORRECK!!!!
 
+            //string diskmodel = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskmodel, null);
+            //string diskserial = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskserial, null);
+
+            //string disknumber = partition.Substring(16, 1);
+
             toolStripProgressBar.Visible = true;
 
             MountDriveDelegate mountdrive = Mount.MountDrive;

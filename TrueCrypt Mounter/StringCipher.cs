@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TrueCrypt_Mounter
 {
@@ -17,10 +14,10 @@ namespace TrueCrypt_Mounter
         // This constant is used to determine the keysize of the encryption algorithm.
         private const int keysize = 256;
         /// <summary>
-        /// Encrypt string with aes. Retrun base 64 string with salt
+        /// Encrypt string with aes. Retrun base 64 string with salt.
         /// </summary>
-        /// <param name="plainText"></param>
-        /// <param name="passPhrase"></param>
+        /// <param name="plainText">The plain text string.</param>
+        /// <param name="passPhrase">The password for the encryption.</param>
         /// <returns></returns>
         public static string Encrypt(string plainText, string passPhrase)
         {
