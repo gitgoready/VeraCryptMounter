@@ -1,16 +1,35 @@
-﻿using System;
+﻿/**
+ * <TruecryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * Copyright (C) <2015>  <Rafael Grothmann>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * **/
+using System;
 using SecurityDriven.Inferno;
 
 namespace TrueCrypt_Mounter
 {
     /// <summary>
-    /// Encode and decode strings with aes-256.
+    /// Encode and decode strings with aes-ctr-256.
     /// </summary>
     public static class StringCipher
     {
 
         // This constant is used to determine the rounds used for AES.
         private const int rounds = 50000;
+
+
         /// <summary>
         /// Encrypt string with aes-256. Retrun base 64 string with salt(chars 88).
         /// </summary>
@@ -43,8 +62,8 @@ namespace TrueCrypt_Mounter
         /// <summary>
         /// Decrypt base64 string with salt (chars 88)
         /// </summary>
-        /// <param name="cipherText"></param>
-        /// <param name="passPhrase"></param>
+        /// <param name="cipherText">cypher text with salt at the end.</param>
+        /// <param name="passPhrase">password for the decryption.</param>
         /// <returns></returns>
         public static string Decrypt(string cipherText, string passPhrase)
         {

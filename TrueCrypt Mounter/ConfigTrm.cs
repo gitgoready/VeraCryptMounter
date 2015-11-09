@@ -70,6 +70,8 @@ namespace TrueCrypt_Mounter
             public const string Truecrypt = "Truecrypt";
             public const string Diskmodel = "Diskmodel";
             public const string Diskserial = "Diskserial";
+            public const string Disknumber = "Disknumber";
+            public const string Partnumber = "Partnumber";
         }
 
         /// <summary>

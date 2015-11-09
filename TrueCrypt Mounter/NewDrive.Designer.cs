@@ -30,6 +30,7 @@ namespace TrueCrypt_Mounter
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewDrive));
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.lableDescription = new System.Windows.Forms.Label();
             this.lablePartition = new System.Windows.Forms.Label();
@@ -49,8 +50,8 @@ namespace TrueCrypt_Mounter
             this.checkBoxAutomountUsb = new System.Windows.Forms.CheckBox();
             this.checkBoxReadonly = new System.Windows.Forms.CheckBox();
             this.groupBoxDriveletter = new System.Windows.Forms.GroupBox();
-            this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
             this.comboBoxHash = new System.Windows.Forms.ComboBox();
+            this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBoxMountoptions.SuspendLayout();
             this.groupBoxDriveletter.SuspendLayout();
@@ -247,6 +248,14 @@ namespace TrueCrypt_Mounter
             this.groupBoxDriveletter.TabStop = false;
             this.groupBoxDriveletter.Text = "Driveletter";
             // 
+            // comboBoxHash
+            // 
+            this.comboBoxHash.FormattingEnabled = true;
+            this.comboBoxHash.Location = new System.Drawing.Point(68, 19);
+            this.comboBoxHash.Name = "comboBoxHash";
+            this.comboBoxHash.Size = new System.Drawing.Size(144, 21);
+            this.comboBoxHash.TabIndex = 11;
+            // 
             // comboBoxDriveletter
             // 
             this.comboBoxDriveletter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
@@ -258,14 +267,6 @@ namespace TrueCrypt_Mounter
             this.comboBoxDriveletter.TabIndex = 7;
             this.comboBoxDriveletter.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxDriveletter_DrawItem);
             this.comboBoxDriveletter.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ComboBoxDriveletter_MeasureItem);
-            // 
-            // comboBoxHash
-            // 
-            this.comboBoxHash.FormattingEnabled = true;
-            this.comboBoxHash.Location = new System.Drawing.Point(68, 19);
-            this.comboBoxHash.Name = "comboBoxHash";
-            this.comboBoxHash.Size = new System.Drawing.Size(144, 21);
-            this.comboBoxHash.TabIndex = 11;
             // 
             // NewDrive
             // 
@@ -279,6 +280,7 @@ namespace TrueCrypt_Mounter
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "NewDrive";
             this.ShowInTaskbar = false;

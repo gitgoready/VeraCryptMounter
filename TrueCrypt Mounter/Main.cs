@@ -20,10 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
-using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace TrueCrypt_Mounter
 {
@@ -35,7 +32,6 @@ namespace TrueCrypt_Mounter
         #region Vareables
 
         private const string AppId = "TrueCryptMounter";
-        //private const string ProgId = "TrueCryptMounter";
         private const string LanguageRegion = "Main";
         private const string LanguageToolTip = "MainToolTips";
 
@@ -45,7 +41,6 @@ namespace TrueCrypt_Mounter
         private readonly List<string> _cbkontainer = new List<string>();
         private readonly Config _config = new Config();
 
-        private readonly string _executablePath;
         private readonly List<string> _mounteddrives = new List<string>();
         private readonly List<string> _mountedkontainer = new List<string>();
         private bool _cached;
@@ -57,24 +52,30 @@ namespace TrueCrypt_Mounter
         private string _pim;
         private string _lablefailed;
         private string _lablesuccseed;
-        private TaskbarManager windowsTaskbar;
+       
 
         #endregion
 
         #region Setter,Getter
-
+        /// <summary>
+        /// Password for mounting a drive
+        /// </summary>
         public string PasswordDrive
         {
             get { return null; }
             set { _passwordDrive = value; }
         }
-
+        /// <summary>
+        /// password for mounting a container
+        /// </summary>
         public string PasswordContainer
         {
             get { return null; }
             set { _passwordContainer = value; }
         }
-
+        /// <summary>
+        /// PIM value for mounting container or drive
+        /// </summary>
         public string Pim
         {
             get { return null; }
@@ -84,7 +85,19 @@ namespace TrueCrypt_Mounter
         #endregion
 
         #region Delegates
-
+        /// <summary>
+        /// Delegate for mountkeyfilekontainer
+        /// </summary>
+        /// <param name="path">string</param>
+        /// <param name="driveletter">string</param>
+        /// <param name="silent">bool</param>
+        /// <param name="beep">bool</param>
+        /// <param name="force">bool</param>
+        /// <param name="readOnly">bool</param>
+        /// <param name="removable">bool</param>
+        /// <param name="hash">string</param>
+        /// <param name="pim">string</param>
+        /// <returns></returns>
         public delegate int MountKeyfilecontainerDelegate(string path, string driveletter, bool silent, bool beep, bool force,
                                                           bool readOnly, bool removable, string hash, bool pim);
 
@@ -191,27 +204,15 @@ namespace TrueCrypt_Mounter
             LanguageFill();
 
             ValidateTest();
-
-
-            // Windows7 taskbar funktions
-            if (TaskbarManager.IsPlatformSupported)
-            {
-                windowsTaskbar = TaskbarManager.Instance;
-
-                // Set the application specific id
-                windowsTaskbar.ApplicationId = AppId;
-
-                // Save current folder and path of running executable
-                _executablePath = Assembly.GetEntryAssembly().Location;
-                Path.GetDirectoryName(_executablePath);
-                
-            }
         }
-
+        /// <summary>
+        /// Destructor set passwords and PIM to null.
+        /// </summary>
         ~TrueCryptMounter()
         {
             _passwordDrive = null;
             _passwordContainer = null;
+            _pim = null;
         }
 
         #endregion
@@ -337,25 +338,6 @@ namespace TrueCrypt_Mounter
 
         #region Initialize and Refreshes
 
-
-        private void TaskBarWindows7(string state)
-        {
-            if (TaskbarManager.IsPlatformSupported)
-            {
-                switch (state)
-                {
-                    case "start":
-                        windowsTaskbar.SetProgressState(TaskbarProgressBarState.Indeterminate);
-                        break;
-
-                    case "stop":
-                        windowsTaskbar.SetProgressState(TaskbarProgressBarState.Normal);
-                        windowsTaskbar.SetProgressValue(0,100);
-                        break;
-                }
-            }
-
-        }
 
         /// <summary>
         /// On load preform automount funktions
@@ -539,11 +521,6 @@ namespace TrueCrypt_Mounter
 
             _cached = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
 
-            
-            //Nummber of iteration to try. (nummber of letters)
-            const int iterations = 26;
-            //int interne = 1;
-
 
             string dletter = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Driveletter, "");
 
@@ -561,12 +538,18 @@ namespace TrueCrypt_Mounter
             string hash = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Hash, "");
             bool tc = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Truecrypt, false);
 
-            //TODO CHECK DISKNUMBER IS CORRECK!!!!
-
-            //string diskmodel = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskmodel, null);
-            //string diskserial = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskserial, null);
-
-            //string disknumber = partition.Substring(16, 1);
+            // check if disknumber has changed. If it has correct it
+            string diskmodel = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskmodel, null);
+            string diskserial = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskserial, null);
+            string disknumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Disknumber, null);
+            string partnumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partnumber, null);
+            WmiDriveInfo info = new WmiDriveInfo();
+            info.Driveinfo(diskmodel);
+            if (string.Equals(info.Serial, diskserial))
+            {
+                if (!string.Equals(info.Index, disknumber))
+                    partition = "\\Device\\Harddisk" + info.Index + "\\Partition" + partnumber;
+            }
 
             toolStripProgressBar.Visible = true;
 
@@ -715,7 +698,6 @@ namespace TrueCrypt_Mounter
             _cachedKontainer = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
 
             toolStripProgressBar.Visible = true;
-            TaskBarWindows7("start");
 
             string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter,
                                               "");
@@ -1149,7 +1131,7 @@ namespace TrueCrypt_Mounter
         {
             if (FormWindowState.Minimized == WindowState)
             {
-                if (!TaskbarManager.IsPlatformSupported)
+                //if (!TaskbarManager.IsPlatformSupported)
                     Hide();
 
                 ToolStripMenuItemNotifyRestore.Enabled = true;
@@ -1320,7 +1302,6 @@ namespace TrueCrypt_Mounter
 
             toolStripProgressBar.MarqueeAnimationSpeed = 0;
             toolStripProgressBar.Visible = false;
-            TaskBarWindows7("stop");
 
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewContainer));
             this.openFileDialogKontainer = new System.Windows.Forms.OpenFileDialog();
             this.buttonOpenContainer = new System.Windows.Forms.Button();
             this.groupBoxDescription = new System.Windows.Forms.GroupBox();
@@ -326,6 +327,7 @@
             this.Controls.Add(this.groupBoxPath);
             this.Controls.Add(this.groupBoxDescription);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "NewContainer";
             this.ShowInTaskbar = false;

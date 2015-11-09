@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mainsettings));
             this.select_truecrypt = new System.Windows.Forms.OpenFileDialog();
             this.textBoxTruecryptPath = new System.Windows.Forms.TextBox();
             this.buttonTruecryptPath = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.groupBoxDebug = new System.Windows.Forms.GroupBox();
             this.checkBoxSilentMode = new System.Windows.Forms.CheckBox();
             this.groupBoxKeyfileContainer = new System.Windows.Forms.GroupBox();
+            this.labelHash = new System.Windows.Forms.Label();
             this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.checkBoxPim = new System.Windows.Forms.CheckBox();
             this.checkBoxAutomount = new System.Windows.Forms.CheckBox();
@@ -55,7 +57,6 @@
             this.checkBoxNoKeyfilecontainer = new System.Windows.Forms.CheckBox();
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
-            this.labelHash = new System.Windows.Forms.Label();
             this.groupBoxDebug.SuspendLayout();
             this.groupBoxKeyfileContainer.SuspendLayout();
             this.groupBoxTruecryptPath.SuspendLayout();
@@ -187,6 +188,15 @@
             this.groupBoxKeyfileContainer.TabIndex = 4;
             this.groupBoxKeyfileContainer.TabStop = false;
             this.groupBoxKeyfileContainer.Text = "Keyfile Kontainer Optionen";
+            // 
+            // labelHash
+            // 
+            this.labelHash.AutoSize = true;
+            this.labelHash.Location = new System.Drawing.Point(351, 59);
+            this.labelHash.Name = "labelHash";
+            this.labelHash.Size = new System.Drawing.Size(30, 13);
+            this.labelHash.TabIndex = 17;
+            this.labelHash.Text = "hash";
             // 
             // comboBoxHash
             // 
@@ -332,15 +342,6 @@
             this.comboBoxLanguage.Size = new System.Drawing.Size(119, 21);
             this.comboBoxLanguage.TabIndex = 14;
             // 
-            // labelHash
-            // 
-            this.labelHash.AutoSize = true;
-            this.labelHash.Location = new System.Drawing.Point(351, 59);
-            this.labelHash.Name = "labelHash";
-            this.labelHash.Size = new System.Drawing.Size(30, 13);
-            this.labelHash.TabIndex = 17;
-            this.labelHash.Text = "hash";
-            // 
             // Mainsettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -354,6 +355,7 @@
             this.Controls.Add(this.groupBoxDebug);
             this.Controls.Add(this.buttonClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Mainsettings";
             this.ShowInTaskbar = false;

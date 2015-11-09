@@ -173,6 +173,8 @@ namespace TrueCrypt_Mounter
             checkBoxPim.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Pim, false);
             checkBoxTruecrypt.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Truecrypt, false);
             comboBoxHash.SelectedItem = _config.GetValue(driveName, ConfigTrm.Drive.Hash, "");
+            _disknummber = _config.GetValue(driveName, ConfigTrm.Drive.Disknumber, "");
+            _partnummber = _config.GetValue(driveName, ConfigTrm.Drive.Partnumber, "");
 
             comboBoxDriveletter.SelectedItem = _config.GetValue(driveName, ConfigTrm.Drive.Driveletter, "");
         }
@@ -300,6 +302,8 @@ namespace TrueCrypt_Mounter
                 _config.SetValue(beschr, ConfigTrm.Drive.Pim, checkBoxPim.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Truecrypt, checkBoxTruecrypt.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Hash, comboBoxHash.SelectedItem.ToString());
+                _config.SetValue(beschr, ConfigTrm.Drive.Disknumber, _disknummber);
+                _config.SetValue(beschr, ConfigTrm.Drive.Partnumber, _partnummber);
             }
             catch (Exception ex)
             {

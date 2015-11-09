@@ -80,20 +80,21 @@ namespace TrueCrypt_Mounter
             {
                 if (createdNew)
                 {
-                    var dirKon = new DirectoryInfo(Path.Combine(Application.StartupPath, "Kontainer"));
-                    if (!dirKon.Exists)
-                        Directory.CreateDirectory(Path.Combine(Application.StartupPath, "Kontainer"));
+                    //DirectoryInfo info = new DirectoryInfo();
+                    //var dirKon = new DirectoryInfo(Path.Combine(Application.StartupPath, "Kontainer"));
+                    //if (!dirKon.Exists)
+                    //   Directory.CreateDirectory(Path.Combine(Application.StartupPath, "Kontainer"));
 
-                    var dirTrue = new DirectoryInfo(Path.Combine(Application.StartupPath, "TrueCrypt"));
-                    if (!dirTrue.Exists)
-                        Directory.CreateDirectory(Path.Combine(Application.StartupPath, "TrueCrypt"));
-
+                    //var dirTrue = new DirectoryInfo(Path.Combine(Application.StartupPath, "TrueCrypt"));
+                    //if (!dirTrue.Exists)
+                    //    Directory.CreateDirectory(Path.Combine(Application.StartupPath, "TrueCrypt"));
+                   
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     
                     //show password form to decrypt config
-                    var dialogBox = new Password();
-                    var result = dialogBox.ShowDialog();
+                    var dialogBoxPassword = new Password();
+                    var result = dialogBoxPassword.ShowDialog();
                     if (result == DialogResult.OK)
                     {
                         Application.Run(new TrueCryptMounter());
