@@ -197,6 +197,10 @@
       <D>Keyfilekontainer nicht eingebunden oder Keyfile nicht vorhanden.</D>
       <E>Keyfilecontainer not mounted or keyfile does not exist.</E>
     </Text>
+    <Text key="DiskNotPresentMessage">
+      <D>Laufwerk nicht angeschlossen.</D>
+      <E>Drive not conected.</E>
+    </Text>
     <Text key="Error">
       <D>Fehler</D>
       <E>Error</E>

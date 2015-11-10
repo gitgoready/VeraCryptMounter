@@ -190,7 +190,7 @@ namespace TrueCrypt_Mounter
             // checkBoxTruecrypt
             // 
             this.checkBoxTruecrypt.AutoSize = true;
-            this.checkBoxTruecrypt.Location = new System.Drawing.Point(96, 39);
+            this.checkBoxTruecrypt.Location = new System.Drawing.Point(128, 39);
             this.checkBoxTruecrypt.Name = "checkBoxTruecrypt";
             this.checkBoxTruecrypt.Size = new System.Drawing.Size(72, 17);
             this.checkBoxTruecrypt.TabIndex = 15;
@@ -200,7 +200,7 @@ namespace TrueCrypt_Mounter
             // checkBoxPim
             // 
             this.checkBoxPim.AutoSize = true;
-            this.checkBoxPim.Location = new System.Drawing.Point(96, 19);
+            this.checkBoxPim.Location = new System.Drawing.Point(128, 19);
             this.checkBoxPim.Name = "checkBoxPim";
             this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
             this.checkBoxPim.TabIndex = 8;

@@ -174,20 +174,20 @@ namespace TrueCrypt_Mounter
             try
             {
                 // Get all the disk drives from WMI that match the Model name
-                mosDisks =
-                    new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = '" + name + "'");
+                mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = '" + name + "'");
 
             }
             catch (Exception ex)
-            {
-                
+            {             
                 throw new Exception("Error in GetDriveinfo (" + ex.Message + ")");
             }
-            
+         
             foreach (ManagementObject moDisk in mosDisks.Get())
             {
                 FillDriveinfo(moDisk);
             }
+
+            mosDisks.Dispose();
         }
 
         private void FillDriveinfo(ManagementObject moDisk)

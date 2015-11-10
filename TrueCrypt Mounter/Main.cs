@@ -451,11 +451,37 @@ namespace TrueCrypt_Mounter
             bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, "Silentmode", true);
             const bool beep = false;
             const bool force = false;
+            string key = null;
 
             toolStripLabelNotification.Visible = false;
 
+            _cached = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
+
+            string dletter = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Driveletter, "");
+
+            string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition, "");
+            bool removable = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Removable, false);
+            bool readOnly = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Readonly, false);
+            string hash = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Hash, "");
+            bool tc = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Truecrypt, false);
+
+            // check if disknumber has changed. If it has correct it
+            string diskmodel = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskmodel, null);
+            string diskserial = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskserial, null);
+            string disknumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Disknumber, null);
+            string partnumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partnumber, null);
+
+            WmiDriveInfo info = new WmiDriveInfo();
+            
             try
             {
+                info.Driveinfo(diskmodel);
+                
+                // Test if disk is connected on machine
+                if (string.IsNullOrEmpty(info.Model))
+                {
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language));
+                }
                 // Test if entry in driverbox is chosen. 
                 if (comboBoxDrives.SelectedItem == null)
                 {
@@ -519,49 +545,28 @@ namespace TrueCrypt_Mounter
                 return;
             }
 
-            _cached = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
-
-
-            string dletter = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Driveletter, "");
-
             // Switch nokeyfile. if it is set key = null else key = keyfile;
-            string key = null;
+
             if (!_config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true))
             {
                 key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
                          _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Keyfile);
             }
-
-            string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition, "");
-            bool removable = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Removable, false);
-            bool readOnly = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Readonly, false);
-            string hash = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Hash, "");
-            bool tc = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Truecrypt, false);
-
-            // check if disknumber has changed. If it has correct it
-            string diskmodel = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskmodel, null);
-            string diskserial = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskserial, null);
-            string disknumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Disknumber, null);
-            string partnumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partnumber, null);
-            WmiDriveInfo info = new WmiDriveInfo();
-            info.Driveinfo(diskmodel);
             if (string.Equals(info.Serial, diskserial))
             {
                 if (!string.Equals(info.Index, disknumber))
                     partition = "\\Device\\Harddisk" + info.Index + "\\Partition" + partnumber;
             }
-
             toolStripProgressBar.Visible = true;
 
             MountDriveDelegate mountdrive = Mount.MountDrive;
             
             mountdrive.BeginInvoke(partition, dletter, key, _passwordDrive, silent, beep, force, readOnly, removable, _pim, hash, tc,
                                    CallbackHandlerMountDrive, mountdrive);
+
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
 
-            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveSucceed",
-                                                                                  _language);
-
+            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveSucceed", _language);
             _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveFaild", _language);
 
             Busy();
@@ -1131,9 +1136,6 @@ namespace TrueCrypt_Mounter
         {
             if (FormWindowState.Minimized == WindowState)
             {
-                //if (!TaskbarManager.IsPlatformSupported)
-                    Hide();
-
                 ToolStripMenuItemNotifyRestore.Enabled = true;
             }
         }
