@@ -156,13 +156,12 @@ namespace TrueCrypt_Mounter
             if (checkBoxPortable.Checked)
             {
                 buttonTruecryptPath.Enabled = false;
-                //textBoxTruecryptPath.Clear();
-                //textBoxTruecryptPath.Text = Application.StartupPath + "\\TrueCrypt\\TrueCrypt.exe";
+                
             }
             else
             {
                 buttonTruecryptPath.Enabled = true;
-                //textBoxTruecryptPath.Text = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, "");
+                
             }
         }
 
