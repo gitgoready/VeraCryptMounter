@@ -23,7 +23,6 @@ namespace TrueCrypt_Mounter
             const string nameDriveletter = "Driveletter";
             const string nameKontainerpath = "Kontainerpath";
             const string nameNokeyfile = "Nokeyfile";
-            const string namePotable = "Portable";
             const string nameReadonly = "Readonly";
             const string nameRemovable = "Removable";
             const string nameSilentmode = "Silentmode";
@@ -32,8 +31,6 @@ namespace TrueCrypt_Mounter
 
             //Test if the minimal config is done
             if (!config.HasEntry(sectionGrundeinstellung, nameTruecryptpath))
-                status = false;
-            if (!config.HasEntry(sectionGrundeinstellung, namePotable))
                 status = false;
             if (!config.HasEntry(sectionGrundeinstellung, nameNokeyfile))
                 status = false;

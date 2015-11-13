@@ -49,7 +49,6 @@
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
             this.checkBoxRemovable = new System.Windows.Forms.CheckBox();
             this.checkBoxReadonly = new System.Windows.Forms.CheckBox();
-            this.checkBoxPortable = new System.Windows.Forms.CheckBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.groupBoxTruecryptPath = new System.Windows.Forms.GroupBox();
             this.groupBoxUsesettings = new System.Windows.Forms.GroupBox();
@@ -69,6 +68,7 @@
             this.select_truecrypt.DefaultExt = "exe";
             this.select_truecrypt.FileName = "VeraCrypt.exe";
             this.select_truecrypt.Filter = "truecrypt.exe|veracrypt.exe";
+            this.select_truecrypt.InitialDirectory = "C:\\Program Files\\VeraCrypt";
             this.select_truecrypt.FileOk += new System.ComponentModel.CancelEventHandler(this.select_truecrypt_FileOk);
             // 
             // textBoxTruecryptPath
@@ -258,17 +258,6 @@
             this.checkBoxReadonly.Text = "Schreibgeschützt";
             this.checkBoxReadonly.UseVisualStyleBackColor = true;
             // 
-            // checkBoxPortable
-            // 
-            this.checkBoxPortable.AutoSize = true;
-            this.checkBoxPortable.Location = new System.Drawing.Point(41, 22);
-            this.checkBoxPortable.Name = "checkBoxPortable";
-            this.checkBoxPortable.Size = new System.Drawing.Size(65, 17);
-            this.checkBoxPortable.TabIndex = 10;
-            this.checkBoxPortable.Text = "Portable";
-            this.checkBoxPortable.UseVisualStyleBackColor = true;
-            this.checkBoxPortable.CheckedChanged += new System.EventHandler(this.checkBoxPortable_CheckedChanged);
-            // 
             // buttonOk
             // 
             this.buttonOk.Location = new System.Drawing.Point(302, 278);
@@ -294,7 +283,6 @@
             // 
             this.groupBoxUsesettings.Controls.Add(this.checkBoxPasswordcache);
             this.groupBoxUsesettings.Controls.Add(this.checkBoxNoKeyfilecontainer);
-            this.groupBoxUsesettings.Controls.Add(this.checkBoxPortable);
             this.groupBoxUsesettings.Location = new System.Drawing.Point(9, 204);
             this.groupBoxUsesettings.Name = "groupBoxUsesettings";
             this.groupBoxUsesettings.Size = new System.Drawing.Size(449, 55);
@@ -305,7 +293,7 @@
             // checkBoxPasswordcache
             // 
             this.checkBoxPasswordcache.AutoSize = true;
-            this.checkBoxPasswordcache.Location = new System.Drawing.Point(290, 22);
+            this.checkBoxPasswordcache.Location = new System.Drawing.Point(256, 22);
             this.checkBoxPasswordcache.Name = "checkBoxPasswordcache";
             this.checkBoxPasswordcache.Size = new System.Drawing.Size(118, 17);
             this.checkBoxPasswordcache.TabIndex = 12;
@@ -315,7 +303,7 @@
             // checkBoxNoKeyfilecontainer
             // 
             this.checkBoxNoKeyfilecontainer.AutoSize = true;
-            this.checkBoxNoKeyfilecontainer.Location = new System.Drawing.Point(112, 22);
+            this.checkBoxNoKeyfilecontainer.Location = new System.Drawing.Point(9, 22);
             this.checkBoxNoKeyfilecontainer.Name = "checkBoxNoKeyfilecontainer";
             this.checkBoxNoKeyfilecontainer.Size = new System.Drawing.Size(172, 17);
             this.checkBoxNoKeyfilecontainer.TabIndex = 11;
@@ -392,7 +380,6 @@
         private System.Windows.Forms.GroupBox groupBoxKeyfileContainer;
         private System.Windows.Forms.CheckBox checkBoxRemovable;
         private System.Windows.Forms.CheckBox checkBoxReadonly;
-        private System.Windows.Forms.CheckBox checkBoxPortable;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.GroupBox groupBoxTruecryptPath;
         private System.Windows.Forms.GroupBox groupBoxUsesettings;

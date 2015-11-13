@@ -37,13 +37,9 @@ namespace TrueCrypt_Mounter
             this.ToolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemClose = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemNewDrive = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemEditDrive = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemRemoveDrive = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ToolStripMenuItemNewContainer = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemEditContainer = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemRemoveContainer = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemEditEntry = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemMainSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.automountConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +69,8 @@ namespace TrueCrypt_Mounter
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripLabelNotification = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.driveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.containerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxDrive.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -112,63 +110,35 @@ namespace TrueCrypt_Mounter
             // ToolStripMenuItemEdit
             // 
             this.ToolStripMenuItemEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemNewDrive,
-            this.ToolStripMenuItemEditDrive,
-            this.ToolStripMenuItemRemoveDrive,
-            this.toolStripSeparator1,
-            this.ToolStripMenuItemNewContainer,
-            this.ToolStripMenuItemEditContainer,
-            this.ToolStripMenuItemRemoveContainer});
+            this.ToolStripMenuItemNew,
+            this.ToolStripMenuItemEditEntry,
+            this.ToolStripMenuItemRemove});
             this.ToolStripMenuItemEdit.Name = "ToolStripMenuItemEdit";
             this.ToolStripMenuItemEdit.Size = new System.Drawing.Size(75, 20);
             this.ToolStripMenuItemEdit.Text = "Bearbeiten";
             // 
-            // ToolStripMenuItemNewDrive
+            // ToolStripMenuItemNew
             // 
-            this.ToolStripMenuItemNewDrive.Name = "ToolStripMenuItemNewDrive";
-            this.ToolStripMenuItemNewDrive.Size = new System.Drawing.Size(184, 22);
-            this.ToolStripMenuItemNewDrive.Text = "Neues Laufwerk";
-            this.ToolStripMenuItemNewDrive.Click += new System.EventHandler(this.ToolStripMenuDriveNew_Click);
+            this.ToolStripMenuItemNew.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.driveToolStripMenuItem,
+            this.containerToolStripMenuItem});
+            this.ToolStripMenuItemNew.Name = "ToolStripMenuItemNew";
+            this.ToolStripMenuItemNew.Size = new System.Drawing.Size(169, 22);
+            this.ToolStripMenuItemNew.Text = "Neu";
             // 
-            // ToolStripMenuItemEditDrive
+            // ToolStripMenuItemEditEntry
             // 
-            this.ToolStripMenuItemEditDrive.Name = "ToolStripMenuItemEditDrive";
-            this.ToolStripMenuItemEditDrive.Size = new System.Drawing.Size(184, 22);
-            this.ToolStripMenuItemEditDrive.Text = "Laufwerk bearbeiten";
-            this.ToolStripMenuItemEditDrive.Click += new System.EventHandler(this.ToolStripMenuDriveEdit_Click);
+            this.ToolStripMenuItemEditEntry.Name = "ToolStripMenuItemEditEntry";
+            this.ToolStripMenuItemEditEntry.Size = new System.Drawing.Size(184, 22);
+            this.ToolStripMenuItemEditEntry.Text = "Bearbeiten";
+            this.ToolStripMenuItemEditEntry.Click += new System.EventHandler(this.ToolStripMenuEditEntry_Click);
             // 
-            // ToolStripMenuItemRemoveDrive
+            // ToolStripMenuItemRemove
             // 
-            this.ToolStripMenuItemRemoveDrive.Name = "ToolStripMenuItemRemoveDrive";
-            this.ToolStripMenuItemRemoveDrive.Size = new System.Drawing.Size(184, 22);
-            this.ToolStripMenuItemRemoveDrive.Text = "Laufwerk löschen";
-            this.ToolStripMenuItemRemoveDrive.Click += new System.EventHandler(this.ToolStripMenuDriveDelete_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(181, 6);
-            // 
-            // ToolStripMenuItemNewContainer
-            // 
-            this.ToolStripMenuItemNewContainer.Name = "ToolStripMenuItemNewContainer";
-            this.ToolStripMenuItemNewContainer.Size = new System.Drawing.Size(184, 22);
-            this.ToolStripMenuItemNewContainer.Text = "Neuen Kontainer";
-            this.ToolStripMenuItemNewContainer.Click += new System.EventHandler(this.ToolStripMenuContainerNew_Click);
-            // 
-            // ToolStripMenuItemEditContainer
-            // 
-            this.ToolStripMenuItemEditContainer.Name = "ToolStripMenuItemEditContainer";
-            this.ToolStripMenuItemEditContainer.Size = new System.Drawing.Size(184, 22);
-            this.ToolStripMenuItemEditContainer.Text = "Kontainer bearbeiten";
-            this.ToolStripMenuItemEditContainer.Click += new System.EventHandler(this.ToolStripMenuContainerEdit_Click);
-            // 
-            // ToolStripMenuItemRemoveContainer
-            // 
-            this.ToolStripMenuItemRemoveContainer.Name = "ToolStripMenuItemRemoveContainer";
-            this.ToolStripMenuItemRemoveContainer.Size = new System.Drawing.Size(184, 22);
-            this.ToolStripMenuItemRemoveContainer.Text = "Kontainer löschen";
-            this.ToolStripMenuItemRemoveContainer.Click += new System.EventHandler(this.ToolStripMenuContainerDelete_Click);
+            this.ToolStripMenuItemRemove.Name = "ToolStripMenuItemRemove";
+            this.ToolStripMenuItemRemove.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemRemove.Text = "Löschen";
+            this.ToolStripMenuItemRemove.Click += new System.EventHandler(this.ToolStripMenuDelete_Click);
             // 
             // toolStripMenuItemSettings
             // 
@@ -428,6 +398,20 @@ namespace TrueCrypt_Mounter
             this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.toolStripProgressBar.Visible = false;
             // 
+            // driveToolStripMenuItem
+            // 
+            this.driveToolStripMenuItem.Name = "driveToolStripMenuItem";
+            this.driveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.driveToolStripMenuItem.Text = "Drive";
+            this.driveToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuDriveNew_Click);
+            // 
+            // containerToolStripMenuItem
+            // 
+            this.containerToolStripMenuItem.Name = "containerToolStripMenuItem";
+            this.containerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.containerToolStripMenuItem.Text = "Container";
+            this.containerToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuContainerNew_Click);
+            // 
             // TrueCryptMounter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,25 +460,21 @@ namespace TrueCrypt_Mounter
         private ToolStripMenuItem toolStripMenuVersion;
         private CheckBox checkBoxClearPassword;
         private ToolStripMenuItem ToolStripMenuItemEdit;
-        private ToolStripMenuItem ToolStripMenuItemEditDrive;
-        private ToolStripMenuItem ToolStripMenuItemNewDrive;
+        private ToolStripMenuItem ToolStripMenuItemEditEntry;
+        private ToolStripMenuItem ToolStripMenuItemNew;
         private Button buttonDismount;
         private GroupBox groupBoxDrive;
         private NotifyIcon notifyIcon1;
         private ContextMenuStrip contextMenuStrip;
         private ToolStripMenuItem ToolStripMenuItemNotifyRestore;
         private ToolStripMenuItem ToolStripMenuItemNotifyClose;
-        private ToolStripMenuItem ToolStripMenuItemRemoveDrive;
+        private ToolStripMenuItem ToolStripMenuItemRemove;
         private GroupBox groupBoxKeyfileContainer;
         private Button buttonKeyfileContainerDismount;
         private GroupBox groupBoxContainer;
         private ComboBox comboBoxContainer;
         private Button buttonDismountContainer;
         private Button buttonMountContainer;
-        private ToolStripSeparator toolStripSeparator1;
-        private ToolStripMenuItem ToolStripMenuItemNewContainer;
-        private ToolStripMenuItem ToolStripMenuItemEditContainer;
-        private ToolStripMenuItem ToolStripMenuItemRemoveContainer;
         private ToolStripMenuItem ToolStripMenuItemNotifyKeyfilecontainer;
         private ToolStripMenuItem ToolStripMenuItemNotifyMount;
         private ToolStripMenuItem ToolStripMenuItemNotifyDismount;
@@ -504,6 +484,8 @@ namespace TrueCrypt_Mounter
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripLabelNotification;
         private ToolStripProgressBar toolStripProgressBar;
+        private ToolStripMenuItem driveToolStripMenuItem;
+        private ToolStripMenuItem containerToolStripMenuItem;
     }
 }
 

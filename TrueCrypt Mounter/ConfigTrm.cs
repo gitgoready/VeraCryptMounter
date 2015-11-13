@@ -34,7 +34,6 @@ namespace TrueCrypt_Mounter
             public const string Language = "Language";
             public const string Nokeyfile = "Nokeyfile";
             public const string Passwordcache = "Passwordcache";
-            public const string Potable = "Portable";
             public const string Readonly = "Readonly";
             public const string Removable = "Removable";
             public const string Silentmode = "Silentmode";

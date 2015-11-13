@@ -266,24 +266,21 @@ namespace TrueCrypt_Mounter
                     ToolStripMenuItemEdit.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
                                                                                       "ToolStripMenuItemEdit",
                                                                                       _language);
-                    ToolStripMenuItemNewDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                          "ToolStripMenuItemNewDrive",
+                    containerToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
+                                                                                          "ContainerToolStripMenuItem",
                                                                                           _language);
-                    ToolStripMenuItemEditDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                           "ToolStripMenuItemEditDrive",
+                    ToolStripMenuItemNew.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
+                                                                                          "ToolStripMenuItemNew",
+                                                                                          _language);
+                    ToolStripMenuItemEditEntry.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
+                                                                                           "ToolStripMenuItemEditEntry",
                                                                                            _language);
-                    ToolStripMenuItemRemoveDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                             "ToolStripMenuItemRemoveDrive",
+                    ToolStripMenuItemRemove.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
+                                                                                             "ToolStripMenuItemRemove",
                                                                                              _language);
-                    ToolStripMenuItemNewContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                              "ToolStripMenuItemNewContainer",
+                    driveToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
+                                                                                              "DriveToolStripMenuItem",
                                                                                               _language);
-                    ToolStripMenuItemEditContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                               "ToolStripMenuItemEditContainer",
-                                                                                               _language);
-                    ToolStripMenuItemRemoveContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                                 "ToolStripMenuItemRemoveContainer",
-                                                                                                 _language);
                     toolStripMenuItemSettings.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
                                                                                           "toolStripMenuItemSettings",
                                                                                           _language);
@@ -931,15 +928,17 @@ namespace TrueCrypt_Mounter
             }
         }
 
-        private void ToolStripMenuDriveEdit_Click(object sender, EventArgs e)
+        private void ToolStripMenuEditEntry_Click(object sender, EventArgs e)
         {
+            string selection = "container";
+            string letter = null;
             try
             {
 
                 // Test if entry in driverbox is chosen.
-                if (comboBoxDrives.SelectedItem == null)
+                if (comboBoxDrives.SelectedItem == null && comboBoxContainer.SelectedItem == null)
                 {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DriveSelectionFaild",
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "SelectionFaild",
                                                                              _language));
                 }
                 
@@ -951,13 +950,29 @@ namespace TrueCrypt_Mounter
                 return;
             }
 
+            if (comboBoxContainer.SelectedItem == null) selection = "drive";
+            Form dialogBox = new Form();
+
+            switch (selection)
+            {
+                case "drive":
+                    letter = comboBoxDrives.SelectedItem.ToString();
+                    dialogBox = new NewDrive(letter);
+                    break;
+                case "container":
+                    letter = comboBoxContainer.SelectedItem.ToString();
+                    dialogBox = new NewContainer(letter);
+                    break;
+            }
+               
+
             try
             {
                 // Test if Drive is mounted.
                 if (!DrivelettersHelper.IsDriveletterFree(
-                    _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Driveletter, "")))
+                    _config.GetValue(letter, ConfigTrm.Drive.Driveletter, "")))
                 {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DriveEditMounted",
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "EditMounted",
                                                                              _language));
                 }
 
@@ -973,27 +988,45 @@ namespace TrueCrypt_Mounter
 
             }
 
-            var dialogBox = new NewDrive(comboBoxDrives.SelectedItem.ToString());
+
             dialogBox.ShowDialog(); // Returns when dialog box has closed
             RefreshComboboxes();
         }
 
-        private void ToolStripMenuDriveDelete_Click(object sender, EventArgs e)
+        private void ToolStripMenuDelete_Click(object sender, EventArgs e)
         {
+            string selection = "container";
+            string name = "";
+            DialogResult result =  DialogResult.Cancel;
+
             try
             {
-                // Test if entry in driverbox is chosen
-                if (comboBoxDrives.SelectedItem == null)
+                
+                if (comboBoxDrives.SelectedItem == null && comboBoxContainer.SelectedItem == null)
                 {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DriveSelectionFaild", _language));
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "SelectionFaild", _language));
                 }
-                string drivename = comboBoxDrives.SelectedItem.ToString();
-                DialogResult result =
-                    MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveDelete", _language),
+
+                if (comboBoxContainer.SelectedItem == null) selection = "drive";
+
+                switch (selection)
+                {
+                    case "drive":
+                        name = comboBoxDrives.SelectedItem.ToString();
+                        result = MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveDelete", _language),
                                     LanguagePool.GetInstance().GetString(LanguageRegion, "MessageWarning", _language), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        break;
+                    case "container":
+                        name = comboBoxContainer.SelectedItem.ToString();
+                        result = MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageContainerDelete", _language),
+                                    LanguagePool.GetInstance().GetString(LanguageRegion, "MessageWarning", _language), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        break;
+                }
+
+                
                 if (result == DialogResult.Yes)
                 {
-                    _config.RemoveSection(drivename);
+                    _config.RemoveSection(name);
                     RefreshComboboxes();
                 }
                 return;
@@ -1005,6 +1038,36 @@ namespace TrueCrypt_Mounter
                 return;
             }
         }
+
+        //private void ToolStripMenuContainerDelete_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+
+        //        // Test if entry in driverbox is chosen
+        //        if (comboBoxContainer.SelectedItem == null)
+        //        {
+        //            throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerSelectionFaild",
+        //                                                                     _language));
+        //        }
+        //        string containerName = comboBoxContainer.SelectedItem.ToString();
+        //        DialogResult result = MessageBox.Show(
+        //            LanguagePool.GetInstance().GetString(LanguageRegion, "MessageContainerDelete", _language),
+        //            LanguagePool.GetInstance().GetString(LanguageRegion, "MessageWarning", _language), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        //        if (result == DialogResult.Yes)
+        //        {
+        //            _config.RemoveSection(containerName);
+        //            RefreshComboboxes();
+        //        }
+        //        return;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
+        //                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+        //}
 
         private void ToolStripMenuContainerNew_Click(object sender, EventArgs e)
         {
@@ -1021,81 +1084,53 @@ namespace TrueCrypt_Mounter
             }
         }
 
-        private void ToolStripMenuContainerEdit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Test if entry in driverbox is chosen
-                if (comboBoxContainer.SelectedItem == null)
-                {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerSelectionFaild",
-                                                                             _language));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+        //private void ToolStripMenuContainerEdit_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        // Test if entry in driverbox is chosen
+        //        if (comboBoxContainer.SelectedItem == null)
+        //        {
+        //            throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerSelectionFaild",
+        //                                                                     _language));
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
+        //                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
 
-            try
-            {
-                // Test if Container is mounted.
-                if (!DrivelettersHelper.IsDriveletterFree(
-                    _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter, "")))
-                {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerEditMounted",
-                                                                             _language));
+        //    try
+        //    {
+        //        // Test if Container is mounted.
+        //        if (!DrivelettersHelper.IsDriveletterFree(
+        //            _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter, "")))
+        //        {
+        //            throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerEditMounted",
+        //                                                                     _language));
 
-                }
-            }
-            catch (Exception ex)
-            {
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                DialogResult res = MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),MessageBoxButtons.RetryCancel,MessageBoxIcon.Warning);
-                if (res == DialogResult.Cancel)
-                {
-                    return;
-                }
+        //        DialogResult res = MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),MessageBoxButtons.RetryCancel,MessageBoxIcon.Warning);
+        //        if (res == DialogResult.Cancel)
+        //        {
+        //            return;
+        //        }
 
-            }
+        //    }
            
-            var dialogBox = new NewContainer(comboBoxContainer.SelectedItem.ToString());
-            dialogBox.ShowDialog(); // Returns when dialog box has closed
-            RefreshComboboxes();
+        //    var dialogBox = new NewContainer(comboBoxContainer.SelectedItem.ToString());
+        //    dialogBox.ShowDialog(); // Returns when dialog box has closed
+        //    RefreshComboboxes();
             
-        }
+        //}
 
-        private void ToolStripMenuContainerDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                
-                // Test if entry in driverbox is chosen
-                if (comboBoxContainer.SelectedItem == null)
-                {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerSelectionFaild",
-                                                                             _language));
-                }
-                string containerName = comboBoxContainer.SelectedItem.ToString();
-                DialogResult result = MessageBox.Show(
-                    LanguagePool.GetInstance().GetString(LanguageRegion, "MessageContainerDelete", _language),
-                    LanguagePool.GetInstance().GetString(LanguageRegion, "MessageWarning", _language), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    _config.RemoveSection(containerName);
-                    RefreshComboboxes();
-                }
-                return;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-        }
+
 
         private void ToolStripMenuVersion_Click(object sender, EventArgs e)
         {
@@ -1192,7 +1227,7 @@ namespace TrueCrypt_Mounter
                                                     MeasureItemEventArgs e)
         {
             // ItemHeight shout be font size + 4 
-            e.ItemHeight = 12;
+            e.ItemHeight = 14;
             //e.ItemWidth = 120;
             
         }
@@ -1205,7 +1240,7 @@ namespace TrueCrypt_Mounter
         {
             Font myFont;
 
-            float size = 8;
+            float size = 10;
             const FontStyle fstyle = FontStyle.Regular;
             string fontname = comboBoxDrives.Font.Name;
             //FontFamily family = FontFamily.GenericSansSerif;
@@ -1233,7 +1268,7 @@ namespace TrueCrypt_Mounter
                                                    MeasureItemEventArgs e)
         {
             // ItemHeight shout be font size + 4 
-            e.ItemHeight = 12;
+            e.ItemHeight = 14;
             //e.ItemWidth = 120;
         }
 
@@ -1245,7 +1280,7 @@ namespace TrueCrypt_Mounter
         {
             Font myFont;
 
-            const float size = 8;
+            const float size = 10;
             const FontStyle fstyle = FontStyle.Regular;
             string fontname = comboBoxContainer.Font.Name;
             //FontFamily family = FontFamily.GenericSansSerif;

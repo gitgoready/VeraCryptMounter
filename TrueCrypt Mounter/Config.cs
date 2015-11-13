@@ -20,7 +20,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Security;
+using System.Windows.Forms;
 
 namespace TrueCrypt_Mounter
 {
@@ -194,9 +194,17 @@ namespace TrueCrypt_Mounter
             // If the file does not exist, use the writer to quickly create it
             if (!File.Exists(_xmlPathName))
             {
-                var writer = new XmlTextWriter(_xmlPathName, _encoding) {Formatting = Formatting.Indented};
-
-
+                XmlTextWriter writer = null;
+                try
+                {
+                  writer  = new XmlTextWriter(_xmlPathName, _encoding) { Formatting = Formatting.Indented };
+                }
+                catch (Exception ex)
+                {
+                    var res = System.Windows.Forms.MessageBox.Show("Config error: " + ex, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+                 
                 writer.WriteStartDocument();
 
                 writer.WriteStartElement("configuration");

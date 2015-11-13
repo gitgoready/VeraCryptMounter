@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -66,7 +67,6 @@ namespace TrueCrypt_Mounter
             checkBoxReadonly.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxReadonly", _language);
             checkBoxRemovable.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxRemovable", _language);
             groupBoxUsesettings.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxUsesettings", _language);
-            checkBoxPortable.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPortable", _language);
             checkBoxNoKeyfilecontainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxNoKeyfilecontainer", _language);
             checkBoxPasswordcache.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPasswordcache", _language);
             groupBoxLanguage.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxLanguage", _language);
@@ -123,7 +123,6 @@ namespace TrueCrypt_Mounter
             checkBoxSilentMode.Checked = !_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
             checkBoxReadonly.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, false);
             checkBoxRemovable.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, false);
-            checkBoxPortable.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Potable, false);
             checkBoxNoKeyfilecontainer.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
             checkBoxPasswordcache.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
             checkBoxAutomount.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, false);
@@ -146,24 +145,6 @@ namespace TrueCrypt_Mounter
             comboBoxHash.SelectedItem = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, "");
         }
 
-        /// <summary>
-        /// Fill Cotrollelments with data in case portable is checked or not.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void checkBoxPortable_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxPortable.Checked)
-            {
-                buttonTruecryptPath.Enabled = false;
-                
-            }
-            else
-            {
-                buttonTruecryptPath.Enabled = true;
-                
-            }
-        }
 
         /// <summary>
         /// Event for button ok. Save the chosen config to config xml file.
@@ -174,27 +155,6 @@ namespace TrueCrypt_Mounter
         {
             try
             {
-                
-                if (checkBoxPortable.Checked)
-                {
-                    if (!File.Exists(Application.StartupPath + "\\" + "TrueCrypt\\TrueCrypt.exe"))
-                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageTruecryptexeMissing", _language));
-                    if (!File.Exists(Application.StartupPath + "\\" + "TrueCrypt\\truecrypt.sys"))
-                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageTruecryptsysMissing", _language));
-                    if (!File.Exists(Application.StartupPath + "\\" + "TrueCrypt\\truecrypt-x64.sys"))
-                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageTruecryptx64Missing", _language));
-
-                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath,
-                                     Application.StartupPath + "\\TrueCrypt\\TrueCrypt.exe");
-                }
-                else
-                {
-                    if (!File.Exists(textBoxTruecryptPath.Text))
-                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePathNotCorrect", _language));
-
-                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, textBoxTruecryptPath.Text);
-                }
-
                 if (checkBoxNoKeyfilecontainer.Checked)
                 {
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true);
@@ -219,21 +179,26 @@ namespace TrueCrypt_Mounter
                     if (usedriveletter != null && usedriveletter != ConfigTrm.Mainconfig.Section)
                         throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDrivletterIsUsed", _language)+usedriveletter);
 
+                    string hash = (comboBoxHash.SelectedItem == null) ? "" : comboBoxHash.SelectedItem.ToString();
+
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, checkBoxPim.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Kontainerpath, textBoxContainerPath.Text);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, checkBoxRemovable.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, checkBoxReadonly.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter,
                                      comboBoxDriveletter.SelectedItem.ToString());
-                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, comboBoxHash.SelectedItem.ToString());
+                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, hash);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, checkBoxPim.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, checkBoxAutomount.Checked);
                 }
                 _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, checkBoxPasswordcache.Checked);
                 _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig. Silentmode, !checkBoxSilentMode.Checked);
-                _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Potable, checkBoxPortable.Checked);
 
+                if (string.IsNullOrEmpty(textBoxTruecryptPath.Text))
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageSelectVeracryptPath", _language));
+
+                _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, textBoxTruecryptPath.Text);
                 // Get letter for selected language and write it to config.
                 foreach (var language in _languages)
                 {
@@ -262,24 +227,9 @@ namespace TrueCrypt_Mounter
 
         private void buttonKontainerPath_Click(object sender, EventArgs e)
         {
-            if (checkBoxPortable.Checked)
-            {
-                try
-                {
-                    var dialogBox = new ContainerselectionPortable();
-                    DialogResult result = dialogBox.ShowDialog(); // Returns when dialog box has closed
-                    if (result == DialogResult.OK)
-                        textBoxContainerPath.Text = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Kontainerpath, "");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, ex.Source);
-                }
-            }
-            else
-            {
-                select_konpath.ShowDialog();
-            }
+
+            select_konpath.ShowDialog();
+            
         }
 
         private void select_truecrypt_FileOk(object sender, CancelEventArgs e)
@@ -308,7 +258,7 @@ namespace TrueCrypt_Mounter
                                                      MeasureItemEventArgs e)
         {
             // ItemHeight shout be font size + 4 
-            e.ItemHeight = 12;
+            e.ItemHeight = 14;
             //e.ItemWidth = 120;
         }
 
@@ -320,7 +270,7 @@ namespace TrueCrypt_Mounter
         {
             Font myFont;
 
-            float size = 8;
+            float size = 10;
             const FontStyle fstyle = FontStyle.Regular;
             string fontname = comboBoxDriveletter.Font.Name;
             //FontFamily family = FontFamily.GenericSansSerif;

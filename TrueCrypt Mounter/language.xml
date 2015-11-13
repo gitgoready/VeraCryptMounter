@@ -53,6 +53,10 @@
       <D>Passwortspeicher löschen</D>
       <E>Clear Passwordcache</E>
     </Text>
+    <Text key="ToolStripMenuItemNew">
+      <D>Neu</D>
+      <E>New</E>
+    </Text>
     <Text key="ToolStripMenuItemFile">
       <D>Datei</D>
       <E>File</E>
@@ -65,29 +69,21 @@
       <D>Bearbeiten</D>
       <E>Edit</E>
     </Text>
-    <Text key="ToolStripMenuItemNewDrive">
-      <D>Neuse Laufwerk</D>
-      <E>New Drive</E>
+    <Text key="ContainerToolStripMenuItem">
+      <D>Kontainer</D>
+      <E>Container</E>
     </Text>
-    <Text key="ToolStripMenuItemEditDrive">
+    <Text key="ToolStripMenuItemEditEntry">
       <D>Laufwerk bearbeiten</D>
       <E>Edit Drive</E>
     </Text>
-    <Text key="ToolStripMenuItemRemoveDrive">
-      <D>Laufwerk löschen</D>
-      <E>Remove Drive</E>
+    <Text key="ToolStripMenuItemRemove">
+      <D>Löschen</D>
+      <E>Remove</E>
     </Text>
-    <Text key="ToolStripMenuItemNewContainer">
-      <D>Neuer Kontainer</D>
-      <E>New Container</E>
-    </Text>
-    <Text key="ToolStripMenuItemEditContainer">
-      <D>Kontainer bearbeiten</D>
-      <E>Edit Container</E>
-    </Text>
-    <Text key="ToolStripMenuItemRemoveContainer">
-      <D>Kontainer löschen</D>
-      <E>Remove Container</E>
+    <Text key="DriveToolStripMenuItem">
+      <D>Laufwerk</D>
+      <E>Drive</E>
     </Text>
     <Text key="toolStripMenuItemSettings">
       <D>Einstellunge</D>
@@ -189,9 +185,9 @@
       <D>Bitte erst Grundeinstellung vornehmen!</D>
       <E>Please configure settings first!</E>
     </Text>
-    <Text key="DriveSelectionFaild">
-      <D>Bitte erst Laufwerk auswählen oder neues Laufwerk erstellen!</D>
-      <E>Please select drive or create a new one!</E>
+    <Text key="SelectionFaild">
+      <D>Bitte erst etwas auswählen oder neue erstellen!</D>
+      <E>Please select something first or create it!</E>
     </Text>
     <Text key="NoKeyfileMessage">
       <D>Keyfilekontainer nicht eingebunden oder Keyfile nicht vorhanden.</D>
@@ -217,10 +213,6 @@
       <D>Keyfilekontainer ist nicht eingebunden.</D>
       <E>Keyfilecontainer is not mounted.</E>
     </Text>
-    <Text key="ContainerSelectionFaild">
-      <D>Bitte erst Kontainer auswählen oder neue Kontainer erstellen!</D>
-      <E>Please select container or create a new one!</E>
-    </Text>
     <Text key="ContainerNotMounted">
       <D>Kontainer ist nicht eingebunden.</D>
       <E>Container is not mounted.</E>
@@ -237,13 +229,9 @@
       <D>Warnung</D>
       <E>Warning</E>
     </Text>
-    <Text key="DriveEditMounted">
-      <D>Laufwerk noch eingebunden. Bitte erst auswerfen.</D>
-      <E>Drive is mounted. Please dismount first.</E>  
-    </Text>
-    <Text key="ContainerEditMounted">
-      <D>Kontainer noch eingebunden. Bitte erst auswerfen.</D>
-      <E>Container is mounted. Please dismount first.</E>
+    <Text key="EditMounted">
+      <D>Laufwerk oder Container noch eingebunden. Bitte erst auswerfen.</D>
+      <E>Drive or container mounted. Please dismount.</E>  
     </Text>
   </Region>
   <Region name="MainToolTips">
@@ -451,21 +439,9 @@
         <D>Fehler</D>
         <E>Error</E>
       </Text>
-      <Text key="MessageTruecryptexeMissing">
-        <D>TrueCrxpt.exe ist nicht vorhanden!</D>
-        <E>TrueCrxpt.exe not available!</E>
-      </Text>
-      <Text key="MessageTruecryptsysMissing">
-        <D>truecrypt.sys ist nicht vorhanden!</D>
-        <E>truecrypt.sys not available!</E>
-      </Text>
-      <Text key="MessageTruecryptx64Missing">
-        <D>truecrypt-x64.sys ist nicht vorhanden!</D>
-        <E>truecrypt-x64.sys not avaialable!</E>
-      </Text>
-      <Text key="MessagePathNotCorrect">
-        <D>Bitte Pfad zur TrueCrypt.exe angeben.</D>
-        <E>Please set path to Truecrypt.exe.</E>
+      <Text key="MessageSelectVeracryptPath">
+        <D>Bitte Veracrypt.exe auswählen.</D>
+        <E>Please select Veracrypt.exe</E>
       </Text>
       <Text key="MesageSetPathContainer">
         <D>Bitte Pfad zum Keyfilekontainer angeben.</D>

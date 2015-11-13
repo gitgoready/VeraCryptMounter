@@ -253,6 +253,8 @@ namespace TrueCrypt_Mounter
                     
                 }
 
+                string hash = (comboBoxHash.SelectedItem == null) ? "" : comboBoxHash.SelectedItem.ToString();
+
                 _config.SetValue(description, ConfigTrm.Container.Type, ConfigTrm.Container.Typename);
                 _config.SetValue(description, ConfigTrm.Container.Kontainerpath, textBoxKontainer.Text);
                 _config.SetValue(description, ConfigTrm.Container.Driveletter, comboBoxDriveletter.SelectedItem.ToString());
@@ -264,7 +266,7 @@ namespace TrueCrypt_Mounter
                 _config.SetValue(description, ConfigTrm.Container.Automountusb, checkBoxAutomountUsb.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Pim, checkBoxPim.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Truecrypt, checkBoxTrueCrypt.Checked);
-                _config.SetValue(description, ConfigTrm.Container.Hash, comboBoxHash.SelectedItem.ToString());
+                _config.SetValue(description, ConfigTrm.Container.Hash, hash);
 
 
             }

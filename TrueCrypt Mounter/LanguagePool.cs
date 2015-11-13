@@ -145,14 +145,31 @@ namespace TrueCrypt_Mounter
                         // Durch Text-Nodes in aktuellem Region-Node iterieren
                         foreach (XmlNode textNode in regionNode.ChildNodes)
                         {
-                            var texts = new StringDictionary();
 
+                            var texts = new StringDictionary();
                             // Durch Text-Elemente iterieren und diese in eine Hashtable speichern
                             foreach (XmlNode txt in textNode.ChildNodes)
-                                texts.Add(txt.Name, txt.InnerText);
-
+                            {
+                                try
+                                {
+                                    texts.Add(txt.Name, txt.InnerText);
+                                }
+                                catch (Exception x)
+                                {
+                                    throw new Exception("HIER:" + txt.InnerText + x.Message);
+                                }
+                                
+                            }
+                            try
+                            {
+                                strs.Add(textNode.Attributes["key"].Value, texts);
+                            }
+                            catch (Exception x)
+                            {
+                                throw new Exception("HIER:" + texts.Keys.ToString() + texts.Values.ToString() + x.Message);
+                            }
                             // StringDictionary mit Text-Elementen in übergeordnetes HashTable-Item speichern
-                            strs.Add(textNode.Attributes["key"].Value, texts);
+                            
                         }
 
                         _regions.Add(regionNode.Attributes["name"].Value, strs);
@@ -160,7 +177,7 @@ namespace TrueCrypt_Mounter
             }
             catch (Exception ex)
             {
-                throw new Exception("Fehler beim einlesen des Xml-Files" + SourceFile + ": " + ex.Message);
+                throw new Exception("Fehler beim einlesen des Xml-Files "+ SourceFile + ": " + ex.Message);
             }
         }
 

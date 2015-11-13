@@ -200,6 +200,7 @@ namespace TrueCrypt_Mounter
             string key;
             string dletter;
             string beschr;
+            string hash;
 
             // Validate userinput
             try
@@ -216,7 +217,9 @@ namespace TrueCrypt_Mounter
 
                 string usedriveletter = DrivelettersHelper.IsDrivletterUsedByConfig(comboBoxDriveletter.SelectedItem.ToString());
 
-  
+                //check if hash is selected
+                hash = (comboBoxHash.SelectedItem == null) ? "" : comboBoxHash.SelectedItem.ToString();
+
                 // Check if driveconfig exist
                 if (!_edit)
                 {
@@ -288,6 +291,7 @@ namespace TrueCrypt_Mounter
             // Write data into config file.
             try
             {
+                
                 _config.SetValue(beschr, ConfigTrm.Drive.Partition, part);
                 _config.SetValue(beschr, ConfigTrm.Drive.Keyfile, key);
                 _config.SetValue(beschr, ConfigTrm.Drive.Driveletter, dletter);
@@ -301,14 +305,14 @@ namespace TrueCrypt_Mounter
                 _config.SetValue(beschr, ConfigTrm.Drive.Diskserial, _diskserial);
                 _config.SetValue(beschr, ConfigTrm.Drive.Pim, checkBoxPim.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Truecrypt, checkBoxTruecrypt.Checked);
-                _config.SetValue(beschr, ConfigTrm.Drive.Hash, comboBoxHash.SelectedItem.ToString());
+                _config.SetValue(beschr, ConfigTrm.Drive.Hash, hash);
                 _config.SetValue(beschr, ConfigTrm.Drive.Disknumber, _disknummber);
                 _config.SetValue(beschr, ConfigTrm.Drive.Partnumber, _partnummber);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error writing config");
-                throw;
+                _config.RemoveSection(beschr);
             }
             // Close the form.
             Close();

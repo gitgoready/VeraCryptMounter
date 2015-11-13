@@ -82,16 +82,6 @@ namespace TrueCrypt_Mounter
                               Application.StartupPath + "\\language.xml");
             }
 
-            if (conf.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Potable, false))
-            {
-                if (conf.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, "") !=
-                    Application.StartupPath + "\\TrueCrypt\\TrueCrypt.exe")
-                {
-                    conf.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath,
-                                  Application.StartupPath + "\\TrueCrypt\\TrueCrypt.exe");
-                }
-            }
-
             return conf;
         }
 
