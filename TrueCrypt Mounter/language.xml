@@ -74,8 +74,8 @@
       <E>Container</E>
     </Text>
     <Text key="ToolStripMenuItemEditEntry">
-      <D>Laufwerk bearbeiten</D>
-      <E>Edit Drive</E>
+      <D>Bearbeiten</D>
+      <E>Edit</E>
     </Text>
     <Text key="ToolStripMenuItemRemove">
       <D>Löschen</D>
