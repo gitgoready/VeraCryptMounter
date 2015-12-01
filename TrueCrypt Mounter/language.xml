@@ -225,6 +225,10 @@
       <D>Möchten sie den Kontainer wirklich löschen?</D>
       <E>Delete the container?</E>
     </Text>
+    <Text key="DriveSelectionFaild">
+      <D>Kein Laufwerk ausgewählt</D>
+      <E>No drive selected</E>
+    </Text>
     <Text key="MessageWarning">
       <D>Warnung</D>
       <E>Warning</E>

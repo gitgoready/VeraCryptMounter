@@ -77,7 +77,7 @@ namespace TrueCrypt_Mounter
         {
             get
             {
-                TestVariable(_model);
+                //TestVariable(_model);
                 return _model;
             }
         }
@@ -86,7 +86,7 @@ namespace TrueCrypt_Mounter
         {
             get
             {
-                TestVariable(_serial);
+                //TestVariable(_serial);
                 return _serial;
             }
         }
@@ -95,7 +95,7 @@ namespace TrueCrypt_Mounter
         {
             get
             {
-                TestVariable(_interface);
+                //TestVariable(_interface);
                 return _interface;
             }
         }
@@ -104,7 +104,7 @@ namespace TrueCrypt_Mounter
         {
             get
             {
-                TestVariable(_partitions);
+                //TestVariable(_partitions);
                 return _partitions;
             }
         }
@@ -113,7 +113,7 @@ namespace TrueCrypt_Mounter
         {
             get
             {
-                TestVariable(_index);
+                //TestVariable(_index);
                 return _index;
             }
         }

@@ -444,7 +444,22 @@ namespace TrueCrypt_Mounter
 
         private void ButtonMountDrive_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                // Test if entry in driverbox is chosen. 
+                if (comboBoxDrives.SelectedItem == null)
+                {
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DriveSelectionFaild", _language));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //_cached = false;
+                return;
+            }
+
             bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, "Silentmode", true);
             const bool beep = false;
             const bool force = false;
@@ -477,12 +492,7 @@ namespace TrueCrypt_Mounter
                 // Test if disk is connected on machine
                 if (string.IsNullOrEmpty(info.Model))
                 {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language));
-                }
-                // Test if entry in driverbox is chosen. 
-                if (comboBoxDrives.SelectedItem == null)
-                {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DriveSelectionFaild", _language));
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language) + "\"" + diskmodel + "\"");
                 }
                 //test if keyfilekontainer is mounted
                 bool nokeyfile = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true);
