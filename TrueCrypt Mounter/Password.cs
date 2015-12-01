@@ -7,6 +7,9 @@ namespace TrueCrypt_Mounter
 {
     public partial class Password : Form
     {
+
+        private string _confDir;
+
         //private readonly Config _config = new Config();
         /// <summary>
         /// Password input for encrypted xml config.
@@ -15,17 +18,53 @@ namespace TrueCrypt_Mounter
         {
             InitializeComponent();
             toolStripStatusLabel1.Text = "";
-            
-            if (File.Exists(string.Format("{0}\\TRM.config", Application.StartupPath)))
+            checkConfigPath();
+
+            if (File.Exists(_confDir))
             {
                 labelPassword_second.Visible = false;
                 textBoxPassword_second.Visible = false;
+                labelOldPassword.Visible = false;
+                textBoxOldPassword.Visible = false;
+            }
+            else
+            {
+                labelOldPassword.Visible = false;
+                textBoxOldPassword.Visible = false;
+            }
+        }
+        
+        private void checkConfigPath()
+        {
+            _confDir = string.Format("{0}\\TRM.config", Application.StartupPath);
+            if (!File.Exists(string.Format(_confDir)))
+                return;
+            try
+            {
+                using (FileStream fs = File.Create(Path.Combine(Application.StartupPath, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose))
+                { }
+            }
+            catch
+            {
+                _confDir = string.Format("{0}\\TRM.config", Application.LocalUserAppDataPath);
             }
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (textBoxPassword_second.Visible == true)
+            if (textBoxOldPassword.Visible)
+            {
+                Password_helper.Password = textBoxOldPassword.Text;
+                if (!Password_helper.Check_password())
+                    return;
+
+                if (!string.Equals(textBoxPassword_first.Text, textBoxPassword_second.Text))
+                    return;
+
+                Password_helper.ChangePassword(textBoxPassword_first.Text);
+            }
+
+            if (textBoxPassword_second.Visible)
             {
                 if (textBoxPassword_first.Text == textBoxPassword_second.Text)
                 {
@@ -45,7 +84,7 @@ namespace TrueCrypt_Mounter
                 }
                 else
                 {
-                    Set_wrong();
+                    set_wrong();
                     return;
                 }
             }
@@ -64,9 +103,9 @@ namespace TrueCrypt_Mounter
             if (result == DialogResult.Cancel)
                 return;
 
-            if (File.Exists(string.Format("{0}\\TRM.config", Application.StartupPath)))
+            if (File.Exists(_confDir))
             {
-                File.Delete(string.Format("{0}\\TRM.config", Application.StartupPath));
+                File.Delete(_confDir);
             }
             Application.Restart();
         }
@@ -85,7 +124,7 @@ namespace TrueCrypt_Mounter
             }
         }
 
-        private void Set_wrong()
+        private void set_wrong()
         {
             toolStripStatusLabel1.Text = "wrong password";
             toolStripStatusLabel1.ForeColor = Color.Red;
@@ -106,6 +145,14 @@ namespace TrueCrypt_Mounter
             {
                 buttonOK_Click(sender, new EventArgs());
             }
+        }
+
+        private void buttonChangePassword_Click(object sender, EventArgs e)
+        {
+            labelOldPassword.Visible = true;
+            textBoxOldPassword.Visible = true;
+            labelPassword_second.Visible = true;
+            textBoxPassword_second.Visible = true;
         }
     }
 }
