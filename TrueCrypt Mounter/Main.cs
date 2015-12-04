@@ -131,6 +131,8 @@ namespace TrueCrypt_Mounter
         {
             InitializeComponent();
 
+            comboBoxDrives.ContextMenuStrip = contextMenuStripDrive;
+            comboBoxContainer.ContextMenuStrip =contextMenuStripContainer ;
             // For these release Disabled
             automountConfigToolStripMenuItem.Visible = false;
             
@@ -1577,6 +1579,11 @@ namespace TrueCrypt_Mounter
         void DisableKeyfilekontainer()
         {
             this.Size = new Size(410, 250);
+            
+        }
+
+        private void comboBoxDrives_MouseClick(object sender, MouseEventArgs e)
+        {
             
         }
     }
