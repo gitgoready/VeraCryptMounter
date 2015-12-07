@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Management;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
@@ -74,9 +71,7 @@ namespace VeraCrypt_Mounter
             {
                 try
                 {
-                    
-                    var start = new Automount("usb");
-                    start.ShowDialog();
+                    Automountusb.MountUsb();
                 }
                 catch (Exception ex)
                 {

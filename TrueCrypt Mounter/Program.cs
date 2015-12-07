@@ -52,28 +52,28 @@ namespace VeraCrypt_Mounter
         private static void Main()
         {
 
-            //ManagementEventWatcher w = null;
-            //WqlEventQuery q = new WqlEventQuery();
-            
-            //// Bind to local machine
-            
-            //scope.Options.EnablePrivileges = true; //sets required privilege
-            //try
-            //{
-            //    q.EventClassName = "__InstanceCreationEvent";
-            //    q.WithinInterval = new TimeSpan(0, 0, 10);
+            ManagementEventWatcher w = null;
+            WqlEventQuery q = new WqlEventQuery();
 
-            //    q.Condition = @"TargetInstance ISA 'Win32_USBControllerDevice' ";
-            //    w = new ManagementEventWatcher(scope, q);
+            // Bind to local machine
 
-            //    w.EventArrived += UsbEvent.UsbEventArrived;
-            //    w.Start();
+            scope.Options.EnablePrivileges = true; //sets required privilege
+            try
+            {
+                q.EventClassName = "__InstanceCreationEvent";
+                q.WithinInterval = new TimeSpan(0, 0, 10);
 
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
+                q.Condition = @"TargetInstance ISA 'Win32_USBControllerDevice' ";
+                w = new ManagementEventWatcher(scope, q);
+
+                w.EventArrived += UsbEvent.UsbEventArrived;
+                w.Start();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             //_driveliste = DrivelettersHelper.GetUsedDriveletter();
             bool createdNew;
             using (var mutex = new Mutex(true, "VeraCryptMounter", out createdNew))
@@ -103,8 +103,8 @@ namespace VeraCrypt_Mounter
                     {
                         Application.Exit();
                     }
-                    //w.EventArrived -= UsbEvent.UsbEventArrived;
-                    //w.Stop();
+                    w.EventArrived -= UsbEvent.UsbEventArrived;
+                    w.Stop();
                 }
                 else
                 {

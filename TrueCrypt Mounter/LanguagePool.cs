@@ -6,6 +6,7 @@ using System.IO;
 using System.Web;
 using System.Web.Caching;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace VeraCrypt_Mounter
 {
@@ -78,8 +79,7 @@ namespace VeraCrypt_Mounter
                 st.LoadStrings();
 
                 // Cache neu füllen
-                myCache.Insert(
-                    CacheKey, st, new CacheDependency(SourceFile));
+                myCache.Insert(CacheKey, st, new CacheDependency(SourceFile));
             }
 
             // Gebe StringPool-Objekt aus Cache zurück
