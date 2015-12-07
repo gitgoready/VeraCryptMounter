@@ -1,5 +1,5 @@
 ﻿/**
- * <TruecryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     /// <summary>
     /// Form for passwordinput.
@@ -29,13 +29,13 @@ namespace TrueCrypt_Mounter
         private readonly string _language;
         private readonly Config _config = new Config();
         private string _chosen;
-        private TrueCryptMounter _main;
+        private VeraCryptMounter _main;
 
         /// <summary>
         /// Constructor for the passwordform.
         /// Initialize the form and the config also the language string.
         /// </summary>
-        public Passwordinput(TrueCryptMounter main, string chosen, bool pim)
+        public Passwordinput(VeraCryptMounter main, string chosen, bool pim)
         {
             InitializeComponent();
             _config = Singleton<ConfigManager>.Instance.Init(_config);

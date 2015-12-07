@@ -1,5 +1,5 @@
 ﻿/**
- * <TruecryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -18,9 +18,10 @@
 
 using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows.Forms;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     public partial class Version : Form
     {
@@ -37,6 +38,8 @@ namespace TrueCrypt_Mounter
         private void Version_Load(object sender, EventArgs e)
         {
             const string version = "Version: 0.9.7 (Beta)";
+            var test = Assembly.GetEntryAssembly().GetName().Version;
+            labelAssembly.Text = "Build: " + test.Build.ToString();
             label2.Text = version;
         }
 

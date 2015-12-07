@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TruecryptMounter", "TrueCrypt Mounter\TruecryptMounter.csproj", "{3738A78D-699E-4D15-B49A-2F44A0FBC65F}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TruecryptMounterSetup", "Setup1\Setup1.vdproj", "{28A37D60-2415-4BAE-8CE1-2FC493A67390}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeracryptMounter", "TrueCrypt Mounter\VeracryptMounter.csproj", "{3738A78D-699E-4D15-B49A-2F44A0FBC65F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,11 +19,6 @@ Global
 		{3738A78D-699E-4D15-B49A-2F44A0FBC65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3738A78D-699E-4D15-B49A-2F44A0FBC65F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3738A78D-699E-4D15-B49A-2F44A0FBC65F}.Release|x64.ActiveCfg = Release|Any CPU
-		{28A37D60-2415-4BAE-8CE1-2FC493A67390}.Debug|Any CPU.ActiveCfg = Debug
-		{28A37D60-2415-4BAE-8CE1-2FC493A67390}.Debug|x64.ActiveCfg = Debug
-		{28A37D60-2415-4BAE-8CE1-2FC493A67390}.Release|Any CPU.ActiveCfg = Release
-		{28A37D60-2415-4BAE-8CE1-2FC493A67390}.Release|Any CPU.Build.0 = Release
-		{28A37D60-2415-4BAE-8CE1-2FC493A67390}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -33,11 +26,5 @@ Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
 		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
 	EndGlobalSection
 EndGlobal

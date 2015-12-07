@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     class Automountusb
     {

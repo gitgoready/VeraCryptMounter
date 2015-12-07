@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 
-[assembly: AssemblyTitle("TrueCrypt Mounter")]
+[assembly: AssemblyTitle("VeraCrypt Mounter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TrueCrypt Mounter")]
+[assembly: AssemblyProduct("VeraCrypt Mounter")]
 [assembly: AssemblyCopyright("Copyright © 2015 Rafael Grothmann")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

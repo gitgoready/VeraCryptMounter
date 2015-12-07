@@ -1,5 +1,5 @@
 ﻿/**
- * <TruecryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     ///<summary>
     /// Class NewDrive shows the form for creating a new drive entry in the config.

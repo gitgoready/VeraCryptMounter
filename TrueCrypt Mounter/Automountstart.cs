@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading;
 
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     public class Automountstart
     {

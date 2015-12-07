@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Caching;
 using System.Xml;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     internal class LanguagePool
     {

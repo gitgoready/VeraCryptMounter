@@ -1,5 +1,5 @@
 ﻿/**
- * <TruecryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
 
     internal class Program
@@ -76,7 +76,7 @@ namespace TrueCrypt_Mounter
             //}
             //_driveliste = DrivelettersHelper.GetUsedDriveletter();
             bool createdNew;
-            using (var mutex = new Mutex(true, "TrueCryptMounter", out createdNew))
+            using (var mutex = new Mutex(true, "VeraCryptMounter", out createdNew))
             {
                 if (createdNew)
                 {
@@ -97,7 +97,7 @@ namespace TrueCrypt_Mounter
                     var result = dialogBoxPassword.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        Application.Run(new TrueCryptMounter());
+                        Application.Run(new VeraCryptMounter());
                     }
                     else
                     {

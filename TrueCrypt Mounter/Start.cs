@@ -4,7 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Drawing.Text;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     ///<summary>
     /// Form for the Ineraktion on automount function.

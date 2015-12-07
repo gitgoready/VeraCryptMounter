@@ -1,5 +1,5 @@
 ﻿/**
- * <TruecryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * **/
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     /// <summary>
     /// Class for classes they contains the strings for the config file. 

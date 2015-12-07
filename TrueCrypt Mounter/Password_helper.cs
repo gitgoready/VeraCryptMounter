@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Forms;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     static class Password_helper
     {

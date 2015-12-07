@@ -1,5 +1,5 @@
 ﻿/**
- * <TruecryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -22,16 +22,16 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     ///<summary>
     /// The main class. Here is all control for the programm
     ///</summary>
-    public partial class TrueCryptMounter : Form
+    public partial class VeraCryptMounter : Form
     {
         #region Vareables
 
-        private const string AppId = "TrueCryptMounter";
+        private const string AppId = "VeraCryptMounter";
         private const string LanguageRegion = "Main";
         private const string LanguageToolTip = "MainToolTips";
 
@@ -127,7 +127,7 @@ namespace TrueCrypt_Mounter
         ///<summary>
         /// Constructor makes all settings for the programm for first running. 
         ///</summary>
-        public TrueCryptMounter()
+        public VeraCryptMounter()
         {
             InitializeComponent();
 
@@ -210,7 +210,7 @@ namespace TrueCrypt_Mounter
         /// <summary>
         /// Destructor set passwords and PIM to null.
         /// </summary>
-        ~TrueCryptMounter()
+        ~VeraCryptMounter()
         {
             _passwordDrive = null;
             _passwordContainer = null;
@@ -343,7 +343,7 @@ namespace TrueCrypt_Mounter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TrueCryptMounter_Load(object sender, EventArgs e)
+        private void VeraCryptMounter_Load(object sender, EventArgs e)
         {
             
             if (_config.GetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Usestartautomount, false))
@@ -371,7 +371,7 @@ namespace TrueCrypt_Mounter
         private void ValidateTest()
         {
             //Deactivate all button if no configuration is made
-            if (!TrueCrypt_Mounter.Validate.ValidateConfig())
+            if (!VeraCrypt_Mounter.Validate.ValidateConfig())
             {
                 Busy();
                 toolStripLabelNotification.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ValidateMessage", _language);
@@ -1179,7 +1179,7 @@ namespace TrueCrypt_Mounter
 
         #region NotifyIcon
 
-        private void TrueCryptMounter_Resize(object sender, EventArgs e)
+        private void VeraCryptMounter_Resize(object sender, EventArgs e)
         {
             if (FormWindowState.Minimized == WindowState)
             {
@@ -1252,7 +1252,7 @@ namespace TrueCrypt_Mounter
         {
             Font myFont;
 
-            float size = 10;
+            float size = 9;
             const FontStyle fstyle = FontStyle.Regular;
             string fontname = comboBoxDrives.Font.Name;
             //FontFamily family = FontFamily.GenericSansSerif;
@@ -1292,10 +1292,10 @@ namespace TrueCrypt_Mounter
         {
             Font myFont;
 
-            const float size = 10;
+            const float size = 9;
             const FontStyle fstyle = FontStyle.Regular;
-            string fontname = comboBoxContainer.Font.Name;
-            //FontFamily family = FontFamily.GenericSansSerif;
+            //string fontname = comboBoxContainer.Font.Name;
+            FontFamily family = FontFamily.GenericSansSerif;
             Brush brush = Brushes.Black;
 
             if (_mountedkontainer.Contains(_cbkontainer[e.Index]))
@@ -1306,7 +1306,7 @@ namespace TrueCrypt_Mounter
 
             // Draw each string in the array, using a different size, color,
             // and font for each item.
-            myFont = new Font(fontname, size, fstyle);
+            myFont = new Font(family, size, fstyle);
             e.Graphics.DrawString(_cbkontainer[e.Index], myFont, brush, e.Bounds.X, e.Bounds.Y);
 
             // Draw the focus rectangle if the mouse hovers over an item.
@@ -1584,7 +1584,12 @@ namespace TrueCrypt_Mounter
 
         private void comboBoxDrives_MouseClick(object sender, MouseEventArgs e)
         {
-            
+            comboBoxDrives.DroppedDown = true;
+        }
+
+        private void comboBoxContainer_MouseClick(object sender, MouseEventArgs e)
+        {
+            comboBoxContainer.DroppedDown = true;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TrueCrypt_Mounter
+﻿namespace VeraCrypt_Mounter
 {
     partial class SelectPartition
     {
@@ -40,6 +40,7 @@
             // 
             // comboBoxDisks
             // 
+            this.comboBoxDisks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDisks.FormattingEnabled = true;
             this.comboBoxDisks.Location = new System.Drawing.Point(12, 25);
             this.comboBoxDisks.Name = "comboBoxDisks";
@@ -49,6 +50,7 @@
             // 
             // comboBoxPartitions
             // 
+            this.comboBoxPartitions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPartitions.FormattingEnabled = true;
             this.comboBoxPartitions.Location = new System.Drawing.Point(12, 65);
             this.comboBoxPartitions.Name = "comboBoxPartitions";

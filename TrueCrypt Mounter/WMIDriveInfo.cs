@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Management;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     class WmiDriveInfo
     {

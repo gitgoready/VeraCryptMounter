@@ -1,5 +1,5 @@
 ﻿/**
- * <TruecryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2015>  <Rafael Grothmann>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 using System;
 using SecurityDriven.Inferno;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     /// <summary>
     /// Encode and decode strings with aes-ctr-256.

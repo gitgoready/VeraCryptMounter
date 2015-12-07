@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 
-namespace TrueCrypt_Mounter
+namespace VeraCrypt_Mounter
 {
     public partial class Password : Form
     {

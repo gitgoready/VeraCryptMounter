@@ -1,4 +1,4 @@
-﻿namespace TrueCrypt_Mounter
+﻿namespace VeraCrypt_Mounter
 {
     partial class Password
     {
