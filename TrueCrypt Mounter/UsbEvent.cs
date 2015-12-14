@@ -13,7 +13,7 @@ namespace VeraCrypt_Mounter
         private Config _config = new Config();
         private List<string> _drives = new List<string>();
         private List<string> _containers = new List<string>();
-        private delegate bool UsbAnalysisDelegate(EventArrivedEventArgs e);
+        private delegate string UsbAnalysisDelegate(EventArrivedEventArgs e);
 
         public void Initialize()
         {
@@ -39,7 +39,7 @@ namespace VeraCrypt_Mounter
         /// </summary>
         /// <param name="e"></param>
         /// <returns>true if it is a storage device</returns>
-        private static bool UsbEventAnalysing(EventArrivedEventArgs e)
+        private static string UsbEventAnalysing(EventArrivedEventArgs e)
         {
             // Get the Event Object.
             foreach (PropertyData pd in e.NewEvent.Properties)
@@ -53,25 +53,25 @@ namespace VeraCrypt_Mounter
                         if (test != null)
                         {
                             if (test.Contains("USBSTOR"))
-                            {
-                                return true;
+                            {                               
+                                return test;
                             }
                         }
                     }
                 }
             }
-            return false;
+            return null;
         }
 
         private static void UsbCallback(IAsyncResult result)
         {
             var ausresult = (UsbAnalysisDelegate)result.AsyncState;
-            bool res = ausresult.EndInvoke(result);
-            if (res)
+            string res = ausresult.EndInvoke(result);
+            if (res != null)
             {
                 try
                 {
-                    Automountusb.MountUsb();
+                    Automountusb.MountUsb(res);
                 }
                 catch (Exception ex)
                 {

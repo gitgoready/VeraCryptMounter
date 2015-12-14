@@ -9,10 +9,12 @@ namespace VeraCrypt_Mounter
     {
         private static Config _config = new Config();
 
-        public static void MountUsb()
+        public static void MountUsb(string device)
         {
-            WmiDriveInfo info = new WmiDriveInfo();
-            info.
+            //TODO extract device info from string to get wmi info 
+            
+            //WmiDriveInfo info = new WmiDriveInfo();
+            //info.
         }
 
         /// <summary>
