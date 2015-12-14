@@ -156,7 +156,8 @@ namespace VeraCrypt_Mounter
                 {              
                     throw new Exception("Error getting drivenames (" + ex.Message + ")");
                 }
-                if (!_drives.Contains(drivename))
+                //Changed to get drives with same label
+                //if (!_drives.Contains(drivename))
                     _drives.Add(drivename);
             }
         }

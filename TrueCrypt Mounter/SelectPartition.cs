@@ -19,10 +19,20 @@ namespace VeraCrypt_Mounter
             InitializeComponent();
             _root = root;
             _driveInfo = new WmiDriveInfo();
+            int counter = 0;
 
             foreach (string drive in _driveInfo.DriveList)
             {
-                comboBoxDisks.Items.Add(drive);
+                //if (comboBoxDisks.Items.Contains(drive))
+                //{
+                //    counter++;
+                //    comboBoxDisks.Items.Add(drive + counter.ToString());
+                //}
+                //else
+                //{
+                    comboBoxDisks.Items.Add(drive);
+                //}
+                
             }
         }
 

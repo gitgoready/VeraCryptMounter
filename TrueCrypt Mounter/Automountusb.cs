@@ -11,7 +11,15 @@ namespace VeraCrypt_Mounter
 
         public static void MountUsb(string device)
         {
-
+            string test = device;
+            int ven = test.IndexOf("VEN_");
+            ven = ven + 4;
+            int prod = test.IndexOf("PROD_");
+            prod = prod + 5;
+            int venend = test.IndexOf("&", ven);
+            int prodend = test.IndexOf("&", prod);
+            string vend = test.Substring(ven, venend - ven);
+            string produ = test.Substring(prod, prodend - prod);
             //TODO extract device info from string to get wmi info 
             
             //WmiDriveInfo info = new WmiDriveInfo();
