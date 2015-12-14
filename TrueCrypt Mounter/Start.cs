@@ -22,7 +22,7 @@ namespace VeraCrypt_Mounter
         private string _passwordcached;
         private int _time = 10;
         private Automountstart ams = new Automountstart();
-        private Automountusb amu = new Automountusb();
+        //private Automountusb amu = new Automountusb();
         private const string LanguageRegion = "Automountform";
         private string _language;
         private readonly string _state;
@@ -82,9 +82,9 @@ namespace VeraCrypt_Mounter
             }
             if (_state == "usb")
             {
-                Thread autousbThread = new Thread(amu.StartMount);
-                autousbThread.IsBackground = true;
-                autousbThread.Start(this);
+                //Thread autousbThread = new Thread(amu.StartMount);
+                //autousbThread.IsBackground = true;
+                //autousbThread.Start(this);
             }
             FillLanguage();
         }

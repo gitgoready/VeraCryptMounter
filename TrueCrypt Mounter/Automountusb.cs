@@ -12,7 +12,6 @@ namespace VeraCrypt_Mounter
         public static void MountUsb()
         {
             WmiDriveInfo info = new WmiDriveInfo();
-            info.
         }
 
         /// <summary>
