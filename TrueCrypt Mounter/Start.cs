@@ -80,12 +80,14 @@ namespace VeraCrypt_Mounter
                 autostartThread.IsBackground = true;
                 autostartThread.Start(this);
             }
-            if (_state == "usb")
-            {
-                //Thread autousbThread = new Thread(amu.StartMount);
-                //autousbThread.IsBackground = true;
-                //autousbThread.Start(this);
-            }
+
+            //if (_state == "usb")
+            //{
+            //    Thread autousbThread = new Thread(amu.StartMount);
+            //    autousbThread.IsBackground = true;
+            //    autousbThread.Start(this);
+            //}
+
             FillLanguage();
         }
 
