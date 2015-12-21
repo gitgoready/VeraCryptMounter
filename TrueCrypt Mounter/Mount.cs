@@ -53,7 +53,7 @@ namespace VeraCrypt_Mounter
         }
 
 
-        internal static int MountDrive(string partition, string driveletter, string keyfile, string password, bool silent,
+        internal static int MountDrive(string[] partition, string driveletter, string keyfile, string password, bool silent,
                                           bool beep, bool force, bool readOnly, bool removable, string pim, string hash, bool tc)
         {
             int output;
@@ -64,7 +64,7 @@ namespace VeraCrypt_Mounter
             const string status = "Die Vareable ist null oder leer:";
             try
             {
-                if (string.IsNullOrEmpty(partition))
+                if (partition.Length <= 0)
                 {
                     throw new Exception(status + "(partition)");
                 }
@@ -124,29 +124,33 @@ namespace VeraCrypt_Mounter
             if (tc)
                 argumentstring += Truecrypt;
 
-            string path = Volume + partition;
-            Tc.Arguments = path + argumentstring;
+            
 # if DEBUG
             DialogResult result = MessageBox.Show(Tc.Arguments, "Mountstring", MessageBoxButtons.RetryCancel);
             if (result == DialogResult.Cancel)
                 return 2;
             //Clipboard.SetDataObject(argumentstring, true);
 #endif
-            try
+            foreach (string pa in partition)
             {
-                Tcprocess.StartInfo = Tc;
-                Tcprocess.Start();
-                Tcprocess.WaitForExit();
-                output = Tcprocess.ExitCode;
-                Tcprocess.Close();
+                string path = Volume + pa;
+                Tc.Arguments = path + argumentstring;
+                try
+                {
+                    Tcprocess.StartInfo = Tc;
+                    Tcprocess.Start();
+                    Tcprocess.WaitForExit();
+                    output = Tcprocess.ExitCode;
+                    Tcprocess.Close();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    return 1;
+                }
+                if (output == 0)
+                    return 0;
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return 1;
-            }
-            if (output == 0)
-                return 0;
             return 1;
 
         }

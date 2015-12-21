@@ -12,132 +12,11 @@ namespace VeraCrypt_Mounter
                                                             "Description", "DeviceID", "DiskIndex", "Index", "Name", "Size"
                                                             , "Type"
                                                         };
-        private string _mediaType;
-        private string _model;
-        private string _serial;
-        private string _interface;
-        private string _partitions;
-        private string _index;
-        private string _drive;
-        private static List<string> _drives = new List<string>();
-        private static List<Partition> _partitionInfos = new List<Partition>();
-        private List<string> _driveInfos = new List<string>();
 
-        /// <summary>
-        /// Returns generic list (MediaType,model,serial,interface,partitions,index)
-        /// </summary>
-        public List<string> DriveInfos
+        public List<string> GetDrives()
         {
-            get
-            { 
-                return _driveInfos;
-            }
-        }
+            List<string> drives = new List<string>();
 
-        /// <summary>
-        /// The name of the drive where the info is requested from.
-        /// </summary>
-        public string Drive
-        {
-            get
-            {
-                TestVariable(_drive);
-                return _drive;
-            }
-        }
-
-        /// <summary>
-        /// The list of the drives.
-        /// </summary>
-        public List<string> DriveList
-        {
-            get { return _drives; }
-        }
-        /// <summary>
-        /// Retrun a List of type Partition.
-        /// </summary>
-        public List<Partition> PartitonInfos
-        {
-            get
-            {
-                //TestVariable(_partitionInfos);
-                return _partitionInfos;
-            }
-        }
-        public string MediaType
-        {
-            get 
-            {
-                TestVariable(_mediaType);
-                return _mediaType; 
-            }
-        }
-
-        public string Model
-        {
-            get
-            {
-                //TestVariable(_model);
-                return _model;
-            }
-        }
-
-        public string Serial
-        {
-            get
-            {
-                //TestVariable(_serial);
-                return _serial;
-            }
-        }
-
-        public string Interface
-        {
-            get
-            {
-                //TestVariable(_interface);
-                return _interface;
-            }
-        }
-
-        public string Partitions
-        {
-            get
-            {
-                //TestVariable(_partitions);
-                return _partitions;
-            }
-        }
-
-        public string Index
-        {
-            get
-            {
-                //TestVariable(_index);
-                return _index;
-            }
-        }
-
-        public WmiDriveInfo()
-        {
-            GetDrives();
-        }
-
-        public void Refresh()
-        {
-            GetDrives();
-
-            if (_drive != null)
-            {
-                if(_drives.Contains(_drive))
-                {
-                    Driveinfo(_drive);
-                }
-            }
-        }
-
-        private static void GetDrives()
-        {
             // Get all the disk drives
 
             var mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
@@ -156,21 +35,24 @@ namespace VeraCrypt_Mounter
                 {              
                     throw new Exception("Error getting drivenames (" + ex.Message + ")");
                 }
-                //Changed to get drives with same label
-                //if (!_drives.Contains(drivename))
-                    _drives.Add(drivename);
+                drives.Add(drivename);
             }
+            return drives;
         }
-
-        public void Driveinfo(string name)
+        /// <summary>
+        /// Get info for requested drivename. Is a more then one drive with same name then is more then one list in list.
+        /// </summary>
+        /// <param name="name">name from GetDrives</param>
+        /// <returns>List of drive infos</returns>
+        public List<DriveInfo> GetDriveinfo(string name)
         {
+            List<DriveInfo> dinfo = new List<DriveInfo>();
 
             if (string.IsNullOrEmpty(name))
             {
                 throw new Exception("Variable is null or empty (Method: GetDriveinfo)");
             }
-  
-            _drive = name;
+
             ManagementObjectSearcher mosDisks;
             try
             {
@@ -185,17 +67,22 @@ namespace VeraCrypt_Mounter
          
             foreach (ManagementObject moDisk in mosDisks.Get())
             {
-                FillDriveinfo(moDisk);
+                dinfo.Add(FillDriveinfo(moDisk));
             }
 
             mosDisks.Dispose();
+            return dinfo;
         }
 
-        private void FillDriveinfo(ManagementObject moDisk)
+        private DriveInfo FillDriveinfo(ManagementObject moDisk)
         {
+            DriveInfo di = new DriveInfo();
             object[] data = new object[6];
+            
+
             for (int i = 0 ; i <= _driveInfoNames.Length-1 ; i++)
             {
+                
                 try
                 {
                     data[i] = moDisk[_driveInfoNames[i]];
@@ -212,57 +99,59 @@ namespace VeraCrypt_Mounter
                 switch (i)
                 {
                     case 0:
-                        _mediaType = data[i].ToString();
+                        di.MediaType = data[i].ToString();
                         break;
 
                     case 1:
-                        _model = data[i].ToString();
+                        di.Model = data[i].ToString();
                         break;
 
                     case 2:
-                        _serial = data[i].ToString();
+                        di.SerialNumber = data[i].ToString();
                         break;
 
                     case 3:
-                        _interface = data[i].ToString();
+                        di.InterfaceType = data[i].ToString();
                         break;
 
                     case 4:
-                        _partitions = data[i].ToString();
+                        di.Partitions = data[i].ToString();
                         break;
 
                     case 5:
-                        _index = data[i].ToString();
+                        di.Index = data[i].ToString();
                         break;
 
                 }
                 
             }
-            _driveInfos.Clear();
-            _driveInfos.AddRange(new List<String> { _mediaType, _model, _serial, _interface, _partitions, _index });
-            GetPartitionInfo();
+            return di;
         }
 
-        private void GetPartitionInfo()
+        public List<Partition> GetPartitionInfo(string index)
         {
+            if (string.IsNullOrEmpty(index))
+            {
+                throw new Exception("Variable is null or empty (Method: GetPartitionInfo)");
+            }
+            List<Partition> partitionInfos = new List<Partition>();
+
             ManagementObjectSearcher mosPart;
             try
             {
                 // Get all the Partitions that catch the diskindex
-                mosPart =
-                    new ManagementObjectSearcher("SELECT * FROM Win32_DiskPartition WHERE DiskIndex ='" + _index + "'");
-
+                mosPart = new ManagementObjectSearcher("SELECT * FROM Win32_DiskPartition WHERE DiskIndex ='" + index + "'");
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error in GetPartitionInfo (" + ex.Message + ")");
             }
-            _partitionInfos.Clear();
+            
             foreach (ManagementObject moPart in mosPart.Get())
             {
-                _partitionInfos.Add(FillPartitionInfo(moPart));              
+                partitionInfos.Add(FillPartitionInfo(moPart));              
             }
+            return partitionInfos;
         }
 
         private Partition FillPartitionInfo(ManagementObject moPart)
@@ -328,12 +217,54 @@ namespace VeraCrypt_Mounter
             return part;
         }
 
-        private void TestVariable(string var)
+        private void TestVariable(string[] var)
         {
-            if(string.IsNullOrEmpty(var))
+            if(var.Length <= 0)
             {
                 throw new Exception("DriveInfo not initialized");
             }
+        }
+    }
+
+    class DriveInfo
+    {
+        private string _mediaType;
+        private string _model;
+        private string _serialNumber;
+        private string _interfaceType;
+        private string _partitions;
+        private string _index;
+
+        public string MediaType
+        {
+            get { return _mediaType; }
+            set { _mediaType = value; }
+        }
+            
+        public string Model
+        {
+            get { return _model; }
+            set { _model = value; }
+        }
+        public string SerialNumber
+        {
+            get { return _serialNumber; }
+            set { _serialNumber = value; }
+        }
+        public string InterfaceType
+        {
+            get { return _interfaceType; }
+            set { _interfaceType = value; }
+        }
+        public string Partitions
+        {
+            get { return _partitions; }
+            set { _partitions = value; }
+        }
+        public string Index
+        {
+            get { return _index; }
+            set { _index = value; }
         }
     }
 

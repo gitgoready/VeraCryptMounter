@@ -174,7 +174,8 @@ namespace VeraCrypt_Mounter
 
                         if (DrivelettersHelper.IsDriveletterFree(driveletter))
                         {
-                            string partition = _config.GetValue(drive, ConfigTrm.Drive.Partition, "");
+                            string[] partition = null;
+                            partition.SetValue(_config.GetValue(drive, ConfigTrm.Drive.Partition, ""), 0);
                             bool ro = _config.GetValue(drive, ConfigTrm.Drive.Readonly, false);
                             bool rm = _config.GetValue(drive, ConfigTrm.Drive.Removable, false);
                             bool tc = _config.GetValue(drive, ConfigTrm.Drive.Truecrypt, false);

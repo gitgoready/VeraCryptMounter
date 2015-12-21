@@ -102,7 +102,7 @@ namespace VeraCrypt_Mounter
                                                           bool readOnly, bool removable, string hash, bool pim);
 
 
-        public delegate int MountDriveDelegate(string partition, string driveletter, string keyfile, string password, bool silent,
+        public delegate int MountDriveDelegate(string[] partition, string driveletter, string keyfile, string password, bool silent,
                                                 bool beep, bool force, bool readOnly, bool removable, string pim, string hash, bool tc);
 
         public delegate int MountContainerDelegate(string path, string driveletter, string keyfile, string password, bool silent,
@@ -466,6 +466,7 @@ namespace VeraCrypt_Mounter
             const bool beep = false;
             const bool force = false;
             string key = null;
+            string[] partition = null;
 
             toolStripLabelNotification.Visible = false;
 
@@ -473,7 +474,7 @@ namespace VeraCrypt_Mounter
 
             string dletter = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Driveletter, "");
 
-            string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition, "");
+            //string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition, "");
             bool removable = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Removable, false);
             bool readOnly = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Readonly, false);
             string hash = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Hash, "");
@@ -492,7 +493,7 @@ namespace VeraCrypt_Mounter
                 info.Driveinfo(diskmodel);
                 
                 // Test if disk is connected on machine
-                if (string.IsNullOrEmpty(info.Model))
+                if (info.Model.Length <= 0)
                 {
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language) + "\"" + diskmodel + "\"");
                 }
@@ -561,11 +562,15 @@ namespace VeraCrypt_Mounter
                 key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
                          _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Keyfile);
             }
-            if (string.Equals(info.Serial, diskserial))
+            for (int i = 0; i <= info.Serial.Length; i++)
             {
-                if (!string.Equals(info.Index, disknumber))
-                    partition = "\\Device\\Harddisk" + info.Index + "\\Partition" + partnumber;
+                if (string.Equals(info.Serial[i], diskserial))
+                {
+                    if (!string.Equals(info.Index[i], disknumber))
+                        partition.SetValue("\\Device\\Harddisk" + info.Index[i] + "\\Partition" + partnumber, i);
+                }
             }
+            
             toolStripProgressBar.Visible = true;
 
             MountDriveDelegate mountdrive = Mount.MountDrive;
