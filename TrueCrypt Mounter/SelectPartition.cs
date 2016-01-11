@@ -9,6 +9,7 @@ namespace VeraCrypt_Mounter
         private WmiDriveInfo _wmidriveinfo;
         private static string[] _driveinfosnames = { "MediaType: ", "Model: ", "Serial: ", "Interface: ", "Partitions: ", "Index: " };
         private static string[] _partitioninfonames = { "Description: ", "DeviceId: ", "DiskIndex: ", "Index: ", "Name: ", "Size: ", "Type: " };
+        //private Dictionary<string, List<DriveInfo>> dd;
         private NewDrive _root;
         
         /// <summary>
@@ -20,12 +21,11 @@ namespace VeraCrypt_Mounter
             InitializeComponent();
             _root = root;
             _wmidriveinfo = new WmiDriveInfo();
-            List<string> drives = _wmidriveinfo.GetDrives();
-            drives.ForEach(delegate (string name)
+            Dictionary<string, string> drives = _wmidriveinfo.GetDrives();
+            foreach (var item in drives)
             {
-                comboBoxDisks.Items.Add(name);
-            });
-
+                comboBoxDisks.Items.Add(item.Value + "(" + item.Key + ")");
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -35,14 +35,16 @@ namespace VeraCrypt_Mounter
 
         private void comboBoxDisks_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //TODO Wenn mehr als ein laufwerk mit dem selben namen da ist dies anzeigen
+            string entry = comboBoxDisks.SelectedItem.ToString();
+            string index = entry.Substring(entry.Length - 2, 1);
+            string name = entry.Substring(0, entry.Length - 3);
 
-            List<DriveInfo> driveinfo = _wmidriveinfo.GetDriveinfo(comboBoxDisks.SelectedItem.ToString());
+            List<DriveInfo> driveinfo = _wmidriveinfo.GetDriveinfo(name, index);
             comboBoxPartitions.Items.Clear();
             treeViewInfos.Nodes.Clear();
             TreeNode[] drivenodestree = new TreeNode[6];
             var i = 0;
-            foreach (Partition part in _wmidriveinfo.PartitonInfos)
+            foreach (Partition part in _wmidriveinfo.GetPartitionInfo(index))
             {
                 int intpartindex = int.Parse(part.Index) + 1;
                 comboBoxPartitions.Items.Add(intpartindex.ToString());
@@ -53,16 +55,18 @@ namespace VeraCrypt_Mounter
                                         new TreeNode(_partitioninfonames[4] + part.Name),
                                         new TreeNode(_partitioninfonames[5] + part.Size),
                                         new TreeNode(_partitioninfonames[6] + part.Type), };
-                treeViewInfos.Nodes.Add(new TreeNode ("Partition" + intpartindex.ToString(), partitionnodestree));
+                treeViewInfos.Nodes.Add(new TreeNode("Partition" + intpartindex.ToString(), partitionnodestree));
             }
-            foreach (var info in _wmidriveinfo.DriveInfos)
+            foreach (var info in _wmidriveinfo.GetDriveinfo(name, index))
             {
-
-                drivenodestree.SetValue(new TreeNode (_driveinfosnames[i] + info[0] ), i);
-                i++;
- 
+                foreach (var infovalue in info)
+                {
+                    drivenodestree.SetValue(new TreeNode(_driveinfosnames[i] + infovalue), i);
+                    i++;
+                }
+                
             }
-            treeViewInfos.Nodes.Add(new TreeNode ("Drive", drivenodestree));
+            treeViewInfos.Nodes.Add(new TreeNode("Drive", drivenodestree));
         }
 
         private void SelectPartition_FormClosed(object sender, FormClosedEventArgs e)
@@ -74,12 +78,17 @@ namespace VeraCrypt_Mounter
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            _wmidriveinfo.Driveinfo(comboBoxDisks.SelectedItem.ToString());
+            string entry = comboBoxDisks.SelectedItem.ToString();
+            string index = entry.Substring(entry.Length - 2, 1);
+            string name = entry.Substring(0, entry.Length - 3);
+
+            List<DriveInfo> dlist = _wmidriveinfo.GetDriveinfo(name, index);
+            DriveInfo info = dlist[0];
             string partnummber = comboBoxPartitions.SelectedItem.ToString();
 
-            _root.Diskmodel =_wmidriveinfo.Model[0];
-            _root.Disknummber = _wmidriveinfo.Index[0];
-            _root.Diskserial = _wmidriveinfo.Serial[0];
+            _root.Diskmodel = info.Model;
+            _root.Disknummber = info.Index;
+            _root.Diskserial = info.SerialNumber;
             _root.Partnummber = partnummber;
             Close();
         }

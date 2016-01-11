@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Management;
 
@@ -13,9 +14,9 @@ namespace VeraCrypt_Mounter
                                                             , "Type"
                                                         };
 
-        public List<string> GetDrives()
+        public Dictionary<string, string> GetDrives()
         {
-            List<string> drives = new List<string>();
+            Dictionary<string, string> ddrives = new Dictionary<string, string>();
 
             // Get all the disk drives
 
@@ -26,25 +27,29 @@ namespace VeraCrypt_Mounter
             foreach (ManagementObject moDisk in mosDisks.Get())
             {
                 string drivename;
+                string index;
                 // Add the HDD to the list (use the Model field as the item's caption)
                 try
                 {
                     drivename = moDisk["Model"].ToString();
+                    index = moDisk["Index"].ToString();
                 }
                 catch (Exception ex)
                 {              
                     throw new Exception("Error getting drivenames (" + ex.Message + ")");
                 }
-                drives.Add(drivename);
+
+                ddrives.Add(index, drivename);
             }
-            return drives;
+            return ddrives;
         }
         /// <summary>
-        /// Get info for requested drivename. Is a more then one drive with same name then is more then one list in list.
+        /// Get info for requested drivename.
         /// </summary>
         /// <param name="name">name from GetDrives</param>
+        /// <param name="index">index of the Drive</param>
         /// <returns>List of drive infos</returns>
-        public List<DriveInfo> GetDriveinfo(string name)
+        public List<DriveInfo> GetDriveinfo(string name, string index)
         {
             List<DriveInfo> dinfo = new List<DriveInfo>();
 
@@ -57,7 +62,7 @@ namespace VeraCrypt_Mounter
             try
             {
                 // Get all the disk drives from WMI that match the Model name
-                mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = '" + name + "'");
+                mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = '" + name + "' and Index= '" + index + "'");
 
             }
             catch (Exception ex)
@@ -226,7 +231,7 @@ namespace VeraCrypt_Mounter
         }
     }
 
-    class DriveInfo
+    class DriveInfo : IEnumerable<string>
     {
         private string _mediaType;
         private string _model;
@@ -266,9 +271,25 @@ namespace VeraCrypt_Mounter
             get { return _index; }
             set { _index = value; }
         }
-    }
 
-    class Partition
+        public IEnumerator<string> GetEnumerator()
+        {
+            yield return MediaType;
+            yield return Model;
+            yield return SerialNumber;
+            yield return InterfaceType;
+            yield return Partitions;
+            yield return Index;
+
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    } 
+
+    class Partition : IEnumerable<string>
     {
         private string _description;
         private string _deviceId;
@@ -318,6 +339,22 @@ namespace VeraCrypt_Mounter
         {
             get { return _description; }
             set { _description = value; }
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            yield return DeviceId;
+            yield return DiskIndex;
+            yield return Index;
+            yield return Name;
+            yield return Size;
+            yield return Type;
+            yield return Description;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

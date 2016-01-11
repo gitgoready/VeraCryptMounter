@@ -490,10 +490,12 @@ namespace VeraCrypt_Mounter
             
             try
             {
-                info.Driveinfo(diskmodel);
+                // TODO
+
+                List<DriveInfo> driveList = info.GetDriveinfo(diskmodel, "0");
                 
                 // Test if disk is connected on machine
-                if (info.Model.Length <= 0)
+                if (driveList.Count >= 1)
                 {
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language) + "\"" + diskmodel + "\"");
                 }
@@ -562,14 +564,16 @@ namespace VeraCrypt_Mounter
                 key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
                          _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Keyfile);
             }
-            for (int i = 0; i <= info.Serial.Length; i++)
-            {
-                if (string.Equals(info.Serial[i], diskserial))
-                {
-                    if (!string.Equals(info.Index[i], disknumber))
-                        partition.SetValue("\\Device\\Harddisk" + info.Index[i] + "\\Partition" + partnumber, i);
-                }
-            }
+            // TODO CHANGE TO NEW METHODES IN WMIDRIVEINFOG
+
+            //for (int i = 0; i <= info.Serial.Length; i++)
+            //{
+            //    if (string.Equals(info.Serial[i], diskserial))
+            //    {
+            //        if (!string.Equals(info.Index[i], disknumber))
+            //            partition.SetValue("\\Device\\Harddisk" + info.Index[i] + "\\Partition" + partnumber, i);
+            //    }
+            //}
             
             toolStripProgressBar.Visible = true;
 
