@@ -131,6 +131,7 @@ namespace VeraCrypt_Mounter
                 return 2;
             //Clipboard.SetDataObject(argumentstring, true);
 #endif
+            int res = 1;
             foreach (string pa in partition)
             {
                 string path = Volume + pa;
@@ -149,9 +150,9 @@ namespace VeraCrypt_Mounter
                     return 1;
                 }
                 if (output == 0)
-                    return 0;
+                    res = 0;
             }
-            return 1;
+            return res;
 
         }
 

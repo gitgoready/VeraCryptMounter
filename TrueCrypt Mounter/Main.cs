@@ -466,7 +466,8 @@ namespace VeraCrypt_Mounter
             const bool beep = false;
             const bool force = false;
             string key = null;
-            string[] partition = null;
+            int i = 0;
+            List<string> parlist = new List<string>();
 
             toolStripLabelNotification.Visible = false;
 
@@ -489,13 +490,9 @@ namespace VeraCrypt_Mounter
             WmiDriveInfo info = new WmiDriveInfo();
             
             try
-            {
-                // TODO
-
-                List<DriveInfo> driveList = info.GetDriveinfo(diskmodel, "0");
-                
+            {          
                 // Test if disk is connected on machine
-                if (driveList.Count >= 1)
+                if (!info.CheckDiskPresent(diskmodel))
                 {
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language) + "\"" + diskmodel + "\"");
                 }
@@ -566,20 +563,20 @@ namespace VeraCrypt_Mounter
             }
             // TODO CHANGE TO NEW METHODES IN WMIDRIVEINFOG
 
-            //for (int i = 0; i <= info.Serial.Length; i++)
-            //{
-            //    if (string.Equals(info.Serial[i], diskserial))
-            //    {
-            //        if (!string.Equals(info.Index[i], disknumber))
-            //            partition.SetValue("\\Device\\Harddisk" + info.Index[i] + "\\Partition" + partnumber, i);
-            //    }
-            //}
-            
+            foreach (var d in info.GetDrives())
+            {
+                if (d.Value == diskmodel)
+                {
+                    parlist.Add("\\Device\\Harddisk" + d.Key + "\\Partition" + partnumber);
+                    i++;
+                }
+            }
+
             toolStripProgressBar.Visible = true;
 
             MountDriveDelegate mountdrive = Mount.MountDrive;
             
-            mountdrive.BeginInvoke(partition, dletter, key, _passwordDrive, silent, beep, force, readOnly, removable, _pim, hash, tc,
+            mountdrive.BeginInvoke(parlist.ToArray(), dletter, key, _passwordDrive, silent, beep, force, readOnly, removable, _pim, hash, tc,
                                    CallbackHandlerMountDrive, mountdrive);
 
             toolStripProgressBar.MarqueeAnimationSpeed = 30;

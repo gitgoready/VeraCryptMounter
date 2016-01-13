@@ -53,7 +53,7 @@ namespace VeraCrypt_Mounter
         {
             List<DriveInfo> dinfo = new List<DriveInfo>();
 
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(index))
             {
                 throw new Exception("Variable is null or empty (Method: GetDriveinfo)");
             }
@@ -131,6 +131,33 @@ namespace VeraCrypt_Mounter
                 
             }
             return di;
+        }
+
+        public bool CheckDiskPresent(string name)
+        {
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new Exception("Variable is null or empty (Method: GetDriveinfo)");
+            }
+
+            ManagementObjectSearcher mosDisks;
+            try
+            {
+                // Get all the disk drives from WMI that match the Model name
+                mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = '" + name + "'");
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in GetDriveinfo (" + ex.Message + ")");
+            }
+
+            ManagementObjectCollection mo = mosDisks.Get();
+
+            if (mo.Count < 1)
+                return false;
+            return true;
         }
 
         public List<Partition> GetPartitionInfo(string index)
