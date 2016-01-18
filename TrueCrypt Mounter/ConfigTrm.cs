@@ -71,6 +71,7 @@ namespace VeraCrypt_Mounter
             public const string Diskserial = "Diskserial";
             public const string Disknumber = "Disknumber";
             public const string Partnumber = "Partnumber";
+            public const string Pnpdeviceid = "PNPDeviceID";
         }
 
         /// <summary>

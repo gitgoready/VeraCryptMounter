@@ -52,9 +52,12 @@ namespace VeraCrypt_Mounter
             this.groupBoxDriveletter = new System.Windows.Forms.GroupBox();
             this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
+            this.groupBox_PNPDeviceID = new System.Windows.Forms.GroupBox();
+            this.textBox_PNPDeviceID = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBoxMountoptions.SuspendLayout();
             this.groupBoxDriveletter.SuspendLayout();
+            this.groupBox_PNPDeviceID.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxDescription
@@ -84,7 +87,7 @@ namespace VeraCrypt_Mounter
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(139, 328);
+            this.buttonOk.Location = new System.Drawing.Point(139, 367);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 5;
@@ -101,7 +104,7 @@ namespace VeraCrypt_Mounter
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(28, 328);
+            this.buttonCancel.Location = new System.Drawing.Point(28, 367);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -268,12 +271,31 @@ namespace VeraCrypt_Mounter
             this.comboBoxDriveletter.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxDriveletter_DrawItem);
             this.comboBoxDriveletter.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ComboBoxDriveletter_MeasureItem);
             // 
+            // groupBox_PNPDeviceID
+            // 
+            this.groupBox_PNPDeviceID.Controls.Add(this.textBox_PNPDeviceID);
+            this.groupBox_PNPDeviceID.Location = new System.Drawing.Point(2, 321);
+            this.groupBox_PNPDeviceID.Name = "groupBox_PNPDeviceID";
+            this.groupBox_PNPDeviceID.Size = new System.Drawing.Size(239, 40);
+            this.groupBox_PNPDeviceID.TabIndex = 14;
+            this.groupBox_PNPDeviceID.TabStop = false;
+            this.groupBox_PNPDeviceID.Text = "PNPDeviceID";
+            // 
+            // textBox_PNPDeviceID
+            // 
+            this.textBox_PNPDeviceID.Location = new System.Drawing.Point(10, 15);
+            this.textBox_PNPDeviceID.Name = "textBox_PNPDeviceID";
+            this.textBox_PNPDeviceID.ReadOnly = true;
+            this.textBox_PNPDeviceID.Size = new System.Drawing.Size(223, 20);
+            this.textBox_PNPDeviceID.TabIndex = 0;
+            // 
             // NewDrive
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.DropList;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(242, 357);
+            this.ClientSize = new System.Drawing.Size(242, 396);
+            this.Controls.Add(this.groupBox_PNPDeviceID);
             this.Controls.Add(this.groupBoxDriveletter);
             this.Controls.Add(this.groupBoxMountoptions);
             this.Controls.Add(this.groupBox1);
@@ -292,6 +314,8 @@ namespace VeraCrypt_Mounter
             this.groupBoxMountoptions.ResumeLayout(false);
             this.groupBoxMountoptions.PerformLayout();
             this.groupBoxDriveletter.ResumeLayout(false);
+            this.groupBox_PNPDeviceID.ResumeLayout(false);
+            this.groupBox_PNPDeviceID.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -319,5 +343,7 @@ namespace VeraCrypt_Mounter
         private CheckBox checkBoxTruecrypt;
         private CheckBox checkBoxPim;
         private ComboBox comboBoxHash;
+        private GroupBox groupBox_PNPDeviceID;
+        private TextBox textBox_PNPDeviceID;
     }
 }

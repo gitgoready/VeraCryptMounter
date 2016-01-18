@@ -7,11 +7,12 @@ namespace VeraCrypt_Mounter
     public partial class SelectPartition : Form
     {
         private WmiDriveInfo _wmidriveinfo;
-        private static string[] _driveinfosnames = { "MediaType: ", "Model: ", "Serial: ", "Interface: ", "Partitions: ", "Index: " };
+        private static string[] _driveinfosnames = { "MediaType: ", "Model: ", "Serial: ", "Interface: ", "Partitions: ", "Index: ", "PNPDeviceID: " };
         private static string[] _partitioninfonames = { "Description: ", "DeviceId: ", "DiskIndex: ", "Index: ", "Name: ", "Size: ", "Type: " };
         //private Dictionary<string, List<DriveInfo>> dd;
         private NewDrive _root;
-        
+        private Dictionary<string, string> _drives;
+
         /// <summary>
         /// 
         /// </summary>
@@ -21,11 +22,14 @@ namespace VeraCrypt_Mounter
             InitializeComponent();
             _root = root;
             _wmidriveinfo = new WmiDriveInfo();
-            Dictionary<string, string> drives = _wmidriveinfo.GetDrives();
-            foreach (var item in drives)
+            _drives = _wmidriveinfo.GetDrives();
+            int i = 0;
+            foreach (var item in _drives.Keys)
             {
-                comboBoxDisks.Items.Add(item.Value + "(" + item.Key + ")");
+                comboBoxDisks.Items.Add(item.ToString());
+                i++;
             }
+
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -35,14 +39,14 @@ namespace VeraCrypt_Mounter
 
         private void comboBoxDisks_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string entry = comboBoxDisks.SelectedItem.ToString();
-            string index = entry.Substring(entry.Length - 2, 1);
-            string name = entry.Substring(0, entry.Length - 3);
+            string pnpdid;
+            _drives.TryGetValue(comboBoxDisks.Text, out pnpdid);
 
-            List<DriveInfo> driveinfo = _wmidriveinfo.GetDriveinfo(name, index);
+            List<DriveInfo> driveinfo = _wmidriveinfo.GetDriveinfo(pnpdid);
+            string index = driveinfo[0].Index;
             comboBoxPartitions.Items.Clear();
             treeViewInfos.Nodes.Clear();
-            TreeNode[] drivenodestree = new TreeNode[6];
+            TreeNode[] drivenodestree = new TreeNode[7];
             var i = 0;
             foreach (Partition part in _wmidriveinfo.GetPartitionInfo(index))
             {
@@ -57,7 +61,7 @@ namespace VeraCrypt_Mounter
                                         new TreeNode(_partitioninfonames[6] + part.Type), };
                 treeViewInfos.Nodes.Add(new TreeNode("Partition" + intpartindex.ToString(), partitionnodestree));
             }
-            foreach (var info in _wmidriveinfo.GetDriveinfo(name, index))
+            foreach (var info in _wmidriveinfo.GetDriveinfo(pnpdid))
             {
                 foreach (var infovalue in info)
                 {
@@ -78,11 +82,10 @@ namespace VeraCrypt_Mounter
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            string entry = comboBoxDisks.SelectedItem.ToString();
-            string index = entry.Substring(entry.Length - 2, 1);
-            string name = entry.Substring(0, entry.Length - 3);
+            string pnpdid;
+            _drives.TryGetValue(comboBoxDisks.Text, out pnpdid);
+            List<DriveInfo> dlist = _wmidriveinfo.GetDriveinfo(pnpdid);
 
-            List<DriveInfo> dlist = _wmidriveinfo.GetDriveinfo(name, index);
             DriveInfo info = dlist[0];
             string partnummber = comboBoxPartitions.SelectedItem.ToString();
 
@@ -90,6 +93,7 @@ namespace VeraCrypt_Mounter
             _root.Disknummber = info.Index;
             _root.Diskserial = info.SerialNumber;
             _root.Partnummber = partnummber;
+            _root.PNPDeviceID = info.PNPDeviceID;
             Close();
         }
     }

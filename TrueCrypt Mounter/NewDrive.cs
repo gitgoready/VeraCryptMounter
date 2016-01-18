@@ -41,9 +41,17 @@ namespace VeraCrypt_Mounter
         private string _partnummber;
         private string _diskmodel;
         private string _diskserial;
+        private string _pnpdeviceid;
 
         /// <summary>
-        /// Set the disknumber for the Drive
+        /// Set the pnpdeviceid for the drive
+        /// </summary>
+        public string PNPDeviceID
+        {
+            set { _pnpdeviceid = value; }
+        }
+        /// <summary>
+        /// Set the disknumber for the drive
         /// </summary>
         public string Disknummber
         {
@@ -117,6 +125,7 @@ namespace VeraCrypt_Mounter
                 checkBoxAutomountStart.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountStart", _language);
                 checkBoxTruecrypt.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxTruecrypt", _language);
                 checkBoxPim.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPim", _language);
+                groupBox_PNPDeviceID.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxPNPDeviceID", _language);
                 //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
             }
             catch (Exception ex)
@@ -175,6 +184,9 @@ namespace VeraCrypt_Mounter
             comboBoxHash.SelectedItem = _config.GetValue(driveName, ConfigTrm.Drive.Hash, "");
             _disknummber = _config.GetValue(driveName, ConfigTrm.Drive.Disknumber, "");
             _partnummber = _config.GetValue(driveName, ConfigTrm.Drive.Partnumber, "");
+            _pnpdeviceid = _config.GetValue(driveName, ConfigTrm.Drive.Pnpdeviceid, "");
+
+            textBox_PNPDeviceID.Text = _pnpdeviceid;
 
             comboBoxDriveletter.SelectedItem = _config.GetValue(driveName, ConfigTrm.Drive.Driveletter, "");
         }
@@ -308,6 +320,7 @@ namespace VeraCrypt_Mounter
                 _config.SetValue(beschr, ConfigTrm.Drive.Hash, hash);
                 _config.SetValue(beschr, ConfigTrm.Drive.Disknumber, _disknummber);
                 _config.SetValue(beschr, ConfigTrm.Drive.Partnumber, _partnummber);
+                _config.SetValue(beschr, ConfigTrm.Drive.Pnpdeviceid, _pnpdeviceid);
             }
             catch (Exception ex)
             {
@@ -393,8 +406,11 @@ namespace VeraCrypt_Mounter
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePartnumberEmpty", _language));
                 if (string.IsNullOrEmpty(_disknummber))
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDisknumberEmpty", _language));
+                if (string.IsNullOrEmpty(_pnpdeviceid))
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePNPDeviceIDEmpty", _language));
 
                 textBoxPartition.Text = "\\Device\\Harddisk" + _disknummber + "\\Partition" + _partnummber;
+                textBox_PNPDeviceID.Text = _pnpdeviceid;
             }
         }
     }
