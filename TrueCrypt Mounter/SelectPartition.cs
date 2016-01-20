@@ -7,7 +7,7 @@ namespace VeraCrypt_Mounter
     public partial class SelectPartition : Form
     {
         private WmiDriveInfo _wmidriveinfo;
-        private static string[] _driveinfosnames = { "MediaType: ", "Model: ", "Serial: ", "Interface: ", "Partitions: ", "Index: " };
+        private static string[] _driveinfosnames = { "MediaType: ", "Model: ", "Serial: ", "Interface: ", "Partitions: ", "Index: ", "DeviceID: ", "PNPDeviceID: ", "Name: ", "CreationClassName: " };
         private static string[] _partitioninfonames = { "Description: ", "DeviceId: ", "DiskIndex: ", "Index: ", "Name: ", "Size: ", "Type: " };
         //private Dictionary<string, List<DriveInfo>> dd;
         private NewDrive _root;
@@ -42,7 +42,7 @@ namespace VeraCrypt_Mounter
             List<DriveInfo> driveinfo = _wmidriveinfo.GetDriveinfo(name, index);
             comboBoxPartitions.Items.Clear();
             treeViewInfos.Nodes.Clear();
-            TreeNode[] drivenodestree = new TreeNode[6];
+            TreeNode[] drivenodestree = new TreeNode[10];
             var i = 0;
             foreach (Partition part in _wmidriveinfo.GetPartitionInfo(index))
             {

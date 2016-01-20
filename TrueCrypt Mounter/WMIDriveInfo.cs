@@ -7,7 +7,7 @@ namespace VeraCrypt_Mounter
 {
     class WmiDriveInfo
     {
-        private readonly string[] _driveInfoNames = {"MediaType", "Model", "SerialNumber", "InterfaceType", "Partitions", "Index"};
+        private readonly string[] _driveInfoNames = {"MediaType", "Model", "SerialNumber", "InterfaceType", "Partitions", "Index", "DeviceID", "PNPDeviceID", "Name", "CreationClassName" };
 
         private readonly string[] _partitionInfoNames = {
                                                             "Description", "DeviceID", "DiskIndex", "Index", "Name", "Size"
@@ -76,13 +76,36 @@ namespace VeraCrypt_Mounter
             }
 
             mosDisks.Dispose();
+            string guid = GetGUID(dinfo[0].PNPDeviceID);
             return dinfo;
+        }
+
+        private string GetGUID(string pnpdeviceid)
+        {
+            ManagementObjectSearcher mosDisks;
+            try
+            {
+                // Get all the disk drives from WMI that match the Model name
+                mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE PNPDeviceID = '" + pnpdeviceid + "'");
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in GetGUID (" + ex.Message + ")");
+            }
+
+            foreach (ManagementObject mo in mosDisks.Get())
+            {
+                string ret = mo["ClassGuid"].ToString();
+                return ret;
+            }
+            return "";
         }
 
         private DriveInfo FillDriveinfo(ManagementObject moDisk)
         {
             DriveInfo di = new DriveInfo();
-            object[] data = new object[6];
+            object[] data = new object[10];
             
 
             for (int i = 0 ; i <= _driveInfoNames.Length-1 ; i++)
@@ -125,6 +148,18 @@ namespace VeraCrypt_Mounter
 
                     case 5:
                         di.Index = data[i].ToString();
+                        break;
+                    case 6:
+                        di.DeviceID = data[i].ToString();
+                        break;
+                    case 7:
+                        di.PNPDeviceID = data[i].ToString();
+                        break;
+                    case 8:
+                        di.Name = data[i].ToString();
+                        break;
+                    case 9:
+                        di.CreationClassName = data[i].ToString();
                         break;
 
                 }
@@ -266,6 +301,10 @@ namespace VeraCrypt_Mounter
         private string _interfaceType;
         private string _partitions;
         private string _index;
+        private string _deviceid;
+        private string _pnpdeviceid;
+        private string _name;
+        private string _creationclassname;
 
         public string MediaType
         {
@@ -298,7 +337,26 @@ namespace VeraCrypt_Mounter
             get { return _index; }
             set { _index = value; }
         }
-
+        public string DeviceID
+        {
+            get { return _deviceid; }
+            set { _deviceid = value; }
+        }
+        public string PNPDeviceID
+        {
+            get { return _pnpdeviceid; }
+            set { _pnpdeviceid = value; }
+        }
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public string CreationClassName
+        {
+            get { return _creationclassname; }
+            set { _creationclassname = value; }
+        }
         public IEnumerator<string> GetEnumerator()
         {
             yield return MediaType;
@@ -307,7 +365,10 @@ namespace VeraCrypt_Mounter
             yield return InterfaceType;
             yield return Partitions;
             yield return Index;
-
+            yield return DeviceID;
+            yield return PNPDeviceID;
+            yield return Name;
+            yield return CreationClassName;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
