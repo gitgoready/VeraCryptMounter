@@ -249,6 +249,10 @@
     </Text>
   </Region>
   <Region name="NewDrive">
+    <Text key="groupBoxPNPDeviceID">
+      <D>PNPDeviceID</D>
+      <E>PNPDeviceID</E>
+    </Text>
     <Text key="checkBoxAutomountStart">
       <D>Autoeinbinden beim Programmstart</D>
       <E>Automount by programstart</E>
@@ -344,6 +348,10 @@
     <Text key="MessageDisknumberEmpty">
       <D>Disknummer konnte nicht ermittelt werden.</D>
       <E>Failed to get number of disk.</E>
+    </Text>
+    <Text key="MessagePnpdeviceidEmpty">
+      <D>PNPDeviceID konnte nicht ermittelt werden.</D>
+      <E>Failed to get PNPDeviceID of disk.</E>
     </Text>
     <Text key="Error">
       <D>Fehler</D>

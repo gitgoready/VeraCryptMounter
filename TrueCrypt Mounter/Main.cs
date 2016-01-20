@@ -486,6 +486,7 @@ namespace VeraCrypt_Mounter
             string diskserial = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskserial, null);
             string disknumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Disknumber, null);
             string partnumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partnumber, null);
+            string pnpdeviceid = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Pnpdeviceid, null);
 
             WmiDriveInfo info = new WmiDriveInfo();
             
