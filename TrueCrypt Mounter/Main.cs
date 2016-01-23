@@ -493,7 +493,7 @@ namespace VeraCrypt_Mounter
             try
             {          
                 // Test if disk is connected on machine
-                if (!info.CheckDiskPresent(diskmodel))
+                if (!info.CheckDiskPresent(pnpdeviceid))
                 {
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language) + "\"" + diskmodel + "\"");
                 }
@@ -562,15 +562,17 @@ namespace VeraCrypt_Mounter
                 key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
                          _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Keyfile);
             }
-            // TODO CHANGE TO NEW METHODES IN WMIDRIVEINFOG
+            // get disknumber from PNPdeviceid if ther is not one use saved disknumber BAD
 
-            foreach (var d in info.GetDrives())
+            List<DriveInfo> list = info.GetDriveinfo(pnpdeviceid);
+
+            if (list.Count >= 1)
             {
-                if (d.Value == diskmodel)
-                {
-                    parlist.Add("\\Device\\Harddisk" + d.Key + "\\Partition" + partnumber);
-                    i++;
-                }
+                parlist.Add("\\Device\\Harddisk" + list[0].Index + "\\Partition" + partnumber);
+            }
+            else
+            {
+                parlist.Add("\\Device\\Harddisk" + disknumber + "\\Partition" + partnumber);
             }
 
             toolStripProgressBar.Visible = true;

@@ -42,6 +42,9 @@ namespace VeraCrypt_Mounter
             string pnpdid;
             _drives.TryGetValue(comboBoxDisks.Text, out pnpdid);
 
+            string test = comboBoxDisks.Text;
+            string tmp = test.Substring(0, test.Length - 3);
+
             List<DriveInfo> driveinfo = _wmidriveinfo.GetDriveinfo(pnpdid);
             string index = driveinfo[0].Index;
             comboBoxPartitions.Items.Clear();
@@ -86,6 +89,8 @@ namespace VeraCrypt_Mounter
         {
             string pnpdid;
             _drives.TryGetValue(comboBoxDisks.Text, out pnpdid);
+            string test = comboBoxDisks.Text;
+            string tmp = test.Substring(0, test.Length - 3);
             List<DriveInfo> dlist = _wmidriveinfo.GetDriveinfo(pnpdid);
 
             DriveInfo info = dlist[0];

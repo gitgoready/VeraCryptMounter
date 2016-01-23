@@ -59,12 +59,14 @@ namespace VeraCrypt_Mounter
             {
                 throw new Exception("Variable is null or empty (Method: GetDriveinfo)");
             }
-
-            ManagementObjectSearcher mosDisks;
+        
             try
             {
-                // Get all the disk drives from WMI that match the Model name
-                mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = \"" + pnpdeviceid + "\"");
+                foreach (ManagementObject drive in new ManagementObjectSearcher("select * from Win32_DiskDrive").Get())
+                {
+                    if (drive["PNPDeviceID"].ToString() == pnpdeviceid)
+                        dinfo.Add(FillDriveinfo(drive));
+                }
 
             }
             catch (Exception ex)
@@ -72,38 +74,31 @@ namespace VeraCrypt_Mounter
                 throw new Exception("Error in GetDriveinfo (" + ex.Message + ")");
             }
 
-            ManagementObjectCollection mocol = mosDisks.Get();
-         
-            foreach (ManagementObject moDisk in mocol)
-            {
-                dinfo.Add(FillDriveinfo(moDisk));
-            }
-
-            mosDisks.Dispose();
-            string guid = GetGUID(dinfo[0].PNPDeviceID);
             return dinfo;
         }
-
-        private string GetGUID(string pnpdeviceid)
+        /// <summary>
+        /// Get drivletter TODO NOT GOOD
+        /// </summary>
+        /// <param name="pnpdeviceid"></param>
+        /// <returns></returns>
+        public List<string> GetDriveLetter(string pnpdeviceid)
         {
-            ManagementObjectSearcher mosDisks;
-            try
-            {
-                // Get all the disk drives from WMI that match the Model name
-                mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE PNPDeviceID = '" + pnpdeviceid + "'");
+            List<string> driveletters = new List<string>();
 
-            }
-            catch (Exception ex)
+            foreach (ManagementObject drive in new ManagementObjectSearcher("select * from Win32_DiskDrive").Get())
             {
-                throw new Exception("Error in GetGUID (" + ex.Message + ")");
+                if (drive["PNPDeviceID"].ToString() == pnpdeviceid)
+                {
+                    foreach (ManagementObject o in drive.GetRelated("Win32_DiskPartition"))
+                    {
+                        foreach (ManagementObject i in o.GetRelated("Win32_LogicalDisk"))
+                        {
+                            driveletters.Add(i["Name"].ToString());
+                        }
+                    }
+                }
             }
-
-            foreach (ManagementObject mo in mosDisks.Get())
-            {
-                string ret = mo["ClassGuid"].ToString();
-                return ret;
-            }
-            return "";
+            return driveletters;
         }
 
         private DriveInfo FillDriveinfo(ManagementObject moDisk)
@@ -165,31 +160,33 @@ namespace VeraCrypt_Mounter
             return di;
         }
 
-        public bool CheckDiskPresent(string name)
+        /// <summary>
+        /// Check if device is connected to Machine by PNPDeviceID.
+        /// </summary>
+        /// <param name="pnpdeviceid">The PNPDeviceID from Win32_DiskDrive</param>
+        /// <returns></returns>
+        public bool CheckDiskPresent(string pnpdeviceid)
         {
-
-            if (string.IsNullOrEmpty(name))
+            bool state = false;
+            if (string.IsNullOrEmpty(pnpdeviceid))
             {
                 throw new Exception("Variable is null or empty (Method: GetDriveinfo)");
             }
-
-            ManagementObjectSearcher mosDisks;
             try
             {
-                // Get all the disk drives from WMI that match the Model name
-                mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = '" + name + "'");
+                foreach (ManagementObject drive in new ManagementObjectSearcher("select * from Win32_DiskDrive").Get())
+                {
+                    if (drive["PNPDeviceID"].ToString() == pnpdeviceid)
+                        state = true;
+                }
 
             }
             catch (Exception ex)
             {
                 throw new Exception("Error in GetDriveinfo (" + ex.Message + ")");
             }
-
-            ManagementObjectCollection mo = mosDisks.Get();
-
-            if (mo.Count < 1)
-                return false;
-            return true;
+            
+            return state;
         }
 
         public List<Partition> GetPartitionInfo(string index)
