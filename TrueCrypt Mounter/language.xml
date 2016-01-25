@@ -45,14 +45,6 @@
       <D>Schlüsselkontainer</D>
       <E>Keyfilecontainer</E>    
     </Text>
-    <Text key="checkBoxClearPassword">
-      <D>Passwortspeicher löschen</D>
-      <E>Clear Passwordcache</E>
-    </Text>
-    <Text key="checkBoxClearPasswordContainer">
-      <D>Passwortspeicher löschen</D>
-      <E>Clear Passwordcache</E>
-    </Text>
     <Text key="ToolStripMenuItemNew">
       <D>Neu</D>
       <E>New</E>
@@ -371,6 +363,14 @@
         <D>Grundeinstellungen</D>
         <E>Mainsettings</E>
       </Text>
+      <Text key="groupBoxConfigPath">
+        <D>Config Ordner</D>
+        <E>Config Path</E>
+      </Text>
+      <Text key="buttonShowConfig">
+        <D>Configordner</D>
+        <E>Config path</E>
+      </Text>
       <Text key="labelHash">
         <D>hash</D>
         <E>hash</E>
@@ -423,10 +423,6 @@
         <D>Keyfilekontainer nicht benutzen</D>
         <E>Do not use Keyfilecontainer</E>
       </Text>
-      <Text key="checkBoxPasswordcache">
-        <D>Passwort Speichern</D>
-        <E>Passwortcache</E>
-      </Text>
       <Text key="groupBoxLanguage">
         <D>Sprache</D>
         <E>Language</E>
@@ -476,6 +472,14 @@
     <Text key="Form">
       <D>Neuer Kontainer</D>
       <E>New Container</E>
+    </Text>
+    <Text key="groupBoxSavePassword">
+      <D>Passwort Speichern</D>
+      <E>Save Password</E>
+    </Text>
+    <Text key="buttonSavePassword">
+      <D>Speicher</D>
+      <E>Save</E>
     </Text>
     <Text key="groupBoxHash">
       <D>hash</D>

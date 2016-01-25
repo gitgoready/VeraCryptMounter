@@ -52,15 +52,18 @@
             this.buttonOk = new System.Windows.Forms.Button();
             this.groupBoxTruecryptPath = new System.Windows.Forms.GroupBox();
             this.groupBoxUsesettings = new System.Windows.Forms.GroupBox();
-            this.checkBoxPasswordcache = new System.Windows.Forms.CheckBox();
             this.checkBoxNoKeyfilecontainer = new System.Windows.Forms.CheckBox();
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
+            this.groupBoxConfigPath = new System.Windows.Forms.GroupBox();
+            this.buttonShowConfig = new System.Windows.Forms.Button();
+            this.textBoxConfigPath = new System.Windows.Forms.TextBox();
             this.groupBoxDebug.SuspendLayout();
             this.groupBoxKeyfileContainer.SuspendLayout();
             this.groupBoxTruecryptPath.SuspendLayout();
             this.groupBoxUsesettings.SuspendLayout();
             this.groupBoxLanguage.SuspendLayout();
+            this.groupBoxConfigPath.SuspendLayout();
             this.SuspendLayout();
             // 
             // select_truecrypt
@@ -73,7 +76,7 @@
             // 
             // textBoxTruecryptPath
             // 
-            this.textBoxTruecryptPath.Location = new System.Drawing.Point(12, 32);
+            this.textBoxTruecryptPath.Location = new System.Drawing.Point(12, 26);
             this.textBoxTruecryptPath.Name = "textBoxTruecryptPath";
             this.textBoxTruecryptPath.ReadOnly = true;
             this.textBoxTruecryptPath.Size = new System.Drawing.Size(324, 20);
@@ -81,7 +84,7 @@
             // 
             // buttonTruecryptPath
             // 
-            this.buttonTruecryptPath.Location = new System.Drawing.Point(366, 29);
+            this.buttonTruecryptPath.Location = new System.Drawing.Point(366, 23);
             this.buttonTruecryptPath.Name = "buttonTruecryptPath";
             this.buttonTruecryptPath.Size = new System.Drawing.Size(75, 23);
             this.buttonTruecryptPath.TabIndex = 3;
@@ -110,7 +113,7 @@
             // labelTruecryptPath
             // 
             this.labelTruecryptPath.AutoSize = true;
-            this.labelTruecryptPath.Location = new System.Drawing.Point(9, 16);
+            this.labelTruecryptPath.Location = new System.Drawing.Point(9, 10);
             this.labelTruecryptPath.Name = "labelTruecryptPath";
             this.labelTruecryptPath.Size = new System.Drawing.Size(92, 13);
             this.labelTruecryptPath.TabIndex = 20;
@@ -141,7 +144,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(383, 278);
+            this.buttonClose.Location = new System.Drawing.Point(383, 288);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 1;
@@ -152,7 +155,7 @@
             // groupBoxDebug
             // 
             this.groupBoxDebug.Controls.Add(this.checkBoxSilentMode);
-            this.groupBoxDebug.Location = new System.Drawing.Point(153, 265);
+            this.groupBoxDebug.Location = new System.Drawing.Point(153, 275);
             this.groupBoxDebug.Name = "groupBoxDebug";
             this.groupBoxDebug.Size = new System.Drawing.Size(146, 43);
             this.groupBoxDebug.TabIndex = 15;
@@ -182,7 +185,7 @@
             this.groupBoxKeyfileContainer.Controls.Add(this.textBoxContainerPath);
             this.groupBoxKeyfileContainer.Controls.Add(this.buttonContainerPath);
             this.groupBoxKeyfileContainer.Controls.Add(this.labelDriveletter);
-            this.groupBoxKeyfileContainer.Location = new System.Drawing.Point(9, 91);
+            this.groupBoxKeyfileContainer.Location = new System.Drawing.Point(9, 65);
             this.groupBoxKeyfileContainer.Name = "groupBoxKeyfileContainer";
             this.groupBoxKeyfileContainer.Size = new System.Drawing.Size(449, 107);
             this.groupBoxKeyfileContainer.TabIndex = 4;
@@ -260,7 +263,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(302, 278);
+            this.buttonOk.Location = new System.Drawing.Point(302, 288);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 18;
@@ -275,30 +278,19 @@
             this.groupBoxTruecryptPath.Controls.Add(this.buttonTruecryptPath);
             this.groupBoxTruecryptPath.Location = new System.Drawing.Point(9, 3);
             this.groupBoxTruecryptPath.Name = "groupBoxTruecryptPath";
-            this.groupBoxTruecryptPath.Size = new System.Drawing.Size(449, 82);
+            this.groupBoxTruecryptPath.Size = new System.Drawing.Size(449, 63);
             this.groupBoxTruecryptPath.TabIndex = 2;
             this.groupBoxTruecryptPath.TabStop = false;
             // 
             // groupBoxUsesettings
             // 
-            this.groupBoxUsesettings.Controls.Add(this.checkBoxPasswordcache);
             this.groupBoxUsesettings.Controls.Add(this.checkBoxNoKeyfilecontainer);
-            this.groupBoxUsesettings.Location = new System.Drawing.Point(9, 204);
+            this.groupBoxUsesettings.Location = new System.Drawing.Point(9, 172);
             this.groupBoxUsesettings.Name = "groupBoxUsesettings";
             this.groupBoxUsesettings.Size = new System.Drawing.Size(449, 55);
             this.groupBoxUsesettings.TabIndex = 9;
             this.groupBoxUsesettings.TabStop = false;
             this.groupBoxUsesettings.Text = "Benutzungseinstellungen";
-            // 
-            // checkBoxPasswordcache
-            // 
-            this.checkBoxPasswordcache.AutoSize = true;
-            this.checkBoxPasswordcache.Location = new System.Drawing.Point(256, 22);
-            this.checkBoxPasswordcache.Name = "checkBoxPasswordcache";
-            this.checkBoxPasswordcache.Size = new System.Drawing.Size(118, 17);
-            this.checkBoxPasswordcache.TabIndex = 12;
-            this.checkBoxPasswordcache.Text = "Passwort speichern";
-            this.checkBoxPasswordcache.UseVisualStyleBackColor = true;
             // 
             // checkBoxNoKeyfilecontainer
             // 
@@ -314,7 +306,7 @@
             // groupBoxLanguage
             // 
             this.groupBoxLanguage.Controls.Add(this.comboBoxLanguage);
-            this.groupBoxLanguage.Location = new System.Drawing.Point(9, 265);
+            this.groupBoxLanguage.Location = new System.Drawing.Point(9, 275);
             this.groupBoxLanguage.Name = "groupBoxLanguage";
             this.groupBoxLanguage.Size = new System.Drawing.Size(138, 43);
             this.groupBoxLanguage.TabIndex = 13;
@@ -330,11 +322,41 @@
             this.comboBoxLanguage.Size = new System.Drawing.Size(119, 21);
             this.comboBoxLanguage.TabIndex = 14;
             // 
+            // groupBoxConfigPath
+            // 
+            this.groupBoxConfigPath.Controls.Add(this.buttonShowConfig);
+            this.groupBoxConfigPath.Controls.Add(this.textBoxConfigPath);
+            this.groupBoxConfigPath.Location = new System.Drawing.Point(9, 227);
+            this.groupBoxConfigPath.Name = "groupBoxConfigPath";
+            this.groupBoxConfigPath.Size = new System.Drawing.Size(449, 42);
+            this.groupBoxConfigPath.TabIndex = 19;
+            this.groupBoxConfigPath.TabStop = false;
+            this.groupBoxConfigPath.Text = "ConfigPath";
+            // 
+            // buttonShowConfig
+            // 
+            this.buttonShowConfig.Location = new System.Drawing.Point(366, 14);
+            this.buttonShowConfig.Name = "buttonShowConfig";
+            this.buttonShowConfig.Size = new System.Drawing.Size(75, 23);
+            this.buttonShowConfig.TabIndex = 1;
+            this.buttonShowConfig.Text = "Show config";
+            this.buttonShowConfig.UseVisualStyleBackColor = true;
+            this.buttonShowConfig.Click += new System.EventHandler(this.buttonShowConfig_Click);
+            // 
+            // textBoxConfigPath
+            // 
+            this.textBoxConfigPath.Location = new System.Drawing.Point(5, 16);
+            this.textBoxConfigPath.Name = "textBoxConfigPath";
+            this.textBoxConfigPath.ReadOnly = true;
+            this.textBoxConfigPath.Size = new System.Drawing.Size(355, 20);
+            this.textBoxConfigPath.TabIndex = 0;
+            // 
             // Mainsettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 320);
+            this.Controls.Add(this.groupBoxConfigPath);
             this.Controls.Add(this.groupBoxLanguage);
             this.Controls.Add(this.groupBoxUsesettings);
             this.Controls.Add(this.groupBoxTruecryptPath);
@@ -359,6 +381,8 @@
             this.groupBoxUsesettings.ResumeLayout(false);
             this.groupBoxUsesettings.PerformLayout();
             this.groupBoxLanguage.ResumeLayout(false);
+            this.groupBoxConfigPath.ResumeLayout(false);
+            this.groupBoxConfigPath.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -385,12 +409,14 @@
         private System.Windows.Forms.GroupBox groupBoxUsesettings;
         private System.Windows.Forms.CheckBox checkBoxNoKeyfilecontainer;
         private System.Windows.Forms.ComboBox comboBoxDriveletter;
-        private System.Windows.Forms.CheckBox checkBoxPasswordcache;
         private System.Windows.Forms.GroupBox groupBoxLanguage;
         private System.Windows.Forms.ComboBox comboBoxLanguage;
         private System.Windows.Forms.CheckBox checkBoxAutomount;
         private System.Windows.Forms.CheckBox checkBoxPim;
         private System.Windows.Forms.ComboBox comboBoxHash;
         private System.Windows.Forms.Label labelHash;
+        private System.Windows.Forms.GroupBox groupBoxConfigPath;
+        private System.Windows.Forms.Button buttonShowConfig;
+        private System.Windows.Forms.TextBox textBoxConfigPath;
     }
 }

@@ -54,6 +54,8 @@
             this.checkBoxReadonly = new System.Windows.Forms.CheckBox();
             this.groupBoxHash = new System.Windows.Forms.GroupBox();
             this.comboBoxHash = new System.Windows.Forms.ComboBox();
+            this.groupBoxSavePassword = new System.Windows.Forms.GroupBox();
+            this.buttonSavePassword = new System.Windows.Forms.Button();
             this.groupBoxDescription.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.groupBoxKyfilename.SuspendLayout();
@@ -61,6 +63,7 @@
             this.groupBoxDriveletter.SuspendLayout();
             this.groupBoxMountoptions.SuspendLayout();
             this.groupBoxHash.SuspendLayout();
+            this.groupBoxSavePassword.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialogKontainer
@@ -107,7 +110,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(122, 334);
+            this.buttonClose.Location = new System.Drawing.Point(122, 364);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(90, 23);
             this.buttonClose.TabIndex = 0;
@@ -117,7 +120,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(225, 334);
+            this.buttonOk.Location = new System.Drawing.Point(225, 364);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(90, 23);
             this.buttonOk.TabIndex = 17;
@@ -179,7 +182,7 @@
             // 
             this.groupBoxDrive.Controls.Add(this.checkBoxNoDrive);
             this.groupBoxDrive.Controls.Add(this.comboBoxDrives);
-            this.groupBoxDrive.Location = new System.Drawing.Point(223, 154);
+            this.groupBoxDrive.Location = new System.Drawing.Point(12, 226);
             this.groupBoxDrive.Name = "groupBoxDrive";
             this.groupBoxDrive.Size = new System.Drawing.Size(205, 70);
             this.groupBoxDrive.TabIndex = 9;
@@ -204,11 +207,12 @@
             this.comboBoxDrives.Name = "comboBoxDrives";
             this.comboBoxDrives.Size = new System.Drawing.Size(193, 21);
             this.comboBoxDrives.TabIndex = 10;
+            this.comboBoxDrives.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBoxDrives_MouseClick);
             // 
             // groupBoxDriveletter
             // 
             this.groupBoxDriveletter.Controls.Add(this.comboBoxDriveletter);
-            this.groupBoxDriveletter.Location = new System.Drawing.Point(12, 230);
+            this.groupBoxDriveletter.Location = new System.Drawing.Point(12, 302);
             this.groupBoxDriveletter.Name = "groupBoxDriveletter";
             this.groupBoxDriveletter.Size = new System.Drawing.Size(205, 54);
             this.groupBoxDriveletter.TabIndex = 12;
@@ -226,6 +230,7 @@
             this.comboBoxDriveletter.TabIndex = 13;
             this.comboBoxDriveletter.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxDriveletter_DrawItem);
             this.comboBoxDriveletter.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ComboBoxDriveletter_MeasureItem);
+            this.comboBoxDriveletter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBoxDriveletter_MouseClick);
             // 
             // groupBoxMountoptions
             // 
@@ -235,7 +240,7 @@
             this.groupBoxMountoptions.Controls.Add(this.checkBoxRemovable);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountUsb);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxReadonly);
-            this.groupBoxMountoptions.Location = new System.Drawing.Point(223, 230);
+            this.groupBoxMountoptions.Location = new System.Drawing.Point(225, 154);
             this.groupBoxMountoptions.Name = "groupBoxMountoptions";
             this.groupBoxMountoptions.Size = new System.Drawing.Size(205, 98);
             this.groupBoxMountoptions.TabIndex = 14;
@@ -297,7 +302,7 @@
             // 
             this.groupBoxHash.Controls.Add(this.comboBoxHash);
             this.groupBoxHash.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBoxHash.Location = new System.Drawing.Point(12, 283);
+            this.groupBoxHash.Location = new System.Drawing.Point(225, 258);
             this.groupBoxHash.Name = "groupBoxHash";
             this.groupBoxHash.Size = new System.Drawing.Size(205, 45);
             this.groupBoxHash.TabIndex = 18;
@@ -311,12 +316,34 @@
             this.comboBoxHash.Name = "comboBoxHash";
             this.comboBoxHash.Size = new System.Drawing.Size(95, 21);
             this.comboBoxHash.TabIndex = 0;
+            this.comboBoxHash.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBoxHash_MouseClick);
+            // 
+            // groupBoxSavePassword
+            // 
+            this.groupBoxSavePassword.Controls.Add(this.buttonSavePassword);
+            this.groupBoxSavePassword.Location = new System.Drawing.Point(225, 310);
+            this.groupBoxSavePassword.Name = "groupBoxSavePassword";
+            this.groupBoxSavePassword.Size = new System.Drawing.Size(200, 46);
+            this.groupBoxSavePassword.TabIndex = 19;
+            this.groupBoxSavePassword.TabStop = false;
+            this.groupBoxSavePassword.Text = "groupBox1";
+            // 
+            // buttonSavePassword
+            // 
+            this.buttonSavePassword.Location = new System.Drawing.Point(57, 19);
+            this.buttonSavePassword.Name = "buttonSavePassword";
+            this.buttonSavePassword.Size = new System.Drawing.Size(90, 23);
+            this.buttonSavePassword.TabIndex = 0;
+            this.buttonSavePassword.Text = "Save Password";
+            this.buttonSavePassword.UseVisualStyleBackColor = true;
+            this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
             // 
             // NewContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 369);
+            this.ClientSize = new System.Drawing.Size(437, 394);
+            this.Controls.Add(this.groupBoxSavePassword);
             this.Controls.Add(this.groupBoxHash);
             this.Controls.Add(this.groupBoxMountoptions);
             this.Controls.Add(this.groupBoxDriveletter);
@@ -346,6 +373,7 @@
             this.groupBoxMountoptions.ResumeLayout(false);
             this.groupBoxMountoptions.PerformLayout();
             this.groupBoxHash.ResumeLayout(false);
+            this.groupBoxSavePassword.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -377,5 +405,7 @@
         private System.Windows.Forms.CheckBox checkBoxPim;
         private System.Windows.Forms.GroupBox groupBoxHash;
         private System.Windows.Forms.ComboBox comboBoxHash;
+        private System.Windows.Forms.GroupBox groupBoxSavePassword;
+        private System.Windows.Forms.Button buttonSavePassword;
     }
 }

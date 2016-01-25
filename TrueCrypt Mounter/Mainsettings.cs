@@ -68,13 +68,14 @@ namespace VeraCrypt_Mounter
             checkBoxRemovable.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxRemovable", _language);
             groupBoxUsesettings.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxUsesettings", _language);
             checkBoxNoKeyfilecontainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxNoKeyfilecontainer", _language);
-            checkBoxPasswordcache.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPasswordcache", _language);
             groupBoxLanguage.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxLanguage", _language);
             groupBoxDebug.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxDebug", _language);
             checkBoxSilentMode.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxSilentMode", _language);
             buttonOk.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOk", _language);
             buttonClose.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonClose", _language);
             checkBoxAutomount.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomount", _language);
+            groupBoxConfigPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxConfigPath", _language);
+            buttonShowConfig.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonShowConfig", _language);
             //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
         }
 
@@ -87,6 +88,8 @@ namespace VeraCrypt_Mounter
         {
             string defaultlanguage = "";
             string selectedlanguage = "";
+
+            textBoxConfigPath.Text = _config.XmlPathName;
             // Get languages from language.xml file.
             try
             {
@@ -124,7 +127,6 @@ namespace VeraCrypt_Mounter
             checkBoxReadonly.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, false);
             checkBoxRemovable.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, false);
             checkBoxNoKeyfilecontainer.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
-            checkBoxPasswordcache.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
             checkBoxAutomount.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, false);
             checkBoxPim.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, false);
 
@@ -192,7 +194,6 @@ namespace VeraCrypt_Mounter
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, checkBoxAutomount.Checked);
                 }
-                _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, checkBoxPasswordcache.Checked);
                 _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig. Silentmode, !checkBoxSilentMode.Checked);
 
                 if (string.IsNullOrEmpty(textBoxTruecryptPath.Text))
@@ -296,5 +297,32 @@ namespace VeraCrypt_Mounter
             Close();
         }
 
+        private void buttonShowConfig_Click(object sender, EventArgs e)
+        {
+            string path = _config.XmlPathName;
+
+            if (File.Exists(path))
+            {
+                string folder = Path.GetDirectoryName(path);
+
+                try
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.FileName = "explorer";
+                    psi.Arguments = string.Format("/root,{0}", folder);
+                    psi.UseShellExecute = true;
+
+                    Process l_newProcess = new Process();
+                    l_newProcess.StartInfo = psi;
+                    l_newProcess.Start();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this,ex.Message,"error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+            }
+        }
     }
 }

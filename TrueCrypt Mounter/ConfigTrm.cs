@@ -28,12 +28,13 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public static class Mainconfig
         {
+
             public const string Defaultlanguage = "Defaultlanguage";
             public const string Driveletter = "Driveletter";
             public const string Kontainerpath = "Kontainerpath";
             public const string Language = "Language";
             public const string Nokeyfile = "Nokeyfile";
-            public const string Passwordcache = "Passwordcache";
+            //public const string Passwordcache = "Passwordcache";
             public const string Readonly = "Readonly";
             public const string Removable = "Removable";
             public const string Silentmode = "Silentmode";
@@ -72,6 +73,7 @@ namespace VeraCrypt_Mounter
             public const string Disknumber = "Disknumber";
             public const string Partnumber = "Partnumber";
             public const string Pnpdeviceid = "PNPDeviceID";
+            public const string Password = "Password";
         }
 
         /// <summary>
@@ -94,6 +96,7 @@ namespace VeraCrypt_Mounter
             public const string Pim = "Pim";
             public const string Truecrypt = "Truecrypt";
             public const string Hash = "Hash";
+            public const string Password = "Password";
 
         }
 

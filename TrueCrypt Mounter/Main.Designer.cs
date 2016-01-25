@@ -50,7 +50,6 @@ namespace VeraCrypt_Mounter
             this.buttonMount = new System.Windows.Forms.Button();
             this.comboBoxDrives = new System.Windows.Forms.ComboBox();
             this.buttonKeyfileContainerMount = new System.Windows.Forms.Button();
-            this.checkBoxClearPassword = new System.Windows.Forms.CheckBox();
             this.buttonDismount = new System.Windows.Forms.Button();
             this.groupBoxDrive = new System.Windows.Forms.GroupBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -63,7 +62,6 @@ namespace VeraCrypt_Mounter
             this.groupBoxKeyfileContainer = new System.Windows.Forms.GroupBox();
             this.buttonKeyfileContainerDismount = new System.Windows.Forms.Button();
             this.groupBoxContainer = new System.Windows.Forms.GroupBox();
-            this.checkBoxClearPasswordContainer = new System.Windows.Forms.CheckBox();
             this.comboBoxContainer = new System.Windows.Forms.ComboBox();
             this.buttonDismountContainer = new System.Windows.Forms.Button();
             this.buttonMountContainer = new System.Windows.Forms.Button();
@@ -232,17 +230,6 @@ namespace VeraCrypt_Mounter
             this.buttonKeyfileContainerMount.UseVisualStyleBackColor = true;
             this.buttonKeyfileContainerMount.Click += new System.EventHandler(this.ButtonKeyfileContainerMount_Click);
             // 
-            // checkBoxClearPassword
-            // 
-            this.checkBoxClearPassword.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxClearPassword.AutoSize = true;
-            this.checkBoxClearPassword.Location = new System.Drawing.Point(6, 49);
-            this.checkBoxClearPassword.Name = "checkBoxClearPassword";
-            this.checkBoxClearPassword.Size = new System.Drawing.Size(140, 23);
-            this.checkBoxClearPassword.TabIndex = 2;
-            this.checkBoxClearPassword.Text = "Passwortspeicher löschen";
-            this.checkBoxClearPassword.UseVisualStyleBackColor = true;
-            // 
             // buttonDismount
             // 
             this.buttonDismount.Location = new System.Drawing.Point(271, 50);
@@ -257,7 +244,6 @@ namespace VeraCrypt_Mounter
             // 
             this.groupBoxDrive.Controls.Add(this.buttonDismount);
             this.groupBoxDrive.Controls.Add(this.comboBoxDrives);
-            this.groupBoxDrive.Controls.Add(this.checkBoxClearPassword);
             this.groupBoxDrive.Controls.Add(this.buttonMount);
             this.groupBoxDrive.Location = new System.Drawing.Point(7, 24);
             this.groupBoxDrive.Name = "groupBoxDrive";
@@ -342,7 +328,6 @@ namespace VeraCrypt_Mounter
             // 
             // groupBoxContainer
             // 
-            this.groupBoxContainer.Controls.Add(this.checkBoxClearPasswordContainer);
             this.groupBoxContainer.Controls.Add(this.comboBoxContainer);
             this.groupBoxContainer.Controls.Add(this.buttonDismountContainer);
             this.groupBoxContainer.Controls.Add(this.buttonMountContainer);
@@ -352,18 +337,6 @@ namespace VeraCrypt_Mounter
             this.groupBoxContainer.TabIndex = 5;
             this.groupBoxContainer.TabStop = false;
             this.groupBoxContainer.Text = "Kontainerauswahl";
-            // 
-            // checkBoxClearPasswordContainer
-            // 
-            this.checkBoxClearPasswordContainer.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxClearPasswordContainer.AutoSize = true;
-            this.checkBoxClearPasswordContainer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.checkBoxClearPasswordContainer.Location = new System.Drawing.Point(6, 49);
-            this.checkBoxClearPasswordContainer.Name = "checkBoxClearPasswordContainer";
-            this.checkBoxClearPasswordContainer.Size = new System.Drawing.Size(140, 23);
-            this.checkBoxClearPasswordContainer.TabIndex = 7;
-            this.checkBoxClearPasswordContainer.Text = "Passwortspeicher löschen";
-            this.checkBoxClearPasswordContainer.UseVisualStyleBackColor = true;
             // 
             // comboBoxContainer
             // 
@@ -488,11 +461,9 @@ namespace VeraCrypt_Mounter
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBoxDrive.ResumeLayout(false);
-            this.groupBoxDrive.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);
             this.groupBoxKeyfileContainer.ResumeLayout(false);
             this.groupBoxContainer.ResumeLayout(false);
-            this.groupBoxContainer.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.contextMenuStripDrive.ResumeLayout(false);
@@ -514,7 +485,6 @@ namespace VeraCrypt_Mounter
         private Button buttonKeyfileContainerMount;
         private ToolStripMenuItem ToolStripMenuItemHelp;
         private ToolStripMenuItem toolStripMenuVersion;
-        private CheckBox checkBoxClearPassword;
         private ToolStripMenuItem ToolStripMenuItemEdit;
         private ToolStripMenuItem ToolStripMenuItemEditEntry;
         private ToolStripMenuItem ToolStripMenuItemNew;
@@ -535,7 +505,6 @@ namespace VeraCrypt_Mounter
         private ToolStripMenuItem ToolStripMenuItemNotifyMount;
         private ToolStripMenuItem ToolStripMenuItemNotifyDismount;
         private ToolTip toolTipMain;
-        private CheckBox checkBoxClearPasswordContainer;
         private ToolStripMenuItem automountConfigToolStripMenuItem;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripLabelNotification;

@@ -43,8 +43,6 @@ namespace VeraCrypt_Mounter
 
         private readonly List<string> _mounteddrives = new List<string>();
         private readonly List<string> _mountedkontainer = new List<string>();
-        private bool _cached;
-        private bool _cachedKontainer;
 
         private string _language;
         private string _passwordDrive;
@@ -62,7 +60,6 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public string PasswordDrive
         {
-            get { return null; }
             set { _passwordDrive = value; }
         }
         /// <summary>
@@ -70,7 +67,6 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public string PasswordContainer
         {
-            get { return null; }
             set { _passwordContainer = value; }
         }
         /// <summary>
@@ -253,12 +249,6 @@ namespace VeraCrypt_Mounter
                     groupBoxKeyfileContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
                                                                                          "groupBoxKeyfileContainer",
                                                                                          _language);
-                    checkBoxClearPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                      "checkBoxClearPassword",
-                                                                                      _language);
-                    checkBoxClearPasswordContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                               "checkBoxClearPasswordContainer",
-                                                                                               _language);
                     ToolStripMenuItemFile.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
                                                                                       "ToolStripMenuItemFile",
                                                                                       _language);
@@ -471,9 +461,8 @@ namespace VeraCrypt_Mounter
 
             toolStripLabelNotification.Visible = false;
 
-            _cached = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
-
             string dletter = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Driveletter, "");
+            _passwordDrive = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Password, null);
 
             //string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition, "");
             bool removable = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Removable, false);
@@ -519,16 +508,8 @@ namespace VeraCrypt_Mounter
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
                 }
 
-                // Reset the cached passwort
-                if (checkBoxClearPassword.Checked)
-                {
-                    _cached = false;
-                    checkBoxClearPassword.CheckState = CheckState.Unchecked;
-                    _passwordDrive = null;
-                    _pim = null;
-                }
                 // If a password is cached, the paswordform isn´t show 
-                if (_cached == false)
+                if (_passwordDrive == null)
                 {
                     try
                     {
@@ -551,7 +532,6 @@ namespace VeraCrypt_Mounter
             {
                 MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _cached = false;
                 return;
             }
 
@@ -646,8 +626,8 @@ namespace VeraCrypt_Mounter
             const bool beep = false;
             const bool force = false;
             string key = null;
+            _passwordContainer = _config.GetValue(comboBoxContainer.SelectedText, ConfigTrm.Container.Password, null);
             
-
             toolStripLabelNotification.Visible = false;
 
             try
@@ -683,15 +663,8 @@ namespace VeraCrypt_Mounter
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
                 }
 
-                /**Reset the cached password **/
-                if (checkBoxClearPasswordContainer.Checked)
-                {
-                    _cachedKontainer = false;
-                    checkBoxClearPasswordContainer.CheckState = CheckState.Unchecked;
-                    _passwordContainer = null;
-                }
                 /** If a password is cached, the paswordform isn´t show **/
-                if (_cachedKontainer == false)
+                if (_passwordContainer == null)
                 {
                     try
                     {
@@ -714,11 +687,8 @@ namespace VeraCrypt_Mounter
             {
                 MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _cached = false;
                 return;
             }
-
-            _cachedKontainer = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Passwordcache, false);
 
             toolStripProgressBar.Visible = true;
 

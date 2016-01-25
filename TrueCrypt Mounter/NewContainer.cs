@@ -35,6 +35,15 @@ namespace VeraCrypt_Mounter
         private readonly string _language;
         private string _oldName;
         private object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160" };
+        private string _password;
+
+        /// <summary>
+        /// Password setter for the new container.
+        /// </summary>
+        public string Password
+        {
+            set { _password = value; }
+        }
 
         /// <summary>
         /// Constructor for creating a new container.
@@ -88,6 +97,8 @@ namespace VeraCrypt_Mounter
                 checkBoxAutomountUsb.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountUsb", _language);
                 checkBoxAutomountStart.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountStart", _language);
                 groupBoxHash.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxHash", _language);
+                groupBoxSavePassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxSavePassword", _language);
+                buttonSavePassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonSavePassword", _language);
                 //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
             }
             catch (Exception ex)
@@ -326,6 +337,26 @@ namespace VeraCrypt_Mounter
             }
             else
                 checkBoxPim.Enabled = true;
+        }
+
+        private void comboBoxHash_MouseClick(object sender, MouseEventArgs e)
+        {
+            comboBoxHash.DroppedDown = true;
+        }
+
+        private void comboBoxDrives_MouseClick(object sender, MouseEventArgs e)
+        {
+            comboBoxDrives.DroppedDown = true;
+        }
+
+        private void buttonSavePassword_Click(object sender, EventArgs e)
+        {
+            //Passwordinput pw = new Passwordinput(this, ConfigTrm.Container.Typename, true);
+        }
+
+        private void comboBoxDriveletter_MouseClick(object sender, MouseEventArgs e)
+        {
+            comboBoxDriveletter.DroppedDown = true;
         }
     }
 }
