@@ -45,38 +45,11 @@ namespace VeraCrypt_Mounter
         private readonly List<string> _mountedkontainer = new List<string>();
 
         private string _language;
-        private string _passwordDrive;
-        private string _passwordContainer;
+        private string _password;
         private string _pim;
         private string _lablefailed;
         private string _lablesuccseed;
        
-
-        #endregion
-
-        #region Setter,Getter
-        /// <summary>
-        /// Password for mounting a drive
-        /// </summary>
-        public string PasswordDrive
-        {
-            set { _passwordDrive = value; }
-        }
-        /// <summary>
-        /// password for mounting a container
-        /// </summary>
-        public string PasswordContainer
-        {
-            set { _passwordContainer = value; }
-        }
-        /// <summary>
-        /// PIM value for mounting container or drive
-        /// </summary>
-        public string Pim
-        {
-            get { return null; }
-            set { _pim = value; }
-        }
 
         #endregion
 
@@ -208,8 +181,7 @@ namespace VeraCrypt_Mounter
         /// </summary>
         ~VeraCryptMounter()
         {
-            _passwordDrive = null;
-            _passwordContainer = null;
+            _password = null;
             _pim = null;
         }
 
@@ -462,7 +434,8 @@ namespace VeraCrypt_Mounter
             toolStripLabelNotification.Visible = false;
 
             string dletter = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Driveletter, "");
-            _passwordDrive = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Password, null);
+            _password = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Password, null);
+            _pim = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Pim, null);
 
             //string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition, "");
             bool removable = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Removable, false);
@@ -509,12 +482,12 @@ namespace VeraCrypt_Mounter
                 }
 
                 // If a password is cached, the paswordform isn´t show 
-                if (_passwordDrive == null)
+                if (string.IsNullOrEmpty(_password))
                 {
                     try
                     {
                         ShowPassworteingabe(ConfigTrm.Drive.Typename, 
-                            _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Pim, false));
+                            _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Pimuse, false));
                     }
                     catch (Exception ex)
                     {
@@ -523,7 +496,7 @@ namespace VeraCrypt_Mounter
                     }
                 }
                 /** test if password is emty**/
-                if (string.IsNullOrEmpty(_passwordDrive) && _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true))
+                if (string.IsNullOrEmpty(_password) && _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true))
                 {
                     throw new Exception("Leeres Passwort ist nicht erlaubt.");
                 }
@@ -559,7 +532,7 @@ namespace VeraCrypt_Mounter
 
             MountDriveDelegate mountdrive = Mount.MountDrive;
             
-            mountdrive.BeginInvoke(parlist.ToArray(), dletter, key, _passwordDrive, silent, beep, force, readOnly, removable, _pim, hash, tc,
+            mountdrive.BeginInvoke(parlist.ToArray(), dletter, key, _password, silent, beep, force, readOnly, removable, _pim, hash, tc,
                                    CallbackHandlerMountDrive, mountdrive);
 
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
@@ -626,8 +599,9 @@ namespace VeraCrypt_Mounter
             const bool beep = false;
             const bool force = false;
             string key = null;
-            _passwordContainer = _config.GetValue(comboBoxContainer.SelectedText, ConfigTrm.Container.Password, null);
-            
+            _password = _config.GetValue(comboBoxContainer.SelectedText, ConfigTrm.Container.Password, null);
+            _pim = _config.GetValue(comboBoxContainer.SelectedText, ConfigTrm.Container.Pim, null);
+
             toolStripLabelNotification.Visible = false;
 
             try
@@ -664,12 +638,12 @@ namespace VeraCrypt_Mounter
                 }
 
                 /** If a password is cached, the paswordform isn´t show **/
-                if (_passwordContainer == null)
+                if (string.IsNullOrEmpty(_password))
                 {
                     try
                     {
                         ShowPassworteingabe(ConfigTrm.Container.Typename, 
-                            _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, false));
+                            _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false));
                     }
                     catch (Exception ex)
                     {
@@ -678,7 +652,7 @@ namespace VeraCrypt_Mounter
                     }
                 }
                 /** test if password is emty**/
-                if (string.IsNullOrEmpty(_passwordContainer) && _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, false))
+                if (string.IsNullOrEmpty(_password) && _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, false))
                 {
                     throw new Exception("Leeres Passwort ist nicht erlaubt.");
                 }
@@ -708,13 +682,13 @@ namespace VeraCrypt_Mounter
             string hash = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Hash, "");
 
             //if pim isnt used set to null
-            if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, false))
+            if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false))
                 _pim = null;
 
 
             MountContainerDelegate mountcontainer = Mount.MountContainer;
 
-            mountcontainer.BeginInvoke(path, dletter, key, _passwordContainer, silent, beep, force, readOnly, removable, tc, _pim, hash,
+            mountcontainer.BeginInvoke(path, dletter, key, _password, silent, beep, force, readOnly, removable, tc, _pim, hash,
                                        CallbackHandlerMountContainer, mountcontainer);
 
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
@@ -1030,36 +1004,6 @@ namespace VeraCrypt_Mounter
             }
         }
 
-        //private void ToolStripMenuContainerDelete_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-
-        //        // Test if entry in driverbox is chosen
-        //        if (comboBoxContainer.SelectedItem == null)
-        //        {
-        //            throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerSelectionFaild",
-        //                                                                     _language));
-        //        }
-        //        string containerName = comboBoxContainer.SelectedItem.ToString();
-        //        DialogResult result = MessageBox.Show(
-        //            LanguagePool.GetInstance().GetString(LanguageRegion, "MessageContainerDelete", _language),
-        //            LanguagePool.GetInstance().GetString(LanguageRegion, "MessageWarning", _language), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-        //        if (result == DialogResult.Yes)
-        //        {
-        //            _config.RemoveSection(containerName);
-        //            RefreshComboboxes();
-        //        }
-        //        return;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
-        //                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-        //}
-
         private void ToolStripMenuContainerNew_Click(object sender, EventArgs e)
         {
             try
@@ -1074,54 +1018,6 @@ namespace VeraCrypt_Mounter
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-        //private void ToolStripMenuContainerEdit_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        // Test if entry in driverbox is chosen
-        //        if (comboBoxContainer.SelectedItem == null)
-        //        {
-        //            throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerSelectionFaild",
-        //                                                                     _language));
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
-        //                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        // Test if Container is mounted.
-        //        if (!DrivelettersHelper.IsDriveletterFree(
-        //            _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter, "")))
-        //        {
-        //            throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerEditMounted",
-        //                                                                     _language));
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        DialogResult res = MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),MessageBoxButtons.RetryCancel,MessageBoxIcon.Warning);
-        //        if (res == DialogResult.Cancel)
-        //        {
-        //            return;
-        //        }
-
-        //    }
-           
-        //    var dialogBox = new NewContainer(comboBoxContainer.SelectedItem.ToString());
-        //    dialogBox.ShowDialog(); // Returns when dialog box has closed
-        //    RefreshComboboxes();
-            
-        //}
-
-
 
         private void ToolStripMenuVersion_Click(object sender, EventArgs e)
         {
@@ -1199,11 +1095,15 @@ namespace VeraCrypt_Mounter
         /// <param name="pim">bool pim used or not</param>
         public void ShowPassworteingabe(string chosen, bool pim)
         {
-            var passwortDialog = new Passwordinput(this, chosen, pim);
+            var passwortDialog = new Passwordinput(chosen, pim);
 
             // Call Passwordinput form.
-            passwortDialog.ShowDialog();
-
+            DialogResult res = passwortDialog.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                _password = passwortDialog._password;
+                _pim = passwortDialog._pim;
+            }
             passwortDialog.Dispose();
         }
 

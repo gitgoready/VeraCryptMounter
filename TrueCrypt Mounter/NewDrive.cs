@@ -179,7 +179,7 @@ namespace VeraCrypt_Mounter
             checkBoxRemovable.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Removable, false);
             checkBoxAutomountStart.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Automountstart, false);
             checkBoxAutomountUsb.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Automountusb, false);
-            checkBoxPim.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Pim, false);
+            checkBoxPim.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Pimuse, false);
             checkBoxTruecrypt.Checked = _config.GetValue(driveName, ConfigTrm.Drive.Truecrypt, false);
             comboBoxHash.SelectedItem = _config.GetValue(driveName, ConfigTrm.Drive.Hash, "");
             _disknummber = _config.GetValue(driveName, ConfigTrm.Drive.Disknumber, "");
@@ -315,7 +315,7 @@ namespace VeraCrypt_Mounter
                 _config.SetValue(beschr, ConfigTrm.Drive.Automountstart, checkBoxAutomountStart.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Diskmodel, _diskmodel);
                 _config.SetValue(beschr, ConfigTrm.Drive.Diskserial, _diskserial);
-                _config.SetValue(beschr, ConfigTrm.Drive.Pim, checkBoxPim.Checked);
+                _config.SetValue(beschr, ConfigTrm.Drive.Pimuse, checkBoxPim.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Truecrypt, checkBoxTruecrypt.Checked);
                 _config.SetValue(beschr, ConfigTrm.Drive.Hash, hash);
                 _config.SetValue(beschr, ConfigTrm.Drive.Disknumber, _disknummber);

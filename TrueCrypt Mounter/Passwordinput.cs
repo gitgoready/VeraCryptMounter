@@ -29,20 +29,28 @@ namespace VeraCrypt_Mounter
         private readonly string _language;
         private readonly Config _config = new Config();
         private string _chosen;
-        private VeraCryptMounter _main;
+
+        /// <summary>
+        /// The entered password.
+        /// </summary>
+        public string _password { get; set; }
+
+        /// <summary>
+        /// The enterd pim.
+        /// </summary>
+        public string _pim { get; set; }
 
         /// <summary>
         /// Constructor for the passwordform.
         /// Initialize the form and the config also the language string.
         /// </summary>
-        public Passwordinput(VeraCryptMounter main, string chosen, bool pim)
+        public Passwordinput(string chosen, bool pim)
         {
             InitializeComponent();
             _config = Singleton<ConfigManager>.Instance.Init(_config);
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             LanguageFill();
             _chosen = chosen;
-            _main = main;
             if (pim)
             {
                 labelPim.Visible = true;
@@ -64,17 +72,9 @@ namespace VeraCrypt_Mounter
 
         private void button_ok_Click(object sender, EventArgs e)
         {
-            if (_chosen == ConfigTrm.Container.Typename)
-            {
-                _main.PasswordContainer = textBoxPassword.Text;
-                _main.Pim = textBoxPim.Text;
-            }
-            if (_chosen == ConfigTrm.Drive.Typename)
-            {
-                _main.PasswordDrive = textBoxPassword.Text;
-                _main.Pim = textBoxPim.Text;
-            }
-
+            _password = textBoxPassword.Text;
+            _pim = textBoxPim.Text;
+            DialogResult = DialogResult.OK;
             Close();
         }
 

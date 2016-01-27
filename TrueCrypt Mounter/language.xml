@@ -545,6 +545,10 @@
       <D>Laufwerksbuchstabe ist benutzt von: </D>
       <E>Driveletter is used by: </E>
     </Text>
+    <Text key="MessagePimNotSet">
+      <D>Bitte Passwort und Pim eingeben.</D>
+      <E>Please input password and pim.</E>
+    </Text>
     <Text key ="checkBoxAutomountUsb">
       <D>Autoeinbinden von USB</D>
       <E>Automount from USB</E>

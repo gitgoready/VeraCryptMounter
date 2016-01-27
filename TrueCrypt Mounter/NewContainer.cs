@@ -35,15 +35,8 @@ namespace VeraCrypt_Mounter
         private readonly string _language;
         private string _oldName;
         private object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160" };
-        private string _password;
-
-        /// <summary>
-        /// Password setter for the new container.
-        /// </summary>
-        public string Password
-        {
-            set { _password = value; }
-        }
+        private string _password = "";
+        private string _pim = "";
 
         /// <summary>
         /// Constructor for creating a new container.
@@ -159,7 +152,7 @@ namespace VeraCrypt_Mounter
             checkBoxAutomountStart.Checked = _config.GetValue(description, ConfigTrm.Container.Automountstart, false);
             checkBoxAutomountUsb.Checked = _config.GetValue(description, ConfigTrm.Container.Automountusb, false);
             checkBoxTrueCrypt.Checked = _config.GetValue(description, ConfigTrm.Container.Truecrypt, false);
-            checkBoxPim.Checked = _config.GetValue(description, ConfigTrm.Container.Pim, false);
+            checkBoxPim.Checked = _config.GetValue(description, ConfigTrm.Container.Pimuse, false);
 
             foreach (string element in DrivelettersHelper.GetDriveletters())
                 _driveletters.Add(element);
@@ -238,6 +231,12 @@ namespace VeraCrypt_Mounter
             
             try
             {
+                if (checkBoxPim.Checked)
+                {
+                    if (string.IsNullOrEmpty(_pim)  && !string.IsNullOrEmpty(_password))
+                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimNotSet", _language));
+                }
+
                 if (_oldName != null)
                     if (description != _oldName)
                         _config.RemoveSection(_oldName);
@@ -275,9 +274,11 @@ namespace VeraCrypt_Mounter
                 _config.SetValue(description, ConfigTrm.Container.Nodrive, checkBoxNoDrive.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Automountstart, checkBoxAutomountStart.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Automountusb, checkBoxAutomountUsb.Checked);
-                _config.SetValue(description, ConfigTrm.Container.Pim, checkBoxPim.Checked);
+                _config.SetValue(description, ConfigTrm.Container.Pimuse, checkBoxPim.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Truecrypt, checkBoxTrueCrypt.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Hash, hash);
+                _config.SetValue(description, ConfigTrm.Container.Password, _password);
+                _config.SetValue(description, ConfigTrm.Container.Pim, _pim);
 
 
             }
@@ -351,7 +352,15 @@ namespace VeraCrypt_Mounter
 
         private void buttonSavePassword_Click(object sender, EventArgs e)
         {
-            //Passwordinput pw = new Passwordinput(this, ConfigTrm.Container.Typename, true);
+            
+            Passwordinput pw = new Passwordinput(ConfigTrm.Container.Typename, checkBoxPim.Checked);
+            DialogResult res = pw.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                _password = pw._password;
+                _pim = pw._pim;
+            }
+            pw.Dispose();
         }
 
         private void comboBoxDriveletter_MouseClick(object sender, MouseEventArgs e)

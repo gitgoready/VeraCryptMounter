@@ -65,7 +65,7 @@ namespace VeraCrypt_Mounter
             public const string Typename = "Drive";
             public const string Automountusb = "Automountusb";
             public const string Automountstart = "Automountstart";
-            public const string Pim = "Pim";
+            public const string Pimuse = "Pimuse";
             public const string Hash = "Hash";
             public const string Truecrypt = "Truecrypt";
             public const string Diskmodel = "Diskmodel";
@@ -74,6 +74,7 @@ namespace VeraCrypt_Mounter
             public const string Partnumber = "Partnumber";
             public const string Pnpdeviceid = "PNPDeviceID";
             public const string Password = "Password";
+            public const string Pim = "Pim";
         }
 
         /// <summary>
@@ -93,10 +94,11 @@ namespace VeraCrypt_Mounter
             public const string Typename = "Container";
             public const string Automountusb = "Automountusb";
             public const string Automountstart = "Automountstart";
-            public const string Pim = "Pim";
+            public const string Pimuse = "Pimuse";
             public const string Truecrypt = "Truecrypt";
             public const string Hash = "Hash";
             public const string Password = "Password";
+            public const string Pim = "Pim";
 
         }
 
