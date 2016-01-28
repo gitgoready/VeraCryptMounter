@@ -397,8 +397,13 @@ namespace VeraCrypt_Mounter
 
         private void buttonChosePartition_Click(object sender, EventArgs e)
         {
-            var dialogBox = new SelectPartition(this);
-            DialogResult res = dialogBox.ShowDialog();
+            var sp = new SelectPartition();
+            DialogResult res = sp.ShowDialog();
+            _partnummber = sp._partnummber;
+            _diskmodel = sp._diskmodel;
+            _disknummber = sp._disknummber;
+            _diskserial = sp._diskserial;
+            _pnpdeviceid = sp._pNPDeviceID;
 
             if (res == DialogResult.OK)
             {

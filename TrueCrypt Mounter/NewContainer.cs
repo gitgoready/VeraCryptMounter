@@ -86,7 +86,7 @@ namespace VeraCrypt_Mounter
                 buttonOk.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOk", _language);
                 buttonClose.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonClose", _language);
                 buttonOpenContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOpenContainer", _language);
-                comboBoxDrives.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxDrives", _language);
+                //comboBoxDrives.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxDrives", _language);
                 checkBoxAutomountUsb.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountUsb", _language);
                 checkBoxAutomountStart.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountStart", _language);
                 groupBoxHash.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxHash", _language);
@@ -116,21 +116,21 @@ namespace VeraCrypt_Mounter
 
             comboBoxDriveletter.DataSource = _driveletters;
 
-            comboBoxDrives.SelectedItem = _driveletters[0];
+            //comboBoxDrives.SelectedItem = _driveletters[0];
 
-            string[] sectionNames = _config.GetSectionNames();
-            comboBoxDrives.Items.Clear();
-            if (sectionNames != null)
-            {
-                foreach (string drive in sectionNames)
-                {
-                    if (_config.HasEntry(drive, ConfigTrm.Drive.Type))
-                    {
-                        if (_config.GetValue(drive, ConfigTrm.Drive.Type, "") == ConfigTrm.Drive.Typename)
-                            comboBoxDrives.Items.Add(drive);
-                    }
-                }
-            }
+            //string[] sectionNames = _config.GetSectionNames();
+            //comboBoxDrives.Items.Clear();
+            //if (sectionNames != null)
+            //{
+            //    foreach (string drive in sectionNames)
+            //    {
+            //        if (_config.HasEntry(drive, ConfigTrm.Drive.Type))
+            //        {
+            //            if (_config.GetValue(drive, ConfigTrm.Drive.Type, "") == ConfigTrm.Drive.Typename)
+            //                comboBoxDrives.Items.Add(drive);
+            //        }
+            //    }
+            //}
         }
 
         /// <summary>
@@ -163,24 +163,24 @@ namespace VeraCrypt_Mounter
 
             comboBoxDriveletter.SelectedItem = _config.GetValue(description, ConfigTrm.Container.Driveletter, "");
 
-            string[] sectionNames = _config.GetSectionNames();
-            comboBoxDrives.Items.Clear();
-            if (sectionNames != null)
-            {
-                foreach (string drive in sectionNames)
-                {
-                    if (_config.HasEntry(drive, ConfigTrm.Drive.Type))
-                    {
-                        if (_config.GetValue(drive, ConfigTrm.Drive.Type, "") == ConfigTrm.Drive.Typename)
-                            comboBoxDrives.Items.Add(drive);
-                    }
-                }
-            }
-            string drivename = _config.GetValue(description, ConfigTrm.Container.Drive, "");
-            if (drivename != "")
-            {
-                comboBoxDrives.SelectedItem = drivename; 
-            }
+            //string[] sectionNames = _config.GetSectionNames();
+            //comboBoxDrives.Items.Clear();
+            //if (sectionNames != null)
+            //{
+            //    foreach (string drive in sectionNames)
+            //    {
+            //        if (_config.HasEntry(drive, ConfigTrm.Drive.Type))
+            //        {
+            //            if (_config.GetValue(drive, ConfigTrm.Drive.Type, "") == ConfigTrm.Drive.Typename)
+            //                comboBoxDrives.Items.Add(drive);
+            //        }
+            //    }
+            //}
+            //string drivename = _config.GetValue(description, ConfigTrm.Container.Drive, "");
+            //if (drivename != "")
+            //{
+            //    comboBoxDrives.SelectedItem = drivename; 
+            //}
            
         }
 
@@ -210,11 +210,7 @@ namespace VeraCrypt_Mounter
         {
             if (checkBoxNoDrive.Checked)
             {
-                comboBoxDrives.Enabled = false;
-            }
-            else
-            {
-                comboBoxDrives.Enabled = true;
+                textBoxSelectedDrive.Text = "";
             }
         }
 
@@ -227,15 +223,26 @@ namespace VeraCrypt_Mounter
         {
             string description = textBoxDescription.Text;
             string keyfile = textBoxKeyfile.Text;
-            string drive = comboBoxDrives.SelectedText;
+
+            //TODO 
+            //string drive = comboBoxDrives.SelectedText;
             
             try
             {
                 if (checkBoxPim.Checked)
                 {
-                    if (string.IsNullOrEmpty(_pim)  && !string.IsNullOrEmpty(_password))
+                    if (string.IsNullOrEmpty(_pim) && !string.IsNullOrEmpty(_password))
                         throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimNotSet", _language));
                 }
+            }
+            catch (Exception ex)
+            {
+                DialogResult res = MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                buttonSavePassword_Click(this, e);
+            }
+
+            try
+            {
 
                 if (_oldName != null)
                     if (description != _oldName)
@@ -252,11 +259,11 @@ namespace VeraCrypt_Mounter
 
                 }
 
-                if (!checkBoxNoDrive.Checked)
-                {
-                    _config.SetValue(description, ConfigTrm.Container.Drive, drive);
+                //if (!checkBoxNoDrive.Checked)
+                //{
+                //    _config.SetValue(description, ConfigTrm.Container.Drive, drive);
 
-                }
+                //}
 
                 if (checkBoxAutomountUsb.Checked)
                 {
@@ -287,8 +294,9 @@ namespace VeraCrypt_Mounter
                 MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
 
+            _password = null;
+            _pim = null;
             Close();
         }
 
@@ -345,11 +353,6 @@ namespace VeraCrypt_Mounter
             comboBoxHash.DroppedDown = true;
         }
 
-        private void comboBoxDrives_MouseClick(object sender, MouseEventArgs e)
-        {
-            comboBoxDrives.DroppedDown = true;
-        }
-
         private void buttonSavePassword_Click(object sender, EventArgs e)
         {
             
@@ -360,12 +363,20 @@ namespace VeraCrypt_Mounter
                 _password = pw._password;
                 _pim = pw._pim;
             }
+            pw._password = null;
+            pw._pim = null;
             pw.Dispose();
         }
 
         private void comboBoxDriveletter_MouseClick(object sender, MouseEventArgs e)
         {
             comboBoxDriveletter.DroppedDown = true;
+        }
+
+        private void buttonSelectDrive_Click(object sender, EventArgs e)
+        {
+            SelectPartition sp = new SelectPartition();
+            DialogResult res = sp.ShowDialog();
         }
     }
 }

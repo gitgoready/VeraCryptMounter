@@ -74,6 +74,26 @@ namespace VeraCrypt_Mounter
         {
             _password = textBoxPassword.Text;
             _pim = textBoxPim.Text;
+
+            var t = 0;
+            try
+            {
+                if (!int.TryParse(_pim, out t))
+                {
+                    throw new FormatException(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimWrongValue", _language));
+                }
+                if (_password.Length < 20 && t < 485)
+                {
+                    throw new FormatException(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimWrongValue", _language));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                _password = null;
+                _pim = null;
+                return;
+            }          
             DialogResult = DialogResult.OK;
             Close();
         }

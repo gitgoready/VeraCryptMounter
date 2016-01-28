@@ -79,11 +79,12 @@ namespace VeraCrypt_Mounter
         /// <summary>
         /// Get drivletter TODO NOT GOOD
         /// </summary>
-        /// <param name="pnpdeviceid"></param>
+        /// <param name="pnpdeviceid">The pnpdeviceid</param>
+        /// <param name="index">Partition index</param>
         /// <returns></returns>
-        public List<string> GetDriveLetter(string pnpdeviceid)
+        public string GetDriveLetter(string pnpdeviceid, string index)
         {
-            List<string> driveletters = new List<string>();
+            string ret = "";
 
             foreach (ManagementObject drive in new ManagementObjectSearcher("select * from Win32_DiskDrive").Get())
             {
@@ -91,14 +92,17 @@ namespace VeraCrypt_Mounter
                 {
                     foreach (ManagementObject o in drive.GetRelated("Win32_DiskPartition"))
                     {
-                        foreach (ManagementObject i in o.GetRelated("Win32_LogicalDisk"))
+                        if (o["Index"].ToString() == index)
                         {
-                            driveletters.Add(i["Name"].ToString());
+                            foreach (ManagementObject i in o.GetRelated("Win32_LogicalDisk"))
+                            {
+                                ret = i["Name"].ToString();
+                            }
                         }
                     }
                 }
             }
-            return driveletters;
+            return ret;
         }
 
         private DriveInfo FillDriveinfo(ManagementObject moDisk)

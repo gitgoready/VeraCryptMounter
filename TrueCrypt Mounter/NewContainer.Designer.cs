@@ -43,7 +43,6 @@
             this.textBoxKeyfile = new System.Windows.Forms.TextBox();
             this.groupBoxDrive = new System.Windows.Forms.GroupBox();
             this.checkBoxNoDrive = new System.Windows.Forms.CheckBox();
-            this.comboBoxDrives = new System.Windows.Forms.ComboBox();
             this.groupBoxDriveletter = new System.Windows.Forms.GroupBox();
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
             this.groupBoxMountoptions = new System.Windows.Forms.GroupBox();
@@ -56,6 +55,8 @@
             this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.groupBoxSavePassword = new System.Windows.Forms.GroupBox();
             this.buttonSavePassword = new System.Windows.Forms.Button();
+            this.buttonSelectDrive = new System.Windows.Forms.Button();
+            this.textBoxSelectedDrive = new System.Windows.Forms.TextBox();
             this.groupBoxDescription.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.groupBoxKyfilename.SuspendLayout();
@@ -180,8 +181,9 @@
             // 
             // groupBoxDrive
             // 
+            this.groupBoxDrive.Controls.Add(this.textBoxSelectedDrive);
+            this.groupBoxDrive.Controls.Add(this.buttonSelectDrive);
             this.groupBoxDrive.Controls.Add(this.checkBoxNoDrive);
-            this.groupBoxDrive.Controls.Add(this.comboBoxDrives);
             this.groupBoxDrive.Location = new System.Drawing.Point(12, 226);
             this.groupBoxDrive.Name = "groupBoxDrive";
             this.groupBoxDrive.Size = new System.Drawing.Size(205, 70);
@@ -199,15 +201,6 @@
             this.checkBoxNoDrive.Text = "Kein Laufwerk";
             this.checkBoxNoDrive.UseVisualStyleBackColor = true;
             this.checkBoxNoDrive.CheckedChanged += new System.EventHandler(this.checkBoxNoDrive_CheckedChanged);
-            // 
-            // comboBoxDrives
-            // 
-            this.comboBoxDrives.FormattingEnabled = true;
-            this.comboBoxDrives.Location = new System.Drawing.Point(6, 19);
-            this.comboBoxDrives.Name = "comboBoxDrives";
-            this.comboBoxDrives.Size = new System.Drawing.Size(193, 21);
-            this.comboBoxDrives.TabIndex = 10;
-            this.comboBoxDrives.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBoxDrives_MouseClick);
             // 
             // groupBoxDriveletter
             // 
@@ -338,6 +331,24 @@
             this.buttonSavePassword.UseVisualStyleBackColor = true;
             this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
             // 
+            // buttonSelectDrive
+            // 
+            this.buttonSelectDrive.Location = new System.Drawing.Point(109, 40);
+            this.buttonSelectDrive.Name = "buttonSelectDrive";
+            this.buttonSelectDrive.Size = new System.Drawing.Size(90, 23);
+            this.buttonSelectDrive.TabIndex = 12;
+            this.buttonSelectDrive.Text = "Select drive";
+            this.buttonSelectDrive.UseVisualStyleBackColor = true;
+            this.buttonSelectDrive.Click += new System.EventHandler(this.buttonSelectDrive_Click);
+            // 
+            // textBoxSelectedDrive
+            // 
+            this.textBoxSelectedDrive.Location = new System.Drawing.Point(6, 20);
+            this.textBoxSelectedDrive.Name = "textBoxSelectedDrive";
+            this.textBoxSelectedDrive.ReadOnly = true;
+            this.textBoxSelectedDrive.Size = new System.Drawing.Size(193, 20);
+            this.textBoxSelectedDrive.TabIndex = 13;
+            // 
             // NewContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,7 +403,6 @@
         private System.Windows.Forms.TextBox textBoxKeyfile;
         private System.Windows.Forms.CheckBox checkBoxNoKeyfile;
         private System.Windows.Forms.GroupBox groupBoxDrive;
-        private System.Windows.Forms.ComboBox comboBoxDrives;
         private System.Windows.Forms.CheckBox checkBoxNoDrive;
         private System.Windows.Forms.GroupBox groupBoxDriveletter;
         private System.Windows.Forms.GroupBox groupBoxMountoptions;
@@ -407,5 +417,7 @@
         private System.Windows.Forms.ComboBox comboBoxHash;
         private System.Windows.Forms.GroupBox groupBoxSavePassword;
         private System.Windows.Forms.Button buttonSavePassword;
+        private System.Windows.Forms.TextBox textBoxSelectedDrive;
+        private System.Windows.Forms.Button buttonSelectDrive;
     }
 }

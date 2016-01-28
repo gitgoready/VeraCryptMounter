@@ -575,6 +575,10 @@
       <D>OK</D>
       <E>OK</E>
     </Text>
+    <Text key="MessagePimWrongValue">
+      <D>PIM darf nur aus Zahlen bestehen. Bei einer Passwortlänge kleiner als 20 Zeichen, darf der PIM nicht kleiner als 485 sein.</D>
+      <E>PIM must be contain only numbers. If the password is less then 20 chars the PIM must be greater then 485.</E>
+    </Text>
     <Text key="MessageDrivletterIsUsed">
       <D>Laufwerksbuchstabe ist benutzt von: </D>
       <E>Driveletter is used by: </E>
@@ -726,6 +730,16 @@
     <Text key="buttonClose">
       <D>Schließen</D>
       <E>Close</E>
+    </Text>
+  </Region>
+  <Region name="SelectPartition">
+    <Text key="MessageSelectPartition">
+      <D>Bitte eine Partition Auswählen</D>
+      <E>Please select a partiton</E>
+    </Text>
+    <Text key="MessageSelectDrive">
+      <D>Bitte ein Laufwerk auswählen</D>
+      <E>Please select a drive.</E>
     </Text>
   </Region>
 </LanguagePool>

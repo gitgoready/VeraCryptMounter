@@ -9,18 +9,24 @@ namespace VeraCrypt_Mounter
         private WmiDriveInfo _wmidriveinfo;
         private static string[] _driveinfosnames = { "MediaType: ", "Model: ", "Serial: ", "Interface: ", "Partitions: ", "Index: ", "PNPDeviceID: " };
         private static string[] _partitioninfonames = { "Description: ", "DeviceId: ", "DiskIndex: ", "Index: ", "Name: ", "Size: ", "Type: " };
-        //private Dictionary<string, List<DriveInfo>> dd;
-        private NewDrive _root;
         private Dictionary<string, string> _drives;
+        private const string LanguageRegion = "SelectPartition";
+        private readonly string _language;
+        private Config _config = new Config();
+
+        public string _diskmodel { get; set; }
+        public string _disknummber { get; set; }
+        public string _diskserial { get; set; }
+        public string _partnummber { get; set; }
+        public string _pNPDeviceID { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="root"></param>
-        public SelectPartition(NewDrive root)
+        public SelectPartition()
         {
             InitializeComponent();
-            _root = root;
+            _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             _wmidriveinfo = new WmiDriveInfo();
             _drives = _wmidriveinfo.GetDrives();
             int i = 0;
@@ -57,13 +63,15 @@ namespace VeraCrypt_Mounter
             {
                 int intpartindex = int.Parse(part.Index) + 1;
                 comboBoxPartitions.Items.Add(intpartindex.ToString());
+                string dletter = _wmidriveinfo.GetDriveLetter(pnpdid, part.Index);
                 TreeNode[] partitionnodestree = { new TreeNode(_partitioninfonames[0] + part.Description),
                                         new TreeNode(_partitioninfonames[1] + part.DeviceId),
                                         new TreeNode(_partitioninfonames[2] + part.DiskIndex),
                                         new TreeNode(_partitioninfonames[3] + intpartindex.ToString()),
                                         new TreeNode(_partitioninfonames[4] + part.Name),
                                         new TreeNode(_partitioninfonames[5] + part.Size),
-                                        new TreeNode(_partitioninfonames[6] + part.Type), };
+                                        new TreeNode(_partitioninfonames[6] + part.Type),
+                                        new TreeNode("Driveletter: " + dletter),};
                 treeViewInfos.Nodes.Add(new TreeNode("Partition" + intpartindex.ToString(), partitionnodestree));
             }
             foreach (var info in _wmidriveinfo.GetDriveinfo(pnpdid))
@@ -87,20 +95,32 @@ namespace VeraCrypt_Mounter
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            //TODO Fehlerbahandlung
+
             string pnpdid;
+            string partnummber;
             _drives.TryGetValue(comboBoxDisks.Text, out pnpdid);
             string test = comboBoxDisks.Text;
             string tmp = test.Substring(0, test.Length - 3);
             List<DriveInfo> dlist = _wmidriveinfo.GetDriveinfo(pnpdid);
 
             DriveInfo info = dlist[0];
-            string partnummber = comboBoxPartitions.SelectedItem.ToString();
+            try
+            {
+                partnummber = comboBoxPartitions.SelectedItem.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageSelectPartition", _language), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
 
-            _root.Diskmodel = info.Model;
-            _root.Disknummber = info.Index;
-            _root.Diskserial = info.SerialNumber;
-            _root.Partnummber = partnummber;
-            _root.PNPDeviceID = info.PNPDeviceID;
+            _diskmodel = info.Model;
+            _disknummber = info.Index;
+            _diskserial = info.SerialNumber;
+            _partnummber = partnummber;
+            _pNPDeviceID = info.PNPDeviceID;
             Close();
         }
     }
