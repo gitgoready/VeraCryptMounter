@@ -99,28 +99,27 @@ namespace VeraCrypt_Mounter
 
             string pnpdid;
             string partnummber;
-            _drives.TryGetValue(comboBoxDisks.Text, out pnpdid);
-            string test = comboBoxDisks.Text;
-            string tmp = test.Substring(0, test.Length - 3);
-            List<DriveInfo> dlist = _wmidriveinfo.GetDriveinfo(pnpdid);
-
-            DriveInfo info = dlist[0];
+  
             try
             {
+                _drives.TryGetValue(comboBoxDisks.Text, out pnpdid);
                 partnummber = comboBoxPartitions.SelectedItem.ToString();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageSelectPartition", _language), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult res = MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageSelectPartition", _language), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
+            List<DriveInfo> dlist = _wmidriveinfo.GetDriveinfo(pnpdid);
+            DriveInfo info = dlist[0];
 
             _diskmodel = info.Model;
             _disknummber = info.Index;
             _diskserial = info.SerialNumber;
             _partnummber = partnummber;
             _pNPDeviceID = info.PNPDeviceID;
+            DialogResult = DialogResult.OK;
             Close();
         }
     }

@@ -77,7 +77,6 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Location = new System.Drawing.Point(168, 344);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
@@ -109,11 +108,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(255, 376);
+            this.Controls.Add(this.treeViewInfos);
             this.Controls.Add(this.labelPartition);
             this.Controls.Add(this.labelDisk);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.treeViewInfos);
             this.Controls.Add(this.comboBoxPartitions);
             this.Controls.Add(this.comboBoxDisks);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

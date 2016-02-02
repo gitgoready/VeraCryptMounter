@@ -37,6 +37,8 @@ namespace VeraCrypt_Mounter
         private object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160" };
         private string _password = "";
         private string _pim = "";
+        private string _pnpid;
+        private string _partnummber;
 
         /// <summary>
         /// Constructor for creating a new container.
@@ -163,24 +165,6 @@ namespace VeraCrypt_Mounter
 
             comboBoxDriveletter.SelectedItem = _config.GetValue(description, ConfigTrm.Container.Driveletter, "");
 
-            //string[] sectionNames = _config.GetSectionNames();
-            //comboBoxDrives.Items.Clear();
-            //if (sectionNames != null)
-            //{
-            //    foreach (string drive in sectionNames)
-            //    {
-            //        if (_config.HasEntry(drive, ConfigTrm.Drive.Type))
-            //        {
-            //            if (_config.GetValue(drive, ConfigTrm.Drive.Type, "") == ConfigTrm.Drive.Typename)
-            //                comboBoxDrives.Items.Add(drive);
-            //        }
-            //    }
-            //}
-            //string drivename = _config.GetValue(description, ConfigTrm.Container.Drive, "");
-            //if (drivename != "")
-            //{
-            //    comboBoxDrives.SelectedItem = drivename; 
-            //}
            
         }
 
@@ -223,9 +207,6 @@ namespace VeraCrypt_Mounter
         {
             string description = textBoxDescription.Text;
             string keyfile = textBoxKeyfile.Text;
-
-            //TODO 
-            //string drive = comboBoxDrives.SelectedText;
             
             try
             {
@@ -259,11 +240,12 @@ namespace VeraCrypt_Mounter
 
                 }
 
-                //if (!checkBoxNoDrive.Checked)
-                //{
-                //    _config.SetValue(description, ConfigTrm.Container.Drive, drive);
+                if (!checkBoxNoDrive.Checked)
+                {
+                    _config.SetValue(description, ConfigTrm.Container.Pnpid, _pnpid);
+                    _config.SetValue(description, ConfigTrm.Container.Partnummber, _partnummber);
 
-                //}
+                }
 
                 if (checkBoxAutomountUsb.Checked)
                 {
@@ -377,6 +359,12 @@ namespace VeraCrypt_Mounter
         {
             SelectPartition sp = new SelectPartition();
             DialogResult res = sp.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                _pnpid = sp._pNPDeviceID;
+                _partnummber = sp._partnummber;
+                textBoxSelectedDrive.Text = sp._diskmodel + " Partition: " + sp._partnummber;
+            }
         }
     }
 }

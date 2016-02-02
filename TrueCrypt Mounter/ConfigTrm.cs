@@ -83,6 +83,8 @@ namespace VeraCrypt_Mounter
         public static class Container
         {
             public const string Driveletter = "Driveletter";
+            public const string Pnpid = "Pnpid";
+            public const string Partnummber = "Partnummber";
             public const string Keyfile = "Keyfile";
             public const string Nokeyfile = "Nokeyfile";
             public const string Type = "Type";

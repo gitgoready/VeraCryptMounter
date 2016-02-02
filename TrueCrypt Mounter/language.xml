@@ -734,8 +734,8 @@
   </Region>
   <Region name="SelectPartition">
     <Text key="MessageSelectPartition">
-      <D>Bitte eine Partition Auswählen</D>
-      <E>Please select a partiton</E>
+      <D>Bitte Laufwerk und Partition Auswählen</D>
+      <E>Please select drive and partition</E>
     </Text>
     <Text key="MessageSelectDrive">
       <D>Bitte ein Laufwerk auswählen</D>
