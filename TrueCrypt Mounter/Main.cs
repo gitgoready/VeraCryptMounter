@@ -966,7 +966,8 @@ namespace VeraCrypt_Mounter
 
             try
             {
-                
+
+                //TODO Fehler wenn beide ausgewählt sind 
                 if (comboBoxDrives.SelectedItem == null && comboBoxContainer.SelectedItem == null)
                 {
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "SelectionFaild", _language));
@@ -1002,6 +1003,16 @@ namespace VeraCrypt_Mounter
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+        }
+
+        private void ToolStripMenuDriveDelete_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuDelete_Click(sender, e);
+        }
+
+        private void ToolStripMenuContainerDelete_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuDelete_Click(sender, e);
         }
 
         private void ToolStripMenuContainerNew_Click(object sender, EventArgs e)
@@ -1470,5 +1481,7 @@ namespace VeraCrypt_Mounter
         {
             comboBoxContainer.DroppedDown = true;
         }
+
+
     }
 }

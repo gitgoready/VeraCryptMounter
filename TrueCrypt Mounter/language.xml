@@ -537,9 +537,17 @@
       <D>Öffnen</D>
       <E>Open</E>
     </Text>
+    <Text key="buttonSelectDrive">
+      <D>Laufwerk</D>
+      <E>Select Drive</E>
+    </Text>
     <Text key="comboBoxDrives">
       <D>Bitte Laufwerk auswählen</D>
       <E>Please choose drive</E>
+    </Text>
+    <Text key="MessageDriveNotConnected">
+      <D>Laufwerk nicht verbunden</D>
+      <E>Drive not connected</E>
     </Text>
     <Text key="MessageDrivletterIsUsed">
       <D>Laufwerksbuchstabe ist benutzt von: </D>
@@ -733,6 +741,26 @@
     </Text>
   </Region>
   <Region name="SelectPartition">
+    <Text key="labelDisk">
+      <D>Laufwerk</D>
+      <E>disk</E>
+    </Text>
+    <Text key="labelPartition">
+      <D>Partition</D>
+      <E>partition</E>
+    </Text>
+    <Text key="buttonOK">
+      <D>OK</D>
+      <E>OK</E>
+    </Text>
+    <Text key="buttonCancel">
+      <D>Abrechen</D>
+      <E>Cancel</E>
+    </Text>
+    <Text key="SelectPartition">
+      <D>Partitionswahl</D>
+      <E>SelectPartition</E>
+    </Text>
     <Text key="MessageSelectPartition">
       <D>Bitte Laufwerk und Partition Auswählen</D>
       <E>Please select drive and partition</E>

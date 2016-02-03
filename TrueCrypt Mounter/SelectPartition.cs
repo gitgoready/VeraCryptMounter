@@ -6,13 +6,13 @@ namespace VeraCrypt_Mounter
 {
     public partial class SelectPartition : Form
     {
+        private readonly Config _config = new Config();
         private WmiDriveInfo _wmidriveinfo;
         private static string[] _driveinfosnames = { "MediaType: ", "Model: ", "Serial: ", "Interface: ", "Partitions: ", "Index: ", "PNPDeviceID: " };
         private static string[] _partitioninfonames = { "Description: ", "DeviceId: ", "DiskIndex: ", "Index: ", "Name: ", "Size: ", "Type: " };
         private Dictionary<string, string> _drives;
         private const string LanguageRegion = "SelectPartition";
-        private readonly string _language;
-        private Config _config = new Config();
+        private readonly string _language;       
 
         public string _diskmodel { get; set; }
         public string _disknummber { get; set; }
@@ -26,6 +26,7 @@ namespace VeraCrypt_Mounter
         public SelectPartition()
         {
             InitializeComponent();
+            _config = Singleton<ConfigManager>.Instance.Init(_config);
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             _wmidriveinfo = new WmiDriveInfo();
             _drives = _wmidriveinfo.GetDrives();
@@ -35,7 +36,17 @@ namespace VeraCrypt_Mounter
                 comboBoxDisks.Items.Add(item.ToString());
                 i++;
             }
+            LanguageFill();
 
+        }
+
+        private void LanguageFill()
+        {
+            buttonOK.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOK", _language);
+            buttonCancel.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonCancel", _language);
+            labelDisk.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelDisk", _language);
+            labelPartition.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelPartition", _language);
+            this.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "SelectPartition", _language);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

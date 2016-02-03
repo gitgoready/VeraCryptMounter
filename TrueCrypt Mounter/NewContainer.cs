@@ -88,7 +88,7 @@ namespace VeraCrypt_Mounter
                 buttonOk.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOk", _language);
                 buttonClose.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonClose", _language);
                 buttonOpenContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOpenContainer", _language);
-                //comboBoxDrives.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxDrives", _language);
+                buttonSelectDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonSelectDrive", _language);
                 checkBoxAutomountUsb.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountUsb", _language);
                 checkBoxAutomountStart.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountStart", _language);
                 groupBoxHash.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxHash", _language);
@@ -117,22 +117,6 @@ namespace VeraCrypt_Mounter
             comboBoxHash.Items.AddRange(_hashes);
 
             comboBoxDriveletter.DataSource = _driveletters;
-
-            //comboBoxDrives.SelectedItem = _driveletters[0];
-
-            //string[] sectionNames = _config.GetSectionNames();
-            //comboBoxDrives.Items.Clear();
-            //if (sectionNames != null)
-            //{
-            //    foreach (string drive in sectionNames)
-            //    {
-            //        if (_config.HasEntry(drive, ConfigTrm.Drive.Type))
-            //        {
-            //            if (_config.GetValue(drive, ConfigTrm.Drive.Type, "") == ConfigTrm.Drive.Typename)
-            //                comboBoxDrives.Items.Add(drive);
-            //        }
-            //    }
-            //}
         }
 
         /// <summary>
@@ -164,6 +148,25 @@ namespace VeraCrypt_Mounter
             comboBoxDriveletter.DataSource = _driveletters;
 
             comboBoxDriveletter.SelectedItem = _config.GetValue(description, ConfigTrm.Container.Driveletter, "");
+
+            WmiDriveInfo wmiinfo = new WmiDriveInfo();
+
+            _pnpid = _config.GetValue(description, ConfigTrm.Container.Pnpid, "");
+            _partnummber = _config.GetValue(description, ConfigTrm.Container.Partnummber, "");
+
+            if (!string.IsNullOrEmpty(_pnpid) || !string.IsNullOrEmpty(_partnummber))
+            {
+                if (wmiinfo.CheckDiskPresent(_pnpid))
+                {
+                    List<DriveInfo> dinfo = wmiinfo.GetDriveinfo(_pnpid);
+                    textBoxSelectedDrive.Text = dinfo[0].Model + " Partition: " + _partnummber;
+                }
+                else
+                {
+                    textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
+                }
+            }
+            
 
            
         }
@@ -207,7 +210,8 @@ namespace VeraCrypt_Mounter
         {
             string description = textBoxDescription.Text;
             string keyfile = textBoxKeyfile.Text;
-            
+            string usedriveletter = DrivelettersHelper.IsDrivletterUsedByConfig(comboBoxDriveletter.SelectedItem.ToString());
+
             try
             {
                 if (checkBoxPim.Checked)
@@ -224,15 +228,32 @@ namespace VeraCrypt_Mounter
 
             try
             {
+                if (usedriveletter != null && usedriveletter != description)
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDrivletterIsUsed", _language) + usedriveletter);
+            }
+            catch (Exception ex)
+            {
+                DialogResult res = MessageBox.Show(ex.Message, "", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+                if (res == DialogResult.Abort)
+                {
+                    return;
+                }
+                if (res == DialogResult.Retry)
+                {
+                    buttonOk_Click(sender, e);
+                    return;
+                }
+
+            }
+
+            try
+            {
 
                 if (_oldName != null)
                     if (description != _oldName)
                         _config.RemoveSection(_oldName);
 
-                string usedriveletter = DrivelettersHelper.IsDrivletterUsedByConfig(comboBoxDriveletter.SelectedItem.ToString());
-
-                if (usedriveletter != null && usedriveletter != description)
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDrivletterIsUsed", _language) + usedriveletter);
+                
 
                 if (!checkBoxNoKeyfile.Checked)
                 {
