@@ -51,7 +51,6 @@ namespace VeraCrypt_Mounter
             }
 
             conf.GroupName = null;
-            //conf.Password = Password_helper.Password;
 
             if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Type))
                 conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Type, ConfigTrm.Automount.Typename);
@@ -96,4 +95,4 @@ namespace VeraCrypt_Mounter
     {
         public static readonly T Instance = new T();
     }
-}
+}   

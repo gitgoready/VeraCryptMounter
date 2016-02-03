@@ -47,6 +47,7 @@ namespace VeraCrypt_Mounter
             public const string Passwordtest = "Passwordtest";
             public const string Pim = "Pim";
             public const string Hash = "Hash";
+            public const string Hashes = "Hashes";
 
         }
 

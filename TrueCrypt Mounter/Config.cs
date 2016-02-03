@@ -481,6 +481,12 @@ namespace VeraCrypt_Mounter
 
         #region  Methodes: GetValue
 
+        //public object[] GetValue(string section, string entry, object[] defaultValue)
+        //{
+        //    object value = GetValue(section, entry);
+        //    return (value == null ? defaultValue : (object[])value);
+        //}
+
         public string GetValue(string section, string entry, string defaultValue)
         {
             object value = GetValue(section, entry);
