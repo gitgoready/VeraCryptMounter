@@ -241,6 +241,22 @@
     </Text>
   </Region>
   <Region name="NewDrive">
+    <Text key="groupBoxSavePassword">
+      <D>Passwort</D>
+      <E>Password</E>
+    </Text>
+    <Text key="buttonSavePassword">
+      <D>Speichern</D>
+      <E>save</E>
+    </Text>
+    <Text key="checkBoxPassword">
+      <D>nicht speichern</D>
+      <E>don't save</E>
+    </Text>
+    <Text key="buttonShowPassword">
+      <D>Anzeigen</D>
+      <E>Show</E>
+    </Text>
     <Text key="groupBoxPNPDeviceID">
       <D>PNPDeviceID</D>
       <E>PNPDeviceID</E>

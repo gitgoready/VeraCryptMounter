@@ -55,9 +55,9 @@ namespace VeraCrypt_Mounter
             this.groupBox_PNPDeviceID = new System.Windows.Forms.GroupBox();
             this.textBox_PNPDeviceID = new System.Windows.Forms.TextBox();
             this.groupBoxSavePassword = new System.Windows.Forms.GroupBox();
-            this.buttonSavePassword = new System.Windows.Forms.Button();
-            this.buttonShowPassword = new System.Windows.Forms.Button();
             this.checkBoxPassword = new System.Windows.Forms.CheckBox();
+            this.buttonShowPassword = new System.Windows.Forms.Button();
+            this.buttonSavePassword = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBoxMountoptions.SuspendLayout();
             this.groupBoxDriveletter.SuspendLayout();
@@ -306,14 +306,16 @@ namespace VeraCrypt_Mounter
             this.groupBoxSavePassword.TabStop = false;
             this.groupBoxSavePassword.Text = "groupBox1";
             // 
-            // buttonSavePassword
+            // checkBoxPassword
             // 
-            this.buttonSavePassword.Location = new System.Drawing.Point(7, 17);
-            this.buttonSavePassword.Name = "buttonSavePassword";
-            this.buttonSavePassword.Size = new System.Drawing.Size(90, 23);
-            this.buttonSavePassword.TabIndex = 0;
-            this.buttonSavePassword.Text = "Save Password";
-            this.buttonSavePassword.UseVisualStyleBackColor = true;
+            this.checkBoxPassword.AutoSize = true;
+            this.checkBoxPassword.Location = new System.Drawing.Point(200, 20);
+            this.checkBoxPassword.Name = "checkBoxPassword";
+            this.checkBoxPassword.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxPassword.TabIndex = 2;
+            this.checkBoxPassword.Text = "checkBox1";
+            this.checkBoxPassword.UseVisualStyleBackColor = true;
+            this.checkBoxPassword.CheckedChanged += new System.EventHandler(this.checkBoxPassword_CheckedChanged);
             // 
             // buttonShowPassword
             // 
@@ -324,15 +326,14 @@ namespace VeraCrypt_Mounter
             this.buttonShowPassword.Text = "button1";
             this.buttonShowPassword.UseVisualStyleBackColor = true;
             // 
-            // checkBoxPassword
+            // buttonSavePassword
             // 
-            this.checkBoxPassword.AutoSize = true;
-            this.checkBoxPassword.Location = new System.Drawing.Point(200, 20);
-            this.checkBoxPassword.Name = "checkBoxPassword";
-            this.checkBoxPassword.Size = new System.Drawing.Size(80, 17);
-            this.checkBoxPassword.TabIndex = 2;
-            this.checkBoxPassword.Text = "checkBox1";
-            this.checkBoxPassword.UseVisualStyleBackColor = true;
+            this.buttonSavePassword.Location = new System.Drawing.Point(7, 17);
+            this.buttonSavePassword.Name = "buttonSavePassword";
+            this.buttonSavePassword.Size = new System.Drawing.Size(90, 23);
+            this.buttonSavePassword.TabIndex = 0;
+            this.buttonSavePassword.Text = "Save Password";
+            this.buttonSavePassword.UseVisualStyleBackColor = true;
             // 
             // NewDrive
             // 

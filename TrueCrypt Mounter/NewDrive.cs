@@ -36,12 +36,13 @@ namespace VeraCrypt_Mounter
         private bool _edit;
         private readonly string _language; 
         private const string LanguageRegion = "NewDrive";
-        private string _oldName;
+        private string _oldName = null;
         private string _disknummber;
         private string _partnummber;
         private string _diskmodel;
         private string _diskserial;
         private string _pnpdeviceid;
+        private string _password = null;
 
         /// <summary>
         /// Set the pnpdeviceid for the drive
@@ -126,6 +127,10 @@ namespace VeraCrypt_Mounter
                 checkBoxTruecrypt.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxTruecrypt", _language);
                 checkBoxPim.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPim", _language);
                 groupBox_PNPDeviceID.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxPNPDeviceID", _language);
+                buttonShowPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonShowPassword", _language);
+                checkBoxPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPassword", _language);
+                buttonSavePassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonSavePassword", _language);
+                groupBoxSavePassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxSavePassword", _language);
                 //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
             }
             catch (Exception ex)
@@ -153,6 +158,8 @@ namespace VeraCrypt_Mounter
             comboBoxDriveletter.DataSource = _driveletters;
             comboBoxDriveletter.SelectedItem = _driveletters[0];
             comboBoxHash.Items.AddRange(_hashes);
+
+            buttonShowPassword.Enabled = false;
         }
 
         /// <summary>
@@ -321,6 +328,9 @@ namespace VeraCrypt_Mounter
                 _config.SetValue(beschr, ConfigTrm.Drive.Disknumber, _disknummber);
                 _config.SetValue(beschr, ConfigTrm.Drive.Partnumber, _partnummber);
                 _config.SetValue(beschr, ConfigTrm.Drive.Pnpdeviceid, _pnpdeviceid);
+
+                
+
             }
             catch (Exception ex)
             {
@@ -416,6 +426,22 @@ namespace VeraCrypt_Mounter
 
                 textBoxPartition.Text = "\\Device\\Harddisk" + _disknummber + "\\Partition" + _partnummber;
                 textBox_PNPDeviceID.Text = _pnpdeviceid;
+            }
+        }
+
+        private void checkBoxPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPassword.Checked)
+            {
+                buttonSavePassword.Enabled = buttonShowPassword.Enabled = false;
+                _password = null;
+            }
+            else
+            {
+                buttonSavePassword.Enabled = true;
+
+                if (!string.IsNullOrEmpty(_oldName))
+                    buttonShowPassword.Enabled = true;
             }
         }
     }
