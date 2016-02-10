@@ -42,6 +42,8 @@
             this.checkBoxNoKeyfile = new System.Windows.Forms.CheckBox();
             this.textBoxKeyfile = new System.Windows.Forms.TextBox();
             this.groupBoxDrive = new System.Windows.Forms.GroupBox();
+            this.textBoxSelectedDrive = new System.Windows.Forms.TextBox();
+            this.buttonSelectDrive = new System.Windows.Forms.Button();
             this.checkBoxNoDrive = new System.Windows.Forms.CheckBox();
             this.groupBoxDriveletter = new System.Windows.Forms.GroupBox();
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
@@ -55,8 +57,8 @@
             this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.groupBoxSavePassword = new System.Windows.Forms.GroupBox();
             this.buttonSavePassword = new System.Windows.Forms.Button();
-            this.buttonSelectDrive = new System.Windows.Forms.Button();
-            this.textBoxSelectedDrive = new System.Windows.Forms.TextBox();
+            this.checkBoxPassword = new System.Windows.Forms.CheckBox();
+            this.buttonShowPassword = new System.Windows.Forms.Button();
             this.groupBoxDescription.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.groupBoxKyfilename.SuspendLayout();
@@ -111,7 +113,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(122, 364);
+            this.buttonClose.Location = new System.Drawing.Point(127, 377);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(90, 23);
             this.buttonClose.TabIndex = 0;
@@ -121,7 +123,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(225, 364);
+            this.buttonOk.Location = new System.Drawing.Point(230, 377);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(90, 23);
             this.buttonOk.TabIndex = 17;
@@ -190,6 +192,24 @@
             this.groupBoxDrive.TabIndex = 9;
             this.groupBoxDrive.TabStop = false;
             this.groupBoxDrive.Text = "Beinhaltendes Laufwerk";
+            // 
+            // textBoxSelectedDrive
+            // 
+            this.textBoxSelectedDrive.Location = new System.Drawing.Point(6, 20);
+            this.textBoxSelectedDrive.Name = "textBoxSelectedDrive";
+            this.textBoxSelectedDrive.ReadOnly = true;
+            this.textBoxSelectedDrive.Size = new System.Drawing.Size(193, 20);
+            this.textBoxSelectedDrive.TabIndex = 13;
+            // 
+            // buttonSelectDrive
+            // 
+            this.buttonSelectDrive.Location = new System.Drawing.Point(109, 40);
+            this.buttonSelectDrive.Name = "buttonSelectDrive";
+            this.buttonSelectDrive.Size = new System.Drawing.Size(90, 23);
+            this.buttonSelectDrive.TabIndex = 12;
+            this.buttonSelectDrive.Text = "Select drive";
+            this.buttonSelectDrive.UseVisualStyleBackColor = true;
+            this.buttonSelectDrive.Click += new System.EventHandler(this.buttonSelectDrive_Click);
             // 
             // checkBoxNoDrive
             // 
@@ -313,47 +333,51 @@
             // 
             // groupBoxSavePassword
             // 
+            this.groupBoxSavePassword.Controls.Add(this.checkBoxPassword);
+            this.groupBoxSavePassword.Controls.Add(this.buttonShowPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonSavePassword);
-            this.groupBoxSavePassword.Location = new System.Drawing.Point(225, 310);
+            this.groupBoxSavePassword.Location = new System.Drawing.Point(225, 309);
             this.groupBoxSavePassword.Name = "groupBoxSavePassword";
-            this.groupBoxSavePassword.Size = new System.Drawing.Size(200, 46);
+            this.groupBoxSavePassword.Size = new System.Drawing.Size(205, 59);
             this.groupBoxSavePassword.TabIndex = 19;
             this.groupBoxSavePassword.TabStop = false;
             this.groupBoxSavePassword.Text = "groupBox1";
             // 
             // buttonSavePassword
             // 
-            this.buttonSavePassword.Location = new System.Drawing.Point(57, 19);
+            this.buttonSavePassword.Location = new System.Drawing.Point(7, 15);
             this.buttonSavePassword.Name = "buttonSavePassword";
-            this.buttonSavePassword.Size = new System.Drawing.Size(90, 23);
+            this.buttonSavePassword.Size = new System.Drawing.Size(75, 23);
             this.buttonSavePassword.TabIndex = 0;
             this.buttonSavePassword.Text = "Save Password";
             this.buttonSavePassword.UseVisualStyleBackColor = true;
             this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
             // 
-            // buttonSelectDrive
+            // checkBoxPassword
             // 
-            this.buttonSelectDrive.Location = new System.Drawing.Point(109, 40);
-            this.buttonSelectDrive.Name = "buttonSelectDrive";
-            this.buttonSelectDrive.Size = new System.Drawing.Size(90, 23);
-            this.buttonSelectDrive.TabIndex = 12;
-            this.buttonSelectDrive.Text = "Select drive";
-            this.buttonSelectDrive.UseVisualStyleBackColor = true;
-            this.buttonSelectDrive.Click += new System.EventHandler(this.buttonSelectDrive_Click);
+            this.checkBoxPassword.AutoSize = true;
+            this.checkBoxPassword.Location = new System.Drawing.Point(7, 40);
+            this.checkBoxPassword.Name = "checkBoxPassword";
+            this.checkBoxPassword.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxPassword.TabIndex = 4;
+            this.checkBoxPassword.Text = "checkBox1";
+            this.checkBoxPassword.UseVisualStyleBackColor = true;
+            this.checkBoxPassword.CheckedChanged += new System.EventHandler(this.checkBoxPassword_CheckedChanged);
             // 
-            // textBoxSelectedDrive
+            // buttonShowPassword
             // 
-            this.textBoxSelectedDrive.Location = new System.Drawing.Point(6, 20);
-            this.textBoxSelectedDrive.Name = "textBoxSelectedDrive";
-            this.textBoxSelectedDrive.ReadOnly = true;
-            this.textBoxSelectedDrive.Size = new System.Drawing.Size(193, 20);
-            this.textBoxSelectedDrive.TabIndex = 13;
+            this.buttonShowPassword.Location = new System.Drawing.Point(105, 15);
+            this.buttonShowPassword.Name = "buttonShowPassword";
+            this.buttonShowPassword.Size = new System.Drawing.Size(75, 23);
+            this.buttonShowPassword.TabIndex = 3;
+            this.buttonShowPassword.Text = "button1";
+            this.buttonShowPassword.UseVisualStyleBackColor = true;
             // 
             // NewContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 394);
+            this.ClientSize = new System.Drawing.Size(437, 410);
             this.Controls.Add(this.groupBoxSavePassword);
             this.Controls.Add(this.groupBoxHash);
             this.Controls.Add(this.groupBoxMountoptions);
@@ -385,6 +409,7 @@
             this.groupBoxMountoptions.PerformLayout();
             this.groupBoxHash.ResumeLayout(false);
             this.groupBoxSavePassword.ResumeLayout(false);
+            this.groupBoxSavePassword.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -419,5 +444,7 @@
         private System.Windows.Forms.Button buttonSavePassword;
         private System.Windows.Forms.TextBox textBoxSelectedDrive;
         private System.Windows.Forms.Button buttonSelectDrive;
+        private System.Windows.Forms.CheckBox checkBoxPassword;
+        private System.Windows.Forms.Button buttonShowPassword;
     }
 }

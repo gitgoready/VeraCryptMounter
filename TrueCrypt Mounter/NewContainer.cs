@@ -94,6 +94,8 @@ namespace VeraCrypt_Mounter
                 groupBoxHash.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxHash", _language);
                 groupBoxSavePassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxSavePassword", _language);
                 buttonSavePassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonSavePassword", _language);
+                buttonShowPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonShowPassword", _language);
+                checkBoxPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxPassword", _language);
                 //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
             }
             catch (Exception ex)
@@ -117,6 +119,8 @@ namespace VeraCrypt_Mounter
             comboBoxHash.Items.AddRange(_hashes);
 
             comboBoxDriveletter.DataSource = _driveletters;
+
+            buttonShowPassword.Enabled = false;
         }
 
         /// <summary>
@@ -139,6 +143,8 @@ namespace VeraCrypt_Mounter
             checkBoxAutomountUsb.Checked = _config.GetValue(description, ConfigTrm.Container.Automountusb, false);
             checkBoxTrueCrypt.Checked = _config.GetValue(description, ConfigTrm.Container.Truecrypt, false);
             checkBoxPim.Checked = _config.GetValue(description, ConfigTrm.Container.Pimuse, false);
+            _password = _config.GetValue(description, ConfigTrm.Drive.Password, "");
+            _pim = _config.GetValue(description, ConfigTrm.Drive.Pim, "");
 
             foreach (string element in DrivelettersHelper.GetDriveletters())
                 _driveletters.Add(element);
@@ -166,9 +172,11 @@ namespace VeraCrypt_Mounter
                     textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
                 }
             }
-            
 
-           
+            if (string.IsNullOrEmpty(_password))
+                buttonShowPassword.Enabled = false;
+
+
         }
 
         private void buttonOpen_Click(object sender, EventArgs e)
@@ -287,8 +295,19 @@ namespace VeraCrypt_Mounter
                 _config.SetValue(description, ConfigTrm.Container.Pimuse, checkBoxPim.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Truecrypt, checkBoxTrueCrypt.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Hash, hash);
-                _config.SetValue(description, ConfigTrm.Container.Password, _password);
-                _config.SetValue(description, ConfigTrm.Container.Pim, _pim);
+
+                if (!string.IsNullOrEmpty(_password))
+                {
+                    _config.SetValue(description, ConfigTrm.Drive.Password, _password);
+                    _config.SetValue(description, ConfigTrm.Drive.Pim, _pim);
+                }
+
+                if (checkBoxPassword.Checked)
+                {
+                    _config.SetValue(description, ConfigTrm.Drive.Password, "");
+                    _config.SetValue(description, ConfigTrm.Drive.Pim, "");
+                }
+
 
 
             }
@@ -365,6 +384,7 @@ namespace VeraCrypt_Mounter
             {
                 _password = pw._password;
                 _pim = pw._pim;
+                buttonShowPassword.Enabled = true;
             }
             pw._password = null;
             pw._pim = null;
@@ -385,6 +405,21 @@ namespace VeraCrypt_Mounter
                 _pnpid = sp._pNPDeviceID;
                 _partnummber = sp._partnummber;
                 textBoxSelectedDrive.Text = sp._diskmodel + " Partition: " + sp._partnummber;
+            }
+        }
+
+        private void checkBoxPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPassword.Checked)
+            {
+                buttonSavePassword.Enabled = buttonShowPassword.Enabled = false;
+            }
+            else
+            {
+                buttonSavePassword.Enabled = true;
+
+                if (!string.IsNullOrEmpty(_password))
+                    buttonShowPassword.Enabled = true;
             }
         }
     }

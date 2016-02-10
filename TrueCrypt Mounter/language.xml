@@ -247,7 +247,7 @@
     </Text>
     <Text key="buttonSavePassword">
       <D>Speichern</D>
-      <E>save</E>
+      <E>Save</E>
     </Text>
     <Text key="checkBoxPassword">
       <D>nicht speichern</D>
@@ -320,6 +320,10 @@
     <Text key="DriveEdit">
       <D>Lauferk bearbeiten</D>
       <E>Edit Drive</E>
+    </Text>
+    <Text key="MessagePimNotSet">
+      <D>Es wurde kein PIM angeben. OK PIM eingebenm</D>
+      <E>PIM not set. OK enter PIM.</E>
     </Text>
     <Text key="MessageDriveExist">
       <D>Beschreibung mit diesem namen schon vorhanden.</D>
@@ -489,6 +493,14 @@
       <D>Neuer Kontainer</D>
       <E>New Container</E>
     </Text>
+    <Text key="buttonShowPassword">
+      <D>Zeigen</D>
+      <E>Show</E>
+    </Text>
+    <Text key="checkBoxPassword">
+      <D>nicht speichern</D>
+      <E>don't save</E>
+    </Text>
     <Text key="groupBoxSavePassword">
       <D>Passwort Speichern</D>
       <E>Save Password</E>
@@ -598,6 +610,10 @@
     <Text key="buttonOk">
       <D>OK</D>
       <E>OK</E>
+    </Text>
+    <Text key="MessagePasswordEmty">
+      <D>Passwort darf nicht leer sein</D>
+      <E>Password is emty</E>
     </Text>
     <Text key="MessagePimWrongValue">
       <D>PIM darf nur aus Zahlen bestehen. Bei einer Passwortlänge kleiner als 20 Zeichen, darf der PIM nicht kleiner als 485 sein.</D>

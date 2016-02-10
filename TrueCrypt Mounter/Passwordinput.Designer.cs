@@ -34,6 +34,7 @@
             this.buttonOk = new System.Windows.Forms.Button();
             this.textBoxPim = new System.Windows.Forms.TextBox();
             this.labelPim = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxPassword
@@ -58,7 +59,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(162, 55);
+            this.buttonOk.Location = new System.Drawing.Point(193, 54);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 3;
@@ -70,7 +71,7 @@
             // 
             this.textBoxPim.Location = new System.Drawing.Point(40, 57);
             this.textBoxPim.Name = "textBoxPim";
-            this.textBoxPim.Size = new System.Drawing.Size(116, 20);
+            this.textBoxPim.Size = new System.Drawing.Size(147, 20);
             this.textBoxPim.TabIndex = 2;
             this.textBoxPim.UseSystemPasswordChar = true;
             this.textBoxPim.Visible = false;
@@ -86,11 +87,21 @@
             this.labelPim.Text = "PIM";
             this.labelPim.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(244, 30);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(24, 18);
+            this.button1.TabIndex = 5;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Passwordinput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(249, 93);
+            this.ClientSize = new System.Drawing.Size(273, 93);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.labelPim);
             this.Controls.Add(this.textBoxPim);
             this.Controls.Add(this.buttonOk);
@@ -116,5 +127,6 @@
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.TextBox textBoxPim;
         private System.Windows.Forms.Label labelPim;
+        private System.Windows.Forms.Button button1;
     }
 }

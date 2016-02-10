@@ -334,6 +334,7 @@ namespace VeraCrypt_Mounter
             this.buttonSavePassword.TabIndex = 0;
             this.buttonSavePassword.Text = "Save Password";
             this.buttonSavePassword.UseVisualStyleBackColor = true;
+            this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
             // 
             // NewDrive
             // 

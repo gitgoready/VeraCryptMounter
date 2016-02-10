@@ -29,6 +29,7 @@ namespace VeraCrypt_Mounter
         private readonly string _language;
         private readonly Config _config = new Config();
         private string _chosen;
+        private bool _pimchosen;
 
         /// <summary>
         /// The entered password.
@@ -51,6 +52,7 @@ namespace VeraCrypt_Mounter
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             LanguageFill();
             _chosen = chosen;
+            _pimchosen = pim;
             if (pim)
             {
                 labelPim.Visible = true;
@@ -78,14 +80,20 @@ namespace VeraCrypt_Mounter
             var t = 0;
             try
             {
-                if (!int.TryParse(_pim, out t))
+                if (string.IsNullOrEmpty(_password))
+                    throw new ArgumentException(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePasswordEmty", _language));
+
+                if (_pimchosen)
                 {
-                    throw new FormatException(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimWrongValue", _language));
-                }
-                if (_password.Length < 20 && t < 485)
-                {
-                    throw new FormatException(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimWrongValue", _language));
-                }
+                    if (!int.TryParse(_pim, out t))
+                    {
+                        throw new FormatException(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimWrongValue", _language));
+                    }
+                    if (_password.Length < 20 && t < 485)
+                    {
+                        throw new FormatException(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimWrongValue", _language));
+                    }
+                }          
             }
             catch (Exception ex)
             {

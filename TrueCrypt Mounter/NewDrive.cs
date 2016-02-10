@@ -43,6 +43,7 @@ namespace VeraCrypt_Mounter
         private string _diskserial;
         private string _pnpdeviceid;
         private string _password = null;
+        private string _pim = null;
 
         /// <summary>
         /// Set the pnpdeviceid for the drive
@@ -192,10 +193,15 @@ namespace VeraCrypt_Mounter
             _disknummber = _config.GetValue(driveName, ConfigTrm.Drive.Disknumber, "");
             _partnummber = _config.GetValue(driveName, ConfigTrm.Drive.Partnumber, "");
             _pnpdeviceid = _config.GetValue(driveName, ConfigTrm.Drive.Pnpdeviceid, "");
+            _password = _config.GetValue(driveName, ConfigTrm.Drive.Password, "");
+            _pim = _config.GetValue(driveName, ConfigTrm.Drive.Pim, "");
 
             textBox_PNPDeviceID.Text = _pnpdeviceid;
 
             comboBoxDriveletter.SelectedItem = _config.GetValue(driveName, ConfigTrm.Drive.Driveletter, "");
+
+            if (string.IsNullOrEmpty(_password))
+                buttonShowPassword.Enabled = false;
         }
 
         /// <summary>
@@ -220,24 +226,60 @@ namespace VeraCrypt_Mounter
             string dletter;
             string beschr;
             string hash;
+            string usedriveletter = DrivelettersHelper.IsDrivletterUsedByConfig(comboBoxDriveletter.SelectedItem.ToString());
+            // Load information from controls into variables
+            beschr = textBoxDescription.Text;
+            part = textBoxPartition.Text;
+            key = textBoxKeyfile.Text;
+            dletter = comboBoxDriveletter.SelectedItem.ToString();
 
+            try
+            {
+                if (checkBoxPim.Checked)
+                {
+                    if (string.IsNullOrEmpty(_pim) && !string.IsNullOrEmpty(_password))
+                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessagePimNotSet", _language));
+                }
+            }
+            catch (Exception ex)
+            {
+                DialogResult res = MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                buttonSavePassword_Click(this, e);
+            }
+
+            //if driveletter is used ask if it shoud ignor or select a new one
+            try
+            {
+                if (usedriveletter != null && usedriveletter != textBoxDescription.Text)
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDrivletterIsUsed", _language) + usedriveletter);
+            }
+            catch (Exception ex)
+            {
+                DialogResult res = MessageBox.Show(ex.Message, "", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+                if (res == DialogResult.Abort)
+                {
+                    return;
+                }
+                if (res == DialogResult.Retry)
+                {
+                    erstellen_Click(sender, e);
+                    return;
+                }
+
+            }
             // Validate userinput
             try
             {
-                // Load information from controls into variables
-                beschr = textBoxDescription.Text;
-                part = textBoxPartition.Text;
-                key = textBoxKeyfile.Text;
-                dletter = comboBoxDriveletter.SelectedItem.ToString();
-
                 if (_oldName != null)
                     if (beschr != _oldName)
                         _config.RemoveSection(_oldName);
 
-                string usedriveletter = DrivelettersHelper.IsDrivletterUsedByConfig(comboBoxDriveletter.SelectedItem.ToString());
+                
 
                 //check if hash is selected
                 hash = (comboBoxHash.SelectedItem == null) ? "" : comboBoxHash.SelectedItem.ToString();
+
+
 
                 // Check if driveconfig exist
                 if (!_edit)
@@ -250,8 +292,7 @@ namespace VeraCrypt_Mounter
                             throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveExist", _language));
                         }
                     }
-                    if (usedriveletter != null && usedriveletter != textBoxDescription.Text)
-                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDrivletterIsUsed", _language) + usedriveletter);
+                    
                 }
                 // Check if drivename is set.
                 if (string.IsNullOrEmpty(beschr))
@@ -328,8 +369,19 @@ namespace VeraCrypt_Mounter
                 _config.SetValue(beschr, ConfigTrm.Drive.Disknumber, _disknummber);
                 _config.SetValue(beschr, ConfigTrm.Drive.Partnumber, _partnummber);
                 _config.SetValue(beschr, ConfigTrm.Drive.Pnpdeviceid, _pnpdeviceid);
+                _config.SetValue(beschr, ConfigTrm.Drive.Pimuse, checkBoxPim.Checked);
 
-                
+                if (!string.IsNullOrEmpty(_password))
+                {
+                    _config.SetValue(beschr, ConfigTrm.Drive.Password, _password);
+                    _config.SetValue(beschr, ConfigTrm.Drive.Pim, _pim);
+                }
+
+                if (checkBoxPassword.Checked)
+                {
+                    _config.SetValue(beschr, ConfigTrm.Drive.Password, "");
+                    _config.SetValue(beschr, ConfigTrm.Drive.Pim, "");
+                }
 
             }
             catch (Exception ex)
@@ -434,15 +486,29 @@ namespace VeraCrypt_Mounter
             if (checkBoxPassword.Checked)
             {
                 buttonSavePassword.Enabled = buttonShowPassword.Enabled = false;
-                _password = null;
             }
             else
             {
                 buttonSavePassword.Enabled = true;
 
-                if (!string.IsNullOrEmpty(_oldName))
+                if (!string.IsNullOrEmpty(_password))
                     buttonShowPassword.Enabled = true;
             }
+        }
+
+        private void buttonSavePassword_Click(object sender, EventArgs e)
+        {
+            Passwordinput pw = new Passwordinput(ConfigTrm.Container.Typename, checkBoxPim.Checked);
+            DialogResult res = pw.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                _password = pw._password;
+                _pim = pw._pim;
+                buttonShowPassword.Enabled = true;
+            }
+            pw._password = null;
+            pw._pim = null;
+            pw.Dispose();
         }
     }
 }
