@@ -298,14 +298,14 @@ namespace VeraCrypt_Mounter
 
                 if (!string.IsNullOrEmpty(_password))
                 {
-                    _config.SetValue(description, ConfigTrm.Drive.Password, _password);
-                    _config.SetValue(description, ConfigTrm.Drive.Pim, _pim);
+                    _config.SetValue(description, ConfigTrm.Container.Password, _password);
+                    _config.SetValue(description, ConfigTrm.Container.Pim, _pim);
                 }
 
                 if (checkBoxPassword.Checked)
                 {
-                    _config.SetValue(description, ConfigTrm.Drive.Password, "");
-                    _config.SetValue(description, ConfigTrm.Drive.Pim, "");
+                    _config.SetValue(description, ConfigTrm.Container.Password, "");
+                    _config.SetValue(description, ConfigTrm.Container.Pim, "");
                 }
 
 

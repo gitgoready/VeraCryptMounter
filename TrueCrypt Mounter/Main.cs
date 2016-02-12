@@ -600,8 +600,8 @@ namespace VeraCrypt_Mounter
             const bool beep = false;
             const bool force = false;
             string key = null;
-            _password = _config.GetValue(comboBoxContainer.SelectedText, ConfigTrm.Container.Password, null);
-            _pim = _config.GetValue(comboBoxContainer.SelectedText, ConfigTrm.Container.Pim, null);
+            _password = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Password, null);
+            _pim = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
 
             toolStripLabelNotification.Visible = false;
 
@@ -644,8 +644,9 @@ namespace VeraCrypt_Mounter
                 {
                     try
                     {
-                        ShowPassworteingabe(ConfigTrm.Container.Typename, 
-                            _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false));
+                        bool dres = ShowPassworteingabe(ConfigTrm.Container.Typename, _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false));
+                        //if (!dres)
+                        //    throw new Exception();
                     }
                     catch (Exception ex)
                     {
@@ -653,8 +654,8 @@ namespace VeraCrypt_Mounter
                         throw;
                     }
                 }
-                /** test if password is emty**/
-                if (string.IsNullOrEmpty(_password) && _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, false))
+                /** test if password is empty**/
+                if (string.IsNullOrEmpty(_password))
                 {
                     throw new Exception("Leeres Passwort ist nicht erlaubt.");
                 }
@@ -1106,7 +1107,7 @@ namespace VeraCrypt_Mounter
         /// </summary>
         /// <param name="chosen">string for drive or container</param>
         /// <param name="pim">bool pim used or not</param>
-        public void ShowPassworteingabe(string chosen, bool pim)
+        public bool ShowPassworteingabe(string chosen, bool pim)
         {
             var passwortDialog = new Passwordinput(chosen, pim);
 
@@ -1116,8 +1117,11 @@ namespace VeraCrypt_Mounter
             {
                 _password = passwortDialog._password;
                 _pim = passwortDialog._pim;
+                passwortDialog.Dispose();
+                return true;
             }
             passwortDialog.Dispose();
+            return false;
         }
 
         #endregion

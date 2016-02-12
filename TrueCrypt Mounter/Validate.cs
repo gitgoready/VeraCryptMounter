@@ -27,7 +27,7 @@ namespace VeraCrypt_Mounter
             const string nameRemovable = "Removable";
             const string nameSilentmode = "Silentmode";
             const string nameTruecryptpath = "Truecryptpath";
-            const string namePasswordcache = "Passwordcache";
+  
 
             //Test if the minimal config is done
             if (!config.HasEntry(sectionGrundeinstellung, nameTruecryptpath))
@@ -35,8 +35,6 @@ namespace VeraCrypt_Mounter
             if (!config.HasEntry(sectionGrundeinstellung, nameNokeyfile))
                 status = false;
             if (!config.HasEntry(sectionGrundeinstellung, nameSilentmode))
-                status = false;
-            if (!config.HasEntry(sectionGrundeinstellung, namePasswordcache))
                 status = false;
 
             //Test if the config is done for the keyfilekontainer.
