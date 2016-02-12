@@ -459,6 +459,7 @@ namespace VeraCrypt_Mounter
                 {
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language) + "\"" + diskmodel + "\"");
                 }
+
                 //test if keyfilekontainer is mounted
                 bool nokeyfile = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true);
                 string keyfilepath;
@@ -495,7 +496,7 @@ namespace VeraCrypt_Mounter
                         throw;
                     }
                 }
-                /** test if password is emty**/
+                /** test if password is empty**/
                 if (string.IsNullOrEmpty(_password) && _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true))
                 {
                     throw new Exception("Leeres Passwort ist nicht erlaubt.");
@@ -604,6 +605,7 @@ namespace VeraCrypt_Mounter
 
             toolStripLabelNotification.Visible = false;
 
+            // TODO wenn ein laufwerk angegebn ist den Laufwerksbuchstaben herausfinden!
             try
             {
                 // Test if entry in driverbox is chosen

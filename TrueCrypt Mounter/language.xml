@@ -321,6 +321,10 @@
       <D>Lauferk bearbeiten</D>
       <E>Edit Drive</E>
     </Text>
+    <Text key="MessageMasterPasswordWrong">
+      <D>Passwort falsch</D>
+      <E>wrong password</E>
+    </Text>
     <Text key="MessagePimNotSet">
       <D>Es wurde kein PIM angeben. OK PIM eingebenm</D>
       <E>PIM not set. OK enter PIM.</E>
@@ -573,6 +577,10 @@
       <D>Bitte Laufwerk auswählen</D>
       <E>Please choose drive</E>
     </Text>
+    <Text key="MessageMasterPasswordWrong">
+      <D>Passwort falsch</D>
+      <E>wrong password</E>
+    </Text>
     <Text key="MessageDriveNotConnected">
       <D>Laufwerk nicht verbunden</D>
       <E>Drive not connected</E>
@@ -595,9 +603,17 @@
     </Text>
   </Region>
   <Region name="Passwordinput">
+    <Text key="FormMaster">
+      <D>Master Passwort</D>
+      <E>Master password</E>
+    </Text>
     <Text key="Form">
       <D>Passworteingabe</D>
       <E>Passwordinput</E>
+    </Text>
+    <Text key ="labelPasswordMaster">
+      <D>Bitte Master Passwort eingeben!</D>
+      <E>Please input master password!</E>
     </Text>
     <Text key="labelPim">
       <D>PIM</D>

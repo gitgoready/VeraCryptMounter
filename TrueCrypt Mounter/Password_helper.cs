@@ -1,11 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Forms;
+using SecurityDriven.Inferno.Hash;
 
 namespace VeraCrypt_Mounter
 {
     static class Password_helper
     {
-        private static  string _password;
+        private static string _password;
         private static string _confDir;
 
         public static string Password
@@ -44,8 +46,26 @@ namespace VeraCrypt_Mounter
             return false;
         }
 
+        public static bool Check_password(string password)
+        {
+            if (password.Equals(_password))
+            {
+                password = null;
+                return true;
+            }
+            password = null;
+            return false;
+        }
+
+        /// <summary>
+        /// Change the master password for the encryption of the config
+        /// </summary>
+        /// <param name="newPassword"></param>
+        /// <exception cref="ArgumentNullException">Throws if passwort is null or empty</exception>
         public static void ChangePassword(string newPassword)
         {
+            if (string.IsNullOrEmpty(newPassword))
+                throw new ArgumentNullException("new password is null or empty");
 
             CheckConfDir();
 

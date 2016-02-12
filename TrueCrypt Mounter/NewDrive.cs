@@ -506,10 +506,29 @@ namespace VeraCrypt_Mounter
             pw._pim = null;
             pw.Dispose();
         }
-
+        /// <summary>
+        /// Shows the saved password after confirm the master password.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonShowPassword_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Passwordinput pin = new Passwordinput();
+            DialogResult res = pin.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                if (Password_helper.Check_password(pin._password))
+                {
+                    Passwordinput pinshow = new Passwordinput("drive", checkBoxPim.Checked, _password, _pim);
+                    pinshow.ShowDialog();
+                }
+                else
+                {
+                    DialogResult wrongres = MessageBox.Show(this, LanguagePool.GetInstance().GetString(LanguageRegion, "MessageMasterPasswordWrong", _language), "", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    if (wrongres == DialogResult.Retry)
+                        buttonShowPassword_Click(sender, e);
+                }
+            }
         }
     }
 }

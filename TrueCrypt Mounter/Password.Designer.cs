@@ -90,18 +90,18 @@
             this.labelPassword_first.AutoSize = true;
             this.labelPassword_first.Location = new System.Drawing.Point(9, 44);
             this.labelPassword_first.Name = "labelPassword_first";
-            this.labelPassword_first.Size = new System.Drawing.Size(53, 13);
+            this.labelPassword_first.Size = new System.Drawing.Size(88, 13);
             this.labelPassword_first.TabIndex = 5;
-            this.labelPassword_first.Text = "Password";
+            this.labelPassword_first.Text = "Master Password";
             // 
             // labelPassword_second
             // 
             this.labelPassword_second.AutoSize = true;
             this.labelPassword_second.Location = new System.Drawing.Point(9, 81);
             this.labelPassword_second.Name = "labelPassword_second";
-            this.labelPassword_second.Size = new System.Drawing.Size(90, 13);
+            this.labelPassword_second.Size = new System.Drawing.Size(125, 13);
             this.labelPassword_second.TabIndex = 6;
-            this.labelPassword_second.Text = "Retype Password";
+            this.labelPassword_second.Text = "Retype Master Password";
             // 
             // buttonReset
             // 
@@ -153,9 +153,9 @@
             this.labelOldPassword.AutoSize = true;
             this.labelOldPassword.Location = new System.Drawing.Point(9, 9);
             this.labelOldPassword.Name = "labelOldPassword";
-            this.labelOldPassword.Size = new System.Drawing.Size(72, 13);
+            this.labelOldPassword.Size = new System.Drawing.Size(107, 13);
             this.labelOldPassword.TabIndex = 11;
-            this.labelOldPassword.Text = "Old Password";
+            this.labelOldPassword.Text = "Old Master Password";
             // 
             // Password
             // 
@@ -176,7 +176,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Password";
-            this.Text = "Input Password";
+            this.Text = "Input Master Password";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

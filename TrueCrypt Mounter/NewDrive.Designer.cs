@@ -323,7 +323,7 @@ namespace VeraCrypt_Mounter
             this.buttonShowPassword.Name = "buttonShowPassword";
             this.buttonShowPassword.Size = new System.Drawing.Size(90, 23);
             this.buttonShowPassword.TabIndex = 1;
-            this.buttonShowPassword.Text = "button1";
+            this.buttonShowPassword.Text = "Show";
             this.buttonShowPassword.UseVisualStyleBackColor = true;
             this.buttonShowPassword.Click += new System.EventHandler(this.buttonShowPassword_Click);
             // 

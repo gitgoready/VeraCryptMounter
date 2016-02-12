@@ -56,9 +56,9 @@
             this.groupBoxHash = new System.Windows.Forms.GroupBox();
             this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.groupBoxSavePassword = new System.Windows.Forms.GroupBox();
-            this.buttonSavePassword = new System.Windows.Forms.Button();
             this.checkBoxPassword = new System.Windows.Forms.CheckBox();
             this.buttonShowPassword = new System.Windows.Forms.Button();
+            this.buttonSavePassword = new System.Windows.Forms.Button();
             this.groupBoxDescription.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.groupBoxKyfilename.SuspendLayout();
@@ -343,16 +343,6 @@
             this.groupBoxSavePassword.TabStop = false;
             this.groupBoxSavePassword.Text = "groupBox1";
             // 
-            // buttonSavePassword
-            // 
-            this.buttonSavePassword.Location = new System.Drawing.Point(7, 15);
-            this.buttonSavePassword.Name = "buttonSavePassword";
-            this.buttonSavePassword.Size = new System.Drawing.Size(75, 23);
-            this.buttonSavePassword.TabIndex = 0;
-            this.buttonSavePassword.Text = "Save Password";
-            this.buttonSavePassword.UseVisualStyleBackColor = true;
-            this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
-            // 
             // checkBoxPassword
             // 
             this.checkBoxPassword.AutoSize = true;
@@ -370,8 +360,19 @@
             this.buttonShowPassword.Name = "buttonShowPassword";
             this.buttonShowPassword.Size = new System.Drawing.Size(75, 23);
             this.buttonShowPassword.TabIndex = 3;
-            this.buttonShowPassword.Text = "button1";
+            this.buttonShowPassword.Text = "show";
             this.buttonShowPassword.UseVisualStyleBackColor = true;
+            this.buttonShowPassword.Click += new System.EventHandler(this.buttonShowPassword_Click);
+            // 
+            // buttonSavePassword
+            // 
+            this.buttonSavePassword.Location = new System.Drawing.Point(7, 15);
+            this.buttonSavePassword.Name = "buttonSavePassword";
+            this.buttonSavePassword.Size = new System.Drawing.Size(75, 23);
+            this.buttonSavePassword.TabIndex = 0;
+            this.buttonSavePassword.Text = "Save Password";
+            this.buttonSavePassword.UseVisualStyleBackColor = true;
+            this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
             // 
             // NewContainer
             // 

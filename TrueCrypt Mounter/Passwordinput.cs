@@ -41,14 +41,36 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public string _pim { get; set; }
 
-
+        /// <summary>
+        /// To enter master password.
+        /// </summary>
+        public Passwordinput()
+        {
+            InitializeComponent();
+            _config = Singleton<ConfigManager>.Instance.Init(_config);
+            _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
+            LanguageFill();
+            Text = LanguagePool.GetInstance().GetString(LanguageRegion, "FormMaster", _language);
+            labelPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelPasswordMaster", _language);
+            labelPim.Visible = false;
+            textBoxPim.Visible = false;
+            
+        }
+        /// <summary>
+        /// To show the safed password.
+        /// </summary>
+        /// <param name="chosen">set to "container" or "drive"</param>
+        /// <param name="pimuse">select if PIM is shown</param>
+        /// <param name="password">the saved password to show</param>
+        /// <param name="pim">the saved pim to show</param>
+        /// <exception cref="NullReferenceException">Thrown if one of the strings is null or empty</exception>
         public Passwordinput(string chosen, bool pimuse, string password, string pim)
         {
             if (string.IsNullOrEmpty(chosen))
                 throw new NullReferenceException("Chosen not set");
             if (string.IsNullOrEmpty(password))
                 throw new NullReferenceException("password not set");
-            if (string.IsNullOrEmpty(pim))
+            if (string.IsNullOrEmpty(pim) && pimuse == true)
                 throw new NullReferenceException("pim not set");
 
             InitializeComponent();
@@ -69,6 +91,9 @@ namespace VeraCrypt_Mounter
         /// Constructor for the passwordform.
         /// Initialize the form and the config also the language string.
         /// </summary>
+        /// <param name="chosen">set to "container" or "drive"</param>
+        /// <param name="pimuse">select if PIM is shown</param>
+        /// <exception cref="NullReferenceException">Throws if chosen is null or empty</exception>
         public Passwordinput(string chosen, bool pimuse)
         {
             if (string.IsNullOrEmpty(chosen))

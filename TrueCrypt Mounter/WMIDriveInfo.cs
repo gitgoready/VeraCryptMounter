@@ -64,7 +64,7 @@ namespace VeraCrypt_Mounter
             {
                 foreach (ManagementObject drive in new ManagementObjectSearcher("select * from Win32_DiskDrive").Get())
                 {
-                    if (drive["PNPDeviceID"].ToString() == pnpdeviceid)
+                    if (drive["PNPDeviceID"].ToString().Equals(pnpdeviceid))
                         dinfo.Add(FillDriveinfo(drive));
                 }
 
@@ -110,8 +110,6 @@ namespace VeraCrypt_Mounter
             DriveInfo di = new DriveInfo();
 
             object[] data = new object[7];
-
-            
 
             for (int i = 0 ; i <= _driveInfoNames.Length-1 ; i++)
             {
