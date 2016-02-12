@@ -41,19 +41,46 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public string _pim { get; set; }
 
+
+        public Passwordinput(string chosen, bool pimuse, string password, string pim)
+        {
+            if (string.IsNullOrEmpty(chosen))
+                throw new NullReferenceException("Chosen not set");
+            if (string.IsNullOrEmpty(password))
+                throw new NullReferenceException("password not set");
+            if (string.IsNullOrEmpty(pim))
+                throw new NullReferenceException("pim not set");
+
+            InitializeComponent();
+            _config = Singleton<ConfigManager>.Instance.Init(_config);
+            _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
+            LanguageFill();
+            textBoxPassword.Text = _password = password;
+            if (pimuse)
+            {
+                labelPim.Visible = true;
+                textBoxPim.Visible = true;
+                textBoxPim.Text = _pim = pim;
+            }          
+            textBoxPassword.UseSystemPasswordChar = textBoxPim.UseSystemPasswordChar = false;
+            
+        }
         /// <summary>
         /// Constructor for the passwordform.
         /// Initialize the form and the config also the language string.
         /// </summary>
-        public Passwordinput(string chosen, bool pim)
+        public Passwordinput(string chosen, bool pimuse)
         {
+            if (string.IsNullOrEmpty(chosen))
+                throw new NullReferenceException("Chosen not set");
+
             InitializeComponent();
             _config = Singleton<ConfigManager>.Instance.Init(_config);
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             LanguageFill();
             _chosen = chosen;
-            _pimchosen = pim;
-            if (pim)
+            _pimchosen = pimuse;
+            if (pimuse)
             {
                 labelPim.Visible = true;
                 textBoxPim.Visible = true;
@@ -116,6 +143,14 @@ namespace VeraCrypt_Mounter
         {
             if (e.KeyChar == (char)Keys.Enter)
                 button_ok_Click(sender, e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBoxPassword.UseSystemPasswordChar)
+                textBoxPassword.UseSystemPasswordChar = textBoxPim.UseSystemPasswordChar = false;
+            else
+                textBoxPassword.UseSystemPasswordChar = textBoxPim.UseSystemPasswordChar = true;
         }
     }
 }

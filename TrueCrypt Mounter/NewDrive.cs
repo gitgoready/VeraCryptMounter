@@ -327,10 +327,6 @@ namespace VeraCrypt_Mounter
                         throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageKeyfileEmpty", _language));
                     }
                 }
-                //if (string.IsNullOrEmpty(dletter))
-                //{
-                //    throw new Exception("Laufwerkbuchstabe darf nicht leer sein");
-                //}
 
                 string pat = @"\\Device\\Harddisk\d+\\Partition\d+$";
                 Regex r = new Regex(pat);
@@ -509,6 +505,11 @@ namespace VeraCrypt_Mounter
             pw._password = null;
             pw._pim = null;
             pw.Dispose();
+        }
+
+        private void buttonShowPassword_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

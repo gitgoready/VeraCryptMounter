@@ -42,7 +42,6 @@
             this.textBoxPassword.Location = new System.Drawing.Point(11, 29);
             this.textBoxPassword.MaxLength = 100;
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(227, 20);
             this.textBoxPassword.TabIndex = 0;
             this.textBoxPassword.UseSystemPasswordChar = true;
@@ -95,6 +94,7 @@
             this.button1.Size = new System.Drawing.Size(24, 18);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Passwordinput
             // 
