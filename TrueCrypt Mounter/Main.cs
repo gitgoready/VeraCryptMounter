@@ -600,8 +600,10 @@ namespace VeraCrypt_Mounter
             const bool beep = false;
             const bool force = false;
             string key = null;
+            string keyfilepath;
             _password = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Password, null);
             _pim = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
+            bool nokeyfile = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, true);
 
             toolStripLabelNotification.Visible = false;
 
@@ -616,10 +618,7 @@ namespace VeraCrypt_Mounter
                 }
 
                 //  Test if keyfilekontainer is mounted
-                bool nokeyfile = _config.GetValue(comboBoxContainer.SelectedItem.ToString(),
-                                                  ConfigTrm.Container.Nokeyfile, true);
 
-                string keyfilepath;
                 if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true))
                 {
                     keyfilepath = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile, "");
