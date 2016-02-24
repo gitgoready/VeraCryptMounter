@@ -596,18 +596,39 @@ namespace VeraCrypt_Mounter
 
         private void ButtonMountContainer_Click(object sender, EventArgs e)
         {
+            WmiDriveInfo winfo = new WmiDriveInfo();
+
             bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
             const bool beep = false;
             const bool force = false;
             string key = null;
             _password = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Password, null);
             _pim = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
+            var pnpid = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
+            string path = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Kontainerpath, "");
+            bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable, false);
+            bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly, false);
+            bool tc = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Truecrypt, false);
+            string hash = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Hash, "");
+            string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter, "");
+            string partnumber = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Partnummber, "");
+
+            
+            var driveletterFromPath = Path.GetPathRoot(@path);
+            var driveltterFromPNPID = (!string.IsNullOrEmpty(pnpid)) ? winfo.GetDriveLetter(pnpid, partnumber) : null;
 
             toolStripLabelNotification.Visible = false;
-
-            // TODO wenn ein laufwerk angegebn ist den Laufwerksbuchstaben herausfinden!
+            
             try
             {
+                // check if pnpid is set and drive is connected
+                if (!string.IsNullOrEmpty(driveltterFromPNPID))
+                {
+                    if (winfo.CheckDiskPresent(pnpid))
+                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentContainerMessage", _language));
+                }
+
+
                 // Test if entry in driverbox is chosen
                 if (comboBoxContainer.SelectedItem == null)
                 {
@@ -669,25 +690,26 @@ namespace VeraCrypt_Mounter
 
             toolStripProgressBar.Visible = true;
 
-            string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter,
-                                              "");
+
             if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, false))
             {
                 key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
                       _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile);
-            }
+            }      
 
-            string path = '\u0022' + _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Kontainerpath, "") +
-                          '\u0022';
-            bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable, false);
-            bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly, false);
-            bool tc = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Truecrypt, false);
-            string hash = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Hash, "");
+            //TODO check if the driveletter of stored container is changed. if then change to new driveletter
+
+            if (!driveltterFromPNPID.Equals(driveletterFromPath))
+            {
+
+            }
 
             //if pim isnt used set to null
             if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false))
                 _pim = null;
 
+            // set quotes to path
+            path = '\u0022' + path + '\u0022';
 
             MountContainerDelegate mountcontainer = Mount.MountContainer;
 
