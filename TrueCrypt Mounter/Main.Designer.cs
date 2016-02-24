@@ -72,10 +72,10 @@ namespace VeraCrypt_Mounter
             this.contextMenuStripDrive = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_Drive_new = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Drive_edit = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripContainer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_Container_new = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem_Container_edit = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxDrive.SuspendLayout();
@@ -131,7 +131,7 @@ namespace VeraCrypt_Mounter
             this.driveToolStripMenuItem,
             this.containerToolStripMenuItem});
             this.ToolStripMenuItemNew.Name = "ToolStripMenuItemNew";
-            this.ToolStripMenuItemNew.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemNew.Size = new System.Drawing.Size(130, 22);
             this.ToolStripMenuItemNew.Text = "Neu";
             // 
             // driveToolStripMenuItem
@@ -151,14 +151,14 @@ namespace VeraCrypt_Mounter
             // ToolStripMenuItemEditEntry
             // 
             this.ToolStripMenuItemEditEntry.Name = "ToolStripMenuItemEditEntry";
-            this.ToolStripMenuItemEditEntry.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemEditEntry.Size = new System.Drawing.Size(130, 22);
             this.ToolStripMenuItemEditEntry.Text = "Bearbeiten";
             this.ToolStripMenuItemEditEntry.Click += new System.EventHandler(this.ToolStripMenuEditEntry_Click);
             // 
             // ToolStripMenuItemRemove
             // 
             this.ToolStripMenuItemRemove.Name = "ToolStripMenuItemRemove";
-            this.ToolStripMenuItemRemove.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemRemove.Size = new System.Drawing.Size(130, 22);
             this.ToolStripMenuItemRemove.Text = "Löschen";
             this.ToolStripMenuItemRemove.Click += new System.EventHandler(this.ToolStripMenuDelete_Click);
             // 
@@ -409,16 +409,23 @@ namespace VeraCrypt_Mounter
             // toolStripMenuItem_Drive_new
             // 
             this.toolStripMenuItem_Drive_new.Name = "toolStripMenuItem_Drive_new";
-            this.toolStripMenuItem_Drive_new.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_Drive_new.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_Drive_new.Text = "New";
             this.toolStripMenuItem_Drive_new.Click += new System.EventHandler(this.ToolStripMenuDriveNew_Click);
             // 
             // toolStripMenuItem_Drive_edit
             // 
             this.toolStripMenuItem_Drive_edit.Name = "toolStripMenuItem_Drive_edit";
-            this.toolStripMenuItem_Drive_edit.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_Drive_edit.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_Drive_edit.Text = "Edit";
             this.toolStripMenuItem_Drive_edit.Click += new System.EventHandler(this.ToolStripMenuEditEntry_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuDriveDelete_Click);
             // 
             // contextMenuStripContainer
             // 
@@ -427,7 +434,7 @@ namespace VeraCrypt_Mounter
             this.editToolStripMenuItem_Container_edit,
             this.deleteToolStripMenuItem1});
             this.contextMenuStripContainer.Name = "contextMenuStripContainer";
-            this.contextMenuStripContainer.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStripContainer.Size = new System.Drawing.Size(108, 70);
             // 
             // toolStripMenuItem_Container_new
             // 
@@ -443,17 +450,10 @@ namespace VeraCrypt_Mounter
             this.editToolStripMenuItem_Container_edit.Text = "Edit";
             this.editToolStripMenuItem_Container_edit.Click += new System.EventHandler(this.ToolStripMenuEditEntry_Click);
             // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuDriveDelete_Click);
-            // 
             // deleteToolStripMenuItem1
             // 
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
             this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuContainerDelete_Click);
             // 
@@ -462,9 +462,9 @@ namespace VeraCrypt_Mounter
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 271);
+            this.Controls.Add(this.groupBoxDrive);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBoxContainer);
-            this.Controls.Add(this.groupBoxDrive);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBoxKeyfileContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

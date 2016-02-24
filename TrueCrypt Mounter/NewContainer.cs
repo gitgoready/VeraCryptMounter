@@ -442,5 +442,15 @@ namespace VeraCrypt_Mounter
                 }
             }
         }
+
+        private void buttonSelectKeyfile_Click(object sender, EventArgs e)
+        {
+            openFileDialogKeyfile.ShowDialog();
+        }
+
+        private void openFileDialogKeyfile_FileOk(object sender, CancelEventArgs e)
+        {
+            textBoxKeyfile.Text = openFileDialogKeyfile.FileName;
+        }
     }
 }

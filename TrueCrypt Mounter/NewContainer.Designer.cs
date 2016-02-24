@@ -59,6 +59,8 @@
             this.checkBoxPassword = new System.Windows.Forms.CheckBox();
             this.buttonShowPassword = new System.Windows.Forms.Button();
             this.buttonSavePassword = new System.Windows.Forms.Button();
+            this.buttonSelectKeyfile = new System.Windows.Forms.Button();
+            this.openFileDialogKeyfile = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxDescription.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.groupBoxKyfilename.SuspendLayout();
@@ -154,6 +156,7 @@
             // 
             // groupBoxKyfilename
             // 
+            this.groupBoxKyfilename.Controls.Add(this.buttonSelectKeyfile);
             this.groupBoxKyfilename.Controls.Add(this.checkBoxNoKeyfile);
             this.groupBoxKyfilename.Controls.Add(this.textBoxKeyfile);
             this.groupBoxKyfilename.Location = new System.Drawing.Point(12, 154);
@@ -374,6 +377,21 @@
             this.buttonSavePassword.UseVisualStyleBackColor = true;
             this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
             // 
+            // buttonSelectKeyfile
+            // 
+            this.buttonSelectKeyfile.Location = new System.Drawing.Point(124, 45);
+            this.buttonSelectKeyfile.Name = "buttonSelectKeyfile";
+            this.buttonSelectKeyfile.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectKeyfile.TabIndex = 9;
+            this.buttonSelectKeyfile.Text = "open";
+            this.buttonSelectKeyfile.UseVisualStyleBackColor = true;
+            this.buttonSelectKeyfile.Click += new System.EventHandler(this.buttonSelectKeyfile_Click);
+            // 
+            // openFileDialogKeyfile
+            // 
+            this.openFileDialogKeyfile.FileName = "openFileDialogKeyfile";
+            this.openFileDialogKeyfile.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialogKeyfile_FileOk);
+            // 
             // NewContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -447,5 +465,7 @@
         private System.Windows.Forms.Button buttonSelectDrive;
         private System.Windows.Forms.CheckBox checkBoxPassword;
         private System.Windows.Forms.Button buttonShowPassword;
+        private System.Windows.Forms.Button buttonSelectKeyfile;
+        private System.Windows.Forms.OpenFileDialog openFileDialogKeyfile;
     }
 }

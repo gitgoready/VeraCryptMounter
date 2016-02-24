@@ -602,6 +602,7 @@ namespace VeraCrypt_Mounter
             const bool beep = false;
             const bool force = false;
             string key = null;
+            string keyfilepath;
             _password = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Password, null);
             _pim = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
             var pnpid = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
@@ -612,6 +613,8 @@ namespace VeraCrypt_Mounter
             string hash = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Hash, "");
             string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter, "");
             string partnumber = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Partnummber, "");
+
+            bool nokeyfile = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, true);
 
             
             var driveletterFromPath = Path.GetPathRoot(@path);
@@ -637,10 +640,7 @@ namespace VeraCrypt_Mounter
                 }
 
                 //  Test if keyfilekontainer is mounted
-                bool nokeyfile = _config.GetValue(comboBoxContainer.SelectedItem.ToString(),
-                                                  ConfigTrm.Container.Nokeyfile, true);
 
-                string keyfilepath;
                 if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true))
                 {
                     keyfilepath = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile, "");
