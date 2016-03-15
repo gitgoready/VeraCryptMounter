@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
 {
@@ -11,19 +12,33 @@ namespace VeraCrypt_Mounter
 
         public static void MountUsb(string device)
         {
-            string test = device;
-            int ven = test.IndexOf("VEN_");
-            ven = ven + 4;
-            int prod = test.IndexOf("PROD_");
-            prod = prod + 5;
-            int venend = test.IndexOf("&", ven);
-            int prodend = test.IndexOf("&", prod);
-            string vend = test.Substring(ven, venend - ven);
-            string produ = test.Substring(prod, prodend - prod);
-            //TODO extract device info from string to get wmi info 
+            device = device.Replace(@"\\", @"\");
             
-            //WmiDriveInfo info = new WmiDriveInfo();
-            //info.
+            // Get Singelton for config
+            _config = Singleton<ConfigManager>.Instance.Init(_config);
+            string pnpid = device;
+            var start = pnpid.IndexOf("USBSTOR");
+            pnpid = pnpid.Substring(start, pnpid.Length - start -1);
+            
+            //TODO extract device info from string to get wmi info 
+#if DEBUG
+            MessageBox.Show(pnpid);
+#endif
+            string[] sections = _config.GetSectionNames();
+
+            foreach (string section in sections)
+            {
+                var configPnPid = _config.GetValue(section, ConfigTrm.Drive.Pnpdeviceid, "");
+                var configtype = _config.GetValue(section, ConfigTrm.Mainconfig.Type, "");
+
+                if (configtype == "Drive" && configPnPid == pnpid)
+                {
+                    var dmodel = _config.GetValue(section, ConfigTrm.Drive.Diskmodel, "");
+#if DEBUG
+                    MessageBox.Show(dmodel);
+#endif
+                }
+            }
 
         }
 
