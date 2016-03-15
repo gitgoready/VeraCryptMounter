@@ -209,6 +209,10 @@
       <D>Kontainer ist nicht eingebunden.</D>
       <E>Container is not mounted.</E>
     </Text>
+    <Text key="DiskNotPresentContainerMessage">
+      <D>Das Laufwerk, auf dem der Kontainer gespeichert wurde, ist nicht angeschlossen</D>
+      <E>Drive containing the container not connected</E>
+    </Text>
     <Text key="MessageDriveDelete">
       <D>Möchten sie das Lauferk wirklich löschen?</D>
       <E>Delete the Drive?</E>
