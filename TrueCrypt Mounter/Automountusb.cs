@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -9,6 +10,11 @@ namespace VeraCrypt_Mounter
     public static class Automountusb
     {
         private static Config _config = new Config();
+        private const string LanguageRegion = "AutomountUsb";
+
+        private static string _language;
+        private static string _password;
+        private static string _pim;
 
         public static void MountUsb(string device)
         {
@@ -19,8 +25,7 @@ namespace VeraCrypt_Mounter
             string pnpid = device;
             var start = pnpid.IndexOf("USBSTOR");
             pnpid = pnpid.Substring(start, pnpid.Length - start -1);
-            
-            //TODO extract device info from string to get wmi info 
+
 #if DEBUG
             MessageBox.Show(pnpid);
 #endif
@@ -35,8 +40,9 @@ namespace VeraCrypt_Mounter
                 {
                     var dmodel = _config.GetValue(section, ConfigTrm.Drive.Diskmodel, "");
 #if DEBUG
-                    MessageBox.Show(dmodel);
+                    MessageBox.Show(section);
 #endif
+                    if (_config.GetValue(section, ConfigTrm.Drive.Automountusb, false)) MountDrive(section);
                 }
             }
 
@@ -87,21 +93,21 @@ namespace VeraCrypt_Mounter
             }
             return containers;
         }
+        
 
-        private static void MountContainer(string name)
+        private static void MountDrive(string name)
         {
-            
+            _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
 
             bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, "Silentmode", true);
             const bool beep = false;
             const bool force = false;
             string key = null;
-            int i = 0;
             List<string> parlist = new List<string>();
 
             string dletter = _config.GetValue(name, ConfigTrm.Drive.Driveletter, "");
-            var _password = _config.GetValue(name, ConfigTrm.Drive.Password, null);
-            var _pim = _config.GetValue(name, ConfigTrm.Drive.Pim, null);
+            _password = _config.GetValue(name, ConfigTrm.Drive.Password, null);
+            _pim = _config.GetValue(name, ConfigTrm.Drive.Pim, null);
 
             //string partition = _config.GetValue(name, ConfigTrm.Drive.Partition, "");
             bool removable = _config.GetValue(name, ConfigTrm.Drive.Removable, false);
@@ -153,8 +159,7 @@ namespace VeraCrypt_Mounter
                 {
                     try
                     {
-                        ShowPassworteingabe(ConfigTrm.Drive.Typename,
-                            _config.GetValue(name, ConfigTrm.Drive.Pimuse, false));
+                        ShowPassworteingabe(ConfigTrm.Drive.Typename, _config.GetValue(name, ConfigTrm.Drive.Pimuse, false));
                     }
                     catch (Exception ex)
                     {
@@ -195,22 +200,36 @@ namespace VeraCrypt_Mounter
                 parlist.Add("\\Device\\Harddisk" + disknumber + "\\Partition" + partnumber);
             }
 
-            toolStripProgressBar.Visible = true;
-
-            MountDriveDelegate mountdrive = Mount.MountDrive;
-
-            mountdrive.BeginInvoke(parlist.ToArray(), dletter, key, _password, silent, beep, force, readOnly, removable, _pim, hash, tc,
-                                   CallbackHandlerMountDrive, mountdrive);
-
-            toolStripProgressBar.MarqueeAnimationSpeed = 30;
-
-            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveSucceed", _language);
-            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveFaild", _language);
-
-            Busy();
-
-            Cursor = Cursors.WaitCursor;
+            int ret = Mount.MountDrive(parlist.ToArray(), dletter, key, _password, silent, beep, force, readOnly, removable, _pim, hash, tc);
+#if DEBUG
+            if (ret == 0)
+            {
+                MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "Mountok", _language),"hallo",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+#endif
             return;
+        }
+
+        /// <summary>
+        /// Window for password input and pim
+        /// </summary>
+        /// <param name="chosen">string for drive or container</param>
+        /// <param name="pim">bool pim used or not</param>
+        public static bool ShowPassworteingabe(string chosen, bool pim)
+        {
+            var passwortDialog = new Passwordinput(chosen, pim);
+
+            // Call Passwordinput form.
+            DialogResult res = passwortDialog.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                _password = passwortDialog._password;
+                _pim = passwortDialog._pim;
+                passwortDialog.Dispose();
+                return true;
+            }
+            passwortDialog.Dispose();
+            return false;
         }
 
     }

@@ -822,4 +822,18 @@
       <E>Please select a drive.</E>
     </Text>
   </Region>
+  <Region name="AutomountUsb">
+    <Text key="DiskNotPresentMessage">
+      <D>Laufwerk nicht Angeschlossen</D>
+      <E>Drive not connected</E>
+    </Text>
+    <Text key="NoKeyfileMessage">
+      <D>Schlüsseldatei nicht vorhanden</D>
+      <E>Keyfile not present</E>
+    </Text>
+    <Text key="Mountok">
+      <D>Mount ok</D>
+      <E>Mount ok</E>
+    </Text>
+  </Region>
 </LanguagePool>
