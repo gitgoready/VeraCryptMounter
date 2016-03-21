@@ -196,7 +196,8 @@ namespace VeraCrypt_Mounter
         {
             if (_language != _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, ""))
             {
-                _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
+                _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");               
+                Properties.Settings.Default.language = _language;
                 try
                 {
                     // Fill the controls with text.

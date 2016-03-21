@@ -201,12 +201,18 @@ namespace VeraCrypt_Mounter
             }
 
             int ret = Mount.MountDrive(parlist.ToArray(), dletter, key, _password, silent, beep, force, readOnly, removable, _pim, hash, tc);
-#if DEBUG
-            if (ret == 0)
+
+            if (ret != 0)
             {
-                MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "Mountok", _language),"hallo",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                var retmes = MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "Mountfail", _language),"hallo",MessageBoxButtons.RetryCancel,MessageBoxIcon.Question);
+                if (retmes == DialogResult.Retry)
+                {
+                    _password = null;
+                    _pim = null;
+                    MountDrive(name);
+                }
             }
-#endif
+
             return;
         }
 

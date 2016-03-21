@@ -831,9 +831,9 @@
       <D>Schlüsseldatei nicht vorhanden</D>
       <E>Keyfile not present</E>
     </Text>
-    <Text key="Mountok">
-      <D>Mount ok</D>
-      <E>Mount ok</E>
+    <Text key="Mountfail">
+      <D>Einbinden vehlgeschlagen. Wollen sie es nochmal versuchen?</D>
+      <E>Mount failed. Retry mount process?</E>
     </Text>
   </Region>
 </LanguagePool>

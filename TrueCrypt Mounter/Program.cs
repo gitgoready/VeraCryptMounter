@@ -79,16 +79,7 @@ namespace VeraCrypt_Mounter
             using (var mutex = new Mutex(true, "VeraCryptMounter", out createdNew))
             {
                 if (createdNew)
-                {
-                    //DirectoryInfo info = new DirectoryInfo();
-                    //var dirKon = new DirectoryInfo(Path.Combine(Application.StartupPath, "Kontainer"));
-                    //if (!dirKon.Exists)
-                    //   Directory.CreateDirectory(Path.Combine(Application.StartupPath, "Kontainer"));
-
-                    //var dirTrue = new DirectoryInfo(Path.Combine(Application.StartupPath, "TrueCrypt"));
-                    //if (!dirTrue.Exists)
-                    //    Directory.CreateDirectory(Path.Combine(Application.StartupPath, "TrueCrypt"));
-                   
+                {               
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     

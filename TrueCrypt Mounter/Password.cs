@@ -9,6 +9,8 @@ namespace VeraCrypt_Mounter
     {
 
         private string _confDir;
+        private const string LanguageRegion = "Password";
+        private string _language = Properties.Settings.Default.language;
 
         //private readonly Config _config = new Config();
         /// <summary>
@@ -19,6 +21,7 @@ namespace VeraCrypt_Mounter
             InitializeComponent();
             toolStripStatusLabel1.Text = "";
             checkConfigPath();
+            FillLanguage();
 
             if (File.Exists(_confDir))
             {
@@ -33,7 +36,10 @@ namespace VeraCrypt_Mounter
                 textBoxOldPassword.Visible = false;
             }
         }
-        
+        private void FillLanguage()
+        {
+            LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
+        }
         private void checkConfigPath()
         {
             _confDir = string.Format("{0}\\TRM.config", Application.StartupPath);
