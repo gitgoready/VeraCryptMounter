@@ -212,7 +212,6 @@ namespace VeraCrypt_Mounter
                     MountDrive(name);
                 }
             }
-
             return;
         }
 

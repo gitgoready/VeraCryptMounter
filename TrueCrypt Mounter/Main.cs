@@ -198,6 +198,7 @@ namespace VeraCrypt_Mounter
             {
                 _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");               
                 Properties.Settings.Default.language = _language;
+                Properties.Settings.Default.Save();
                 try
                 {
                     // Fill the controls with text.
@@ -351,7 +352,7 @@ namespace VeraCrypt_Mounter
         /// <summary>
         /// Function to refresh the comboboxes.
         /// </summary>
-        private void RefreshComboboxes()
+        public void RefreshComboboxes()
         {
             // Clear list elements.
             _cbdrive.Clear();
@@ -1300,7 +1301,7 @@ namespace VeraCrypt_Mounter
             Cursor = Cursors.Arrow;
         }
 
-        private void RefreshComboboxesInvoke()
+        public void RefreshComboboxesInvoke()
         {
             RefreshComboboxes();
         }

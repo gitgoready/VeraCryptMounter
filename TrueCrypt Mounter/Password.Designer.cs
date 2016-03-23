@@ -117,9 +117,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 178);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 183);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(284, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(286, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
@@ -132,6 +132,7 @@
             // 
             // buttonChangePassword
             // 
+            this.buttonChangePassword.AutoSize = true;
             this.buttonChangePassword.Location = new System.Drawing.Point(12, 121);
             this.buttonChangePassword.Name = "buttonChangePassword";
             this.buttonChangePassword.Size = new System.Drawing.Size(103, 23);
@@ -161,19 +162,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 200);
-            this.Controls.Add(this.labelOldPassword);
-            this.Controls.Add(this.textBoxOldPassword);
+            this.ClientSize = new System.Drawing.Size(286, 205);
             this.Controls.Add(this.buttonChangePassword);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.labelOldPassword);
             this.Controls.Add(this.buttonReset);
+            this.Controls.Add(this.textBoxOldPassword);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.labelPassword_second);
             this.Controls.Add(this.labelPassword_first);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.textBoxPassword_second);
             this.Controls.Add(this.textBoxPassword_first);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Password";
             this.Text = "Input Master Password";

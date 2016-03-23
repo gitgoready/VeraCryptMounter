@@ -20,6 +20,9 @@ namespace VeraCrypt_Mounter
         {
             InitializeComponent();
             toolStripStatusLabel1.Text = "";
+#if DEBUG
+            toolStripStatusLabel1.Text = _language;
+#endif
             checkConfigPath();
             FillLanguage();
 
@@ -38,7 +41,13 @@ namespace VeraCrypt_Mounter
         }
         private void FillLanguage()
         {
-            LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
+            this.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "Caption", _language);
+            buttonCancel.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonCancel", _language);
+            buttonChangePassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonChangePassword", _language);
+            buttonOK.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOK", _language);
+            buttonReset.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonReset", _language);
+
+            //LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
         }
         private void checkConfigPath()
         {
@@ -104,7 +113,7 @@ namespace VeraCrypt_Mounter
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("to reset the password config will be deleted", "Delete Config", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            var result = MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "resetMessage", _language), "Delete Config", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Cancel)
                 return;
@@ -120,19 +129,19 @@ namespace VeraCrypt_Mounter
         {
             if (textBoxPassword_first.Text == textBoxPassword_second.Text)
             {
-                toolStripStatusLabel1.Text = "equel";
+                toolStripStatusLabel1.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "equel", _language);
                 toolStripStatusLabel1.ForeColor = Color.Green;
             }
             else
             {
-                toolStripStatusLabel1.Text = "not equel";
+                toolStripStatusLabel1.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "not equel", _language);
                 toolStripStatusLabel1.ForeColor = Color.Red;
             }
         }
 
         private void set_wrong()
         {
-            toolStripStatusLabel1.Text = "wrong password";
+            toolStripStatusLabel1.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "password wrong", _language);
             toolStripStatusLabel1.ForeColor = Color.Red;
             return;
         }

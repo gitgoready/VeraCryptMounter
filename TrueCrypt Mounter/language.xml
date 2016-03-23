@@ -836,4 +836,42 @@
       <E>Mount failed. Retry mount process?</E>
     </Text>
   </Region>
+  <Region name="Password">
+    <Text key="Caption">
+      <D>Master Passwort Eingeben</D>
+      <E>Input master password</E>
+    </Text>
+    <Text key="buttonCancel">
+      <D>Abbrechen</D>
+      <E>Cancel</E>
+    </Text>
+    <Text key="buttonChangePassword">
+      <D>Passwort ändern</D>
+      <E>Changen password</E>
+    </Text>
+    <Text key ="buttonOK">
+      <D>OK</D>
+      <E>OK</E>
+    </Text>
+    <Text key="buttonReset">
+      <D>Zurücksetzen</D>
+      <E>Reset</E>
+    </Text>
+    <Text key="resetMessage">
+      <D>Um das Passwort zu reseten, wird die Konfig gelöscht. Alle Einstellungen der angelegeten Laufwerke und Kontainer gehen verlohren.</D>
+      <E>To reset the password all configurations of Drives and Containers will be deleted.</E>
+    </Text>
+    <Text key="equel">
+      <D>Passwort übereinstimment</D>
+      <E>Password equel</E>
+    </Text>
+    <Text key="not equel">
+      <D>Passwort nicht übereinstimmend</D>
+      <E>Password not equel</E>
+    </Text>
+    <Text key="password wrong">
+      <D>Passwort Falsch</D>
+      <E>Password wrong</E>
+    </Text>
+  </Region>
 </LanguagePool>

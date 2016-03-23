@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Web;
 using System.Web.Caching;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace VeraCrypt_Mounter
@@ -23,27 +24,23 @@ namespace VeraCrypt_Mounter
 
         #endregion
 
-        #region Property: DefaultLanguage
+        #region Property: _defaultLanguage
 
         /// <summary>
         /// Standardsprache (aus Config-Datei)
         /// </summary>
-        public static string DefaultLanguage
-        {
-            get { return _config.GetValue("Grundeinstellungen", "Defaultlanguage", "E"); }
-        }
+        private string _defaultLanguage;
+
 
         #endregion
 
         #region Property: SourceFile
 
         /// <summary>
-        /// Physischer Pfad zur Xml-Datei (aus Config-Datei)
+        /// Physischer Pfad zur Xml-Datei 
         /// </summary>
-        public static string SourceFile
-        {
-            get { return _config.GetValue("Grundeinstellungen", "Languagefile", ""); }
-        }
+        private static string _sourceFile;
+
 
         #endregion
 
@@ -54,7 +51,8 @@ namespace VeraCrypt_Mounter
         /// </summary>
         private LanguagePool()
         {
-            _config = Singleton<ConfigManager>.Instance.Init(_config);
+            _sourceFile = string.Format("{0}\\language.xml", Application.StartupPath);
+            _defaultLanguage = "E";
         }
 
         #endregion
@@ -78,7 +76,7 @@ namespace VeraCrypt_Mounter
                 st.LoadStrings();
 
                 // Cache neu füllen
-                myCache.Insert(CacheKey, st, new CacheDependency(SourceFile));
+                myCache.Insert(CacheKey, st, new CacheDependency(_sourceFile));
             }
 
             // Gebe StringPool-Objekt aus Cache zurück
@@ -128,7 +126,7 @@ namespace VeraCrypt_Mounter
             _regions.Clear();
 
             // XML-File laden
-            XmlDocument xDoc = LoadSourceFile(SourceFile);
+            XmlDocument xDoc = LoadSourceFile(_sourceFile);
 
             // XML-Daten lesen
             try
@@ -176,7 +174,7 @@ namespace VeraCrypt_Mounter
             }
             catch (Exception ex)
             {
-                throw new Exception("Fehler beim einlesen des Xml-Files "+ SourceFile + ": " + ex.Message);
+                throw new Exception("Fehler beim einlesen des Xml-Files "+ _sourceFile + ": " + ex.Message);
             }
         }
 
@@ -209,7 +207,7 @@ namespace VeraCrypt_Mounter
                         if (((StringDictionary) ((Hashtable) _regions[region])[key]).ContainsKey(language))
                             text = ((StringDictionary) ((Hashtable) _regions[region])[key])[language];
                         else
-                            text = ((StringDictionary) ((Hashtable) _regions[region])[key])[DefaultLanguage];
+                            text = ((StringDictionary) ((Hashtable) _regions[region])[key])[_defaultLanguage];
 
                         return text;
                     }
@@ -231,7 +229,7 @@ namespace VeraCrypt_Mounter
 
         public string GetString(string region, string key)
         {
-            return GetString(region, key, DefaultLanguage);
+            return GetString(region, key, _defaultLanguage);
         }
 
         #endregion
