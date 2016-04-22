@@ -39,6 +39,7 @@
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
             this.checkBoxAutomountUsb = new System.Windows.Forms.CheckBox();
             this.groupBoxKyfilename = new System.Windows.Forms.GroupBox();
+            this.buttonSelectKeyfile = new System.Windows.Forms.Button();
             this.checkBoxNoKeyfile = new System.Windows.Forms.CheckBox();
             this.textBoxKeyfile = new System.Windows.Forms.TextBox();
             this.groupBoxDrive = new System.Windows.Forms.GroupBox();
@@ -59,7 +60,6 @@
             this.checkBoxPassword = new System.Windows.Forms.CheckBox();
             this.buttonShowPassword = new System.Windows.Forms.Button();
             this.buttonSavePassword = new System.Windows.Forms.Button();
-            this.buttonSelectKeyfile = new System.Windows.Forms.Button();
             this.openFileDialogKeyfile = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxDescription.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
@@ -166,6 +166,16 @@
             this.groupBoxKyfilename.TabStop = false;
             this.groupBoxKyfilename.Text = "Keyfilename";
             // 
+            // buttonSelectKeyfile
+            // 
+            this.buttonSelectKeyfile.Location = new System.Drawing.Point(124, 45);
+            this.buttonSelectKeyfile.Name = "buttonSelectKeyfile";
+            this.buttonSelectKeyfile.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectKeyfile.TabIndex = 9;
+            this.buttonSelectKeyfile.Text = "open";
+            this.buttonSelectKeyfile.UseVisualStyleBackColor = true;
+            this.buttonSelectKeyfile.Click += new System.EventHandler(this.buttonSelectKeyfile_Click);
+            // 
             // checkBoxNoKeyfile
             // 
             this.checkBoxNoKeyfile.AutoSize = true;
@@ -217,6 +227,7 @@
             // checkBoxNoDrive
             // 
             this.checkBoxNoDrive.AutoSize = true;
+            this.checkBoxNoDrive.Enabled = false;
             this.checkBoxNoDrive.Location = new System.Drawing.Point(6, 46);
             this.checkBoxNoDrive.Name = "checkBoxNoDrive";
             this.checkBoxNoDrive.Size = new System.Drawing.Size(94, 17);
@@ -376,16 +387,6 @@
             this.buttonSavePassword.Text = "Save Password";
             this.buttonSavePassword.UseVisualStyleBackColor = true;
             this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
-            // 
-            // buttonSelectKeyfile
-            // 
-            this.buttonSelectKeyfile.Location = new System.Drawing.Point(124, 45);
-            this.buttonSelectKeyfile.Name = "buttonSelectKeyfile";
-            this.buttonSelectKeyfile.Size = new System.Drawing.Size(75, 23);
-            this.buttonSelectKeyfile.TabIndex = 9;
-            this.buttonSelectKeyfile.Text = "open";
-            this.buttonSelectKeyfile.UseVisualStyleBackColor = true;
-            this.buttonSelectKeyfile.Click += new System.EventHandler(this.buttonSelectKeyfile_Click);
             // 
             // openFileDialogKeyfile
             // 

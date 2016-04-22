@@ -72,6 +72,7 @@ namespace VeraCrypt_Mounter
             var i = 0;
             foreach (Partition part in _wmidriveinfo.GetPartitionInfo(index))
             {
+
                 int intpartindex = int.Parse(part.Index) + 1;
                 comboBoxPartitions.Items.Add(intpartindex.ToString());
                 string dletter = _wmidriveinfo.GetDriveLetter(pnpdid, part.Index);

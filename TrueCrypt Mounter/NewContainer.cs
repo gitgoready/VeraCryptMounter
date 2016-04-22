@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
@@ -130,12 +131,13 @@ namespace VeraCrypt_Mounter
         private void NewKontainerEdit(string description)
         {
             _oldName = description;
+            string path = _config.GetValue(description, ConfigTrm.Container.Kontainerpath, "");
             textBoxDescription.Text = description;
             comboBoxHash.Items.AddRange(new object[] { "", "sha512", "sha256", "wirlpool", "ripemd160" });
             comboBoxHash.SelectedItem = _config.GetValue(description, ConfigTrm.Container.Hash, "");
             checkBoxNoKeyfile.Checked = _config.GetValue(description, ConfigTrm.Container.Nokeyfile, false);
             checkBoxNoDrive.Checked = _config.GetValue(description, ConfigTrm.Container.Nodrive, false);
-            textBoxKontainer.Text = _config.GetValue(description, ConfigTrm.Container.Kontainerpath, "");
+            textBoxKontainer.Text = path;
             textBoxKeyfile.Text = _config.GetValue(description, ConfigTrm.Container.Keyfile, "");
             checkBoxReadonly.Checked = _config.GetValue(description, ConfigTrm.Container.Readonly, false);
             checkBoxRemovable.Checked = _config.GetValue(description, ConfigTrm.Container.Removable, false);
@@ -157,21 +159,27 @@ namespace VeraCrypt_Mounter
 
             WmiDriveInfo wmiinfo = new WmiDriveInfo();
 
+            // TODO Automatisch ermitteln der PNPID für den pfad FEHLERBEHANDLUNG
             _pnpid = _config.GetValue(description, ConfigTrm.Container.Pnpid, "");
             _partnummber = _config.GetValue(description, ConfigTrm.Container.Partnummber, "");
+            string driveletterFromPath = Path.GetPathRoot(@path);
 
-            if (!string.IsNullOrEmpty(_pnpid) || !string.IsNullOrEmpty(_partnummber))
-            {
-                if (wmiinfo.CheckDiskPresent(_pnpid))
-                {
-                    List<DriveInfo> dinfo = wmiinfo.GetDriveinfo(_pnpid);
-                    textBoxSelectedDrive.Text = dinfo[0].Model + " Partition: " + _partnummber;
-                }
-                else
-                {
-                    textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
-                }
-            }
+            driveletterFromPath = driveletterFromPath.Replace(@"\", "");
+            string[] pnpandin = wmiinfo.GetPNPidfromDriveletter(driveletterFromPath);
+            textBoxSelectedDrive.Text = pnpandin[0] + " Partition: " + pnpandin[1];
+
+            //if (!string.IsNullOrEmpty(_pnpid) && !string.IsNullOrEmpty(_partnummber))
+            //{
+            //    if (wmiinfo.CheckDiskPresent(_pnpid))
+            //    {
+            //        List<DriveInfo> dinfo = wmiinfo.GetDriveinfo(_pnpid);
+            //        textBoxSelectedDrive.Text = dinfo[0].Model + " Partition: " + _partnummber;
+            //    }
+            //    else
+            //    {
+            //        textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
+            //    }
+            //}
 
             if (string.IsNullOrEmpty(_password))
                 buttonShowPassword.Enabled = false;

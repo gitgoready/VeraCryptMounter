@@ -598,10 +598,28 @@ namespace VeraCrypt_Mounter
 
         private void ButtonMountContainer_Click(object sender, EventArgs e)
         {
+            // first check if anything is chosen
+            try
+            {
+                // Test if entry in driverbox is chosen
+                if (comboBoxContainer.SelectedItem == null)
+                {
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "SelectionFaild",
+                                                                             _language));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             WmiDriveInfo winfo = new WmiDriveInfo();
 
             bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
             const bool beep = false;
+            string driveletterFromPath = null;
             const bool force = false;
             string key = null;
             string keyfilepath;
@@ -618,8 +636,15 @@ namespace VeraCrypt_Mounter
 
             bool nokeyfile = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, true);
 
-            
-            var driveletterFromPath = Path.GetPathRoot(@path);
+            try
+            {
+                driveletterFromPath = Path.GetPathRoot(@path);
+            }
+            catch (Exception argex)
+            {
+                //Do nothing.
+            }
+
             var driveltterFromPNPID = (!string.IsNullOrEmpty(pnpid)) ? winfo.GetDriveLetter(pnpid, partnumber) : null;
 
             toolStripLabelNotification.Visible = false;
@@ -631,14 +656,6 @@ namespace VeraCrypt_Mounter
                 {
                     if (winfo.CheckDiskPresent(pnpid))
                         throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentContainerMessage", _language));
-                }
-
-
-                // Test if entry in driverbox is chosen
-                if (comboBoxContainer.SelectedItem == null)
-                {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerSelectionFaild",
-                                                                             _language));
                 }
 
                 //  Test if keyfilekontainer is mounted
@@ -700,11 +717,14 @@ namespace VeraCrypt_Mounter
             }      
 
             //TODO check if the driveletter of stored container is changed. if then change to new driveletter
-
-            if (!driveltterFromPNPID.Equals(driveletterFromPath))
+            if (!string.IsNullOrEmpty(driveletterFromPath) && !string.IsNullOrEmpty(driveltterFromPNPID))
             {
+                if (!driveltterFromPNPID.Equals(driveletterFromPath))
+                {
 
+                }
             }
+            
 
             //if pim isnt used set to null
             if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false))
