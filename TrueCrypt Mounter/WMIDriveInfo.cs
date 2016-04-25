@@ -77,7 +77,7 @@ namespace VeraCrypt_Mounter
             return dinfo;
         }
         /// <summary>
-        /// Get drivletter 
+        /// Get drivletter for the partition on the Device.
         /// </summary>
         /// <param name="pnpdeviceid">The pnpdeviceid</param>
         /// <param name="index">Partition index</param>
@@ -106,10 +106,10 @@ namespace VeraCrypt_Mounter
         }
 
         /// <summary>
-        /// 
+        /// Get DeviceID and Partnummber for the driveletter.
         /// </summary>
         /// <param name="driveletter"></param>
-        /// <returns></returns>
+        /// <returns>String array 1# PNPDeviceID 2# Partitionumber</returns>
         public string[] GetPNPidfromDriveletter(string driveletter)
         {
 

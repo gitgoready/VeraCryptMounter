@@ -625,7 +625,7 @@ namespace VeraCrypt_Mounter
             string keyfilepath;
             _password = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Password, null);
             _pim = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
-            var pnpid = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
+            string pnpid = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
             string path = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Kontainerpath, "");
             bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable, false);
             bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly, false);
@@ -639,6 +639,7 @@ namespace VeraCrypt_Mounter
             try
             {
                 driveletterFromPath = Path.GetPathRoot(@path);
+                driveletterFromPath = driveletterFromPath.Replace(@"\", "");
             }
             catch (Exception argex)
             {
@@ -721,7 +722,8 @@ namespace VeraCrypt_Mounter
             {
                 if (!driveltterFromPNPID.Equals(driveletterFromPath))
                 {
-
+                    path = path.Substring(1, path.Length);
+                    path = driveltterFromPNPID + path;
                 }
             }
             

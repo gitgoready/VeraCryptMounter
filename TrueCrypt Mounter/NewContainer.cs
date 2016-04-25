@@ -162,11 +162,25 @@ namespace VeraCrypt_Mounter
             // TODO Automatisch ermitteln der PNPID für den pfad FEHLERBEHANDLUNG
             _pnpid = _config.GetValue(description, ConfigTrm.Container.Pnpid, "");
             _partnummber = _config.GetValue(description, ConfigTrm.Container.Partnummber, "");
-            string driveletterFromPath = Path.GetPathRoot(@path);
 
-            driveletterFromPath = driveletterFromPath.Replace(@"\", "");
-            string[] pnpandin = wmiinfo.GetPNPidfromDriveletter(driveletterFromPath);
-            textBoxSelectedDrive.Text = pnpandin[0] + " Partition: " + pnpandin[1];
+            if ( !string.IsNullOrEmpty(_pnpid) || !string.IsNullOrEmpty(_partnummber))
+            {
+                string driveletterFromPath = "";
+                try
+                {
+                    driveletterFromPath = Path.GetPathRoot(@path);
+                    driveletterFromPath = driveletterFromPath.Replace(@"\", "");
+                    string[] pnpandin = wmiinfo.GetPNPidfromDriveletter(driveletterFromPath);
+                    textBoxSelectedDrive.Text = pnpandin[0] + " Partition: " + pnpandin[1];
+                }
+                catch (Exception ex)
+                {
+                    textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
+                }
+                
+            }
+            
+
 
             //if (!string.IsNullOrEmpty(_pnpid) && !string.IsNullOrEmpty(_partnummber))
             //{
@@ -225,8 +239,10 @@ namespace VeraCrypt_Mounter
         private void buttonOk_Click(object sender, EventArgs e)
         {
             string description = textBoxDescription.Text;
+            string driveletterFromPath = "";
             string keyfile = textBoxKeyfile.Text;
             string usedriveletter = DrivelettersHelper.IsDrivletterUsedByConfig(comboBoxDriveletter.SelectedItem.ToString());
+            WmiDriveInfo wmiinfo = new WmiDriveInfo();
 
             try
             {
@@ -265,6 +281,11 @@ namespace VeraCrypt_Mounter
             try
             {
 
+                if (string.IsNullOrEmpty(description))
+                {
+                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDescriptionNullorEmpty", _language));
+                }
+
                 if (_oldName != null)
                     if (description != _oldName)
                         _config.RemoveSection(_oldName);
@@ -277,12 +298,14 @@ namespace VeraCrypt_Mounter
 
                 }
 
-                if (!checkBoxNoDrive.Checked)
-                {
-                    _config.SetValue(description, ConfigTrm.Container.Pnpid, _pnpid);
-                    _config.SetValue(description, ConfigTrm.Container.Partnummber, _partnummber);
+                driveletterFromPath = Path.GetPathRoot(@textBoxKontainer.Text);
+                driveletterFromPath = driveletterFromPath.Replace(@"\", "");
+                string[] pnpandin = wmiinfo.GetPNPidfromDriveletter(driveletterFromPath);
+                textBoxSelectedDrive.Text = pnpandin[0] + " Partition: " + pnpandin[1];
 
-                }
+                _config.SetValue(description, ConfigTrm.Container.Pnpid, pnpandin[0]);
+                _config.SetValue(description, ConfigTrm.Container.Partnummber, pnpandin[1]);
+
 
                 if (checkBoxAutomountUsb.Checked)
                 {

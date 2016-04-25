@@ -581,6 +581,10 @@
       <D>Bitte Laufwerk auswählen</D>
       <E>Please choose drive</E>
     </Text>
+    <Text key="MessageDescriptionNullorEmpty">
+      <D>Beschreibung darf nicht leer sein</D>
+      <E>Description is empty</E>
+    </Text>
     <Text key="MessageMasterPasswordWrong">
       <D>Passwort falsch</D>
       <E>wrong password</E>
