@@ -109,7 +109,7 @@ namespace VeraCrypt_Mounter
         /// Get DeviceID and Partnummber for the driveletter.
         /// </summary>
         /// <param name="driveletter"></param>
-        /// <returns>String array 1# PNPDeviceID 2# Partitionumber</returns>
+        /// <returns>null or String array 1# PNPDeviceID 2# Partitionumber</returns>
         public string[] GetPNPidfromDriveletter(string driveletter)
         {
 

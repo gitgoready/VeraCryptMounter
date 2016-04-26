@@ -79,17 +79,17 @@ namespace VeraCrypt_Mounter
                 groupBoxDescription.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxDescription", _language);
                 groupBoxPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxPath", _language);
                 groupBoxKyfilename.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxKyfilename", _language);
-                groupBoxDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxDrive", _language);
+                
                 groupBoxDriveletter.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxDriveletter", _language);
                 groupBoxMountoptions.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxMountoptions", _language);
                 checkBoxNoKeyfile.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxNoKeyfile", _language);
-                checkBoxNoDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxNoDrive", _language);
+                
                 checkBoxRemovable.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxRemovable", _language);
                 checkBoxReadonly.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxReadonly", _language);
                 buttonOk.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOk", _language);
                 buttonClose.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonClose", _language);
                 buttonOpenContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOpenContainer", _language);
-                buttonSelectDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonSelectDrive", _language);
+                
                 checkBoxAutomountUsb.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountUsb", _language);
                 checkBoxAutomountStart.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomountStart", _language);
                 groupBoxHash.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxHash", _language);
@@ -136,7 +136,7 @@ namespace VeraCrypt_Mounter
             comboBoxHash.Items.AddRange(new object[] { "", "sha512", "sha256", "wirlpool", "ripemd160" });
             comboBoxHash.SelectedItem = _config.GetValue(description, ConfigTrm.Container.Hash, "");
             checkBoxNoKeyfile.Checked = _config.GetValue(description, ConfigTrm.Container.Nokeyfile, false);
-            checkBoxNoDrive.Checked = _config.GetValue(description, ConfigTrm.Container.Nodrive, false);
+            
             textBoxKontainer.Text = path;
             textBoxKeyfile.Text = _config.GetValue(description, ConfigTrm.Container.Keyfile, "");
             checkBoxReadonly.Checked = _config.GetValue(description, ConfigTrm.Container.Readonly, false);
@@ -179,21 +179,6 @@ namespace VeraCrypt_Mounter
                 }
                 
             }
-            
-
-
-            //if (!string.IsNullOrEmpty(_pnpid) && !string.IsNullOrEmpty(_partnummber))
-            //{
-            //    if (wmiinfo.CheckDiskPresent(_pnpid))
-            //    {
-            //        List<DriveInfo> dinfo = wmiinfo.GetDriveinfo(_pnpid);
-            //        textBoxSelectedDrive.Text = dinfo[0].Model + " Partition: " + _partnummber;
-            //    }
-            //    else
-            //    {
-            //        textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
-            //    }
-            //}
 
             if (string.IsNullOrEmpty(_password))
                 buttonShowPassword.Enabled = false;
@@ -220,14 +205,6 @@ namespace VeraCrypt_Mounter
             else
             {
                 textBoxKeyfile.Enabled = true;
-            }
-        }
-
-        private void checkBoxNoDrive_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxNoDrive.Checked)
-            {
-                textBoxSelectedDrive.Text = "";
             }
         }
 
@@ -301,11 +278,16 @@ namespace VeraCrypt_Mounter
                 driveletterFromPath = Path.GetPathRoot(@textBoxKontainer.Text);
                 driveletterFromPath = driveletterFromPath.Replace(@"\", "");
                 string[] pnpandin = wmiinfo.GetPNPidfromDriveletter(driveletterFromPath);
+
+                //if no pnpdeviceid is found set to nothing
+                if (pnpandin == null)
+                {
+                    pnpandin = new string[2];
+                    pnpandin[0] = "";
+                    pnpandin[1] = "";
+                }
+
                 textBoxSelectedDrive.Text = pnpandin[0] + " Partition: " + pnpandin[1];
-
-                _config.SetValue(description, ConfigTrm.Container.Pnpid, pnpandin[0]);
-                _config.SetValue(description, ConfigTrm.Container.Partnummber, pnpandin[1]);
-
 
                 if (checkBoxAutomountUsb.Checked)
                 {
@@ -320,12 +302,13 @@ namespace VeraCrypt_Mounter
                 _config.SetValue(description, ConfigTrm.Container.Readonly, checkBoxReadonly.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Removable, checkBoxRemovable.Checked); 
                 _config.SetValue(description, ConfigTrm.Container.Nokeyfile, checkBoxNoKeyfile.Checked);
-                _config.SetValue(description, ConfigTrm.Container.Nodrive, checkBoxNoDrive.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Automountstart, checkBoxAutomountStart.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Automountusb, checkBoxAutomountUsb.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Pimuse, checkBoxPim.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Truecrypt, checkBoxTrueCrypt.Checked);
                 _config.SetValue(description, ConfigTrm.Container.Hash, hash);
+                _config.SetValue(description, ConfigTrm.Container.Pnpid, pnpandin[0]);
+                _config.SetValue(description, ConfigTrm.Container.Partnummber, pnpandin[1]);
 
                 if (!string.IsNullOrEmpty(_password))
                 {

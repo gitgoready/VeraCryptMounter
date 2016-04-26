@@ -533,10 +533,6 @@
       <D>Schlüsseldateiname</D>
       <E>Keyfilename</E>
     </Text>
-    <Text key="groupBoxDrive">
-      <D>Laufwerk des Kontainers</D>
-      <E>Drive from the container</E>
-    </Text>
     <Text key="groupBoxDriveletter">
       <D>Laufwerksbuchstabe</D>
       <E>Driveletter</E>
@@ -548,10 +544,6 @@
     <Text key="checkBoxNoKeyfile">
       <D>Keinen Keyfile</D>
       <E>No Keyfile</E>
-    </Text>
-    <Text key="checkBoxNoDrive">
-      <D>Kein Laufwerk</D>
-      <E>No drive</E>
     </Text>
     <Text key="checkBoxRemovable">
       <D>Wechsellaufwerk</D>
@@ -572,10 +564,6 @@
     <Text key="buttonOpenContainer">
       <D>Öffnen</D>
       <E>Open</E>
-    </Text>
-    <Text key="buttonSelectDrive">
-      <D>Laufwerk</D>
-      <E>Select Drive</E>
     </Text>
     <Text key="comboBoxDrives">
       <D>Bitte Laufwerk auswählen</D>
