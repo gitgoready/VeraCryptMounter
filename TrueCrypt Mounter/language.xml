@@ -233,6 +233,30 @@
       <D>Laufwerk oder Container noch eingebunden. Bitte erst auswerfen.</D>
       <E>Drive or container mounted. Please dismount.</E>  
     </Text>
+    <Text key="toolStripMenuItem_Drive_new">
+      <D>Neu</D>
+      <E>New</E>
+    </Text>
+    <Text key="toolStripMenuItem_Drive_edit">
+      <D>Bearbeiten</D>
+      <E>Edit</E>
+    </Text>
+    <Text key="deleteToolStripMenuItem">
+      <D>Löschen</D>
+      <E>Delete</E>
+    </Text>
+    <Text key="toolStripMenuItem_Container_new">
+      <D>Neu</D>
+      <E>New</E>
+    </Text>
+    <Text key="editToolStripMenuItem_Container_edit">
+      <D>Bearbeiten</D>
+      <E>Edit</E>
+    </Text>
+    <Text key="deleteToolStripMenuItem1">
+      <D>Löschen</D>
+      <E>Delete</E>
+    </Text>
   </Region>
   <Region name="MainToolTips">
     <Text key="ComboboxDriveTip">
@@ -850,7 +874,7 @@
       <E>Reset</E>
     </Text>
     <Text key="resetMessage">
-      <D>Um das Passwort zu reseten, wird die Konfig gelöscht. Alle Einstellungen der angelegeten Laufwerke und Kontainer gehen verlohren.</D>
+      <D>Um das Passwort zurückzusetzen, wird die Konfig gelöscht. Alle Einstellungen der angelegeten Laufwerke und Kontainer gehen verlohren.</D>
       <E>To reset the password all configurations of Drives and Containers will be deleted.</E>
     </Text>
     <Text key="equel">
@@ -864,6 +888,18 @@
     <Text key="password wrong">
       <D>Passwort Falsch</D>
       <E>Password wrong</E>
+    </Text>
+    <Text key="labelOldPassword">
+      <D>Altes Passwort</D>
+      <E>Old password</E>
+    </Text>
+    <Text key="labelPassword_first">
+      <D>Passwort</D>
+      <E>Password</E>
+    </Text>
+    <Text key="labelPassword_second">
+      <D>Password wiederholen</D>
+      <E>Retype password</E>
     </Text>
   </Region>
 </LanguagePool>

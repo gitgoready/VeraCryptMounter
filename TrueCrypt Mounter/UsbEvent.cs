@@ -10,17 +10,7 @@ namespace VeraCrypt_Mounter
     /// </summary>
     class UsbEvent
     {
-        private Config _config = new Config();
-        private List<string> _drives = new List<string>();
-        private List<string> _containers = new List<string>();
         private delegate string UsbAnalysisDelegate(EventArrivedEventArgs e);
-
-        public void Initialize()
-        {
-            // Get Singelton for config
-            _config = Singleton<ConfigManager>.Instance.Init(_config);
-           
-        }
 
         /// <summary>
         /// Event method if a usbdevice is pluged in.

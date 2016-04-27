@@ -12,7 +12,6 @@ namespace VeraCrypt_Mounter
         private const string LanguageRegion = "Password";
         private string _language = Properties.Settings.Default.language;
 
-        //private readonly Config _config = new Config();
         /// <summary>
         /// Password input for encrypted xml config.
         /// </summary>
@@ -46,7 +45,9 @@ namespace VeraCrypt_Mounter
             buttonChangePassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonChangePassword", _language);
             buttonOK.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonOK", _language);
             buttonReset.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonReset", _language);
-
+            labelOldPassword.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelOldPassword", _language);
+            labelPassword_first.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelPassword_first", _language);
+            labelPassword_second.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelPassword_second", _language);
             //LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
         }
         private void checkConfigPath()
@@ -164,10 +165,21 @@ namespace VeraCrypt_Mounter
 
         private void buttonChangePassword_Click(object sender, EventArgs e)
         {
-            labelOldPassword.Visible = true;
-            textBoxOldPassword.Visible = true;
-            labelPassword_second.Visible = true;
-            textBoxPassword_second.Visible = true;
+            if (labelOldPassword.Visible)
+            {
+                labelOldPassword.Visible = false;
+                textBoxOldPassword.Visible = false;
+                labelPassword_second.Visible = false;
+                textBoxPassword_second.Visible = false;
+            }
+            else
+            {
+                labelOldPassword.Visible = true;
+                textBoxOldPassword.Visible = true;
+                labelPassword_second.Visible = true;
+                textBoxPassword_second.Visible = true;
+            }
+            
         }
     }
 }

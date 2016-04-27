@@ -33,8 +33,8 @@ namespace VeraCrypt_Mounter
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        private static ManagementScope scope = new ManagementScope("root\\CIMV2");
-        private static ManagementOperationObserver observer = new ManagementOperationObserver();
+        //private static ManagementScope scope = new ManagementScope("root\\CIMV2");
+        //private static ManagementOperationObserver observer = new ManagementOperationObserver();
 
         private static string[] _driveliste;
 
@@ -52,29 +52,28 @@ namespace VeraCrypt_Mounter
         private static void Main()
         {
 
-            ManagementEventWatcher w = null;
-            WqlEventQuery q = new WqlEventQuery();
+            //ManagementEventWatcher w = null;
+            //WqlEventQuery q = new WqlEventQuery();
 
-            // Bind to local machine
+            //// Bind to local machine
 
-            scope.Options.EnablePrivileges = true; //sets required privilege
-            try
-            {
-                q.EventClassName = "__InstanceCreationEvent";
-                q.WithinInterval = new TimeSpan(0, 0, 10);
+            //scope.Options.EnablePrivileges = true; //sets required privilege
+            //try
+            //{
+            //    q.EventClassName = "__InstanceCreationEvent";
+            //    q.WithinInterval = new TimeSpan(0, 0, 10);
 
-                q.Condition = @"TargetInstance ISA 'Win32_USBControllerDevice' ";
-                w = new ManagementEventWatcher(scope, q);
+            //    q.Condition = @"TargetInstance ISA 'Win32_USBControllerDevice' ";
+            //    w = new ManagementEventWatcher(scope, q);
 
-                w.EventArrived += UsbEvent.UsbEventArrived;
-                w.Start();
+            //    w.EventArrived += UsbEvent.UsbEventArrived;
+            //    w.Start();
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            //_driveliste = DrivelettersHelper.GetUsedDriveletter();
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
             bool createdNew;
             using (var mutex = new Mutex(true, "VeraCryptMounter", out createdNew))
             {
@@ -94,8 +93,8 @@ namespace VeraCrypt_Mounter
                     {
                         Application.Exit();
                     }
-                    w.EventArrived -= UsbEvent.UsbEventArrived;
-                    w.Stop();
+                    //w.EventArrived -= UsbEvent.UsbEventArrived;
+                    //w.Stop();
                 }
                 else
                 {

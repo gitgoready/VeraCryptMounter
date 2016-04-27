@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Management;
 using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
@@ -43,6 +44,8 @@ namespace VeraCrypt_Mounter
 
         private readonly List<string> _mounteddrives = new List<string>();
         private readonly List<string> _mountedkontainer = new List<string>();
+
+        private static ManagementScope scope = new ManagementScope("root\\CIMV2");
 
         private string _language;
         private string _password;
@@ -93,12 +96,40 @@ namespace VeraCrypt_Mounter
 
         #region Constructor, Destructor
 
+
+        private void UsbEventWatcher(object main)
+        {
+            ManagementEventWatcher w = null;
+            WqlEventQuery q = new WqlEventQuery();
+
+            // Bind to local machine
+
+            scope.Options.EnablePrivileges = true; //sets required privilege
+            try
+            {
+                q.EventClassName = "__InstanceCreationEvent";
+                q.WithinInterval = new TimeSpan(0, 0, 5);
+
+                q.Condition = @"TargetInstance ISA 'Win32_USBControllerDevice' ";
+                w = new ManagementEventWatcher(scope, q);
+
+                w.EventArrived += UsbEvent.UsbEventArrived;
+                w.Start();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         ///<summary>
         /// Constructor makes all settings for the programm for first running. 
         ///</summary>
         public VeraCryptMounter()
         {
             InitializeComponent();
+            UsbEventWatcher(this);
+
 
             comboBoxDrives.ContextMenuStrip = contextMenuStripDrive;
             comboBoxContainer.ContextMenuStrip =contextMenuStripContainer ;
@@ -202,85 +233,41 @@ namespace VeraCrypt_Mounter
                 try
                 {
                     // Fill the controls with text.
-                    buttonDismount.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonDismount",
-                                                                               _language);
-                    buttonDismountContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                        "buttonDismountContainer",
-                                                                                        _language);
-                    buttonKeyfileContainerDismount.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                               "buttonKeyfileContainerDismount",
-                                                                                               _language);
-                    buttonKeyfileContainerMount.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                            "buttonKeyfileContainerMount",
-                                                                                            _language);
+                    buttonDismount.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonDismount", _language);
+                    buttonDismountContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonDismountContainer", _language);
+                    buttonKeyfileContainerDismount.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonKeyfileContainerDismount", _language);
+                    buttonKeyfileContainerMount.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonKeyfileContainerMount", _language);
                     buttonMount.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonMount", _language);
-                    buttonMountContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                     "buttonMountContainer",
-                                                                                     _language);
+                    buttonMountContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonMountContainer", _language);
                     groupBoxDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxDrive", _language);
-                    groupBoxContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxContainer",
-                                                                                  _language);
-                    groupBoxKeyfileContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                         "groupBoxKeyfileContainer",
-                                                                                         _language);
-                    ToolStripMenuItemFile.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                      "ToolStripMenuItemFile",
-                                                                                      _language);
-                    ToolStripMenuItemClose.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                       "ToolStripMenuItemClose",
-                                                                                       _language);
-                    ToolStripMenuItemEdit.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                      "ToolStripMenuItemEdit",
-                                                                                      _language);
-                    containerToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                          "ContainerToolStripMenuItem",
-                                                                                          _language);
-                    ToolStripMenuItemNew.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                          "ToolStripMenuItemNew",
-                                                                                          _language);
-                    ToolStripMenuItemEditEntry.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                           "ToolStripMenuItemEditEntry",
-                                                                                           _language);
-                    ToolStripMenuItemRemove.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                             "ToolStripMenuItemRemove",
-                                                                                             _language);
-                    driveToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                              "DriveToolStripMenuItem",
-                                                                                              _language);
-                    toolStripMenuItemSettings.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                          "toolStripMenuItemSettings",
-                                                                                          _language);
-                    ToolStripMenuItemMainSettings.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                              "ToolStripMenuItemMainSettings",
-                                                                                              _language);
-                    ToolStripMenuItemHelp.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                      "ToolStripMenuItemHelp",
-                                                                                      _language);
-                    toolStripMenuVersion.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                     "toolStripMenuVersion",
-                                                                                     _language);
-                    ToolStripMenuItemNotifyKeyfilecontainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                                        "ToolStripMenuItemNotifyKeyfilecontainer",
-                                                                                                        _language);
-                    ToolStripMenuItemNotifyRestore.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                               "ToolStripMenuItemNotifyRestore",
-                                                                                               _language);
-                    ToolStripMenuItemNotifyClose.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                             "ToolStripMenuItemNotifyClose",
-                                                                                             _language);
-                    ToolStripMenuItemNotifyMount.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                             "ToolStripMenuItemNotifyMount",
-                                                                                             _language);
-                    ToolStripMenuItemNotifyDismount.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                                "ToolStripMenuItemNotifyDismount",
-                                                                                                _language);
-                    comboBoxDrives.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxDrives",
-                                                                               _language);
-                    comboBoxContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxContainer",
-                                                                                  _language);
-                    automountConfigToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                                                 "automountConfigToolStripMenuItem",
-                                                                                                 _language);
+                    groupBoxContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxContainer", _language);
+                    groupBoxKeyfileContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxKeyfileContainer", _language);
+                    ToolStripMenuItemFile.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ToolStripMenuItemFile", _language);
+                    ToolStripMenuItemClose.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ToolStripMenuItemClose", _language);
+                    ToolStripMenuItemEdit.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"ToolStripMenuItemEdit", _language);
+                    containerToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"ContainerToolStripMenuItem", _language);
+                    ToolStripMenuItemNew.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ToolStripMenuItemNew", _language);
+                    ToolStripMenuItemEditEntry.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ToolStripMenuItemEditEntry",_language);
+                    ToolStripMenuItemRemove.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ToolStripMenuItemRemove",_language);
+                    driveToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "DriveToolStripMenuItem",_language);
+                    toolStripMenuItemSettings.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"toolStripMenuItemSettings",_language);
+                    ToolStripMenuItemMainSettings.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"ToolStripMenuItemMainSettings", _language);
+                    ToolStripMenuItemHelp.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"ToolStripMenuItemHelp",_language);
+                    toolStripMenuVersion.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "toolStripMenuVersion",_language);
+                    ToolStripMenuItemNotifyKeyfilecontainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"ToolStripMenuItemNotifyKeyfilecontainer",_language);
+                    ToolStripMenuItemNotifyRestore.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ToolStripMenuItemNotifyRestore", _language);
+                    ToolStripMenuItemNotifyClose.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"ToolStripMenuItemNotifyClose",_language);
+                    ToolStripMenuItemNotifyMount.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "ToolStripMenuItemNotifyMount",_language);
+                    ToolStripMenuItemNotifyDismount.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"ToolStripMenuItemNotifyDismount", _language);
+                    comboBoxDrives.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxDrives",_language);
+                    comboBoxContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxContainer",_language);
+                    automountConfigToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "automountConfigToolStripMenuItem",_language);
+                    toolStripMenuItem_Drive_new.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "toolStripMenuItem_Drive_new", _language);
+                    toolStripMenuItem_Drive_edit.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "toolStripMenuItem_Drive_edit", _language);
+                    deleteToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "deleteToolStripMenuItem", _language);
+                    toolStripMenuItem_Container_new.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "toolStripMenuItem_Container_new", _language);
+                    editToolStripMenuItem_Container_edit.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "editToolStripMenuItem_Container_edit", _language);
+                    deleteToolStripMenuItem1.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "deleteToolStripMenuItem1", _language);
                     //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
 
                     // Fill the tooltips with text.
@@ -717,7 +704,7 @@ namespace VeraCrypt_Mounter
                       _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile);
             }      
 
-            //TODO check if the driveletter of stored container is changed. if then change to new driveletter
+            //
             if (!string.IsNullOrEmpty(driveletterFromPath) && !string.IsNullOrEmpty(driveltterFromPNPID))
             {
                 if (!driveltterFromPNPID.Equals(driveletterFromPath))

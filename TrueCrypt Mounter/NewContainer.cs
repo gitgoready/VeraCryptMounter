@@ -210,7 +210,23 @@ namespace VeraCrypt_Mounter
 
         private void openFileDialogKontainerFileOK(object sender, CancelEventArgs e)
         {
-            textBoxKontainer.Text = openFileDialogKontainer.FileName;
+            WmiDriveInfo wmiinfo = new WmiDriveInfo();
+            string path = null;
+            string driveletterFromPath = null;
+
+            path = textBoxKontainer.Text = openFileDialogKontainer.FileName;
+
+            try
+            {
+                driveletterFromPath = Path.GetPathRoot(@path);
+                driveletterFromPath = driveletterFromPath.Replace(@"\", "");
+                string[] pnpandin = wmiinfo.GetPNPidfromDriveletter(driveletterFromPath);
+                textBoxSelectedDrive.Text = pnpandin[0] + " Partition: " + pnpandin[1];
+            }
+            catch (Exception)
+            {
+                textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
+            }
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
