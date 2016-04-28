@@ -400,9 +400,10 @@ namespace VeraCrypt_Mounter
         {
             ValidateMount vm = new ValidateMount();
             MountDriveDelegate mountdrive = Mount.MountDrive;
-            MountVareablesdrive mvd;
+            MountVareables mvd;
             string name;
 
+            // test if combobox drive select is done.
             try
             {
                 // Test if entry in driverbox is chosen. 
@@ -417,141 +418,31 @@ namespace VeraCrypt_Mounter
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            
             name = comboBoxDrives.SelectedItem.ToString();
+            //change elements to mount state
             toolStripLabelNotification.Visible = false;
-
-
-            //bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, "Silentmode", true);
-            //const bool beep = false;
-            //const bool force = false;
-            //string key = null;
-            //int i = 0;
-            //List<string> parlist = new List<string>();
-
-
-
-            //string dletter = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Driveletter, "");
-            //_password = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Password, null);
-            //_pim = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Pim, null);
-
-            ////string partition = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partition, "");
-            //bool removable = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Removable, false);
-            //bool readOnly = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Readonly, false);
-            //string hash = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Hash, "");
-            //bool tc = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Truecrypt, false);
-
-            //// check if disknumber has changed. If it has correct it
-            //string diskmodel = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskmodel, null);
-            //string diskserial = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Diskserial, null);
-            //string disknumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Disknumber, null);
-            //string partnumber = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Partnumber, null);
-            //string pnpdeviceid = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Pnpdeviceid, null);
-
-            //WmiDriveInfo info = new WmiDriveInfo();
-
-            //            try
-            //            {          
-            //                // Test if disk is connected on machine
-            //                if (!info.CheckDiskPresent(pnpdeviceid))
-            //                {
-            //                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language) + "\"" + diskmodel + "\"");
-            //                }
-
-            //                //test if keyfilekontainer is mounted
-            //                bool nokeyfile = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true);
-            //                string keyfilepath;
-            //                if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true))
-            //                {
-            //                    keyfilepath = _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Keyfile, "");
-            //                }
-            //                else
-            //                {
-            //                    keyfilepath =
-            //                    _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
-            //                    _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Keyfile, "");
-            //                }
-
-            //# if DEBUG
-            //                MessageBox.Show(keyfilepath, "Path to Keyfile");
-            //# endif
-            //                if (!nokeyfile && !File.Exists(keyfilepath))
-            //                {
-            //                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
-            //                }
-
-            //                // If a password is cached, the paswordform isn´t show 
-            //                if (string.IsNullOrEmpty(_password))
-            //                {
-            //                    try
-            //                    {
-            //                        ShowPassworteingabe(ConfigTrm.Drive.Typename, 
-            //                            _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Pimuse, false));
-            //                    }
-            //                    catch (Exception ex)
-            //                    {
-            //                        MessageBox.Show(ex.Message);
-            //                        throw;
-            //                    }
-            //                }
-            //                /** test if password is empty**/
-            //                if (string.IsNullOrEmpty(_password) && _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true))
-            //                {
-            //                    throw new Exception("Leeres Passwort ist nicht erlaubt.");
-            //                }
-            //            }
-            //            catch (Exception ex)
-            //            {
-            //                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
-            //                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //                return;
-            //            }
-
-            //            // Switch nokeyfile. if it is set key = null else key = keyfile;
-
-            //            if (!_config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Nokeyfile, true))
-            //            {
-            //                key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
-            //                         _config.GetValue(comboBoxDrives.SelectedItem.ToString(), ConfigTrm.Drive.Keyfile);
-            //            }
-            //            // get disknumber from PNPdeviceid if ther is not one use saved disknumber BAD
-
-            //            List<DriveInfo> list = info.GetDriveinfo(pnpdeviceid);
-
-            //            if (list.Count >= 1)
-            //            {
-            //                parlist.Add("\\Device\\Harddisk" + list[0].Index + "\\Partition" + partnumber);
-            //            }
-            //            else
-            //            {
-            //                parlist.Add("\\Device\\Harddisk" + disknumber + "\\Partition" + partnumber);
-            //            }
-
             toolStripProgressBar.Visible = true;
             
             try
             {
-                mvd = vm.ValidateMountDrive(this, name, _language);
+                mvd = vm.ValidateMountDrive(name, _language);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            
+            // mount drive 
             mountdrive.BeginInvoke(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, 
                                     mvd.hash, mvd.tc, CallbackHandlerMountDrive, mountdrive);
-
-            //mountdrive.BeginInvoke(parlist.ToArray(), dletter, key, _password, silent, beep, force, readOnly, removable, _pim, hash, tc,
-            //                       CallbackHandlerMountDrive, mountdrive);
-
-            toolStripProgressBar.MarqueeAnimationSpeed = 30;
-
+            
+            //change to mount state 
             _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveSucceed", _language);
             _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveFaild", _language);
-
+            toolStripProgressBar.MarqueeAnimationSpeed = 30;
             Busy();
-
             Cursor = Cursors.WaitCursor;
             return;
         }
@@ -605,6 +496,9 @@ namespace VeraCrypt_Mounter
 
         private void ButtonMountContainer_Click(object sender, EventArgs e)
         {
+            MountVareables mvd;
+            ValidateMount vm = new ValidateMount();
+            string name;
             // first check if anything is chosen
             try
             {
@@ -621,143 +515,140 @@ namespace VeraCrypt_Mounter
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            name = comboBoxContainer.SelectedItem.ToString();
+            //WmiDriveInfo winfo = new WmiDriveInfo();
 
-            WmiDriveInfo winfo = new WmiDriveInfo();
+            //bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
+            //const bool beep = false;
+            //string driveletterFromPath = null;
+            //const bool force = false;
+            //string key = null;
+            //string keyfilepath;
+            //_password = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Password, null);
+            //_pim = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
+            //string pnpid = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
+            //string path = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Kontainerpath, "");
+            //bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable, false);
+            //bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly, false);
+            //bool tc = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Truecrypt, false);
+            //string hash = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Hash, "");
+            //string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter, "");
+            //string partnumber = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Partnummber, "");
 
-            bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
-            const bool beep = false;
-            string driveletterFromPath = null;
-            const bool force = false;
-            string key = null;
-            string keyfilepath;
-            _password = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Password, null);
-            _pim = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
-            string pnpid = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
-            string path = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Kontainerpath, "");
-            bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable, false);
-            bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly, false);
-            bool tc = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Truecrypt, false);
-            string hash = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Hash, "");
-            string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter, "");
-            string partnumber = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Partnummber, "");
+            //bool nokeyfile = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, true);
 
-            bool nokeyfile = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, true);
+            //try
+            //{
+            //    driveletterFromPath = Path.GetPathRoot(@path);
+            //    driveletterFromPath = driveletterFromPath.Replace(@"\", "");
+            //}
+            //catch (Exception argex)
+            //{
+            //    //Do nothing.
+            //}
 
-            try
-            {
-                driveletterFromPath = Path.GetPathRoot(@path);
-                driveletterFromPath = driveletterFromPath.Replace(@"\", "");
-            }
-            catch (Exception argex)
-            {
-                //Do nothing.
-            }
-
-            var driveltterFromPNPID = (!string.IsNullOrEmpty(pnpid)) ? winfo.GetDriveLetter(pnpid, partnumber) : null;
+            //var driveltterFromPNPID = (!string.IsNullOrEmpty(pnpid)) ? winfo.GetDriveLetter(pnpid, partnumber) : null;
 
             toolStripLabelNotification.Visible = false;
             
             try
             {
-                // check if pnpid is set and drive is connected
-                if (!string.IsNullOrEmpty(driveltterFromPNPID))
-                {
-                    if (winfo.CheckDiskPresent(pnpid))
-                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentContainerMessage", _language));
-                }
+                //                // check if pnpid is set and drive is connected
+                //                if (!string.IsNullOrEmpty(driveltterFromPNPID))
+                //                {
+                //                    if (winfo.CheckDiskPresent(pnpid))
+                //                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentContainerMessage", _language));
+                //                }
 
-                //  Test if keyfilekontainer is mounted
+                //                //  Test if keyfilekontainer is mounted
 
-                if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true))
-                {
-                    keyfilepath = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile, "");
-                }
-                else
-                {
-                    keyfilepath =
-                     _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Container.Driveletter, "") +
-                     _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile, "");
-                }
+                //                if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true))
+                //                {
+                //                    keyfilepath = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile, "");
+                //                }
+                //                else
+                //                {
+                //                    keyfilepath =
+                //                     _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Container.Driveletter, "") +
+                //                     _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile, "");
+                //                }
 
-# if DEBUG
-                MessageBox.Show(keyfilepath + " " + comboBoxContainer.SelectedItem.ToString(), "Path to Keyfile");
-# endif
-                if (!nokeyfile && !File.Exists(keyfilepath))
-                {
-                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
-                }
+                //# if DEBUG
+                //                MessageBox.Show(keyfilepath + " " + comboBoxContainer.SelectedItem.ToString(), "Path to Keyfile");
+                //# endif
+                //                if (!nokeyfile && !File.Exists(keyfilepath))
+                //                {
+                //                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
+                //                }
 
-                /** If a password is cached, the paswordform isn´t show **/
-                if (string.IsNullOrEmpty(_password))
-                {
-                    try
-                    {
-                        bool dres = ShowPassworteingabe(ConfigTrm.Container.Typename, _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false));
-                        //if (!dres)
-                        //    throw new Exception();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        throw;
-                    }
-                }
-                /** test if password is empty**/
-                if (string.IsNullOrEmpty(_password))
-                {
-                    throw new Exception("Leeres Passwort ist nicht erlaubt.");
-                }
+                //                /** If a password is cached, the paswordform isn´t show **/
+                //                if (string.IsNullOrEmpty(_password))
+                //                {
+                //                    try
+                //                    {
+                //                        bool dres = ShowPassworteingabe(ConfigTrm.Container.Typename, _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false));
+                //                        //if (!dres)
+                //                        //    throw new Exception();
+                //                    }
+                //                    catch (Exception ex)
+                //                    {
+                //                        MessageBox.Show(ex.Message);
+                //                        throw;
+                //                    }
+                //                }
+                //                /** test if password is empty**/
+                //                if (string.IsNullOrEmpty(_password))
+                //                {
+                //                    throw new Exception("Leeres Passwort ist nicht erlaubt.");
+                //                }
+                mvd = vm.ValidateMountContainer(name, _language);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language),
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             toolStripProgressBar.Visible = true;
 
 
-            if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, false))
-            {
-                key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
-                      _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile);
-            }      
+            //if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, false))
+            //{
+            //    key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
+            //          _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile);
+            //}      
 
-            //
-            if (!string.IsNullOrEmpty(driveletterFromPath) && !string.IsNullOrEmpty(driveltterFromPNPID))
-            {
-                if (!driveltterFromPNPID.Equals(driveletterFromPath))
-                {
-                    path = path.Substring(1, path.Length);
-                    path = driveltterFromPNPID + path;
-                }
-            }
+            ////
+            //if (!string.IsNullOrEmpty(driveletterFromPath) && !string.IsNullOrEmpty(driveltterFromPNPID))
+            //{
+            //    if (!driveltterFromPNPID.Equals(driveletterFromPath))
+            //    {
+            //        path = path.Substring(1, path.Length);
+            //        path = driveltterFromPNPID + path;
+            //    }
+            //}
             
 
-            //if pim isnt used set to null
-            if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false))
-                _pim = null;
+            ////if pim isnt used set to null
+            //if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false))
+            //    _pim = null;
 
-            // set quotes to path
-            path = '\u0022' + path + '\u0022';
+            //// set quotes to path
+            //path = '\u0022' + path + '\u0022';
 
             MountContainerDelegate mountcontainer = Mount.MountContainer;
 
-            mountcontainer.BeginInvoke(path, dletter, key, _password, silent, beep, force, readOnly, removable, tc, _pim, hash,
-                                       CallbackHandlerMountContainer, mountcontainer);
+            mountcontainer.BeginInvoke(mvd.path, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe,
+                                        mvd.tc, mvd.pim, mvd.hash, CallbackHandlerMountContainer, mountcontainer);
+
+            //mountcontainer.BeginInvoke(path, dletter, key, _password, silent, beep, force, readOnly, removable, tc, _pim, hash,
+            //                           CallbackHandlerMountContainer, mountcontainer);
 
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
-
-            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerSucceed",
-                                                                                  _language);
-
+            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerSucceed", _language);
             _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerFaild", _language);
-
             Busy();
-
             Cursor = Cursors.WaitCursor;
-
             return;
         }
 
