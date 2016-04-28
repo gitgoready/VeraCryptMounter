@@ -245,6 +245,7 @@
     </Compile>
     <Compile Include="DrivelettersHelper.cs" />
     <Compile Include="Validate.cs" />
+    <Compile Include="ValidateMount.cs" />
     <Compile Include="Version.cs">
       <SubType>Form</SubType>
     </Compile>
