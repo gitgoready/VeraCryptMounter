@@ -219,6 +219,7 @@ namespace VeraCrypt_Mounter
             this.comboBoxDrives.Size = new System.Drawing.Size(261, 21);
             this.comboBoxDrives.TabIndex = 1;
             this.comboBoxDrives.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBox_Laufwerke_DrawItem);
+            this.comboBoxDrives.DropDown += new System.EventHandler(this.comboBoxDrives_DropDown);
             this.comboBoxDrives.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ComboBox_Laufwerke_MeasureItem);
             this.comboBoxDrives.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBoxDrives_MouseClick);
             // 
@@ -349,6 +350,7 @@ namespace VeraCrypt_Mounter
             this.comboBoxContainer.Size = new System.Drawing.Size(261, 21);
             this.comboBoxContainer.TabIndex = 6;
             this.comboBoxContainer.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxKontainerDrawItem);
+            this.comboBoxContainer.DropDown += new System.EventHandler(this.comboBoxContainer_DropDown);
             this.comboBoxContainer.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ComboBoxKontainer_MeasureItem);
             this.comboBoxContainer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBoxContainer_MouseClick);
             // 

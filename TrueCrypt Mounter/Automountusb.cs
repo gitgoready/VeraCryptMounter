@@ -1,34 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
 {
+    /// <summary>
+    /// Get the devices with "automount usb" from config and mount them if it is pluged in.
+    /// </summary>
     public static class Automountusb
     {
         private static Config _config = new Config();
-        private const string LanguageRegion = "AutomountUsb";
-
+        private const string LanguageRegion = "Main";
         private static string _language;
-        private static string _password;
-        private static string _pim;
 
-        public static void MountUsb(string device)
+        //TODO  Mount for Container and check for partition
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pnpid"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static void MountUsb(string pnpid)
         {
+            if (string.IsNullOrEmpty(pnpid))
+                throw new ArgumentNullException("pnpid");
+            
             // Get Singelton for config
             _config = Singleton<ConfigManager>.Instance.Init(_config);
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             ValidateMount vm = new ValidateMount();
             MountVareables mvd;
-            string pnpid = device;
             int start;
 
-            device = device.Replace(@"\\", @"\");            
-            start = pnpid.IndexOf("USBSTOR");
-            pnpid = pnpid.Substring(start, pnpid.Length - start -1);
+            try
+            {
+                pnpid = pnpid.Replace(@"\\", @"\");
+                start = pnpid.IndexOf("USBSTOR");
+                pnpid = pnpid.Substring(start, pnpid.Length - start - 1);
+            }
+            catch (Exception ex)
+            {
+                pnpid = "";
+            }
+            
 
 #if DEBUG
             MessageBox.Show(pnpid);
@@ -37,10 +51,10 @@ namespace VeraCrypt_Mounter
 
             foreach (string section in sections)
             {
-                var configPnPid = _config.GetValue(section, ConfigTrm.Drive.Pnpdeviceid, "");
-                var configtype = _config.GetValue(section, ConfigTrm.Mainconfig.Type, "");
+                string configPnPid = _config.GetValue(section, ConfigTrm.Drive.Pnpdeviceid, "");
+                string configtype = _config.GetValue(section, ConfigTrm.Mainconfig.Type, "");
 
-                if (configtype == "Drive" && configPnPid == pnpid)
+                if (configtype.Equals("Drive") && configPnPid.Equals(pnpid))
                 {
                     var dmodel = _config.GetValue(section, ConfigTrm.Drive.Diskmodel, "");
 #if DEBUG

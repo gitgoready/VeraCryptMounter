@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Management;
 using System.Windows.Forms;
 
@@ -95,8 +94,7 @@ namespace VeraCrypt_Mounter
 
         #endregion
 
-        #region Constructor, Destructor
-
+        #region USBEvent
 
         private void UsbEventWatcher(object main)
         {
@@ -123,6 +121,9 @@ namespace VeraCrypt_Mounter
                 Console.WriteLine(e.Message);
             }
         }
+        #endregion
+
+        #region Constructor, Destructor
         ///<summary>
         /// Constructor makes all settings for the programm for first running. 
         ///</summary>
@@ -1045,31 +1046,6 @@ namespace VeraCrypt_Mounter
 
         #endregion
 
-        #region Passwordinput
-        /// <summary>
-        /// Window for password input and pim
-        /// </summary>
-        /// <param name="chosen">string for drive or container</param>
-        /// <param name="pim">bool pim used or not</param>
-        public bool ShowPassworteingabe(string chosen, bool pim)
-        {
-            var passwortDialog = new Passwordinput(chosen, pim);
-
-            // Call Passwordinput form.
-            DialogResult res = passwortDialog.ShowDialog();
-            if (res == DialogResult.OK)
-            {
-                _password = passwortDialog._password;
-                _pim = passwortDialog._pim;
-                passwortDialog.Dispose();
-                return true;
-            }
-            passwortDialog.Dispose();
-            return false;
-        }
-
-        #endregion
-
         #region Comboboxes Draw Events
 
         // If you set the Draw property to DrawMode.OwnerDrawVariable, 
@@ -1409,8 +1385,10 @@ namespace VeraCrypt_Mounter
             NormalDelegate normal = Normal;
             Invoke(normal);
         }
-        #endregion     
-   
+        #endregion
+
+        #region Workflow and resizing
+
         void EnableKeyfilekontainer()
         {
             this.Size = new Size(410, 308);
@@ -1423,7 +1401,7 @@ namespace VeraCrypt_Mounter
         }
 
         private void comboBoxDrives_MouseClick(object sender, MouseEventArgs e)
-        {
+        {          
             comboBoxDrives.DroppedDown = true;
         }
 
@@ -1432,11 +1410,24 @@ namespace VeraCrypt_Mounter
             comboBoxContainer.DroppedDown = true;
         }
 
+        private void comboBoxDrives_DropDown(object sender, EventArgs e)
+        {
+            RefreshComboboxes();
+        }
+
+        private void comboBoxContainer_DropDown(object sender, EventArgs e)
+        {
+            RefreshComboboxes();
+        }
+        #endregion
+
         private void VeraCryptMounter_FormClosing(object sender, FormClosingEventArgs e)
         {
             w.Stop();
             _password = null;
             _pim = null;
         }
+
+        
     }
 }

@@ -48,6 +48,9 @@ namespace VeraCrypt_Mounter
 
         public static bool Check_password(string password)
         {
+            if (string.IsNullOrEmpty(password))
+                return false;
+
             if (password.Equals(_password))
             {
                 password = null;

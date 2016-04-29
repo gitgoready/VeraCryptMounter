@@ -46,10 +46,13 @@ namespace VeraCrypt_Mounter
     class ValidateMount
     {
         private readonly Config _config = new Config();
+        private MountVareables retstruct = new MountVareables();
+        private MountVareables mvd = new MountVareables();
         private const string LanguageRegion = "Main";
         private string _password;
         private string _pim;
 
+        #region Constructor Destructor
         public ValidateMount()
         {
             // Get Singelton for config
@@ -60,8 +63,14 @@ namespace VeraCrypt_Mounter
         {
             _password = null;
             _pim = null;
+            retstruct.password = null;
+            retstruct.pim = null;
+            mvd.password = null;
+            mvd.pim = null;
         }
+        #endregion
 
+        #region MountDrive
         /// <summary>
         /// Validate vareables for on drive in config. Makes corrections.
         /// Returns all vareables for mounting in struct from type MountVareablesdrive. 
@@ -77,52 +86,16 @@ namespace VeraCrypt_Mounter
                 throw new ArgumentNullException("name");
             if (string.IsNullOrEmpty(language))
                 throw new ArgumentNullException("language");
-            return ValidateMountDrive(name, language);
+            return ValidateDrive(name, language);
         }
 
-        ///// <summary>
-        ///// Validate vareables for on container in config. Get name from config with pnpid and partindex. 
-        ///// Returns all vareables for mounting in struct from type MountVareablesdrive. 
-        ///// </summary>
-        ///// <param name="pnpid">pnpid stored in config</param>
-        ///// <param name="partitionindex">partition index stored in config</param>
-        ///// <param name="language">selected language for gui</param>
-        ///// <returns></returns>
-        ///// <exception cref="ArgumentNullException"> thrown if parameter is null or empty</exception>
-        ///// <exception cref="Exception">thrown for user information</exception>
-        //public MountVareablesdrive ValidateMountDrive(string pnpid, string partitionindex, string language)
-        //{
-        //    string[] sections;
-
-        //    if (string.IsNullOrEmpty(pnpid))
-        //        throw new ArgumentNullException("pnpid");
-        //    if (string.IsNullOrEmpty(language))
-        //        throw new ArgumentNullException("language");
-        //    if (string.IsNullOrEmpty(partitionindex))
-        //        throw new ArgumentNullException("partindex");
-
-        //    sections = _config.GetSectionNames();
-
-        //    foreach (string sectionname in sections)
-        //    {
-        //        if (pnpid.Equals(_config.GetValue(sectionname, ConfigTrm.Drive.Pnpdeviceid)) && )
-        //        {
-
-        //        }
-        //    }
-
-        //    string name = null;
-        //    return ValidateDrive(name, language);
-        //}
-
-        #region MountDrive
+        
 
         private MountVareables ValidateDrive(string drivename, string _language)
         {
 
             List<string> parlist = new List<string>();
-            WmiDriveInfo info = new WmiDriveInfo();
-            MountVareables retstruct = new MountVareables();
+            WmiDriveInfo info = new WmiDriveInfo();           
             List<DriveInfo> list;
             string keyfilepath = null;
             const bool beep = false;
@@ -219,19 +192,36 @@ namespace VeraCrypt_Mounter
             retstruct.hash = hash;
             retstruct.tc = tc;
 
+            //set password an pim to null
+            _password = null;
+            _pim = null;
+
             return retstruct;
         }
         #endregion
 
+        #region MountContainer
+        /// <summary>
+        /// Gets mount vareables for on container. Validate this and correkt if needed. Returns struct with all needed vareables.
+        /// </summary>
+        /// <param name="name">Name in config section</param>
+        /// <param name="language">Selected language string</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
         public MountVareables ValidateMountContainer(string name, string language)
         {
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(language))
+                throw new ArgumentNullException("language");
+
             return ValidateContainer(name, language);
         }
 
         private MountVareables ValidateContainer(string name, string _language)
         {
             WmiDriveInfo winfo = new WmiDriveInfo();
-            MountVareables mvd = new MountVareables();
 
             bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
             const bool beep = false;
@@ -342,10 +332,17 @@ namespace VeraCrypt_Mounter
             mvd.removalbe = removable;
             mvd.tc = tc;
             mvd.pim = _pim;
-            mvd.hash = hash;     
+            mvd.hash = hash;
+
+            //set password an pim to null
+            _password = null;
+            _pim = null;     
 
             return mvd;
         }
+        #endregion
+
+        #region Passwortinput
         /// <summary>
         /// Window for password input and pim
         /// </summary>
@@ -368,4 +365,5 @@ namespace VeraCrypt_Mounter
             return false;
         }
     }
+    #endregion
 }
