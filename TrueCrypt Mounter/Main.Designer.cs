@@ -183,7 +183,6 @@ namespace VeraCrypt_Mounter
             this.automountConfigToolStripMenuItem.Name = "automountConfigToolStripMenuItem";
             this.automountConfigToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.automountConfigToolStripMenuItem.Text = "Automount config";
-            this.automountConfigToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuAutomountConfig_Click);
             // 
             // ToolStripMenuItemHelp
             // 

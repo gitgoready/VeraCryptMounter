@@ -48,8 +48,6 @@ namespace VeraCrypt_Mounter
         private ManagementEventWatcher w = null;
 
         private string _language;
-        private string _password;
-        private string _pim;
         private string _lablefailed;
         private string _lablesuccseed;
        
@@ -92,9 +90,73 @@ namespace VeraCrypt_Mounter
 
         public delegate void RefreshComboboxesInvokeDelegate();
 
+        private delegate string UsbAnalysisDelegate(EventArrivedEventArgs e);
+
         #endregion
 
         #region USBEvent
+
+        /// <summary>
+        /// Event method if a usbdevice is pluged in.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void UsbEventArrived(object sender, EventArrivedEventArgs e)
+        {
+            UsbAnalysisDelegate aus = UsbEventAnalysing;
+            aus.BeginInvoke(e, UsbCallback, aus);
+        }
+
+
+        /// <summary>
+        /// Analyse if the usbdevice is a sorrage device.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>true if it is a storage device</returns>
+        private static string UsbEventAnalysing(EventArrivedEventArgs e)
+        {
+            // Get the Event Object.
+            foreach (PropertyData pd in e.NewEvent.Properties)
+            {
+                ManagementBaseObject mbo = null;
+                if ((mbo = pd.Value as ManagementBaseObject) != null)
+                {
+                    foreach (PropertyData prop in mbo.Properties)
+                    {
+                        string test = (string)prop.Value;
+                        if (test != null)
+                        {
+                            if (test.Contains("USBSTOR"))
+                            {
+                                Automountusb.MountUsb(test);
+
+                                return test;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        private static void UsbCallback(IAsyncResult result)
+        {
+            var ausresult = (UsbAnalysisDelegate)result.AsyncState;
+            string res = ausresult.EndInvoke(result);
+            if (res != null)
+            {
+                try
+                {
+                    //Automountusb.MountUsb(res);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + ex.Source);
+                    return;
+                }
+
+            }
+        }
 
         private void UsbEventWatcher(object main)
         {
@@ -112,7 +174,7 @@ namespace VeraCrypt_Mounter
                 q.Condition = @"TargetInstance ISA 'Win32_USBControllerDevice' ";
                 w = new ManagementEventWatcher(scope, q);
 
-                w.EventArrived += UsbEvent.UsbEventArrived;
+                w.EventArrived += UsbEventArrived;
                 w.Start();
 
             }
@@ -214,8 +276,6 @@ namespace VeraCrypt_Mounter
         /// </summary>
         ~VeraCryptMounter()
         {
-            _password = null;
-            _pim = null;
         }
 
         #endregion
@@ -996,18 +1056,7 @@ namespace VeraCrypt_Mounter
             Application.Exit();
         }
 
-        private void ToolStripMenuAutomountConfig_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var dialogBox = new AutomountConfig();
-                dialogBox.ShowDialog(); // Returns when dialog box has closed
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        
 
         #endregion 
 
@@ -1424,8 +1473,6 @@ namespace VeraCrypt_Mounter
         private void VeraCryptMounter_FormClosing(object sender, FormClosingEventArgs e)
         {
             w.Stop();
-            _password = null;
-            _pim = null;
         }
 
         

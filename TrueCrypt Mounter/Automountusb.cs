@@ -20,11 +20,11 @@ namespace VeraCrypt_Mounter
         /// </summary>
         /// <param name="pnpid"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void MountUsb(string pnpid)
+        public static int MountUsb(string pnpid)
         {
             if (string.IsNullOrEmpty(pnpid))
                 throw new ArgumentNullException("pnpid");
-            
+
             // Get Singelton for config
             _config = Singleton<ConfigManager>.Instance.Init(_config);
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
@@ -69,15 +69,16 @@ namespace VeraCrypt_Mounter
                         catch (Exception ex)
                         {
                             MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
+                            return 0;
                         }
 
-                        Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
-                        
+                        int res = Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
+
+                        return res;
                     }
                 }
             }
-
+            return 1;
         }
 
         /// <summary>
