@@ -476,7 +476,6 @@ namespace VeraCrypt_Mounter
             this.Name = "VeraCryptMounter";
             this.Text = "VeraCryptMounter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VeraCryptMounter_FormClosing);
-            this.Load += new System.EventHandler(this.VeraCryptMounter_Load);
             this.Resize += new System.EventHandler(this.VeraCryptMounter_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

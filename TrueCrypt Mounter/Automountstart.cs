@@ -3,241 +3,88 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading;
-
+using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
 {
+    /// <summary>
+    /// Class for mounting all config whitch have automountstart set.
+    /// </summary>
     public class Automountstart
     {
 
         private static Config _config = new Config();
-        private Automount _mystart;
-        private string _password;
         private const string LanguageRegion = "Automountstart";
-        private string _language;
+        /// <summary>
+        /// Name in config for mounted drive
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// state if mount succeed.
+        /// </summary>
+        public bool State { get; set; }
 
         public Automountstart()
         {
             _config = Singleton<ConfigManager>.Instance.Init(_config);
         }
 
-        public void StartMount(object start)
+        public void StartMount()
         {
-
-            _mystart = (Automount) start;
-            _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
+            string _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
+            ValidateMount vm = new ValidateMount();
+            MountVareables mvd;
             List<string> containers;
             List<string> drives;
-
-
-            if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, false))
+            containers = GetAutoContainers();
+            drives = GetAutoDrives();
+            
+            foreach (string name in containers)
             {
-                string driveletter = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "");
-                string hash = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, "");
-                bool pim = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, false);
-                _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "KeyfilecontainerTryMount", _language), true);
-
-                if (DrivelettersHelper.IsDriveletterFree(driveletter))
+                try
                 {
-                    bool ro = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, true);
-                    bool rm = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, false);
-
-                    string path = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Kontainerpath, "");
-                    if (File.Exists(path))
-                    {
-                        path = '\u0022' + path + '\u0022';
-
-                        _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "KeyfilecontainerState", _language), false);
-
-                        int ret = Mount.MountKeyfileContainer(path, driveletter, false, false, false, ro, rm, hash, pim);
-
-                        if (ret == 0)
-                        {
-                            _mystart.SetLastText(LanguagePool.GetInstance().GetString(LanguageRegion, "Succeed", _language), Color.Green);
-                        }
-                        else
-                        {
-                            _mystart.SetLastText(LanguagePool.GetInstance().GetString(LanguageRegion, "Faild", _language), Color.Red);
-                        }
-                    }
-                    else
-                    {
-                        _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "KeyfilecontainerNotExist", _language), true);
-                    }
+                    mvd = vm.ValidateMountContainer(name, _language);
                 }
-                else
+                catch (Exception ex)
                 {
-                    _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "KeyfilecontainerMounted", _language), true);
+                    MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+
+                int ret = Mount.MountContainer(mvd.path, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.tc, mvd.pim, mvd.hash);
+
+                if (ret == 0)
+                    State = true;
             }
-
-            if (_config.GetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Mountcontainerstart, false))
+            
+            foreach (string name in drives)
             {
-                containers = GetAutoContainers();
-
-                if (containers != null)
-                    foreach (var container in containers)
-                    {
-                        string path = _config.GetValue(container, ConfigTrm.Container.Kontainerpath, "");
-
-                        _mystart.SetFirstText(container + LanguagePool.GetInstance().GetString(LanguageRegion, "TryMount", _language), true);
-
-                        if (File.Exists(path))
-                        {
-                            string driveletter = _config.GetValue(container, ConfigTrm.Container.Driveletter, "");
-
-                            if (DrivelettersHelper.IsDriveletterFree(driveletter))
-                            {
-                                bool ro = _config.GetValue(container, ConfigTrm.Container.Readonly, false);
-                                string hash = _config.GetValue(container, ConfigTrm.Container.Hash, "");
-                                string keyfile = null;
-                                bool rm = _config.GetValue(container, ConfigTrm.Container.Removable, false);
-                                bool beep = false;
-                                bool force = false;
-                                bool silent = true;
-                                path = '\u0022' + path + '\u0022';
-                                if (!_config.GetValue(container, ConfigTrm.Container.Nokeyfile, false))
-                                {
-                                    keyfile =
-                                        _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter,"") +
-                                        _config.GetValue(container, ConfigTrm.Container.Keyfile);
-                                }
-                                _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "Password", _language) + container, true);
-
-                                _mystart.SetFocus();
-
-                                try
-                                {
-                                    Monitor.Enter(this);
-                                    if ((_mystart.Password == null) && (_mystart.PasswordCached == null))
-                                    {
-                                        Monitor.Wait(this);
-                                    }
-                                    if (_mystart.Password != null)
-                                    {
-                                        _password = _mystart.Password;
-                                        _mystart.Password = null;
-                                    }
-                                    else
-                                    {
-                                        _password = _mystart.PasswordCached;
-                                    }
-                                }
-                                finally 
-                                {
-                                    Monitor.Exit(this);
-                                }
-
-                                _mystart.SetFirstText(container + LanguagePool.GetInstance().GetString(LanguageRegion, "State", _language), false);
-
-
-                                int ret = Mount.MountContainer(path, driveletter, keyfile, _password, silent, beep,
-                                                               force, ro, rm, false, null, hash);
-
-                                if (ret == 0)
-                                {
-                                    _mystart.SetLastText(LanguagePool.GetInstance().GetString(LanguageRegion, "Succeed", _language), Color.Green);
-                                }
-                                else
-                                {
-                                    _mystart.SetLastText(LanguagePool.GetInstance().GetString(LanguageRegion, "Faild", _language), Color.Red);
-                                }
-                            }
-                            else
-                            {
-                                _mystart.SetFirstText(container + LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerMounted", _language), true);
-
-                            }
-                        }
-                        else
-                        {
-                            _mystart.SetFirstText(container + LanguagePool.GetInstance().GetString(LanguageRegion, "ContainerNotExist", _language), true);
-                        }
+                try
+                {
+                    mvd = vm.ValidateMountDrive(name, _language);
                 }
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-            if (_config.GetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Mountdrivesstart, false))
-            {
-                _mystart.Password = null;
-                _mystart.PasswordCached = null;
+                int res = Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
 
-                string pim = null;
+                if (res == 0)
+                    State = true;
 
-                drives = GetAutoDrives();
-                if (drives != null)
-                    foreach (string drive in drives)
-                    {
-                        string keyfile = _config.GetValue(drive, ConfigTrm.Drive.Keyfile, "");
-                        string driveletter = _config.GetValue(drive, ConfigTrm.Drive.Driveletter, "");
-
-                        _mystart.SetFirstText(drive + LanguagePool.GetInstance().GetString(LanguageRegion, "TryMount", _language), true);
-
-                        if (DrivelettersHelper.IsDriveletterFree(driveletter))
-                        {
-                            string[] partition = null;
-                            partition.SetValue(_config.GetValue(drive, ConfigTrm.Drive.Partition, ""), 0);
-                            bool ro = _config.GetValue(drive, ConfigTrm.Drive.Readonly, false);
-                            bool rm = _config.GetValue(drive, ConfigTrm.Drive.Removable, false);
-                            bool tc = _config.GetValue(drive, ConfigTrm.Drive.Truecrypt, false);
-                            string hash = _config.GetValue(drive, ConfigTrm.Drive.Hash, "");
-
-
-                            _mystart.SetFirstText(LanguagePool.GetInstance().GetString(LanguageRegion, "Password", _language) + drive, true);
-
-                            _mystart.SetFocus();
-
-                            try
-                            {
-                                Monitor.Enter(this);
-                                if ((_mystart.Password == null) && (_mystart.PasswordCached == null))
-                                {
-                                    Monitor.Wait(this);
-                                }
-                                if (_mystart.Password != null)
-                                {
-                                    _password = _mystart.Password;
-                                    _mystart.Password = null;
-                                }
-                                else
-                                {
-                                    _password = _mystart.PasswordCached;
-                                }
-                            }
-                            finally 
-                            {
-                                Monitor.Exit(this);
-                            }
-
-                            _mystart.SetFirstText(drive + LanguagePool.GetInstance().GetString(LanguageRegion, "State", _language), false);
-
-                            int ret = Mount.MountDrive(partition, driveletter, keyfile, _password, true, false, false, ro, rm, pim, hash, tc);
-
-                            if (ret == 0)
-                            {
-                                _mystart.SetLastText(LanguagePool.GetInstance().GetString(LanguageRegion, "Succeed", _language), Color.Green);
-                            }
-                            else
-                            {
-                                _mystart.SetLastText(LanguagePool.GetInstance().GetString(LanguageRegion, "Faild", _language), Color.Red);
-                            }
-                        }
-                        else
-                        {
-                            _mystart.SetFirstText(drive + LanguagePool.GetInstance().GetString(LanguageRegion, "DriveMounted", _language), true);
-                        }
-                        
-                    }
-            }
-            _mystart.ButtonVisible();
+                return;
+            }            
         }
-
 
         /// <summary>
         /// Get list of drives which have the automount label.
         /// </summary>
         /// <param name="automount">ConfigTrm.Drives.Automountstart</param>
         /// <returns>List of drives</returns>
-        private static List<string> GetAutoDrives()
+        private List<string> GetAutoDrives()
         {
             List<string> drives = new List<string>();
 
@@ -261,7 +108,7 @@ namespace VeraCrypt_Mounter
         /// </summary>
         /// <param name="automount">ConfigTrm.Containers.Automountstart</param>
         /// <returns>List of containers</returns>
-        private static List<string> GetAutoContainers()
+        private List<string> GetAutoContainers()
         {
             List<string> containers = new List<string>();
 

@@ -257,6 +257,14 @@
       <D>Löschen</D>
       <E>Delete</E>
     </Text>
+    <Text key="Automountusbsucceed">
+      <D>: wurde erfolgreich automatisch eingebunden</D>
+      <E>: is automatic mounted.</E>
+    </Text>
+    <Text key="Automountusbfailed">
+      <D>: konnte nicht automatisch eingebund werden.</D>
+      <E>: automatic mount failed.</E>
+    </Text>
   </Region>
   <Region name="MainToolTips">
     <Text key="ComboboxDriveTip">

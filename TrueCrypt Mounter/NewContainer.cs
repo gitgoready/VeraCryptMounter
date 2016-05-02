@@ -226,6 +226,8 @@ namespace VeraCrypt_Mounter
             catch (Exception)
             {
                 textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
+                checkBoxAutomountUsb.Checked = false;
+                checkBoxAutomountUsb.Enabled = false;
             }
         }
 

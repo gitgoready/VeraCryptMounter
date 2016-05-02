@@ -7,20 +7,30 @@ namespace VeraCrypt_Mounter
     /// <summary>
     /// Get the devices with "automount usb" from config and mount them if it is pluged in.
     /// </summary>
-    public static class Automountusb
+    public class Automountusb
     {
         private static Config _config = new Config();
         private const string LanguageRegion = "Main";
         private static string _language;
 
-        //TODO  Mount for Container and check for partition
+        /// <summary>
+        /// Name in config for mounted drive
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// state if mount succeed.
+        /// </summary>
+        public bool State { get; set; }
+
+        //TODO check for partition
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pnpid"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static int MountUsb(string pnpid)
+        public Automountusb MountUsb(string pnpid)
         {
             if (string.IsNullOrEmpty(pnpid))
                 throw new ArgumentNullException("pnpid");
@@ -30,6 +40,7 @@ namespace VeraCrypt_Mounter
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             ValidateMount vm = new ValidateMount();
             MountVareables mvd;
+            State = false;
             int start;
 
             try
@@ -38,47 +49,82 @@ namespace VeraCrypt_Mounter
                 start = pnpid.IndexOf("USBSTOR");
                 pnpid = pnpid.Substring(start, pnpid.Length - start - 1);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 pnpid = "";
-            }
-            
+            }           
 
 #if DEBUG
             MessageBox.Show(pnpid);
 #endif
             string[] sections = _config.GetSectionNames();
+            string configPnPid = "";
 
             foreach (string section in sections)
             {
-                string configPnPid = _config.GetValue(section, ConfigTrm.Drive.Pnpdeviceid, "");
-                string configtype = _config.GetValue(section, ConfigTrm.Mainconfig.Type, "");
+                Name = section;
+                string configtype = _config.GetValue(section, ConfigTrm.Drive.Type, "");
 
-                if (configtype.Equals("Drive") && configPnPid.Equals(pnpid))
+                if (configtype.Equals("Container"))    
                 {
-                    var dmodel = _config.GetValue(section, ConfigTrm.Drive.Diskmodel, "");
-#if DEBUG
-                    MessageBox.Show(section);
-#endif
-                    if (_config.GetValue(section, ConfigTrm.Drive.Automountusb, false))
+                    configPnPid = _config.GetValue(section, ConfigTrm.Container.Pnpid, "");
+                    if (configPnPid.Equals(pnpid))
                     {
-                        try
+                        if (_config.GetValue(section, ConfigTrm.Container.Automountusb, false))
                         {
-                            mvd = vm.ValidateMountDrive(section, _language);
+                            try
+                            {
+                                mvd = vm.ValidateMountContainer(section, _language);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return this;
+                            }
+
+                            int ret = Mount.MountContainer(mvd.path, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.tc, mvd.pim, mvd.hash);
+
+                            if (ret == 0)
+                                State = true;
+                            return this;
+
                         }
-                        catch (Exception ex)
+                    }
+                }
+
+
+                if (configtype.Equals("Drive"))
+                {
+                    configPnPid = _config.GetValue(section, ConfigTrm.Drive.Pnpdeviceid, "");
+
+                    if (configPnPid.Equals(pnpid))
+                    {                    
+#if DEBUG
+                        MessageBox.Show(section);
+#endif
+                        if (_config.GetValue(section, ConfigTrm.Drive.Automountusb, false))
                         {
-                            MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return 0;
+                            try
+                            {
+                                mvd = vm.ValidateMountDrive(section, _language);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return this;
+                            }
+
+                            int res = Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
+
+                            if (res == 0)
+                                State = true;
+
+                            return this;
                         }
-
-                        int res = Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
-
-                        return res;
                     }
                 }
             }
-            return 1;
+            return this;
         }
 
         /// <summary>

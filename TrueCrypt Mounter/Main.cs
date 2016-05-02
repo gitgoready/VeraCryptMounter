@@ -90,7 +90,8 @@ namespace VeraCrypt_Mounter
 
         public delegate void RefreshComboboxesInvokeDelegate();
 
-        private delegate string UsbAnalysisDelegate(EventArrivedEventArgs e);
+        private delegate Automountusb UsbAnalysisDelegate(EventArrivedEventArgs e);
+
 
         #endregion
 
@@ -101,9 +102,9 @@ namespace VeraCrypt_Mounter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public static void UsbEventArrived(object sender, EventArrivedEventArgs e)
+        public void UsbEventArrived(object sender, EventArrivedEventArgs e)
         {
-            UsbAnalysisDelegate aus = UsbEventAnalysing;
+            UsbAnalysisDelegate aus = UsbEventAnalysing;     
             aus.BeginInvoke(e, UsbCallback, aus);
         }
 
@@ -113,8 +114,9 @@ namespace VeraCrypt_Mounter
         /// </summary>
         /// <param name="e"></param>
         /// <returns>true if it is a storage device</returns>
-        private static string UsbEventAnalysing(EventArrivedEventArgs e)
+        private static Automountusb UsbEventAnalysing(EventArrivedEventArgs e)
         {
+            Automountusb autousb = new Automountusb();
             // Get the Event Object.
             foreach (PropertyData pd in e.NewEvent.Properties)
             {
@@ -128,9 +130,8 @@ namespace VeraCrypt_Mounter
                         {
                             if (test.Contains("USBSTOR"))
                             {
-                                Automountusb.MountUsb(test);
-
-                                return test;
+                                Automountusb res = autousb.MountUsb(test);
+                                return res;
                             }
                         }
                     }
@@ -138,33 +139,41 @@ namespace VeraCrypt_Mounter
             }
             return null;
         }
-
-        private static void UsbCallback(IAsyncResult result)
+        
+        /// <summary>
+        /// Changed notification if automunt has tried to mount anything.
+        /// </summary>
+        /// <param name="result"></param>
+        private void UsbCallback(IAsyncResult result)
         {
             var ausresult = (UsbAnalysisDelegate)result.AsyncState;
-            string res = ausresult.EndInvoke(result);
+            Automountusb res = ausresult.EndInvoke(result);
+            int completion = 1;
             if (res != null)
             {
-                try
+                if (res.State)
+                    completion = 0;
+
+                _lablesuccseed = res.Name + LanguagePool.GetInstance().GetString(LanguageRegion, "Automountusbsucceed", _language);
+                _lablefailed = res.Name + LanguagePool.GetInstance().GetString(LanguageRegion, "Automountusbfailed", _language);
+
+                if (statusStrip1.InvokeRequired)
                 {
-                    //Automountusb.MountUsb(res);
+                    SetLableNotificationDelegate set = SetLableNotification;
+                    Invoke(set, new object[] { completion });
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message + ex.Source);
-                    return;
-                }
+                else
+                    SetLableNotification(completion);
 
             }
         }
 
-        private void UsbEventWatcher(object main)
-        {
-            
+        /// <summary>
+        /// Set Eventwatcher for usb event. called if any usb event is signaled.
+        /// </summary>
+        private void UsbEventWatcher()
+        {            
             WqlEventQuery q = new WqlEventQuery();
-
-            // Bind to local machine
-
             scope.Options.EnablePrivileges = true; //sets required privilege
             try
             {
@@ -192,7 +201,7 @@ namespace VeraCrypt_Mounter
         public VeraCryptMounter()
         {
             InitializeComponent();
-            UsbEventWatcher(this);
+            UsbEventWatcher();
 
 
             comboBoxDrives.ContextMenuStrip = contextMenuStripDrive;
@@ -268,8 +277,8 @@ namespace VeraCrypt_Mounter
 
             // Fill controls with selected language
             LanguageFill();
-
             ValidateTest();
+            //AutomountAtStart();
         }
         /// <summary>
         /// Destructor set passwords and PIM to null.
@@ -279,6 +288,13 @@ namespace VeraCrypt_Mounter
         }
 
         #endregion
+
+        private void AutomountAtStart()
+        {
+            //TODO workflow for auto mounting
+            Automountstart ams = new Automountstart();
+            ams.StartMount();
+        }
 
         #region Language settings
 
@@ -349,33 +365,6 @@ namespace VeraCrypt_Mounter
         #endregion
 
         #region Initialize and Refreshes
-
-
-        /// <summary>
-        /// On load preform automount funktions
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void VeraCryptMounter_Load(object sender, EventArgs e)
-        {
-            
-            if (_config.GetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Usestartautomount, false))
-            {
-                try
-                {
-                    var start = new Automount("start");
-                    start.ShowDialog();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message + ex.Source);
-                    return;
-                }
-                RefreshComboboxes();
-                
-            }
-        }
-
 
         /// <summary>
         /// Method to validate the mainconfig. 
@@ -538,10 +527,8 @@ namespace VeraCrypt_Mounter
 
             dismount.BeginInvoke(dletter, true, false, false, CallbackHandlerDismount, dismount);
 
-            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveDismountSucceed",
-                                                                 _language);
-            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveDismountFaild",
-                                                               _language);
+            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveDismountSucceed",_language);
+            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationDriveDismountFaild",_language);
             toolStripProgressBar.Visible = true;
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
 
@@ -577,91 +564,12 @@ namespace VeraCrypt_Mounter
                 return;
             }
             name = comboBoxContainer.SelectedItem.ToString();
-            //WmiDriveInfo winfo = new WmiDriveInfo();
-
-            //bool silent = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
-            //const bool beep = false;
-            //string driveletterFromPath = null;
-            //const bool force = false;
-            //string key = null;
-            //string keyfilepath;
-            //_password = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Password, null);
-            //_pim = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
-            //string pnpid = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pim, null);
-            //string path = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Kontainerpath, "");
-            //bool removable = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Removable, false);
-            //bool readOnly = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Readonly, false);
-            //bool tc = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Truecrypt, false);
-            //string hash = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Hash, "");
-            //string dletter = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Driveletter, "");
-            //string partnumber = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Partnummber, "");
-
-            //bool nokeyfile = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, true);
-
-            //try
-            //{
-            //    driveletterFromPath = Path.GetPathRoot(@path);
-            //    driveletterFromPath = driveletterFromPath.Replace(@"\", "");
-            //}
-            //catch (Exception argex)
-            //{
-            //    //Do nothing.
-            //}
-
-            //var driveltterFromPNPID = (!string.IsNullOrEmpty(pnpid)) ? winfo.GetDriveLetter(pnpid, partnumber) : null;
 
             toolStripLabelNotification.Visible = false;
             
             try
             {
-                //                // check if pnpid is set and drive is connected
-                //                if (!string.IsNullOrEmpty(driveltterFromPNPID))
-                //                {
-                //                    if (winfo.CheckDiskPresent(pnpid))
-                //                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentContainerMessage", _language));
-                //                }
-
-                //                //  Test if keyfilekontainer is mounted
-
-                //                if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true))
-                //                {
-                //                    keyfilepath = _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile, "");
-                //                }
-                //                else
-                //                {
-                //                    keyfilepath =
-                //                     _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Container.Driveletter, "") +
-                //                     _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile, "");
-                //                }
-
-                //# if DEBUG
-                //                MessageBox.Show(keyfilepath + " " + comboBoxContainer.SelectedItem.ToString(), "Path to Keyfile");
-                //# endif
-                //                if (!nokeyfile && !File.Exists(keyfilepath))
-                //                {
-                //                    throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
-                //                }
-
-                //                /** If a password is cached, the paswordform isn´t show **/
-                //                if (string.IsNullOrEmpty(_password))
-                //                {
-                //                    try
-                //                    {
-                //                        bool dres = ShowPassworteingabe(ConfigTrm.Container.Typename, _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false));
-                //                        //if (!dres)
-                //                        //    throw new Exception();
-                //                    }
-                //                    catch (Exception ex)
-                //                    {
-                //                        MessageBox.Show(ex.Message);
-                //                        throw;
-                //                    }
-                //                }
-                //                /** test if password is empty**/
-                //                if (string.IsNullOrEmpty(_password))
-                //                {
-                //                    throw new Exception("Leeres Passwort ist nicht erlaubt.");
-                //                }
+                
                 mvd = vm.ValidateMountContainer(name, _language);
             }
             catch (Exception ex)
@@ -672,38 +580,10 @@ namespace VeraCrypt_Mounter
 
             toolStripProgressBar.Visible = true;
 
-
-            //if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Nokeyfile, false))
-            //{
-            //    key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
-            //          _config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Keyfile);
-            //}      
-
-            ////
-            //if (!string.IsNullOrEmpty(driveletterFromPath) && !string.IsNullOrEmpty(driveltterFromPNPID))
-            //{
-            //    if (!driveltterFromPNPID.Equals(driveletterFromPath))
-            //    {
-            //        path = path.Substring(1, path.Length);
-            //        path = driveltterFromPNPID + path;
-            //    }
-            //}
-            
-
-            ////if pim isnt used set to null
-            //if (!_config.GetValue(comboBoxContainer.SelectedItem.ToString(), ConfigTrm.Container.Pimuse, false))
-            //    _pim = null;
-
-            //// set quotes to path
-            //path = '\u0022' + path + '\u0022';
-
             MountContainerDelegate mountcontainer = Mount.MountContainer;
 
             mountcontainer.BeginInvoke(mvd.path, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe,
                                         mvd.tc, mvd.pim, mvd.hash, CallbackHandlerMountContainer, mountcontainer);
-
-            //mountcontainer.BeginInvoke(path, dletter, key, _password, silent, beep, force, readOnly, removable, tc, _pim, hash,
-            //                           CallbackHandlerMountContainer, mountcontainer);
 
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
             _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerSucceed", _language);
@@ -748,11 +628,9 @@ namespace VeraCrypt_Mounter
 
             dismount.BeginInvoke(dletter, true, false, false, CallbackHandlerDismount, dismount);
 
-            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerDismountSucceed",
-                                                                 _language);
+            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerDismountSucceed", _language);
 
-            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerDismountFaild",
-                                                               _language);
+            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationContainerDismountFaild", _language);
 
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
             Busy();
@@ -801,10 +679,8 @@ namespace VeraCrypt_Mounter
 
             mountmethode.BeginInvoke(path, dletter, false, false, false, ro, rm, hash, pim, CallbackHandlerMountKyfilecontainer, mountmethode);
 
-            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationKeyfilecontainerSucceed",
-                                                                 _language);
-            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationKeyfilecontainerFaild",
-                                                               _language);
+            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationKeyfilecontainerSucceed", _language);
+            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationKeyfilecontainerFaild",_language);
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
 
             Busy();
@@ -842,12 +718,8 @@ namespace VeraCrypt_Mounter
 
             dismount.BeginInvoke(dletter, true, false, false, CallbackHandlerDismount, dismount);
 
-            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                                 "NotificationKeyfilecontainerDismountSucceed",
-                                                                 _language);
-            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion,
-                                                               "NotificationKeyfilecontainerDismountFaild",
-                                                               _language);
+            _lablesuccseed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationKeyfilecontainerDismountSucceed",_language);
+            _lablefailed = LanguagePool.GetInstance().GetString(LanguageRegion, "NotificationKeyfilecontainerDismountFaild",_language);
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
             Busy();
             Cursor = Cursors.WaitCursor;
@@ -1472,6 +1344,7 @@ namespace VeraCrypt_Mounter
 
         private void VeraCryptMounter_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //stop usb event watcher on close
             w.Stop();
         }
 
