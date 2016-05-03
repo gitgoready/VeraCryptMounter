@@ -39,20 +39,29 @@ namespace VeraCrypt_Mounter
             _config = Singleton<ConfigManager>.Instance.Init(_config);
             _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             ValidateMount vm = new ValidateMount();
+            pnpid = pnpid.Replace(@"\\", @"\");
+            string[] stringindex = { "USBSTOR", "SCSI\\DISK" };
             MountVareables mvd;
             State = false;
             int start;
 
-            try
+            foreach (string sindex in stringindex)
             {
-                pnpid = pnpid.Replace(@"\\", @"\");
-                start = pnpid.IndexOf("USBSTOR");
-                pnpid = pnpid.Substring(start, pnpid.Length - start - 1);
+                if (pnpid.Contains(sindex))
+                {
+                    try
+                    {                     
+                        start = pnpid.IndexOf(sindex);
+                        pnpid = pnpid.Substring(start, pnpid.Length - start - 1);
+                    }
+                    catch (Exception)
+                    {
+                        pnpid = "";
+                    }
+                }
             }
-            catch (Exception)
-            {
-                pnpid = "";
-            }           
+
+                    
 
 #if DEBUG
             MessageBox.Show(pnpid);

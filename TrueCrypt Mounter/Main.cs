@@ -128,7 +128,7 @@ namespace VeraCrypt_Mounter
                         string test = (string)prop.Value;
                         if (test != null)
                         {
-                            if (test.Contains("USBSTOR"))
+                            if (test.Contains("USBSTOR") || test.Contains("SCSI\\\\DISK"))
                             {
                                 Automountusb res = autousb.MountUsb(test);
                                 return res;
