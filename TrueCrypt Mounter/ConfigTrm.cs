@@ -1,4 +1,4 @@
-﻿ /**
+﻿ /***
  * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 

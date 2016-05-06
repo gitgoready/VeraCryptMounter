@@ -1,4 +1,4 @@
-﻿/**
+﻿/***
  * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
@@ -173,7 +173,7 @@ namespace VeraCrypt_Mounter
                     string[] pnpandin = wmiinfo.GetPNPidfromDriveletter(driveletterFromPath);
                     textBoxSelectedDrive.Text = pnpandin[0] + " Partition: " + pnpandin[1];
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     textBoxSelectedDrive.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDriveNotConnected", _language);
                 }

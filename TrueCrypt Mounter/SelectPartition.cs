@@ -1,9 +1,30 @@
-﻿using System;
+﻿/***
+ * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
+ * Copyright (C) <2009>  <Rafael Grothmann>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * **/
+
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
 {
+    /// <summary>
+    /// Form for selecting Partiton 
+    /// </summary>
     public partial class SelectPartition : Form
     {
         private readonly Config _config = new Config();
@@ -14,10 +35,25 @@ namespace VeraCrypt_Mounter
         private const string LanguageRegion = "SelectPartition";
         private readonly string _language;       
 
+        /// <summary>
+        /// Modelstring
+        /// </summary>
         public string _diskmodel { get; set; }
+        /// <summary>
+        /// Number of disk in System
+        /// </summary>
         public string _disknummber { get; set; }
+        /// <summary>
+        /// serialnumber of disk
+        /// </summary>
         public string _diskserial { get; set; }
+        /// <summary>
+        /// Partitionumber
+        /// </summary>
         public string _partnummber { get; set; }
+        /// <summary>
+        /// PNPDeviceID
+        /// </summary>
         public string _pNPDeviceID { get; set; }
 
         /// <summary>
@@ -117,7 +153,7 @@ namespace VeraCrypt_Mounter
                 _drives.TryGetValue(comboBoxDisks.Text, out pnpdid);
                 partnummber = comboBoxPartitions.SelectedItem.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 DialogResult res = MessageBox.Show(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageSelectPartition", _language), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

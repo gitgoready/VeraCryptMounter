@@ -1,4 +1,4 @@
-﻿/**
+﻿/***
  * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
@@ -443,7 +443,12 @@ namespace VeraCrypt_Mounter
             }
             return null;
         }
-
+        /// <summary>
+        /// Test if entry is in section og config
+        /// </summary>
+        /// <param name="section">Section in XML config</param>
+        /// <param name="entry">entry to test</param>
+        /// <returns></returns>
         public bool HasEntry(string section, string entry)
         {
             string[] entries = GetEntryNames(section);
@@ -457,12 +462,19 @@ namespace VeraCrypt_Mounter
 
         #region Methods : Verifications
 
+        /// <summary>
+        /// Replace whitespace with underscore in section
+        /// </summary>
+        /// <param name="section">section name</param>
         protected void VerifyAndAdjustSection(ref string section)
         {
             if (section.IndexOf(' ') >= 0)
                 section = section.Replace(' ', '_');
         }
-
+        /// <summary>
+        /// Trims entry string
+        /// </summary>
+        /// <param name="entry"></param>
         protected void VerifyAndAdjustEntry(ref string entry)
         {
             if (entry == null)
@@ -470,7 +482,9 @@ namespace VeraCrypt_Mounter
 
             entry = entry.Trim();
         }
-
+        /// <summary>
+        /// check if name is null or empty
+        /// </summary>
         protected void VerifyName()
         {
             if (string.IsNullOrEmpty(_xmlPathName))
@@ -480,19 +494,25 @@ namespace VeraCrypt_Mounter
         #endregion
 
         #region  Methodes: GetValue
-
-        //public object[] GetValue(string section, string entry, object[] defaultValue)
-        //{
-        //    object value = GetValue(section, entry);
-        //    return (value == null ? defaultValue : (object[])value);
-        //}
-
+        /// <summary>
+        /// Get value from XML config for string value
+        /// </summary>
+        /// <param name="section"></param>
+        /// <param name="entry"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public string GetValue(string section, string entry, string defaultValue)
         {
             object value = GetValue(section, entry);
             return (value == null ? defaultValue : value.ToString());
         }
-
+        /// <summary>
+        /// Get value from XML config for int value
+        /// </summary>
+        /// <param name="section"></param>
+        /// <param name="entry"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public int GetValue(string section, string entry, int defaultValue)
         {
             object value = GetValue(section, entry);
@@ -508,7 +528,13 @@ namespace VeraCrypt_Mounter
                 return 0;
             }
         }
-
+        /// <summary>
+        /// Get value from XML config for double value
+        /// </summary>
+        /// <param name="section"></param>
+        /// <param name="entry"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public double GetValue(string section, string entry, double defaultValue)
         {
             object value = GetValue(section, entry);
@@ -524,7 +550,13 @@ namespace VeraCrypt_Mounter
                 return 0;
             }
         }
-
+        /// <summary>
+        /// get value from XML config for bool value
+        /// </summary>
+        /// <param name="section"></param>
+        /// <param name="entry"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public bool GetValue(string section, string entry, bool defaultValue)
         {
             object value = GetValue(section, entry);
@@ -540,7 +572,12 @@ namespace VeraCrypt_Mounter
                 return false;
             }
         }
-
+        /// <summary>
+        /// get value from XML config for all values
+        /// </summary>
+        /// <param name="section"></param>
+        /// <param name="entry"></param>
+        /// <returns></returns>
         public object GetValue(string section, string entry)
         {
             VerifyAndAdjustSection(ref section);

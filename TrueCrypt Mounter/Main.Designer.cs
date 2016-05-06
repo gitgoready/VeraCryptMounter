@@ -44,7 +44,6 @@ namespace VeraCrypt_Mounter
             this.ToolStripMenuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemMainSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.automountConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonMount = new System.Windows.Forms.Button();
@@ -77,6 +76,7 @@ namespace VeraCrypt_Mounter
             this.toolStripMenuItem_Container_new = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem_Container_edit = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.automountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxDrive.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -131,7 +131,7 @@ namespace VeraCrypt_Mounter
             this.driveToolStripMenuItem,
             this.containerToolStripMenuItem});
             this.ToolStripMenuItemNew.Name = "ToolStripMenuItemNew";
-            this.ToolStripMenuItemNew.Size = new System.Drawing.Size(130, 22);
+            this.ToolStripMenuItemNew.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemNew.Text = "Neu";
             // 
             // driveToolStripMenuItem
@@ -151,22 +151,21 @@ namespace VeraCrypt_Mounter
             // ToolStripMenuItemEditEntry
             // 
             this.ToolStripMenuItemEditEntry.Name = "ToolStripMenuItemEditEntry";
-            this.ToolStripMenuItemEditEntry.Size = new System.Drawing.Size(130, 22);
+            this.ToolStripMenuItemEditEntry.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemEditEntry.Text = "Bearbeiten";
             this.ToolStripMenuItemEditEntry.Click += new System.EventHandler(this.ToolStripMenuEditEntry_Click);
             // 
             // ToolStripMenuItemRemove
             // 
             this.ToolStripMenuItemRemove.Name = "ToolStripMenuItemRemove";
-            this.ToolStripMenuItemRemove.Size = new System.Drawing.Size(130, 22);
+            this.ToolStripMenuItemRemove.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItemRemove.Text = "Löschen";
             this.ToolStripMenuItemRemove.Click += new System.EventHandler(this.ToolStripMenuDelete_Click);
             // 
             // toolStripMenuItemSettings
             // 
             this.toolStripMenuItemSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemMainSettings,
-            this.automountConfigToolStripMenuItem});
+            this.ToolStripMenuItemMainSettings});
             this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
             this.toolStripMenuItemSettings.Size = new System.Drawing.Size(90, 20);
             this.toolStripMenuItemSettings.Text = "Einstellungen";
@@ -177,12 +176,6 @@ namespace VeraCrypt_Mounter
             this.ToolStripMenuItemMainSettings.Size = new System.Drawing.Size(178, 22);
             this.ToolStripMenuItemMainSettings.Text = "Grundeinstellungen";
             this.ToolStripMenuItemMainSettings.Click += new System.EventHandler(this.ToolStripMenuMainconfig_Click);
-            // 
-            // automountConfigToolStripMenuItem
-            // 
-            this.automountConfigToolStripMenuItem.Name = "automountConfigToolStripMenuItem";
-            this.automountConfigToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.automountConfigToolStripMenuItem.Text = "Automount config";
             // 
             // ToolStripMenuItemHelp
             // 
@@ -266,10 +259,11 @@ namespace VeraCrypt_Mounter
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemNotifyKeyfilecontainer,
+            this.automountToolStripMenuItem,
             this.ToolStripMenuItemNotifyRestore,
             this.ToolStripMenuItemNotifyClose});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(160, 70);
+            this.contextMenuStrip.Size = new System.Drawing.Size(160, 114);
             // 
             // ToolStripMenuItemNotifyKeyfilecontainer
             // 
@@ -458,6 +452,13 @@ namespace VeraCrypt_Mounter
             this.deleteToolStripMenuItem1.Text = "Delete";
             this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuContainerDelete_Click);
             // 
+            // automountToolStripMenuItem
+            // 
+            this.automountToolStripMenuItem.Name = "automountToolStripMenuItem";
+            this.automountToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.automountToolStripMenuItem.Text = "Automount";
+            this.automountToolStripMenuItem.Click += new System.EventHandler(this.automountToolStripMenuItem_Click);
+            // 
             // VeraCryptMounter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -524,7 +525,6 @@ namespace VeraCrypt_Mounter
         private ToolStripMenuItem ToolStripMenuItemNotifyMount;
         private ToolStripMenuItem ToolStripMenuItemNotifyDismount;
         private ToolTip toolTipMain;
-        private ToolStripMenuItem automountConfigToolStripMenuItem;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripLabelNotification;
         private ToolStripProgressBar toolStripProgressBar;
@@ -538,6 +538,7 @@ namespace VeraCrypt_Mounter
         private ToolStripMenuItem editToolStripMenuItem_Container_edit;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem1;
+        private ToolStripMenuItem automountToolStripMenuItem;
     }
 }
 

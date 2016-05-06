@@ -1,4 +1,4 @@
-﻿/**
+﻿/***
  * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2015>  <Rafael Grothmann>
  * 
@@ -14,7 +14,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * **/
+ **/
 using System;
 using SecurityDriven.Inferno;
 
