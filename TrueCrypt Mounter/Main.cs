@@ -178,7 +178,7 @@ namespace VeraCrypt_Mounter
             try
             {
                 q.EventClassName = "__InstanceCreationEvent";
-                q.WithinInterval = new TimeSpan(0, 0, 5);
+                q.WithinInterval = new TimeSpan(0, 0, 10);
 
                 q.Condition = @"TargetInstance ISA 'Win32_USBControllerDevice' ";
                 w = new ManagementEventWatcher(scope, q);

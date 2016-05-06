@@ -22,8 +22,7 @@
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
     <SignManifests>false</SignManifests>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>VeraCrypt.p12</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -232,6 +231,7 @@
       <DependentUpon>Version.cs</DependentUpon>
     </Compile>
     <Compile Include="WmiDriveInfo.cs" />
+    <None Include="VeraCrypt.p12" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="language.xml">

@@ -34,7 +34,7 @@ namespace VeraCrypt_Mounter
         {
             string _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
             ValidateMount vm = new ValidateMount();
-            MountVareables mvd;
+            MountVareables mvd = new MountVareables();
             List<string> containers;
             List<string> drives;
             containers = GetAutoContainers();
@@ -45,17 +45,13 @@ namespace VeraCrypt_Mounter
                 try
                 {
                     mvd = vm.ValidateMountContainer(name, _language);
+                    int ret = Mount.MountContainer(mvd.path, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.tc, mvd.pim, mvd.hash);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
 
-                int ret = Mount.MountContainer(mvd.path, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.tc, mvd.pim, mvd.hash);
-
-                if (ret == 0)
-                    State = true;
             }
             
             foreach (string name in drives)
@@ -63,19 +59,13 @@ namespace VeraCrypt_Mounter
                 try
                 {
                     mvd = vm.ValidateMountDrive(name, _language);
+                    int res = Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
-
-                int res = Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
-
-                if (res == 0)
-                    State = true;
-
-                return;
             }            
         }
 

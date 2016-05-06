@@ -37,12 +37,12 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
+            this.textBoxSelectedDrive = new System.Windows.Forms.TextBox();
             this.checkBoxAutomountUsb = new System.Windows.Forms.CheckBox();
             this.groupBoxKyfilename = new System.Windows.Forms.GroupBox();
             this.buttonSelectKeyfile = new System.Windows.Forms.Button();
             this.checkBoxNoKeyfile = new System.Windows.Forms.CheckBox();
             this.textBoxKeyfile = new System.Windows.Forms.TextBox();
-            this.textBoxSelectedDrive = new System.Windows.Forms.TextBox();
             this.groupBoxDriveletter = new System.Windows.Forms.GroupBox();
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
             this.groupBoxMountoptions = new System.Windows.Forms.GroupBox();
@@ -141,6 +141,14 @@
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Pfad zum Kontainer";
             // 
+            // textBoxSelectedDrive
+            // 
+            this.textBoxSelectedDrive.Location = new System.Drawing.Point(87, 48);
+            this.textBoxSelectedDrive.Name = "textBoxSelectedDrive";
+            this.textBoxSelectedDrive.ReadOnly = true;
+            this.textBoxSelectedDrive.Size = new System.Drawing.Size(323, 20);
+            this.textBoxSelectedDrive.TabIndex = 13;
+            // 
             // checkBoxAutomountUsb
             // 
             this.checkBoxAutomountUsb.AutoSize = true;
@@ -190,14 +198,6 @@
             this.textBoxKeyfile.Name = "textBoxKeyfile";
             this.textBoxKeyfile.Size = new System.Drawing.Size(193, 20);
             this.textBoxKeyfile.TabIndex = 7;
-            // 
-            // textBoxSelectedDrive
-            // 
-            this.textBoxSelectedDrive.Location = new System.Drawing.Point(87, 48);
-            this.textBoxSelectedDrive.Name = "textBoxSelectedDrive";
-            this.textBoxSelectedDrive.ReadOnly = true;
-            this.textBoxSelectedDrive.Size = new System.Drawing.Size(323, 20);
-            this.textBoxSelectedDrive.TabIndex = 13;
             // 
             // groupBoxDriveletter
             // 
@@ -373,6 +373,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "NewContainer";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
