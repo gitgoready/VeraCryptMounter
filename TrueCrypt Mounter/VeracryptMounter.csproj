@@ -90,6 +90,12 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_64|AnyCPU'">
+    <OutputPath>bin\Release_64\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_64|x64'">
+    <OutputPath>bin\x64\Release_64\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SecurityDriven.Inferno, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Inferno.1.1.0\lib\net451\SecurityDriven.Inferno.dll</HintPath>

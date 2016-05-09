@@ -265,6 +265,10 @@
       <D>: konnte nicht automatisch eingebund werden.</D>
       <E>: automatic mount failed.</E>
     </Text>
+    <Text key="automountToolStripMenuItem">
+      <D>Autoeinbinden</D>
+      <E>Automount</E>
+    </Text>
   </Region>
   <Region name="MainToolTips">
     <Text key="ComboboxDriveTip">

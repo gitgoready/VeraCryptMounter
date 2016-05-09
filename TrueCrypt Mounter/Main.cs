@@ -1,4 +1,4 @@
-﻿/**
+﻿/***
  * <VeraCryptMounter. Programm to use Truecrypt drives and containers easier.>
  * Copyright (C) <2009>  <Rafael Grothmann>
  * 
@@ -86,6 +86,8 @@ namespace VeraCrypt_Mounter
 
         public delegate void NormalDelegate();
 
+        public delegate void BusyDelegate();
+
         public delegate void SetCursorNormalDelegate();
 
         public delegate void RefreshComboboxesInvokeDelegate();
@@ -104,7 +106,9 @@ namespace VeraCrypt_Mounter
         /// <param name="e"></param>
         public void UsbEventArrived(object sender, EventArrivedEventArgs e)
         {
-            UsbAnalysisDelegate aus = UsbEventAnalysing;     
+            UsbAnalysisDelegate aus = UsbEventAnalysing;
+            BusyDelegate bu = Busy;
+            Invoke(bu);
             aus.BeginInvoke(e, UsbCallback, aus);
         }
 
@@ -165,6 +169,15 @@ namespace VeraCrypt_Mounter
                 else
                     SetLableNotification(completion);
 
+                if (this.InvokeRequired)
+                {
+                    NormalDelegate nor = Normal;
+                    Invoke(nor);
+                }
+                else
+                    Normal();
+
+
             }
         }
 
@@ -178,7 +191,7 @@ namespace VeraCrypt_Mounter
             try
             {
                 q.EventClassName = "__InstanceCreationEvent";
-                q.WithinInterval = new TimeSpan(0, 0, 5);
+                q.WithinInterval = new TimeSpan(0, 0, 15);
 
                 q.Condition = @"TargetInstance ISA 'Win32_USBControllerDevice' ";
                 w = new ManagementEventWatcher(scope, q);
@@ -206,8 +219,6 @@ namespace VeraCrypt_Mounter
 
             comboBoxDrives.ContextMenuStrip = contextMenuStripDrive;
             comboBoxContainer.ContextMenuStrip =contextMenuStripContainer ;
-            // For these release Disabled
-            automountConfigToolStripMenuItem.Visible = false;
             
             // Get Singelton for config
             _config = Singleton<ConfigManager>.Instance.Init(_config);
@@ -278,7 +289,7 @@ namespace VeraCrypt_Mounter
             // Fill controls with selected language
             LanguageFill();
             ValidateTest();
-            //AutomountAtStart();
+            AutomountAtStart();
         }
         /// <summary>
         /// Destructor set passwords and PIM to null.
@@ -291,7 +302,7 @@ namespace VeraCrypt_Mounter
 
         private void AutomountAtStart()
         {
-            //TODO workflow for auto mounting
+            //TODO seems working Test is on
             Automountstart ams = new Automountstart();
             ams.StartMount();
         }
@@ -339,13 +350,13 @@ namespace VeraCrypt_Mounter
                     ToolStripMenuItemNotifyDismount.Text = LanguagePool.GetInstance().GetString(LanguageRegion,"ToolStripMenuItemNotifyDismount", _language);
                     comboBoxDrives.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxDrives",_language);
                     comboBoxContainer.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "comboBoxContainer",_language);
-                    automountConfigToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "automountConfigToolStripMenuItem",_language);
                     toolStripMenuItem_Drive_new.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "toolStripMenuItem_Drive_new", _language);
                     toolStripMenuItem_Drive_edit.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "toolStripMenuItem_Drive_edit", _language);
                     deleteToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "deleteToolStripMenuItem", _language);
                     toolStripMenuItem_Container_new.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "toolStripMenuItem_Container_new", _language);
                     editToolStripMenuItem_Container_edit.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "editToolStripMenuItem_Container_edit", _language);
                     deleteToolStripMenuItem1.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "deleteToolStripMenuItem1", _language);
+                    automountToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "automountToolStripMenuItem", _language);
                     //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
 
                     // Fill the tooltips with text.
@@ -1348,6 +1359,9 @@ namespace VeraCrypt_Mounter
             w.Stop();
         }
 
-        
+        private void automountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AutomountAtStart();
+        }
     }
 }
