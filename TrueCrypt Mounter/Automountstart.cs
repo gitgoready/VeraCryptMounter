@@ -25,11 +25,17 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public bool State { get; set; }
 
+        /// <summary>
+        /// Class for mount containers and drives at start
+        /// </summary>
         public Automountstart()
         {
             _config = Singleton<ConfigManager>.Instance.Init(_config);
         }
 
+        /// <summary>
+        /// Mount all containers and drives witch automountstart flag
+        /// </summary>
         public void StartMount()
         {
             string _language = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "");
@@ -95,7 +101,6 @@ namespace VeraCrypt_Mounter
         /// <summary>
         /// Get list of containers which have the automount label.
         /// </summary>
-        /// <param name="automount">ConfigTrm.Containers.Automountstart</param>
         /// <returns>List of containers</returns>
         private List<string> GetAutoContainers()
         {

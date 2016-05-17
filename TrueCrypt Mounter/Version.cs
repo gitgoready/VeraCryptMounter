@@ -23,10 +23,13 @@ using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
 {
+    /// <summary>
+    /// Form for showing the Version
+    /// </summary>
     public partial class Version : Form
     {
         /// <summary>
-        /// 
+        /// constructor for Version
         /// </summary>
         public Version()
         {
@@ -48,7 +51,7 @@ namespace VeraCrypt_Mounter
 
         private void homepage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://truecryptmounte.sourceforge.net");
+            Process.Start("https://github.com/LordSandwurm/VeraCryptMounter");
         }
     }
 }

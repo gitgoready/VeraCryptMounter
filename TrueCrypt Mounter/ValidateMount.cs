@@ -28,18 +28,57 @@ namespace VeraCrypt_Mounter
     /// </summary>
     public struct MountVareables
     {
+        /// <summary>
+        /// list of partitions
+        /// </summary>
         public string[] partitionlist;
+        /// <summary>
+        /// Path to container
+        /// </summary>
         public string path;
+        /// <summary>
+        /// driveletter for mounting to
+        /// </summary>
         public string driveletter;
+        /// <summary>
+        /// keyfile
+        /// </summary>
         public string key;
+        /// <summary>
+        /// password
+        /// </summary>
         public string password;
+        /// <summary>
+        /// mount silent
+        /// </summary>
         public bool silent;
+        /// <summary>
+        /// beep by mount
+        /// </summary>
         public bool beep;
+        /// <summary>
+        /// force dismount
+        /// </summary>
         public bool force;
+        /// <summary>
+        /// mount readonly
+        /// </summary>
         public bool readOnly;
+        /// <summary>
+        /// mount as removable device
+        /// </summary>
         public bool removalbe;
+        /// <summary>
+        /// pim
+        /// </summary>
         public string pim;
+        /// <summary>
+        /// hash to use
+        /// </summary>
         public string hash;
+        /// <summary>
+        /// truecryptmode 
+        /// </summary>
         public bool tc;
     }
 
@@ -282,7 +321,7 @@ namespace VeraCrypt_Mounter
                 throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
             }
 
-            
+            // If a password is cached, the paswordform isn´t show
             if (string.IsNullOrEmpty(_password))
             {
                 try
