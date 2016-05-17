@@ -282,14 +282,12 @@ namespace VeraCrypt_Mounter
                 throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
             }
 
-            /** If a password is cached, the paswordform isn´t show **/
+            
             if (string.IsNullOrEmpty(_password))
             {
                 try
                 {
                     bool dres = ShowPassworteingabe(ConfigTrm.Container.Typename, _config.GetValue(name, ConfigTrm.Container.Pimuse, false));
-                    //if (!dres)
-                    //    throw new Exception();
                 }
                 catch (Exception ex)
                 {

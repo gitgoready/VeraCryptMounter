@@ -25,6 +25,9 @@ namespace VeraCrypt_Mounter
 {
     public partial class Version : Form
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Version()
         {
             InitializeComponent();

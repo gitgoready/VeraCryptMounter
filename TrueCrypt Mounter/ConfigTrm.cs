@@ -28,25 +28,77 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public static class Mainconfig
         {
-
+            /// <summary>
+            /// Default langugage string
+            /// </summary>
             public const string Defaultlanguage = "Defaultlanguage";
+            /// <summary>
+            /// Driveletter for the keyfilekontainer
+            /// </summary>
             public const string Driveletter = "Driveletter";
+            /// <summary>
+            /// Path to the keyfilekontainer
+            /// </summary>
             public const string Kontainerpath = "Kontainerpath";
+            /// <summary>
+            /// Selected language
+            /// </summary>
             public const string Language = "Language";
+            /// <summary>
+            /// nokeyfilekontainer string
+            /// </summary>
             public const string Nokeyfile = "Nokeyfile";
-            //public const string Passwordcache = "Passwordcache";
+            /// <summary>
+            /// keyfilekontainer mount readonly
+            /// </summary>
             public const string Readonly = "Readonly";
+            /// <summary>
+            /// keyfilekontainer mount as removable device
+            /// </summary>
             public const string Removable = "Removable";
+            /// <summary>
+            /// use silent mode for mounting
+            /// </summary>
             public const string Silentmode = "Silentmode";
+            /// <summary>
+            /// Path to truecrypt (veracrypt exe)
+            /// </summary>
             public const string Truecryptpath = "Truecryptpath";
+            /// <summary>
+            /// section name in config
+            /// </summary>
             public const string Section = "Grundeinstellungen";
+            /// <summary>
+            /// type string
+            /// </summary>
             public const string Type = "Type";
+            /// <summary>
+            /// name of languagefile
+            /// </summary>
             public const string Languagefile = "Languagefile";
+            /// <summary>
+            /// typename in XML config
+            /// </summary>
             public const string Typename = "config";
+            /// <summary>
+            /// mount keyfilekontainer at programm start
+            /// </summary>
             public const string Automount = "Automount";
+            /// <summary>
+            /// Testpassword for encryption test
+            /// </summary>
             public const string Passwordtest = "Passwordtest";
+            /// <summary>
+            /// pim for keyfilekontainer
+            /// </summary>
             public const string Pim = "Pim";
+            /// <summary>
+            /// hash for keyfilekontainer
+            /// </summary>
             public const string Hash = "Hash";
+            /// <summary>
+            /// ???
+            /// </summary>
             public const string Hashes = "Hashes";
 
         }
@@ -56,6 +108,9 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public static class Drive
         {
+            /// <summary>
+            /// driveletter to mount the drive
+            /// </summary>
             public const string Driveletter = "Driveletter";
             public const string Partition = "Partition";
             public const string Keyfile = "Keyfile";

@@ -72,7 +72,6 @@ namespace VeraCrypt_Mounter
         /// <summary>
         /// Get list of drives which have the automount label.
         /// </summary>
-        /// <param name="automount">ConfigTrm.Drives.Automountstart</param>
         /// <returns>List of drives</returns>
         private List<string> GetAutoDrives()
         {
