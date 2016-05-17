@@ -7,10 +7,15 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("VeraCrypt Mounter")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+#if DEBUG
+    [assembly: AssemblyConfiguration("DEBUG")]
+#endif
+#if RELEASE
+    [assembly: AssemblyConfiguration("Release")]
+#endif
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("VeraCrypt Mounter")]
-[assembly: AssemblyCopyright("Copyright © 2015 Rafael Grothmann")]
+[assembly: AssemblyCopyright("Copyright © 2016 Rafael Grothmann")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

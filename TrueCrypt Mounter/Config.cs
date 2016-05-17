@@ -30,8 +30,7 @@ namespace VeraCrypt_Mounter
     ///</summary>
     public class Config
     {
-        private const string SectionType =
-            "System.Configuration.NameValueSectionHandler, System, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, Custom=null";
+        private const string SectionType = "System.Configuration.NameValueSectionHandler, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, Custom=null";
 
         private readonly Encoding _encoding = Encoding.UTF8;
         private string _mGroupName = "profile";

@@ -97,7 +97,7 @@ namespace VeraCrypt_Mounter
             /// </summary>
             public const string Hash = "Hash";
             /// <summary>
-            /// ???
+            /// Hash used for keyfilekontainer
             /// </summary>
             public const string Hashes = "Hashes";
 
@@ -112,24 +112,81 @@ namespace VeraCrypt_Mounter
             /// driveletter to mount the drive
             /// </summary>
             public const string Driveletter = "Driveletter";
+            /// <summary>
+            /// Partition to mount on the drive
+            /// </summary>
             public const string Partition = "Partition";
+            /// <summary>
+            /// keyfile for the drive
+            /// </summary>
             public const string Keyfile = "Keyfile";
+            /// <summary>
+            /// bool for indikate if keyfile is used
+            /// </summary>
             public const string Nokeyfile = "Nokeyfile";
+            /// <summary>
+            /// bool mount readonly
+            /// </summary>
             public const string Readonly = "Readonly";
+            /// <summary>
+            /// bool mount removable
+            /// </summary>
             public const string Removable = "Removable";
+            /// <summary>
+            /// string type
+            /// </summary>
             public const string Type = "Type";
+            /// <summary>
+            /// string typename
+            /// </summary>
             public const string Typename = "Drive";
+            /// <summary>
+            /// bool automountusb
+            /// </summary>
             public const string Automountusb = "Automountusb";
+            /// <summary>
+            /// bool automountstart
+            /// </summary>
             public const string Automountstart = "Automountstart";
+            /// <summary>
+            /// boll use pim
+            /// </summary>
             public const string Pimuse = "Pimuse";
+            /// <summary>
+            /// string hash for mounting
+            /// </summary>
             public const string Hash = "Hash";
+            /// <summary>
+            /// bool use truecryptmode
+            /// </summary>
             public const string Truecrypt = "Truecrypt";
+            /// <summary>
+            /// string diskmodel
+            /// </summary>
             public const string Diskmodel = "Diskmodel";
+            /// <summary>
+            /// string disk serial
+            /// </summary>
             public const string Diskserial = "Diskserial";
+            /// <summary>
+            /// string disknumber
+            /// </summary>
             public const string Disknumber = "Disknumber";
+            /// <summary>
+            /// ???
+            /// </summary>
             public const string Partnumber = "Partnumber";
+            /// <summary>
+            /// string pnpdeviceid
+            /// </summary>
             public const string Pnpdeviceid = "PNPDeviceID";
+            /// <summary>
+            /// string password
+            /// </summary>
             public const string Password = "Password";
+            /// <summary>
+            /// string pim
+            /// </summary>
             public const string Pim = "Pim";
         }
 
@@ -138,42 +195,96 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public static class Container
         {
+            /// <summary>
+            /// Driveltter to mount to
+            /// </summary>
             public const string Driveletter = "Driveletter";
+            /// <summary>
+            /// pnpdeviceid for containing drive
+            /// </summary>
             public const string Pnpid = "Pnpid";
+            /// <summary>
+            /// partitionnumber for containing drive
+            /// </summary>
             public const string Partnummber = "Partnummber";
+            /// <summary>
+            /// keyfile for container
+            /// </summary>
             public const string Keyfile = "Keyfile";
+            /// <summary>
+            /// bool use keyfile
+            /// </summary>
             public const string Nokeyfile = "Nokeyfile";
+            /// <summary>
+            /// string type
+            /// </summary>
             public const string Type = "Type";
+            /// <summary>
+            /// bool mount redonly
+            /// </summary>
             public const string Readonly = "Readonly";
+            /// <summary>
+            /// bool mount removable
+            /// </summary>
             public const string Removable = "Removable";
+            /// <summary>
+            /// path to kontainer
+            /// </summary>
             public const string Kontainerpath = "Kontainerpath";
+            /// <summary>
+            /// ???
+            /// </summary>
             public const string Drive = "Drive";
+            /// <summary>
+            /// bool test containing drive
+            /// </summary>
             public const string Nodrive = "Nodrive";
+            /// <summary>
+            /// kontainer name
+            /// </summary>
             public const string Typename = "Container";
+            /// <summary>
+            /// bool automount from usb
+            /// </summary>
             public const string Automountusb = "Automountusb";
+            /// <summary>
+            /// bool automount by programm start
+            /// </summary>
             public const string Automountstart = "Automountstart";
+            /// <summary>
+            /// bool use pim
+            /// </summary>
             public const string Pimuse = "Pimuse";
+            /// <summary>
+            /// bool use truecrypt mode
+            /// </summary>
             public const string Truecrypt = "Truecrypt";
+            /// <summary>
+            /// hash for container
+            /// </summary>
             public const string Hash = "Hash";
+            /// <summary>
+            /// string password
+            /// </summary>
             public const string Password = "Password";
+            /// <summary>
+            /// string pim
+            /// </summary>
             public const string Pim = "Pim";
 
         }
 
-        /// <summary>
-        /// Class for the strings in the Automount section.
-        /// </summary>
-        public static class Automount
-        {
-            public const string Useusbautomount = "Useusbautomount";
-            public const string Mountdrivesusb = "Mountdrivesusb";
-            public const string Mountcontainersusb = "Mountcontainersusb";
-            public const string Type = "Type";
-            public const string Typename = "Config";
-            public const string Section = "Automount";
-            public const string Mountdrivesstart = "Mountdrivesstart";
-            public const string Mountcontainerstart = "Mountcontainerstart";
-            public const string Usestartautomount = "Usestartautomount";
-        }
+        //public static class Automount
+        //{
+        //    public const string Useusbautomount = "Useusbautomount";
+        //    public const string Mountdrivesusb = "Mountdrivesusb";
+        //    public const string Mountcontainersusb = "Mountcontainersusb";
+        //    public const string Type = "Type";
+        //    public const string Typename = "Config";
+        //    public const string Section = "Automount";
+        //    public const string Mountdrivesstart = "Mountdrivesstart";
+        //    public const string Mountcontainerstart = "Mountcontainerstart";
+        //    public const string Usestartautomount = "Usestartautomount";
+        //}
     }
 }

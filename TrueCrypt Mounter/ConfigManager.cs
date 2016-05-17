@@ -52,14 +52,14 @@ namespace VeraCrypt_Mounter
 
             conf.GroupName = null;
 
-            if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Type))
-                conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Type, ConfigTrm.Automount.Typename);
+            //if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Type))
+            //    conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Type, ConfigTrm.Automount.Typename);
 
-            if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Useusbautomount))
-                conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Useusbautomount, false);
+            //if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Useusbautomount))
+            //    conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Useusbautomount, false);
 
-            if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Usestartautomount))
-                conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Usestartautomount, false);
+            //if (!conf.HasEntry(ConfigTrm.Automount.Section, ConfigTrm.Automount.Usestartautomount))
+            //    conf.SetValue(ConfigTrm.Automount.Section, ConfigTrm.Automount.Usestartautomount, false);
             
             if (!conf.HasEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Type))
                 conf.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Type, ConfigTrm.Mainconfig.Typename);
