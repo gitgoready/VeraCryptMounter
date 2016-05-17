@@ -22,6 +22,9 @@ using System.IO;
 
 namespace VeraCrypt_Mounter
 {
+    /// <summary>
+    /// Form for input password
+    /// </summary>
     public partial class Password : Form
     {
 

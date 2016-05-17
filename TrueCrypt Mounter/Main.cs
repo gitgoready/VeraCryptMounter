@@ -71,27 +71,91 @@ namespace VeraCrypt_Mounter
         public delegate int MountKeyfilecontainerDelegate(string path, string driveletter, bool silent, bool beep, bool force,
                                                           bool readOnly, bool removable, string hash, bool pim);
 
-
+        /// <summary>
+        /// Delegate for Mounting a Drive
+        /// </summary>
+        /// <param name="partition">string[]</param>
+        /// <param name="driveletter">string</param>
+        /// <param name="keyfile">string</param>
+        /// <param name="password">string</param>
+        /// <param name="silent">bool</param>
+        /// <param name="beep">bool</param>
+        /// <param name="force">bool</param>
+        /// <param name="readOnly">bool</param>
+        /// <param name="removable">bool</param>
+        /// <param name="pim">string</param>
+        /// <param name="hash">string</param>
+        /// <param name="tc">bool</param>
+        /// <returns></returns>
         public delegate int MountDriveDelegate(string[] partition, string driveletter, string keyfile, string password, bool silent,
                                                 bool beep, bool force, bool readOnly, bool removable, string pim, string hash, bool tc);
 
+        /// <summary>
+        /// delegate for mounting a container
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="driveletter"></param>
+        /// <param name="keyfile"></param>
+        /// <param name="password"></param>
+        /// <param name="silent"></param>
+        /// <param name="beep"></param>
+        /// <param name="force"></param>
+        /// <param name="readOnly"></param>
+        /// <param name="removable"></param>
+        /// <param name="tc"></param>
+        /// <param name="pim"></param>
+        /// <param name="hash"></param>
+        /// <returns></returns>
         public delegate int MountContainerDelegate(string path, string driveletter, string keyfile, string password, bool silent,
                                                    bool beep, bool force, bool readOnly, bool removable, bool tc, string pim,string hash);
 
+        /// <summary>
+        /// delegate for dismounting a drive or container
+        /// </summary>
+        /// <param name="driveletter"></param>
+        /// <param name="silent"></param>
+        /// <param name="beep"></param>
+        /// <param name="force"></param>
+        /// <returns></returns>
         public delegate int DismountDelegate(string driveletter, bool silent, bool beep, bool force);
 
+
+        /// <summary>
+        /// Stop the progressbar from other task
+        /// </summary>
         public delegate void StopProgressbarDelegate();
 
+        /// <summary>
+        /// set label notification base on result
+        /// </summary>
+        /// <param name="result">0 for ok, 1 for fail</param>
         public delegate void SetLableNotificationDelegate(int result);
 
+        /// <summary>
+        /// sets main ui on normal state
+        /// </summary>
         public delegate void NormalDelegate();
 
+        /// <summary>
+        /// sets main ui on busy state 
+        /// </summary>
         public delegate void BusyDelegate();
 
+        /// <summary>
+        /// set cursor on normal state
+        /// </summary>
         public delegate void SetCursorNormalDelegate();
 
+        /// <summary>
+        /// refresh comboboxes 
+        /// </summary>
         public delegate void RefreshComboboxesInvokeDelegate();
 
+        /// <summary>
+        /// start automount from usb 
+        /// </summary>
+        /// <param name="e">eventparameter</param>
+        /// <returns></returns>
         private delegate Automountusb UsbAnalysisDelegate(EventArrivedEventArgs e);
 
 
@@ -1128,7 +1192,9 @@ namespace VeraCrypt_Mounter
         {
             Cursor = Cursors.Arrow;
         }
-
+        /// <summary>
+        /// refresh the comboboxes
+        /// </summary>
         public void RefreshComboboxesInvoke()
         {
             RefreshComboboxes();
@@ -1351,8 +1417,6 @@ namespace VeraCrypt_Mounter
         {
             RefreshComboboxes();
         }
-        #endregion
-
         private void VeraCryptMounter_FormClosing(object sender, FormClosingEventArgs e)
         {
             //stop usb event watcher on close
@@ -1363,5 +1427,8 @@ namespace VeraCrypt_Mounter
         {
             AutomountAtStart();
         }
+        #endregion
+
+
     }
 }

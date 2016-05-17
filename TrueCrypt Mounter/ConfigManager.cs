@@ -85,14 +85,17 @@ namespace VeraCrypt_Mounter
         }
 
     }
-
+    
     /// <summary>
-    /// dotnet function for getting an threadsafe singelton.
+    /// Singelton class
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">instance from singelton</typeparam>
     public class Singleton<T>
         where T : new()
     {
+        /// <summary>
+        /// instance for singelton
+        /// </summary>
         public static readonly T Instance = new T();
     }
 }   

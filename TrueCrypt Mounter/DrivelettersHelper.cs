@@ -21,6 +21,9 @@ using System.IO;
 
 namespace VeraCrypt_Mounter
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class DrivelettersHelper
     {
         private static Config _config = new Config();
@@ -29,7 +32,10 @@ namespace VeraCrypt_Mounter
         {
             _config = Singleton<ConfigManager>.Instance.Init(_config);
         }
-
+        /// <summary>
+        /// Returns the driveletters there arnt used
+        /// </summary>
+        /// <returns>string array with not used driveletters</returns>
         public static string[] GetFreeDriveletters()
         {
             var driveletters = new[]
@@ -54,7 +60,10 @@ namespace VeraCrypt_Mounter
             }
             return driveletters;
         }
-
+        /// <summary>
+        /// retrun string array with driveletters
+        /// </summary>
+        /// <returns>string array</returns>
         public static string[] GetDriveletters()
         {
             var driveletters = new[]
@@ -65,12 +74,19 @@ namespace VeraCrypt_Mounter
                                    };
             return driveletters;
         }
-
+        /// <summary>
+        /// returns string array with used driveletters
+        /// </summary>
+        /// <returns>string array</returns>
         public static string[] GetUsedDriveletter()
         {
             return Directory.GetLogicalDrives();
         }
-
+        /// <summary>
+        /// test is driveletter is used
+        /// </summary>
+        /// <param name="letter">string driveletter</param>
+        /// <returns>bool</returns>
         public static bool IsDriveletterFree(string letter)
         {
             string[] useddriveletters = Directory.GetLogicalDrives();
@@ -88,7 +104,7 @@ namespace VeraCrypt_Mounter
         /// <summary>
         /// Test if the drivletter is used for another drive or container in config file.
         /// </summary>
-        /// <param name="driveletter"></param>
+        /// <param name="driveletter">string driveletter</param>
         /// <returns>Name of the drive or container they use the drivletter.</returns>
         public static string IsDrivletterUsedByConfig (string driveletter)
         {
