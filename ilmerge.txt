@@ -1,1 +1,0 @@
-ilmerge /target:winexe /out:TruecryptMounter.exe "TrueCrypt Mounter.exe" Microsoft.WindowsAPICodePack.dll Microsoft.WindowsAPICodePack.Shell.dll
