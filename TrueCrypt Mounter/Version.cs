@@ -43,7 +43,7 @@ namespace VeraCrypt_Mounter
 
         private void Version_Load(object sender, EventArgs e)
         {
-            const string version = "Version: 0.9.7 (Beta)";
+            const string version = "Version: 0.9.8 (Beta)";
             var test = Assembly.GetEntryAssembly().GetName().Version;
             labelAssembly.Text = "Build: " + test.Build.ToString();
             label2.Text = version;
@@ -51,6 +51,11 @@ namespace VeraCrypt_Mounter
 
         private void homepage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            Process.Start("https://blog.lordsandwurm.de/veracryptmounter");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {         
             Process.Start("https://github.com/LordSandwurm/VeraCryptMounter");
         }
     }
