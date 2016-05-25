@@ -354,7 +354,6 @@ namespace VeraCrypt_Mounter
             // Fill controls with selected language
             LanguageFill();
             ValidateTest();
-            AutomountAtStart();
         }
         /// <summary>
         /// Destructor set passwords and PIM to null.
@@ -366,10 +365,10 @@ namespace VeraCrypt_Mounter
         #endregion
 
         private void AutomountAtStart()
-        {
-            //TODO seems working Test is on
+        { 
             Automountstart ams = new Automountstart();
-            ams.StartMount();
+            //TODO seems working Test is on
+            ams.StartMount();           
         }
 
         #region Language settings
@@ -1426,10 +1425,26 @@ namespace VeraCrypt_Mounter
 
         private void automountToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Busy();
+            toolStripLabelNotification.ForeColor = Color.Green;
+            toolStripLabelNotification.Text = "Automount";
+            toolStripLabelNotification.Visible = true;
             AutomountAtStart();
+            Normal();
+            toolStripLabelNotification.Visible = false;
         }
+
+        private void VeraCryptMounter_Shown(object sender, EventArgs e)
+        {
+            Busy();
+            toolStripLabelNotification.ForeColor = Color.Green;
+            toolStripLabelNotification.Text = "Automount";
+            toolStripLabelNotification.Visible = true;
+            AutomountAtStart();
+            Normal();
+            toolStripLabelNotification.Visible = false;
+        }
+
         #endregion
-
-
     }
 }

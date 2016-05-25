@@ -163,8 +163,6 @@ namespace VeraCrypt_Mounter
                 throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentMessage", _language) + "\"" + diskmodel + "\"");
             }
 
-            //TODO neu prüfung ob keyfile existiert und wenn ofad nicht gegeben ob er im keyfilekontainer liegt.
-
             if (!_config.GetValue(drivename, ConfigTrm.Drive.Nokeyfile, true))
             {
                 //test if keyfilekontainer is used and mounted               
@@ -202,15 +200,14 @@ namespace VeraCrypt_Mounter
                     else
                     {
                         keyfilepath = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") + _config.GetValue(drivename, ConfigTrm.Drive.Keyfile, "");
-                        //TODO Prüfe ob kexfilekontainer eingebunden ist.
+                        //TODO Prüfe ob kexfilekontainer eingebunden ist???
                         if (!File.Exists(keyfilepath))
                         {
                             throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
                         }
-                    }
-
-                    
+                    } 
                 }
+                key = keyfilepath;
             }
 
 # if DEBUG
@@ -291,7 +288,7 @@ namespace VeraCrypt_Mounter
             string driveletterFromPath = null;
             const bool force = false;
             string key = null;
-            string keyfilepath;
+            string keyfilepath = "";
             _password = _config.GetValue(name, ConfigTrm.Container.Password, null);
             _pim = _config.GetValue(name, ConfigTrm.Container.Pim, null);
             string pnpid = _config.GetValue(name, ConfigTrm.Container.Pim, null);
@@ -324,26 +321,56 @@ namespace VeraCrypt_Mounter
                     throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "DiskNotPresentContainerMessage", _language));
             }
 
-            //  Test if keyfilekontainer is mounted
+            if (!_config.GetValue(name, ConfigTrm.Container.Nokeyfile, true))
+            {
+                //test if keyfilekontainer is used and mounted               
+                if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true))
+                {
+                    keyfilepath = _config.GetValue(name, ConfigTrm.Container.Keyfile, "");
+                    // test if keyfile is valid path
+                    try
+                    {
+                        if (Path.IsPathRooted(keyfilepath))
+                        {
+                            if (!File.Exists(keyfilepath))
+                            {
+                                throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
+                    }
 
-            if (_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true))
-            {
-                keyfilepath = _config.GetValue(name, ConfigTrm.Container.Keyfile, "");
-            }
-            else
-            {
-                keyfilepath =
-                    _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Container.Driveletter, "") +
-                    _config.GetValue(name, ConfigTrm.Container.Keyfile, "");
+                }
+                else
+                {
+                    keyfilepath = _config.GetValue(name, ConfigTrm.Container.Keyfile, "");
+
+                    if (Path.IsPathRooted(keyfilepath))
+                    {
+                        if (!File.Exists(keyfilepath))
+                        {
+                            throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
+                        }
+                    }
+                    else
+                    {
+                        keyfilepath = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") + _config.GetValue(name, ConfigTrm.Container.Keyfile, "");
+                        //TODO Prüfe ob kexfilekontainer eingebunden ist???
+                        if (!File.Exists(keyfilepath))
+                        {
+                            throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
+                        }
+                    }
+                }
+                key = keyfilepath;
             }
 
 # if DEBUG
             MessageBox.Show(keyfilepath + " " + name, "Path to Keyfile");
 # endif
-            if (!nokeyfile && !File.Exists(keyfilepath))
-            {
-                throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "NoKeyfileMessage", _language));
-            }
 
             // If a password is cached, the paswordform isn´t show
             if (string.IsNullOrEmpty(_password))
@@ -357,12 +384,6 @@ namespace VeraCrypt_Mounter
                     MessageBox.Show(ex.Message);
                     throw;
                 }
-            }
-
-            if (!_config.GetValue(name, ConfigTrm.Container.Nokeyfile, false))
-            {
-                key = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, "") +
-                      _config.GetValue(name, ConfigTrm.Container.Keyfile);
             }
 
             //

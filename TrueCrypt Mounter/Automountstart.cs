@@ -45,32 +45,62 @@ namespace VeraCrypt_Mounter
             List<string> drives;
             containers = GetAutoContainers();
             drives = GetAutoDrives();
-            
+            bool error = false;
+            int ret;
+            int res;
+
             foreach (string name in containers)
             {
+                error = false;
                 try
                 {
                     mvd = vm.ValidateMountContainer(name, _language);
-                    int ret = Mount.MountContainer(mvd.path, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.tc, mvd.pim, mvd.hash);
+                    
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error = true;
                 }
+                if (!error)
+                {
+                    try
+                    {
+                        ret = Mount.MountContainer(mvd.path, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.tc, mvd.pim, mvd.hash);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                    
 
             }
             
             foreach (string name in drives)
             {
+                error = false;
                 try
                 {
                     mvd = vm.ValidateMountDrive(name, _language);
-                    int res = Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
+                    
 
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error = true;
+                }
+                if (!error)
+                {
+                    try
+                    {
+                        res = Mount.MountDrive(mvd.partitionlist, mvd.driveletter, mvd.key, mvd.password, mvd.silent, mvd.beep, mvd.force, mvd.readOnly, mvd.removalbe, mvd.pim, mvd.hash, mvd.tc);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }            
         }

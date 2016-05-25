@@ -52,7 +52,23 @@ namespace VeraCrypt_Mounter
             _config = Singleton<ConfigManager>.Instance.Init(_config);
         }
 
-
+        /// <summary>
+        /// Mount a Drive. Call veracrypt process and try to mount.
+        /// </summary>
+        /// <param name="partition"></param>
+        /// <param name="driveletter"></param>
+        /// <param name="keyfile"></param>
+        /// <param name="password"></param>
+        /// <param name="silent"></param>
+        /// <param name="beep"></param>
+        /// <param name="force"></param>
+        /// <param name="readOnly"></param>
+        /// <param name="removable"></param>
+        /// <param name="pim"></param>
+        /// <param name="hash"></param>
+        /// <param name="tc"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         internal static int MountDrive(string[] partition, string driveletter, string keyfile, string password, bool silent,
                                           bool beep, bool force, bool readOnly, bool removable, string pim, string hash, bool tc)
         {
@@ -283,6 +299,23 @@ namespace VeraCrypt_Mounter
             return output;
         }
 
+        /// <summary>
+        /// Mount a kontainer. Call veracrypt process and try to mount kontainer
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="driveletter"></param>
+        /// <param name="keyfile"></param>
+        /// <param name="password"></param>
+        /// <param name="silent"></param>
+        /// <param name="beep"></param>
+        /// <param name="force"></param>
+        /// <param name="readOnly"></param>
+        /// <param name="removable"></param>
+        /// <param name="tc"></param>
+        /// <param name="pim"></param>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static int MountContainer(string path, string driveletter, string keyfile, string password, bool silent,
                                          bool beep, bool force, bool readOnly, bool removable, bool tc, string pim, string hash)
         {
@@ -305,11 +338,6 @@ namespace VeraCrypt_Mounter
                 {
                     throw new Exception(status + "(driveletter)");
                 }
-
-                //if (string.IsNullOrEmpty(password))
-                //{
-                //    throw new Exception(status + "(password)");
-                //}
                 if (!DrivelettersHelper.IsDriveletterFree(driveletter))
                 {
                     throw new Exception("Laufwerksbuchstabe ist belegt");
