@@ -100,6 +100,10 @@ namespace VeraCrypt_Mounter
             /// Hash used for keyfilekontainer
             /// </summary>
             public const string Hashes = "Hashes";
+            /// <summary>
+            /// start with windows
+            /// </summary>
+            public const string AutostartWithWindows = "AutostartWithWindows";
 
         }
 

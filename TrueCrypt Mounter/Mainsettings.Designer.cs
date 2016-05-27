@@ -58,6 +58,7 @@
             this.groupBoxConfigPath = new System.Windows.Forms.GroupBox();
             this.buttonShowConfig = new System.Windows.Forms.Button();
             this.textBoxConfigPath = new System.Windows.Forms.TextBox();
+            this.checkBox_startwithwin = new System.Windows.Forms.CheckBox();
             this.groupBoxDebug.SuspendLayout();
             this.groupBoxKeyfileContainer.SuspendLayout();
             this.groupBoxTruecryptPath.SuspendLayout();
@@ -284,6 +285,7 @@
             // 
             // groupBoxUsesettings
             // 
+            this.groupBoxUsesettings.Controls.Add(this.checkBox_startwithwin);
             this.groupBoxUsesettings.Controls.Add(this.checkBoxNoKeyfilecontainer);
             this.groupBoxUsesettings.Location = new System.Drawing.Point(9, 172);
             this.groupBoxUsesettings.Name = "groupBoxUsesettings";
@@ -350,6 +352,16 @@
             this.textBoxConfigPath.ReadOnly = true;
             this.textBoxConfigPath.Size = new System.Drawing.Size(355, 20);
             this.textBoxConfigPath.TabIndex = 0;
+            // 
+            // checkBox_startwithwin
+            // 
+            this.checkBox_startwithwin.AutoSize = true;
+            this.checkBox_startwithwin.Location = new System.Drawing.Point(187, 22);
+            this.checkBox_startwithwin.Name = "checkBox_startwithwin";
+            this.checkBox_startwithwin.Size = new System.Drawing.Size(112, 17);
+            this.checkBox_startwithwin.TabIndex = 12;
+            this.checkBox_startwithwin.Text = "start with windows";
+            this.checkBox_startwithwin.UseVisualStyleBackColor = true;
             // 
             // Mainsettings
             // 
@@ -418,5 +430,6 @@
         private System.Windows.Forms.GroupBox groupBoxConfigPath;
         private System.Windows.Forms.Button buttonShowConfig;
         private System.Windows.Forms.TextBox textBoxConfigPath;
+        private System.Windows.Forms.CheckBox checkBox_startwithwin;
     }
 }

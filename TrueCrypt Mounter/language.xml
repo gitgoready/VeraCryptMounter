@@ -507,6 +507,10 @@
         <D>Schließen</D>
         <E>Close</E>
       </Text>
+      <Text key="checkBox_startwithwin">
+        <D>Starten mit Windows</D>
+        <E>Autostart at boot</E>
+      </Text>
       <Text key="Error">
         <D>Fehler</D>
         <E>Error</E>

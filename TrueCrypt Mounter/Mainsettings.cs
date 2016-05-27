@@ -15,12 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * **/
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
@@ -76,6 +79,7 @@ namespace VeraCrypt_Mounter
             checkBoxAutomount.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBoxAutomount", _language);
             groupBoxConfigPath.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "groupBoxConfigPath", _language);
             buttonShowConfig.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "buttonShowConfig", _language);
+            checkBox_startwithwin.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "checkBox_startwithwin", _language);
             //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
         }
 
@@ -129,6 +133,7 @@ namespace VeraCrypt_Mounter
             checkBoxNoKeyfilecontainer.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
             checkBoxAutomount.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, false);
             checkBoxPim.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, false);
+            checkBox_startwithwin.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.AutostartWithWindows, false);
 
             // Fill lists for the comboboxdriveletter
             foreach (string element in DrivelettersHelper.GetDriveletters())
@@ -182,17 +187,21 @@ namespace VeraCrypt_Mounter
                         throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDrivletterIsUsed", _language)+usedriveletter);
 
                     string hash = (comboBoxHash.SelectedItem == null) ? "" : comboBoxHash.SelectedItem.ToString();
+                    bool autoright = false;
+
+                    autoright = WriteAutostartAtWindows(checkBox_startwithwin.Checked);
 
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, checkBoxPim.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Kontainerpath, textBoxContainerPath.Text);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, checkBoxRemovable.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, checkBoxReadonly.Checked);
-                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter,
-                                     comboBoxDriveletter.SelectedItem.ToString());
+                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter, comboBoxDriveletter.SelectedItem.ToString());
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash, hash);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, checkBoxPim.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, checkBoxAutomount.Checked);
+                    if (autoright)
+                        _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.AutostartWithWindows, checkBox_startwithwin.Checked);
                 }
                 _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig. Silentmode, !checkBoxSilentMode.Checked);
 
@@ -214,6 +223,51 @@ namespace VeraCrypt_Mounter
                 MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error",_language), MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
+        }
+        /// <summary>
+        /// Write start with windows in registry
+        /// </summary>
+        /// <param name="remove">true = write, false = remove</param>
+        /// <returns>true if entry is written</returns>
+        private bool WriteAutostartAtWindows(bool remove)
+        {
+            string dateipfad = Application.ExecutablePath;
+            try
+            {
+                string samAccountName;
+                {
+                    var currentWindowsIdentity = WindowsIdentity.GetCurrent();
+                    if (currentWindowsIdentity == null)
+                    {
+                        return false;
+                    }
+
+                    samAccountName = currentWindowsIdentity.Name;
+                }
+
+                var registrySecurity = new RegistrySecurity();
+                {
+                    registrySecurity.AddAccessRule(new RegistryAccessRule(samAccountName,
+                            RegistryRights.WriteKey | RegistryRights.ChangePermissions, InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow));
+                }
+
+                var targetRegistryKey = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+
+                if (targetRegistryKey == null)
+                {
+                    return false;
+                }
+                if (remove)
+                    targetRegistryKey.SetValue(dateipfad.Remove(0, dateipfad.LastIndexOf(@"\") + 1), dateipfad);
+                else
+                    targetRegistryKey.DeleteValue(dateipfad.Remove(0, dateipfad.LastIndexOf(@"\") + 1));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

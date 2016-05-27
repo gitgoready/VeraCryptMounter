@@ -122,7 +122,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SelectPartition";
-            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectPartition_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
