@@ -269,6 +269,10 @@
       <D>Autoeinbinden</D>
       <E>Automount</E>
     </Text>
+    <Text key="Automount">
+      <D>Automount wird ausgeführt</D>
+      <E>Performing automount</E>
+    </Text>
   </Region>
   <Region name="MainToolTips">
     <Text key="ComboboxDriveTip">

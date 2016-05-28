@@ -421,6 +421,7 @@ namespace VeraCrypt_Mounter
                     editToolStripMenuItem_Container_edit.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "editToolStripMenuItem_Container_edit", _language);
                     deleteToolStripMenuItem1.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "deleteToolStripMenuItem1", _language);
                     automountToolStripMenuItem.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "automountToolStripMenuItem", _language);
+                    automountToolStripMenuItem1.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "automountToolStripMenuItem", _language);
                     //.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
 
                     // Fill the tooltips with text.
@@ -1427,7 +1428,7 @@ namespace VeraCrypt_Mounter
         {
             Busy();
             toolStripLabelNotification.ForeColor = Color.Green;
-            toolStripLabelNotification.Text = "Automount";
+            toolStripLabelNotification.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "Automount", _language);
             toolStripLabelNotification.Visible = true;
             AutomountAtStart();
             Normal();
@@ -1438,7 +1439,18 @@ namespace VeraCrypt_Mounter
         {
             Busy();
             toolStripLabelNotification.ForeColor = Color.Green;
-            toolStripLabelNotification.Text = "Automount";
+            toolStripLabelNotification.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "Automount", _language);
+            toolStripLabelNotification.Visible = true;
+            AutomountAtStart();
+            Normal();
+            toolStripLabelNotification.Visible = false;
+        }
+
+        private void automountToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Busy();
+            toolStripLabelNotification.ForeColor = Color.Green;
+            toolStripLabelNotification.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "Automount", _language);
             toolStripLabelNotification.Visible = true;
             AutomountAtStart();
             Normal();
