@@ -23,6 +23,7 @@ using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
 {
+    #region struct MountVareables
     /// <summary>
     /// kontains all neede vareables for mounting
     /// </summary>
@@ -81,6 +82,7 @@ namespace VeraCrypt_Mounter
         /// </summary>
         public bool tc;
     }
+    #endregion
 
     class ValidateMount
     {
