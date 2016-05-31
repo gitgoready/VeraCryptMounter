@@ -77,9 +77,10 @@
             // 
             // buttonOpenContainer
             // 
-            this.buttonOpenContainer.Location = new System.Drawing.Point(6, 45);
+            this.buttonOpenContainer.Location = new System.Drawing.Point(8, 55);
+            this.buttonOpenContainer.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonOpenContainer.Name = "buttonOpenContainer";
-            this.buttonOpenContainer.Size = new System.Drawing.Size(75, 23);
+            this.buttonOpenContainer.Size = new System.Drawing.Size(101, 28);
             this.buttonOpenContainer.TabIndex = 5;
             this.buttonOpenContainer.Text = "Öffnen";
             this.buttonOpenContainer.UseVisualStyleBackColor = true;
@@ -88,32 +89,37 @@
             // groupBoxDescription
             // 
             this.groupBoxDescription.Controls.Add(this.textBoxDescription);
-            this.groupBoxDescription.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxDescription.Location = new System.Drawing.Point(16, 15);
+            this.groupBoxDescription.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxDescription.Name = "groupBoxDescription";
-            this.groupBoxDescription.Size = new System.Drawing.Size(416, 50);
+            this.groupBoxDescription.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBoxDescription.Size = new System.Drawing.Size(555, 62);
             this.groupBoxDescription.TabIndex = 1;
             this.groupBoxDescription.TabStop = false;
             this.groupBoxDescription.Text = "Beschreibung des Kontainers";
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(6, 19);
+            this.textBoxDescription.Location = new System.Drawing.Point(8, 23);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(404, 20);
+            this.textBoxDescription.Size = new System.Drawing.Size(537, 22);
             this.textBoxDescription.TabIndex = 2;
             // 
             // textBoxKontainer
             // 
-            this.textBoxKontainer.Location = new System.Drawing.Point(6, 19);
+            this.textBoxKontainer.Location = new System.Drawing.Point(8, 23);
+            this.textBoxKontainer.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxKontainer.Name = "textBoxKontainer";
-            this.textBoxKontainer.Size = new System.Drawing.Size(404, 20);
+            this.textBoxKontainer.Size = new System.Drawing.Size(537, 22);
             this.textBoxKontainer.TabIndex = 4;
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(304, 333);
+            this.buttonClose.Location = new System.Drawing.Point(405, 410);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(90, 23);
+            this.buttonClose.Size = new System.Drawing.Size(120, 28);
             this.buttonClose.TabIndex = 0;
             this.buttonClose.Text = "Abbruch";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -121,9 +127,10 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(208, 333);
+            this.buttonOk.Location = new System.Drawing.Point(277, 410);
+            this.buttonOk.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(90, 23);
+            this.buttonOk.Size = new System.Drawing.Size(120, 28);
             this.buttonOk.TabIndex = 17;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
@@ -134,27 +141,31 @@
             this.groupBoxPath.Controls.Add(this.textBoxSelectedDrive);
             this.groupBoxPath.Controls.Add(this.textBoxKontainer);
             this.groupBoxPath.Controls.Add(this.buttonOpenContainer);
-            this.groupBoxPath.Location = new System.Drawing.Point(12, 68);
+            this.groupBoxPath.Location = new System.Drawing.Point(16, 84);
+            this.groupBoxPath.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxPath.Name = "groupBoxPath";
-            this.groupBoxPath.Size = new System.Drawing.Size(416, 80);
+            this.groupBoxPath.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBoxPath.Size = new System.Drawing.Size(555, 98);
             this.groupBoxPath.TabIndex = 3;
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Pfad zum Kontainer";
             // 
             // textBoxSelectedDrive
             // 
-            this.textBoxSelectedDrive.Location = new System.Drawing.Point(87, 48);
+            this.textBoxSelectedDrive.Location = new System.Drawing.Point(117, 59);
+            this.textBoxSelectedDrive.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxSelectedDrive.Name = "textBoxSelectedDrive";
             this.textBoxSelectedDrive.ReadOnly = true;
-            this.textBoxSelectedDrive.Size = new System.Drawing.Size(323, 20);
+            this.textBoxSelectedDrive.Size = new System.Drawing.Size(429, 22);
             this.textBoxSelectedDrive.TabIndex = 13;
             // 
             // checkBoxAutomountUsb
             // 
             this.checkBoxAutomountUsb.AutoSize = true;
-            this.checkBoxAutomountUsb.Location = new System.Drawing.Point(6, 53);
+            this.checkBoxAutomountUsb.Location = new System.Drawing.Point(8, 65);
+            this.checkBoxAutomountUsb.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.checkBoxAutomountUsb.Name = "checkBoxAutomountUsb";
-            this.checkBoxAutomountUsb.Size = new System.Drawing.Size(116, 17);
+            this.checkBoxAutomountUsb.Size = new System.Drawing.Size(149, 21);
             this.checkBoxAutomountUsb.TabIndex = 6;
             this.checkBoxAutomountUsb.Text = "Automount by USB";
             this.checkBoxAutomountUsb.UseVisualStyleBackColor = true;
@@ -164,18 +175,21 @@
             this.groupBoxKyfilename.Controls.Add(this.buttonSelectKeyfile);
             this.groupBoxKyfilename.Controls.Add(this.checkBoxNoKeyfile);
             this.groupBoxKyfilename.Controls.Add(this.textBoxKeyfile);
-            this.groupBoxKyfilename.Location = new System.Drawing.Point(12, 154);
+            this.groupBoxKyfilename.Location = new System.Drawing.Point(16, 190);
+            this.groupBoxKyfilename.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxKyfilename.Name = "groupBoxKyfilename";
-            this.groupBoxKyfilename.Size = new System.Drawing.Size(205, 70);
+            this.groupBoxKyfilename.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBoxKyfilename.Size = new System.Drawing.Size(273, 86);
             this.groupBoxKyfilename.TabIndex = 6;
             this.groupBoxKyfilename.TabStop = false;
             this.groupBoxKyfilename.Text = "Keyfilename";
             // 
             // buttonSelectKeyfile
             // 
-            this.buttonSelectKeyfile.Location = new System.Drawing.Point(124, 45);
+            this.buttonSelectKeyfile.Location = new System.Drawing.Point(165, 55);
+            this.buttonSelectKeyfile.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonSelectKeyfile.Name = "buttonSelectKeyfile";
-            this.buttonSelectKeyfile.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectKeyfile.Size = new System.Drawing.Size(101, 28);
             this.buttonSelectKeyfile.TabIndex = 9;
             this.buttonSelectKeyfile.Text = "open";
             this.buttonSelectKeyfile.UseVisualStyleBackColor = true;
@@ -184,9 +198,10 @@
             // checkBoxNoKeyfile
             // 
             this.checkBoxNoKeyfile.AutoSize = true;
-            this.checkBoxNoKeyfile.Location = new System.Drawing.Point(6, 45);
+            this.checkBoxNoKeyfile.Location = new System.Drawing.Point(8, 55);
+            this.checkBoxNoKeyfile.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.checkBoxNoKeyfile.Name = "checkBoxNoKeyfile";
-            this.checkBoxNoKeyfile.Size = new System.Drawing.Size(81, 17);
+            this.checkBoxNoKeyfile.Size = new System.Drawing.Size(104, 21);
             this.checkBoxNoKeyfile.TabIndex = 8;
             this.checkBoxNoKeyfile.Text = "Kein Keyfile";
             this.checkBoxNoKeyfile.UseVisualStyleBackColor = true;
@@ -194,17 +209,20 @@
             // 
             // textBoxKeyfile
             // 
-            this.textBoxKeyfile.Location = new System.Drawing.Point(6, 19);
+            this.textBoxKeyfile.Location = new System.Drawing.Point(8, 23);
+            this.textBoxKeyfile.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxKeyfile.Name = "textBoxKeyfile";
-            this.textBoxKeyfile.Size = new System.Drawing.Size(193, 20);
+            this.textBoxKeyfile.Size = new System.Drawing.Size(255, 22);
             this.textBoxKeyfile.TabIndex = 7;
             // 
             // groupBoxDriveletter
             // 
             this.groupBoxDriveletter.Controls.Add(this.comboBoxDriveletter);
-            this.groupBoxDriveletter.Location = new System.Drawing.Point(12, 228);
+            this.groupBoxDriveletter.Location = new System.Drawing.Point(16, 281);
+            this.groupBoxDriveletter.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxDriveletter.Name = "groupBoxDriveletter";
-            this.groupBoxDriveletter.Size = new System.Drawing.Size(205, 46);
+            this.groupBoxDriveletter.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBoxDriveletter.Size = new System.Drawing.Size(273, 57);
             this.groupBoxDriveletter.TabIndex = 12;
             this.groupBoxDriveletter.TabStop = false;
             this.groupBoxDriveletter.Text = "Zuzuweisender Laufwerksbuchstaben";
@@ -214,9 +232,10 @@
             this.comboBoxDriveletter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.comboBoxDriveletter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDriveletter.FormattingEnabled = true;
-            this.comboBoxDriveletter.Location = new System.Drawing.Point(80, 19);
+            this.comboBoxDriveletter.Location = new System.Drawing.Point(107, 23);
+            this.comboBoxDriveletter.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.comboBoxDriveletter.Name = "comboBoxDriveletter";
-            this.comboBoxDriveletter.Size = new System.Drawing.Size(45, 21);
+            this.comboBoxDriveletter.Size = new System.Drawing.Size(59, 23);
             this.comboBoxDriveletter.TabIndex = 13;
             this.comboBoxDriveletter.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxDriveletter_DrawItem);
             this.comboBoxDriveletter.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ComboBoxDriveletter_MeasureItem);
@@ -230,9 +249,11 @@
             this.groupBoxMountoptions.Controls.Add(this.checkBoxRemovable);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountUsb);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxReadonly);
-            this.groupBoxMountoptions.Location = new System.Drawing.Point(225, 154);
+            this.groupBoxMountoptions.Location = new System.Drawing.Point(299, 190);
+            this.groupBoxMountoptions.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxMountoptions.Name = "groupBoxMountoptions";
-            this.groupBoxMountoptions.Size = new System.Drawing.Size(205, 98);
+            this.groupBoxMountoptions.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBoxMountoptions.Size = new System.Drawing.Size(273, 121);
             this.groupBoxMountoptions.TabIndex = 14;
             this.groupBoxMountoptions.TabStop = false;
             this.groupBoxMountoptions.Text = "Mounteinstellungen";
@@ -240,9 +261,10 @@
             // checkBoxTrueCrypt
             // 
             this.checkBoxTrueCrypt.AutoSize = true;
-            this.checkBoxTrueCrypt.Location = new System.Drawing.Point(121, 34);
+            this.checkBoxTrueCrypt.Location = new System.Drawing.Point(161, 42);
+            this.checkBoxTrueCrypt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.checkBoxTrueCrypt.Name = "checkBoxTrueCrypt";
-            this.checkBoxTrueCrypt.Size = new System.Drawing.Size(72, 17);
+            this.checkBoxTrueCrypt.Size = new System.Drawing.Size(93, 21);
             this.checkBoxTrueCrypt.TabIndex = 18;
             this.checkBoxTrueCrypt.Text = "TrueCrypt";
             this.checkBoxTrueCrypt.UseVisualStyleBackColor = true;
@@ -251,9 +273,10 @@
             // checkBoxPim
             // 
             this.checkBoxPim.AutoSize = true;
-            this.checkBoxPim.Location = new System.Drawing.Point(121, 15);
+            this.checkBoxPim.Location = new System.Drawing.Point(161, 18);
+            this.checkBoxPim.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.checkBoxPim.Name = "checkBoxPim";
-            this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
+            this.checkBoxPim.Size = new System.Drawing.Size(53, 21);
             this.checkBoxPim.TabIndex = 17;
             this.checkBoxPim.Text = "PIM";
             this.checkBoxPim.UseVisualStyleBackColor = true;
@@ -261,9 +284,10 @@
             // checkBoxAutomountStart
             // 
             this.checkBoxAutomountStart.AutoSize = true;
-            this.checkBoxAutomountStart.Location = new System.Drawing.Point(6, 72);
+            this.checkBoxAutomountStart.Location = new System.Drawing.Point(8, 89);
+            this.checkBoxAutomountStart.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.checkBoxAutomountStart.Name = "checkBoxAutomountStart";
-            this.checkBoxAutomountStart.Size = new System.Drawing.Size(152, 17);
+            this.checkBoxAutomountStart.Size = new System.Drawing.Size(202, 21);
             this.checkBoxAutomountStart.TabIndex = 7;
             this.checkBoxAutomountStart.Text = "Automount by programstart";
             this.checkBoxAutomountStart.UseVisualStyleBackColor = true;
@@ -271,9 +295,10 @@
             // checkBoxRemovable
             // 
             this.checkBoxRemovable.AutoSize = true;
-            this.checkBoxRemovable.Location = new System.Drawing.Point(6, 15);
+            this.checkBoxRemovable.Location = new System.Drawing.Point(8, 18);
+            this.checkBoxRemovable.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.checkBoxRemovable.Name = "checkBoxRemovable";
-            this.checkBoxRemovable.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxRemovable.Size = new System.Drawing.Size(101, 21);
             this.checkBoxRemovable.TabIndex = 15;
             this.checkBoxRemovable.Text = "Removable";
             this.checkBoxRemovable.UseVisualStyleBackColor = true;
@@ -281,9 +306,10 @@
             // checkBoxReadonly
             // 
             this.checkBoxReadonly.AutoSize = true;
-            this.checkBoxReadonly.Location = new System.Drawing.Point(6, 34);
+            this.checkBoxReadonly.Location = new System.Drawing.Point(8, 42);
+            this.checkBoxReadonly.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.checkBoxReadonly.Name = "checkBoxReadonly";
-            this.checkBoxReadonly.Size = new System.Drawing.Size(108, 17);
+            this.checkBoxReadonly.Size = new System.Drawing.Size(139, 21);
             this.checkBoxReadonly.TabIndex = 16;
             this.checkBoxReadonly.Text = "Schreibgeschützt";
             this.checkBoxReadonly.UseVisualStyleBackColor = true;
@@ -292,9 +318,11 @@
             // 
             this.groupBoxHash.Controls.Add(this.comboBoxHash);
             this.groupBoxHash.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBoxHash.Location = new System.Drawing.Point(12, 277);
+            this.groupBoxHash.Location = new System.Drawing.Point(16, 341);
+            this.groupBoxHash.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxHash.Name = "groupBoxHash";
-            this.groupBoxHash.Size = new System.Drawing.Size(205, 45);
+            this.groupBoxHash.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBoxHash.Size = new System.Drawing.Size(273, 55);
             this.groupBoxHash.TabIndex = 18;
             this.groupBoxHash.TabStop = false;
             this.groupBoxHash.Text = "Hash";
@@ -302,9 +330,10 @@
             // comboBoxHash
             // 
             this.comboBoxHash.FormattingEnabled = true;
-            this.comboBoxHash.Location = new System.Drawing.Point(55, 15);
+            this.comboBoxHash.Location = new System.Drawing.Point(73, 18);
+            this.comboBoxHash.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.comboBoxHash.Name = "comboBoxHash";
-            this.comboBoxHash.Size = new System.Drawing.Size(95, 21);
+            this.comboBoxHash.Size = new System.Drawing.Size(125, 24);
             this.comboBoxHash.TabIndex = 0;
             this.comboBoxHash.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBoxHash_MouseClick);
             // 
@@ -313,9 +342,11 @@
             this.groupBoxSavePassword.Controls.Add(this.checkBoxPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonShowPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonSavePassword);
-            this.groupBoxSavePassword.Location = new System.Drawing.Point(225, 258);
+            this.groupBoxSavePassword.Location = new System.Drawing.Point(299, 318);
+            this.groupBoxSavePassword.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxSavePassword.Name = "groupBoxSavePassword";
-            this.groupBoxSavePassword.Size = new System.Drawing.Size(205, 64);
+            this.groupBoxSavePassword.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBoxSavePassword.Size = new System.Drawing.Size(273, 79);
             this.groupBoxSavePassword.TabIndex = 19;
             this.groupBoxSavePassword.TabStop = false;
             this.groupBoxSavePassword.Text = "groupBox1";
@@ -323,9 +354,10 @@
             // checkBoxPassword
             // 
             this.checkBoxPassword.AutoSize = true;
-            this.checkBoxPassword.Location = new System.Drawing.Point(7, 42);
+            this.checkBoxPassword.Location = new System.Drawing.Point(9, 52);
+            this.checkBoxPassword.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.checkBoxPassword.Name = "checkBoxPassword";
-            this.checkBoxPassword.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxPassword.Size = new System.Drawing.Size(98, 21);
             this.checkBoxPassword.TabIndex = 4;
             this.checkBoxPassword.Text = "checkBox1";
             this.checkBoxPassword.UseVisualStyleBackColor = true;
@@ -333,9 +365,10 @@
             // 
             // buttonShowPassword
             // 
-            this.buttonShowPassword.Location = new System.Drawing.Point(105, 15);
+            this.buttonShowPassword.Location = new System.Drawing.Point(139, 18);
+            this.buttonShowPassword.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonShowPassword.Name = "buttonShowPassword";
-            this.buttonShowPassword.Size = new System.Drawing.Size(75, 23);
+            this.buttonShowPassword.Size = new System.Drawing.Size(101, 28);
             this.buttonShowPassword.TabIndex = 3;
             this.buttonShowPassword.Text = "show";
             this.buttonShowPassword.UseVisualStyleBackColor = true;
@@ -343,9 +376,10 @@
             // 
             // buttonSavePassword
             // 
-            this.buttonSavePassword.Location = new System.Drawing.Point(7, 15);
+            this.buttonSavePassword.Location = new System.Drawing.Point(9, 18);
+            this.buttonSavePassword.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonSavePassword.Name = "buttonSavePassword";
-            this.buttonSavePassword.Size = new System.Drawing.Size(75, 23);
+            this.buttonSavePassword.Size = new System.Drawing.Size(101, 28);
             this.buttonSavePassword.TabIndex = 0;
             this.buttonSavePassword.Text = "Save Password";
             this.buttonSavePassword.UseVisualStyleBackColor = true;
@@ -358,9 +392,9 @@
             // 
             // NewContainer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 368);
+            this.ClientSize = new System.Drawing.Size(583, 453);
             this.Controls.Add(this.groupBoxSavePassword);
             this.Controls.Add(this.groupBoxHash);
             this.Controls.Add(this.groupBoxMountoptions);
@@ -370,15 +404,17 @@
             this.Controls.Add(this.groupBoxKyfilename);
             this.Controls.Add(this.groupBoxPath);
             this.Controls.Add(this.groupBoxDescription);
+            this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewContainer";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Neuer Kontainer";
-            this.TopMost = true;
             this.groupBoxDescription.ResumeLayout(false);
             this.groupBoxDescription.PerformLayout();
             this.groupBoxPath.ResumeLayout(false);
