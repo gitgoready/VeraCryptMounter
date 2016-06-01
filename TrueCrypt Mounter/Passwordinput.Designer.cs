@@ -39,10 +39,11 @@
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(11, 29);
+            this.textBoxPassword.Location = new System.Drawing.Point(15, 36);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxPassword.MaxLength = 100;
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(227, 20);
+            this.textBoxPassword.Size = new System.Drawing.Size(301, 22);
             this.textBoxPassword.TabIndex = 0;
             this.textBoxPassword.UseSystemPasswordChar = true;
             this.textBoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswortEingabe_KexDown);
@@ -50,18 +51,20 @@
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(8, 13);
+            this.labelPassword.Location = new System.Drawing.Point(11, 16);
+            this.labelPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(121, 13);
+            this.labelPassword.Size = new System.Drawing.Size(160, 17);
             this.labelPassword.TabIndex = 1;
             this.labelPassword.Text = "Bitte Passwort eingeben";
             // 
             // buttonOk
             // 
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOk.Location = new System.Drawing.Point(193, 54);
+            this.buttonOk.Location = new System.Drawing.Point(257, 66);
+            this.buttonOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(75, 23);
+            this.buttonOk.Size = new System.Drawing.Size(100, 28);
             this.buttonOk.TabIndex = 3;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
@@ -69,9 +72,10 @@
             // 
             // textBoxPim
             // 
-            this.textBoxPim.Location = new System.Drawing.Point(40, 57);
+            this.textBoxPim.Location = new System.Drawing.Point(53, 70);
+            this.textBoxPim.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxPim.Name = "textBoxPim";
-            this.textBoxPim.Size = new System.Drawing.Size(147, 20);
+            this.textBoxPim.Size = new System.Drawing.Size(195, 22);
             this.textBoxPim.TabIndex = 2;
             this.textBoxPim.UseSystemPasswordChar = true;
             this.textBoxPim.Visible = false;
@@ -80,9 +84,10 @@
             // labelPim
             // 
             this.labelPim.AutoSize = true;
-            this.labelPim.Location = new System.Drawing.Point(8, 60);
+            this.labelPim.Location = new System.Drawing.Point(11, 74);
+            this.labelPim.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPim.Name = "labelPim";
-            this.labelPim.Size = new System.Drawing.Size(26, 13);
+            this.labelPim.Size = new System.Drawing.Size(31, 17);
             this.labelPim.TabIndex = 4;
             this.labelPim.Text = "PIM";
             this.labelPim.Visible = false;
@@ -90,18 +95,19 @@
             // button1
             // 
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(244, 30);
+            this.button1.Location = new System.Drawing.Point(325, 37);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 18);
+            this.button1.Size = new System.Drawing.Size(32, 22);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Passwordinput
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(273, 93);
+            this.ClientSize = new System.Drawing.Size(364, 114);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelPim);
             this.Controls.Add(this.textBoxPim);
@@ -110,9 +116,9 @@
             this.Controls.Add(this.textBoxPassword);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Passwordinput";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Passwordinput";
             this.ResumeLayout(false);
