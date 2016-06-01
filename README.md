@@ -10,7 +10,7 @@ Es können Konfigurationen angelegt werden die Beschreiben wie das Laufwerk oder
 Download
 ---- 
 
-[Version 0.9.8](https://github.com/LordSandwurm/VeraCryptMounter/releases/download/v0.9.8/VeracryptMounter-0.9.8.zip)
+[Version 0.9.8](https://github.com/LordSandwurm/VeraCryptMounter/releases/download/v0.9.8/VeracryptMounter-0.9.8.zip)   
 sha1: e0a2282052a2bac05e3907bc1b0782802838c781   
 
 [Version 0.9.8 Signatur](https://github.com/LordSandwurm/VeraCryptMounter/releases/download/v0.9.8/VeracryptMounter-0.9.8.zip.sig)  
