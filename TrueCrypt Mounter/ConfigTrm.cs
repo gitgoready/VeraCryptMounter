@@ -192,6 +192,10 @@ namespace VeraCrypt_Mounter
             /// string pim
             /// </summary>
             public const string Pim = "Pim";
+            /// <summary>
+            /// Bool partition drive is not corrected
+            /// </summary>
+            public const string PartitionNotCorrect = "PartitionNotCorrect";
         }
 
         /// <summary>

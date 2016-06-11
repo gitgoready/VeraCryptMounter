@@ -347,7 +347,12 @@ namespace VeraCrypt_Mounter
             // Write data into config file.
             try
             {
-                
+                //use entry in textbox of partition if it is not the same 
+                string dd = part.Substring(part.LastIndexOf("n") + 1);
+                if (!_partnummber.Equals(dd))
+                {
+                    _partnummber = dd;
+                }
                 _config.SetValue(beschr, ConfigTrm.Drive.Partition, part);
                 _config.SetValue(beschr, ConfigTrm.Drive.Keyfile, key);
                 _config.SetValue(beschr, ConfigTrm.Drive.Driveletter, dletter);

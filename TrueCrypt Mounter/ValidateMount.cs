@@ -81,6 +81,10 @@ namespace VeraCrypt_Mounter
         /// truecryptmode 
         /// </summary>
         public bool tc;
+        /// <summary>
+        /// Partition not corrected
+        /// </summary>
+        public bool AutostartWithWindows;
     }
     #endregion
 
@@ -158,6 +162,7 @@ namespace VeraCrypt_Mounter
             string partnumber = _config.GetValue(drivename, ConfigTrm.Drive.Partnumber, null);
             string pnpdeviceid = _config.GetValue(drivename, ConfigTrm.Drive.Pnpdeviceid, null);
             bool nokeyfile = _config.GetValue(drivename, ConfigTrm.Drive.Nokeyfile, true);
+            bool autostartWithWindows = _config.GetValue(drivename, ConfigTrm.Drive.PartitionNotCorrect, false);
 
             // Test if disk is connected on machine
             if (!info.CheckDiskPresent(pnpdeviceid))
@@ -230,6 +235,7 @@ namespace VeraCrypt_Mounter
                 }
             } 
 
+            
             list = info.GetDriveinfo(pnpdeviceid);
 
             if (list.Count >= 1)
