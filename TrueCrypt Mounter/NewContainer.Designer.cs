@@ -93,7 +93,7 @@
             this.groupBoxDescription.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxDescription.Name = "groupBoxDescription";
             this.groupBoxDescription.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBoxDescription.Size = new System.Drawing.Size(555, 62);
+            this.groupBoxDescription.Size = new System.Drawing.Size(545, 62);
             this.groupBoxDescription.TabIndex = 1;
             this.groupBoxDescription.TabStop = false;
             this.groupBoxDescription.Text = "Beschreibung des Kontainers";
@@ -103,7 +103,7 @@
             this.textBoxDescription.Location = new System.Drawing.Point(8, 23);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(537, 22);
+            this.textBoxDescription.Size = new System.Drawing.Size(518, 22);
             this.textBoxDescription.TabIndex = 2;
             // 
             // textBoxKontainer
@@ -111,12 +111,12 @@
             this.textBoxKontainer.Location = new System.Drawing.Point(8, 23);
             this.textBoxKontainer.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxKontainer.Name = "textBoxKontainer";
-            this.textBoxKontainer.Size = new System.Drawing.Size(537, 22);
+            this.textBoxKontainer.Size = new System.Drawing.Size(518, 22);
             this.textBoxKontainer.TabIndex = 4;
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(405, 410);
+            this.buttonClose.Location = new System.Drawing.Point(441, 405);
             this.buttonClose.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(120, 28);
@@ -127,7 +127,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(277, 410);
+            this.buttonOk.Location = new System.Drawing.Point(313, 405);
             this.buttonOk.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(120, 28);
@@ -145,7 +145,7 @@
             this.groupBoxPath.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxPath.Name = "groupBoxPath";
             this.groupBoxPath.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBoxPath.Size = new System.Drawing.Size(555, 98);
+            this.groupBoxPath.Size = new System.Drawing.Size(545, 98);
             this.groupBoxPath.TabIndex = 3;
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Pfad zum Kontainer";
@@ -156,7 +156,7 @@
             this.textBoxSelectedDrive.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxSelectedDrive.Name = "textBoxSelectedDrive";
             this.textBoxSelectedDrive.ReadOnly = true;
-            this.textBoxSelectedDrive.Size = new System.Drawing.Size(429, 22);
+            this.textBoxSelectedDrive.Size = new System.Drawing.Size(409, 22);
             this.textBoxSelectedDrive.TabIndex = 13;
             // 
             // checkBoxAutomountUsb
@@ -179,14 +179,14 @@
             this.groupBoxKyfilename.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxKyfilename.Name = "groupBoxKyfilename";
             this.groupBoxKyfilename.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBoxKyfilename.Size = new System.Drawing.Size(273, 86);
+            this.groupBoxKyfilename.Size = new System.Drawing.Size(262, 86);
             this.groupBoxKyfilename.TabIndex = 6;
             this.groupBoxKyfilename.TabStop = false;
             this.groupBoxKyfilename.Text = "Keyfilename";
             // 
             // buttonSelectKeyfile
             // 
-            this.buttonSelectKeyfile.Location = new System.Drawing.Point(165, 55);
+            this.buttonSelectKeyfile.Location = new System.Drawing.Point(138, 55);
             this.buttonSelectKeyfile.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buttonSelectKeyfile.Name = "buttonSelectKeyfile";
             this.buttonSelectKeyfile.Size = new System.Drawing.Size(101, 28);
@@ -212,7 +212,7 @@
             this.textBoxKeyfile.Location = new System.Drawing.Point(8, 23);
             this.textBoxKeyfile.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxKeyfile.Name = "textBoxKeyfile";
-            this.textBoxKeyfile.Size = new System.Drawing.Size(255, 22);
+            this.textBoxKeyfile.Size = new System.Drawing.Size(231, 22);
             this.textBoxKeyfile.TabIndex = 7;
             // 
             // groupBoxDriveletter
@@ -222,7 +222,7 @@
             this.groupBoxDriveletter.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxDriveletter.Name = "groupBoxDriveletter";
             this.groupBoxDriveletter.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBoxDriveletter.Size = new System.Drawing.Size(273, 57);
+            this.groupBoxDriveletter.Size = new System.Drawing.Size(262, 57);
             this.groupBoxDriveletter.TabIndex = 12;
             this.groupBoxDriveletter.TabStop = false;
             this.groupBoxDriveletter.Text = "Zuzuweisender Laufwerksbuchstaben";
@@ -249,7 +249,7 @@
             this.groupBoxMountoptions.Controls.Add(this.checkBoxRemovable);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountUsb);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxReadonly);
-            this.groupBoxMountoptions.Location = new System.Drawing.Point(299, 190);
+            this.groupBoxMountoptions.Location = new System.Drawing.Point(288, 190);
             this.groupBoxMountoptions.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxMountoptions.Name = "groupBoxMountoptions";
             this.groupBoxMountoptions.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -322,7 +322,7 @@
             this.groupBoxHash.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxHash.Name = "groupBoxHash";
             this.groupBoxHash.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBoxHash.Size = new System.Drawing.Size(273, 55);
+            this.groupBoxHash.Size = new System.Drawing.Size(262, 55);
             this.groupBoxHash.TabIndex = 18;
             this.groupBoxHash.TabStop = false;
             this.groupBoxHash.Text = "Hash";
@@ -342,7 +342,7 @@
             this.groupBoxSavePassword.Controls.Add(this.checkBoxPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonShowPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonSavePassword);
-            this.groupBoxSavePassword.Location = new System.Drawing.Point(299, 318);
+            this.groupBoxSavePassword.Location = new System.Drawing.Point(288, 318);
             this.groupBoxSavePassword.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBoxSavePassword.Name = "groupBoxSavePassword";
             this.groupBoxSavePassword.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -394,7 +394,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 453);
+            this.ClientSize = new System.Drawing.Size(574, 441);
             this.Controls.Add(this.groupBoxSavePassword);
             this.Controls.Add(this.groupBoxHash);
             this.Controls.Add(this.groupBoxMountoptions);
