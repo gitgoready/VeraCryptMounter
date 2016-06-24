@@ -31,6 +31,7 @@ namespace VeraCrypt_Mounter
         private string _confDir;
         private const string LanguageRegion = "Password";
         private string _language = Properties.Settings.Default.language;
+        private int fail;
 
         /// <summary>
         /// Password input for encrypted xml config.
@@ -39,6 +40,7 @@ namespace VeraCrypt_Mounter
         {
             InitializeComponent();
             toolStripStatusLabel1.Text = "";
+            fail = 0;
 #if DEBUG
             toolStripStatusLabel1.Text = _language;
 #endif
@@ -162,7 +164,14 @@ namespace VeraCrypt_Mounter
 
         private void set_wrong()
         {
+            //close after 5 wrong inputs
+            if (fail <= 3)
+                fail++;
+            else
+                buttonCancel_Click(this, EventArgs.Empty);
+
             toolStripStatusLabel1.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "password wrong", _language);
+            textBoxPassword_first.Text = "";
             toolStripStatusLabel1.ForeColor = Color.Red;
             return;
         }
