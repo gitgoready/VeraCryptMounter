@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace VeraCrypt_Mounter
@@ -57,6 +54,11 @@ namespace VeraCrypt_Mounter
                     mvd = vm.ValidateMountContainer(name, _language);
                     
                 }
+                catch (DrivletterUsedException dx)
+                {
+                    //Dont show error if drivletter is used. Drive is probalbly mounted
+                    error = true;
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error", _language), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -85,6 +87,11 @@ namespace VeraCrypt_Mounter
                     mvd = vm.ValidateMountDrive(name, _language);
                     
 
+                }
+                catch (DrivletterUsedException dx)
+                {
+                    //Dont show error if drivletter is used. Drive is probalbly mounted
+                    error = true;
                 }
                 catch (Exception ex)
                 {

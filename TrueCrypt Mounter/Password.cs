@@ -40,7 +40,7 @@ namespace VeraCrypt_Mounter
         {
             InitializeComponent();
             toolStripStatusLabel1.Text = "";
-            fail = 0;
+            fail = 1;
 #if DEBUG
             toolStripStatusLabel1.Text = _language;
 #endif

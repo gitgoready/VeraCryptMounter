@@ -185,6 +185,7 @@ namespace VeraCrypt_Mounter
         private static Automountusb UsbEventAnalysing(EventArrivedEventArgs e)
         {
             Automountusb autousb = new Automountusb();
+            Automountusb res = null;
             // Get the Event Object.
             foreach (PropertyData pd in e.NewEvent.Properties)
             {
@@ -198,7 +199,7 @@ namespace VeraCrypt_Mounter
                         {
                             if (test.Contains("USBSTOR") || test.Contains("SCSI\\\\DISK"))
                             {
-                                Automountusb res = autousb.MountUsb(test);
+                                res = autousb.MountUsb(test);
                                 return res;
                             }
                         }

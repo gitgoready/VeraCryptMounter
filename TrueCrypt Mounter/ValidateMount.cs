@@ -247,6 +247,11 @@ namespace VeraCrypt_Mounter
                 parlist.Add("\\Device\\Harddisk" + disknumber + "\\Partition" + partnumber);
             }
 
+            if (!DrivelettersHelper.IsDriveletterFree(dletter))
+            {
+                throw new DrivletterUsedException(dletter);
+            }
+
             retstruct.partitionlist = parlist.ToArray();
             retstruct.driveletter = dletter;
             retstruct.key = key;
@@ -410,6 +415,11 @@ namespace VeraCrypt_Mounter
 
             // set quotes to path
             path = '\u0022' + path + '\u0022';
+
+            if (!DrivelettersHelper.IsDriveletterFree(dletter))
+            {
+                throw new DrivletterUsedException(dletter);
+            }
 
             mvd.path = path;
             mvd.driveletter = dletter;

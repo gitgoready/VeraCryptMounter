@@ -63,9 +63,7 @@ namespace VeraCrypt_Mounter
 
                     
 
-#if DEBUG
-            MessageBox.Show(pnpid);
-#endif
+
             string[] sections = _config.GetSectionNames();
             string configPnPid = "";
 
@@ -78,6 +76,9 @@ namespace VeraCrypt_Mounter
                 {
                     configPnPid = _config.GetValue(section, ConfigTrm.Container.Pnpid, "");
                     if (configPnPid.Equals(pnpid))
+#if DEBUG
+                        MessageBox.Show(pnpid + "  " + configPnPid);
+#endif
                     {
                         if (_config.GetValue(section, ConfigTrm.Container.Automountusb, false))
                         {
@@ -107,9 +108,9 @@ namespace VeraCrypt_Mounter
                     configPnPid = _config.GetValue(section, ConfigTrm.Drive.Pnpdeviceid, "");
 
                     if (configPnPid.Equals(pnpid))
-                    {                    
+                    {
 #if DEBUG
-                        MessageBox.Show(section);
+                        MessageBox.Show(pnpid + "  " + configPnPid);
 #endif
                         if (_config.GetValue(section, ConfigTrm.Drive.Automountusb, false))
                         {
