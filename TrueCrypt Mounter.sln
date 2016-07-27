@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeracryptMounter", "TrueCrypt Mounter\VeracryptMounter.csproj", "{3738A78D-699E-4D15-B49A-2F44A0FBC65F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "VeracryptMounterLinux", "VeracryptMounterLinux\VeracryptMounterLinux.xproj", "{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeracryptMounterLinux", "VeracryptMounterLinux\VeracryptMounterLinux.csproj", "{383B7D0E-320F-48DE-8946-018B84CB2FBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,18 +27,18 @@ Global
 		{3738A78D-699E-4D15-B49A-2F44A0FBC65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3738A78D-699E-4D15-B49A-2F44A0FBC65F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3738A78D-699E-4D15-B49A-2F44A0FBC65F}.Release|x64.ActiveCfg = Release|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Debug|x64.Build.0 = Debug|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Release_64|Any CPU.ActiveCfg = Release|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Release_64|Any CPU.Build.0 = Release|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Release_64|x64.ActiveCfg = Release|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Release_64|x64.Build.0 = Release|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Release|x64.ActiveCfg = Release|Any CPU
-		{A03205C2-94F0-4DAC-8EAC-0304B7ADC8D8}.Release|x64.Build.0 = Release|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Debug|x64.Build.0 = Debug|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Release_64|Any CPU.ActiveCfg = Release|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Release_64|Any CPU.Build.0 = Release|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Release_64|x64.ActiveCfg = Release|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Release_64|x64.Build.0 = Release|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Release|x64.ActiveCfg = Release|Any CPU
+		{383B7D0E-320F-48DE-8946-018B84CB2FBD}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
