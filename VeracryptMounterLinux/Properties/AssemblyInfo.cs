@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("VeracryptMounterLinux")]
-[assembly: AssemblyCopyright("Copyright Rafael Grothmann©  2016")]
+[assembly: AssemblyCopyright("Copyright ©  2016 by Rafael Grothmann")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

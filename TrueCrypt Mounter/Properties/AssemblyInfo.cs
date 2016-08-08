@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("VeraCrypt Mounter")]
-[assembly: AssemblyCopyright("Copyright © 2016 Rafael Grothmann")]
+[assembly: AssemblyCopyright("Copyright © 2016 by Rafael Grothmann")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
