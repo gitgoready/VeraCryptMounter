@@ -23,6 +23,7 @@ namespace VeracryptMounterLinux
                     Console.WriteLine(description);
                     Console.WriteLine("-l gedrückt");
                     Console.WriteLine(PasswordInput());
+
                     break;
                 case "-f":
                     Console.WriteLine(description);
