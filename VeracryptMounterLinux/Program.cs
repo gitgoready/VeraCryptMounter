@@ -8,12 +8,21 @@ namespace VeracryptMounterLinux
 {
     class Program 
     {
+        private static string password;
+
+
         static void Main(string[] args)
         {
             string description = Properties.Settings.Default.Description;
             if (args.Length <= 0)
             {
                 Console.WriteLine(description);
+                password = PasswordInput();
+                Console.WriteLine(password);
+                Password_helper.Password = password;
+                bool check = Password_helper.Check_password();
+                Console.WriteLine(check);
+                Console.ReadKey();
                 Environment.Exit(0);
             }
 
@@ -22,7 +31,8 @@ namespace VeracryptMounterLinux
                 case "-l":
                     Console.WriteLine(description);
                     Console.WriteLine("-l gedrückt");
-                    Console.WriteLine(PasswordInput());
+                    password = PasswordInput();
+                    Console.WriteLine();
 
                     break;
                 case "-f":

@@ -21,7 +21,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace VeraCrypt_Mounter
+namespace VeracryptMounterLinux
 {
     ///<summary>
     /// Class prvides all methods to use the config file.
@@ -199,8 +199,8 @@ namespace VeraCrypt_Mounter
                 }
                 catch (Exception ex)
                 {
-                    var res = System.Windows.Forms.MessageBox.Show("Config error: " + ex, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                    Application.Exit();
+                    Console.WriteLine("Config error: " + ex );
+                    Environment.Exit(0);
                 }
                  
                 writer.WriteStartDocument();
@@ -366,6 +366,7 @@ namespace VeraCrypt_Mounter
         {
             // Verify the document exists
             XmlDocument doc = GetXmlDocument();
+            
             if (doc == null)
                 return null;
 
@@ -590,6 +591,7 @@ namespace VeraCrypt_Mounter
                 {
                     XmlNode entryNode = root.SelectSingleNode(GroupNameSlash + section + "/add[@key=\"" + entry + "\"]");
                     string value = entryNode.Attributes["value"].Value;
+                    Console.WriteLine(value);
                     //encrypt value
                     value = StringCipher.Decrypt(value, Password_helper.Password);
                     return value;

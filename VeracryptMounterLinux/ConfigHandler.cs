@@ -13,9 +13,15 @@ namespace VeracryptMounterLinux
 
         }
 
-        public string getList()
+        public string GetList()
         {
-            return null;
+            throw new NotImplementedException();
+        }
+
+        public string GetSection(string name)
+        {
+
+            throw new NotImplementedException();
         }
     }
 }

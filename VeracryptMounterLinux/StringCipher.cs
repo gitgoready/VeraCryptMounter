@@ -18,7 +18,7 @@
 using System;
 using SecurityDriven.Inferno;
 
-namespace VeraCrypt_Mounter
+namespace VeracryptMounterLinux
 {
     /// <summary>
     /// Encode and decode strings with aes-ctr-256.
@@ -38,6 +38,7 @@ namespace VeraCrypt_Mounter
         /// <returns></returns>
         public static string Encrypt(string plainText, string passPhrase)
         {
+            
             //get nedded form of passphrase and plaintest
             byte[] key = Utils.SafeUTF8.GetBytes(passPhrase);
             ArraySegment<byte> plain = new ArraySegment<byte>(Utils.SafeUTF8.GetBytes(plainText));
@@ -67,6 +68,7 @@ namespace VeraCrypt_Mounter
         /// <returns></returns>
         public static string Decrypt(string cipherText, string passPhrase)
         {
+            Console.WriteLine("DECRYPT");
             //get nedded form of passphrase and cyphertext
             byte[] key = Utils.SafeUTF8.GetBytes(passPhrase);
             string salt = cipherText.Substring(cipherText.Length - 88);
