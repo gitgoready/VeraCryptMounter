@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle">
+      <HintPath>.\BouncyCastle.dll</HintPath>
+    </Reference>
     <Reference Include="SecurityDriven.Inferno, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Inferno.1.3.0\lib\net452\SecurityDriven.Inferno.dll</HintPath>
       <Private>True</Private>
@@ -47,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AESGCM.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConfigHandler.cs" />
     <Compile Include="ConfigManager.cs" />

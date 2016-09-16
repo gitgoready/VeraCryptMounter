@@ -32,7 +32,7 @@ namespace VeraCrypt_Mounter
         private readonly Config _config = new Config();
         private readonly List<string> _driveletters = new List<string>();
         private readonly List<string> _useddriveletters = new List<string>();
-        private static object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160" };
+        private static object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160", "streebog" };
         private bool _edit;
         private readonly string _language; 
         private const string LanguageRegion = "NewDrive";

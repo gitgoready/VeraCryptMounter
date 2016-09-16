@@ -35,7 +35,8 @@ namespace VeraCrypt_Mounter
         private const string LanguageRegion = "NewContainer";
         private readonly string _language;
         private string _oldName;
-        private object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160" };
+        private object[] _hashes = { "", "sha512", "sha256", "whirlpool", "ripemd160", "streebog"
+        };
         private string _password = "";
         private string _pim = "";
         private string _pnpid;
@@ -133,7 +134,7 @@ namespace VeraCrypt_Mounter
             _oldName = description;
             string path = _config.GetValue(description, ConfigTrm.Container.Kontainerpath, "");
             textBoxDescription.Text = description;
-            comboBoxHash.Items.AddRange(new object[] { "", "sha512", "sha256", "wirlpool", "ripemd160" });
+            comboBoxHash.Items.AddRange(new object[] { "", "sha512", "sha256", "wirlpool", "ripemd160", "streebog" });
             comboBoxHash.SelectedItem = _config.GetValue(description, ConfigTrm.Container.Hash, "");
             checkBoxNoKeyfile.Checked = _config.GetValue(description, ConfigTrm.Container.Nokeyfile, false);
             
