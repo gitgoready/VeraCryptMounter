@@ -78,11 +78,11 @@
       <E>Drive</E>
     </Text>
     <Text key="toolStripMenuItemSettings">
-      <D>Einstellunge</D>
+      <D>Einstellungen</D>
       <E>Options</E>
     </Text>
     <Text key="ToolStripMenuItemMainSettings">
-      <D>Grundeinstellunge</D>
+      <D>Grundeinstellungen</D>
       <E>Mainsettings</E>
     </Text>
     <Text key="ToolStripMenuItemHelp">
