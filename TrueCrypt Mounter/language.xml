@@ -26,24 +26,24 @@
       <E>Dismount</E>
     </Text>
     <Text key="buttonKeyfileContainerMount">
-      <D>Schlüsselkontainer Einbinden</D>
-      <E>Keyfilecontainer Mount</E>
+      <D>Schlüsselcontainer Einbinden</D>
+      <E>Mount container for keyfiles</E>
     </Text>
     <Text key="buttonKeyfileContainerDismount">
-      <D>Schlüsselkontainer Auswerfen</D>
-      <E>Keyfilecontainer Dismount</E>
+      <D>Schlüsselcontainer Auswerfen</D>
+      <E>Dismount container for keyfiles</E>
     </Text>
     <Text key="groupBoxDrive">
       <D>Laufwerke</D>
       <E>Drives</E>
     </Text>
     <Text key="groupBoxContainer">
-      <D>Kontainer</D>
+      <D>Container</D>
       <E>Container</E>
     </Text>
     <Text key="groupBoxKeyfileContainer">
-      <D>Schlüsselkontainer</D>
-      <E>Keyfilecontainer</E>    
+      <D>Schlüsselcontainer</D>
+      <E>Container for keyfiles</E>    
     </Text>
     <Text key="ToolStripMenuItemNew">
       <D>Neu</D>
@@ -62,7 +62,7 @@
       <E>Edit</E>
     </Text>
     <Text key="ContainerToolStripMenuItem">
-      <D>Kontainer</D>
+      <D>Container</D>
       <E>Container</E>
     </Text>
     <Text key="ToolStripMenuItemEditEntry">
@@ -83,7 +83,7 @@
     </Text>
     <Text key="ToolStripMenuItemMainSettings">
       <D>Grundeinstellungen</D>
-      <E>Mainsettings</E>
+      <E>Settings</E>
     </Text>
     <Text key="ToolStripMenuItemHelp">
       <D>Hilfe</D>
@@ -94,8 +94,8 @@
       <E>Version</E>
     </Text>
     <Text key="ToolStripMenuItemNotifyKeyfilecontainer">
-      <D>Schlüsselkontainer</D>
-      <E>Keyfilecontainer</E>
+      <D>Schlüsselcontainer</D>
+      <E>Container for keyfiles</E>
     </Text>
     <Text key="ToolStripMenuItemNotifyRestore">
       <D>Wiederherstellen</D>
@@ -119,106 +119,106 @@
     </Text>
     <Text key="comboBoxDrives">
       <D>Bitte Laufwerk auswählen</D>
-      <E>Please choose drive</E>
+      <E>Please select drive</E>
     </Text>
     <Text key="comboBoxContainer">
-      <D>Bitte Kontainer auswählen</D>
-      <E>Please choose container</E>
+      <D>Bitte Container auswählen</D>
+      <E>Please select container</E>
     </Text>
     <Text key="NotificationDriveSucceed">
       <D>Laufwerk erfolgreich eingebunden</D>
-      <E>Drive successful mounted</E>
+      <E>Drive mounted successfuly</E>
     </Text>
     <Text key="NotificationDriveFaild">
       <D>Laufwerk konnte nicht eingebunden werden</D>
       <E>Drive mounting failed</E>
     </Text>
     <Text key="NotificationContainerFaild">
-      <D>Kontainer konnte nicht eingebunden werden</D>
-      <E>Container mounting failed</E>
+      <D>Container konnte nicht eingebunden werden</D>
+      <E>Mounting container failed</E>
     </Text>
     <Text key="NotificationContainerSucceed">
-      <D>Kontainer erfolgreich eingebunden</D>
-      <E>Container successful mounted</E>
+      <D>Container erfolgreich eingebunden</D>
+      <E>Container mounted successfuly</E>
     </Text>
     <Text key="NotificationKeyfilecontainerSucceed">
-      <D>Schlüsselkontainer erfolgreich eingebunden</D>
-      <E>Keyfilecontainer successful mounted</E>
+      <D>Schlüsselcontainer erfolgreich eingebunden</D>
+      <E>Container for keyfiles mounted successfully</E>
     </Text>
     <Text key="NotificationKeyfilecontainerFaild">
-      <D>Schlüsselkontainer konnte nicht eingebunden werden</D>
-      <E>Keyfilecontainer mounting failed</E>
+      <D>Schlüsselcontainer konnte nicht eingebunden werden</D>
+      <E>Failed to mount container for keyfiles</E>
     </Text>
     <Text key="NotificationDriveDismountSucceed">
       <D>Laufwerk erfolgreich ausgeworfen</D>
-      <E>Drive successful dismounted</E>
+      <E>Drive dismounted successfully</E>
     </Text>
     <Text key="NotificationDriveDismountFaild">
       <D>Laufwerk konnte nicht ausgeworfen werden</D>
-      <E>Drive dismounting failed</E>
+      <E>Dismounting drive failed</E>
     </Text>
     <Text key="NotificationContainerDismountFaild">
-      <D>Kontainer konnte nicht ausgeworfen werden</D>
-      <E>Container dismounting failed</E>
+      <D>Container konnte nicht ausgeworfen werden</D>
+      <E>Dismounting container failed</E>
     </Text>
     <Text key="NotificationContainerDismountSucceed">
-      <D>Kontainer erfolgreich ausgeworfen</D>
-      <E>Container successful dismounted</E>
+      <D>Container erfolgreich ausgeworfen</D>
+      <E>Container dismounted successfully</E>
     </Text>
     <Text key="NotificationKeyfilecontainerDismountSucceed">
-      <D>Schlüsselkontainer erfolgreich ausgeworfen</D>
-      <E>Keyfilecontainer successful dismounted</E>
+      <D>Schlüsselcontainer erfolgreich ausgeworfen</D>
+      <E>Container for keyfiles dismounted successfully</E>
     </Text>
     <Text key="NotificationKeyfilecontainerDismountFaild">
-      <D>Schlüsselkontainer konnte nicht ausgeworfen werden</D>
-      <E>Keyfilecontainer dismounting failed</E>
+      <D>Schlüsselcontainer konnte nicht ausgeworfen werden</D>
+      <E>Dismounting container for keyfiles failed</E>
     </Text>
     <Text key="ValidateMessage">
       <D>Bitte erst Grundeinstellung vornehmen!</D>
-      <E>Please configure settings first!</E>
+      <E>Please first configure settings!</E>
     </Text>
     <Text key="SelectionFaild">
-      <D>Bitte erst etwas auswählen oder neue erstellen!</D>
-      <E>Please select something first or create it!</E>
+      <D>Bitte erst auswählen oder erstellen!</D>
+      <E>Please first select or create </E>
     </Text>
     <Text key="NoKeyfileMessage">
-      <D>Keyfilekontainer nicht eingebunden oder Keyfile nicht vorhanden.</D>
-      <E>Keyfilecontainer not mounted or keyfile does not exist.</E>
+      <D>Keyfilecontainer nicht eingebunden oder Keyfile nicht vorhanden.</D>
+      <E>Container for keyfiels not mounted or keyfile does not exist.</E>
     </Text>
     <Text key="DiskNotPresentMessage">
       <D>Laufwerk nicht angeschlossen.</D>
-      <E>Drive not conected.</E>
+      <E>Drive not connected.</E>
     </Text>
     <Text key="Error">
       <D>Fehler</D>
       <E>Error</E>
     </Text>
     <Text key="KyfilecontainerUsed">
-      <D>Laufwerksbuchstabe ist belegt oder KeyfileKontainer ist schon eingebunden.</D>
-      <E>Drivletter is used or Keyfilecontainer is mounted.</E>
+      <D>Laufwerksbuchstabe ist belegt oder Keyfilecontainer ist schon eingebunden.</D>
+      <E>Drivletter is used or container for keyfiles is mounted.</E>
     </Text>
     <Text key="DriveNotMounted">
-      <D>Laufwerk ist nicht eingebunden.</D>
+      <D>Laufwerk nicht eingebunden.</D>
       <E>Drive not mounted.</E>
     </Text>
     <Text key="KeyfilecontainerNotMounted">
-      <D>Keyfilekontainer ist nicht eingebunden.</D>
-      <E>Keyfilecontainer is not mounted.</E>
+      <D>Keyfilecontainer ist nicht eingebunden.</D>
+      <E>Container for keyfiels is not mounted.</E>
     </Text>
     <Text key="ContainerNotMounted">
-      <D>Kontainer ist nicht eingebunden.</D>
+      <D>Container ist nicht eingebunden.</D>
       <E>Container is not mounted.</E>
     </Text>
     <Text key="DiskNotPresentContainerMessage">
-      <D>Das Laufwerk, auf dem der Kontainer gespeichert wurde, ist nicht angeschlossen</D>
-      <E>Drive containing the container not connected</E>
+      <D>Das Laufwerk, auf dem der Container gespeichert wurde, ist nicht angeschlossen</D>
+      <E>Drive containing the container is not connected</E>
     </Text>
     <Text key="MessageDriveDelete">
       <D>Möchten sie das Lauferk wirklich löschen?</D>
       <E>Delete the Drive?</E>
     </Text>
     <Text key="MessageContainerDelete">
-      <D>Möchten sie den Kontainer wirklich löschen?</D>
+      <D>Möchten sie den Container wirklich löschen?</D>
       <E>Delete the container?</E>
     </Text>
     <Text key="DriveSelectionFaild">
@@ -231,7 +231,7 @@
     </Text>
     <Text key="EditMounted">
       <D>Laufwerk oder Container noch eingebunden. Bitte erst auswerfen.</D>
-      <E>Drive or container mounted. Please dismount.</E>  
+      <E>Drive or container mounted. Please dismount first.</E>  
     </Text>
     <Text key="toolStripMenuItem_Drive_new">
       <D>Neu</D>
@@ -259,11 +259,11 @@
     </Text>
     <Text key="Automountusbsucceed">
       <D>: wurde erfolgreich automatisch eingebunden</D>
-      <E>: is automatic mounted.</E>
+      <E>: is automaticaly mounted.</E>
     </Text>
     <Text key="Automountusbfailed">
       <D>: konnte nicht automatisch eingebund werden.</D>
-      <E>: automatic mount failed.</E>
+      <E>: automaticaly mounting failed.</E>
     </Text>
     <Text key="automountToolStripMenuItem">
       <D>Autoeinbinden</D>
@@ -280,7 +280,7 @@
       <E>Shows the drivenames those you created.</E>
     </Text>
     <Text key="ComboboxContainerTip">
-      <D>Anzeige der von Ihnen angelegten Kontainernamen.</D>
+      <D>Anzeige der von Ihnen angelegten Containernamen.</D>
       <E>Shows the containernames those you created.</E>
     </Text>
   </Region>
@@ -456,11 +456,11 @@
         <E>Choose</E>
       </Text>
       <Text key="groupBoxKeyfileContainer">
-        <D>Keyfilekontainer Optionen</D>
+        <D>Keyfilecontainer Optionen</D>
         <E>Keyfilecontainer settings</E>
       </Text>
       <Text key="labelKeyfilecontainer">
-        <D>Pfad zum Keyfilekontainer</D>
+        <D>Pfad zum Keyfilecontainer</D>
         <E>Path to Keyfikecontainer</E>
       </Text>
       <Text key="labelDriveletter">
@@ -488,7 +488,7 @@
         <E>Portable</E>
       </Text>
       <Text key="checkBoxNoKeyfilecontainer">
-        <D>Keyfilekontainer nicht benutzen</D>
+        <D>Keyfilecontainer nicht benutzen</D>
         <E>Do not use Keyfilecontainer</E>
       </Text>
       <Text key="groupBoxLanguage">
@@ -524,7 +524,7 @@
         <E>Please select Veracrypt.exe</E>
       </Text>
       <Text key="MesageSetPathContainer">
-        <D>Bitte Pfad zum Keyfilekontainer angeben.</D>
+        <D>Bitte Pfad zum Keyfilecontainer angeben.</D>
         <E>Please set path to Keyfilecontainer.</E>
       </Text>
       <Text key="MessageSelectDriveletter">
@@ -542,7 +542,7 @@
     </Region>
   <Region name="NewContainer">
     <Text key="Form">
-      <D>Neuer Kontainer</D>
+      <D>Neuer container</D>
       <E>New Container</E>
     </Text>
     <Text key="buttonShowPassword">
@@ -566,11 +566,11 @@
       <E>hash</E>
     </Text>
     <Text key="groupBoxDescription">
-      <D>Beschreibung des Kontainers</D>
+      <D>Beschreibung des containers</D>
       <E>Container description</E>
     </Text>
     <Text key="groupBoxPath">
-      <D>Pfad zum Kontainer</D>
+      <D>Pfad zum container</D>
       <E>Path to the container</E>
     </Text>
     <Text key="groupBoxKyfilename">
@@ -682,11 +682,11 @@
   </Region>
   <Region name="ContainerselectionPortable">
     <Text key="Form">
-      <D>Schlüsselkontainer</D>
+      <D>Schlüsselcontainer</D>
       <E>Keyfilecontainer</E>
     </Text>
     <Text key="labelKeyfilecontainer">
-      <D>Bitte Schlüsselkontainer auswählen</D>
+      <D>Bitte Schlüsselcontainer auswählen</D>
       <E>Please choose Keyfilecontainer</E>
     </Text>
     <Text key="buttonOk">
@@ -698,7 +698,7 @@
       <E>Close</E>
     </Text>
     <Text key="MessageNoSelection">
-      <D>Bitte Schlüsselkontainer auswählen.</D>
+      <D>Bitte Schlüsselcontainer auswählen.</D>
       <E>Please select keyfilecontainer.</E>
     </Text>
     <Text key="Error">
@@ -720,7 +720,7 @@
       <E>Mount drives from USB</E>
     </Text>
     <Text key="checkBoxContainer">
-      <D>Kontainer einbinden von USB</D>
+      <D>container einbinden von USB</D>
       <E>Mount container from USB</E>
     </Text>
     <Text key="buttonOK">
@@ -752,7 +752,7 @@
       <E>Mount drives by programstart</E>
     </Text>
     <Text key="checkBoxSartContainer">
-      <D>Kontainer beim Start einbinden</D>
+      <D>container beim Start einbinden</D>
       <E>Mount container by programstart</E>
     </Text>
     <Text key="groupBoxStartAutomount">
@@ -790,23 +790,23 @@
       <E>succeed</E>
     </Text>
     <Text key="ContainerNotExist">
-      <D>: Kontainerdatei nicht vorhanden.</D>
+      <D>: containerdatei nicht vorhanden.</D>
       <E>: Containerfile not exist.</E>
     </Text>
     <Text key="KeyfilecontainerMounted">
-      <D>Schlüsselkontainer bereits eingebunden.</D>
+      <D>Schlüsselcontainer bereits eingebunden.</D>
       <E>Keyfilecontainer already mountend.</E>
     </Text>
     <Text key="KeyfilecontainerTryMount">
-      <D>Schlüsselkontainer wird versuch einzubinden.</D>
+      <D>Schlüsselcontainer wird versuch einzubinden.</D>
       <E>Trying to mount Keyfilecontainer.</E>
     </Text>
     <Text key="KeyfilecontainerState">
-      <D>Schlüsselkontainer einbindung: </D>
+      <D>Schlüsselcontainer einbindung: </D>
       <E>Mounting Keyfilecontainer: </E>
     </Text>
     <Text key="KeyfilecontainerNotExist">
-      <D>Schlüsselkontainer nicht vorhanden.</D>
+      <D>Schlüsselcontainer nicht vorhanden.</D>
       <E>Keyfilecontainer not exist.</E>
     </Text>
   </Region>
@@ -894,7 +894,7 @@
       <E>Reset</E>
     </Text>
     <Text key="resetMessage">
-      <D>Um das Passwort zurückzusetzen, wird die Konfig gelöscht. Alle Einstellungen der angelegeten Laufwerke und Kontainer gehen verlohren.</D>
+      <D>Um das Passwort zurückzusetzen, wird die Konfig gelöscht. Alle Einstellungen der angelegeten Laufwerke und container gehen verlohren.</D>
       <E>To reset the password all configurations of Drives and Containers will be deleted.</E>
     </Text>
     <Text key="equel">
