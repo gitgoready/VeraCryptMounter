@@ -210,5 +210,13 @@ namespace VeraCrypt_Mounter
             }
             
         }
+
+        private void button_change_passwordview_Click(object sender, EventArgs e)
+        {
+            if (textBoxPassword_first.UseSystemPasswordChar)
+                textBoxPassword_first.UseSystemPasswordChar  = textBoxOldPassword.UseSystemPasswordChar = textBoxPassword_second.UseSystemPasswordChar = false;
+            else
+                textBoxPassword_first.UseSystemPasswordChar  = textBoxOldPassword.UseSystemPasswordChar = textBoxPassword_second.UseSystemPasswordChar = true;
+        }
     }
 }
