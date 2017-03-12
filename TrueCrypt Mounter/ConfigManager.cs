@@ -34,21 +34,7 @@ namespace VeraCrypt_Mounter
         public Config Init(Config conf)
         {
             string dirPath = string.Format(Application.StartupPath);
-            conf.XmlPathName = string.Format("{0}\\TRM.config", Application.StartupPath);
-
-            //if startuppath is not writable use localuserappdatapath
-            if (!File.Exists(conf.XmlPathName))
-            { 
-                try
-                {
-                    using (FileStream fs = File.Create(Path.Combine(dirPath, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose))
-                    { }
-                }
-                catch
-                {
-                    conf.XmlPathName = string.Format("{0}\\TRM.config", Application.LocalUserAppDataPath);
-                }
-            }
+            conf.XmlPathName = Password_helper.CheckConfDir();
 
             conf.GroupName = null;
             

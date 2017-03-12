@@ -104,6 +104,16 @@
     <DocumentationFile>bin\x64\Release_64\VeracryptMounter.XML</DocumentationFile>
     <WarningLevel>2</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>85ECC7E91548BC2469068C17BE2EDCC97803DFFF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>VeraCrypt.p12</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestTimestampUrl>
+    </ManifestTimestampUrl>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SecurityDriven.Inferno, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Inferno.1.2.0\lib\net452\SecurityDriven.Inferno.dll</HintPath>
@@ -247,6 +257,7 @@
       <DependentUpon>Version.cs</DependentUpon>
     </Compile>
     <Compile Include="WmiDriveInfo.cs" />
+    <None Include="VeraCrypt.p12" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="language.xml">

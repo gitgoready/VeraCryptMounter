@@ -2,6 +2,8 @@
 using System.IO;
 using System.Windows.Forms;
 using SecurityDriven.Inferno.Hash;
+using System.Security;
+using System.Security.Permissions;
 
 namespace VeraCrypt_Mounter
 {
@@ -15,11 +17,16 @@ namespace VeraCrypt_Mounter
             get { return _password; }
             set { _password = value; }
         }
-        private static void CheckConfDir()
+        /// <summary>
+        /// Check if Startuppath is writeable. if it isnt use Applocal path for config.
+        /// </summary>
+        /// <returns>string: Path to config file</returns>
+        public static string CheckConfDir()
         {
             _confDir = string.Format("{0}\\TRM.config", Application.StartupPath);
-            if (!File.Exists(string.Format(_confDir)))
-                return;
+
+            if (File.Exists(string.Format(_confDir)))
+                return _confDir;
             try
             {
                 using (FileStream fs = File.Create(Path.Combine(Application.StartupPath, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose))
@@ -28,8 +35,12 @@ namespace VeraCrypt_Mounter
             catch
             {
                 _confDir = string.Format("{0}\\TRM.config", Application.LocalUserAppDataPath);
+                return _confDir;
             }
+            return _confDir;
         }
+
+
         public static bool Check_password()
         {
 

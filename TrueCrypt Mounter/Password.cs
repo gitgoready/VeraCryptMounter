@@ -44,7 +44,8 @@ namespace VeraCrypt_Mounter
 #if DEBUG
             toolStripStatusLabel1.Text = _language;
 #endif
-            checkConfigPath();
+            //checkConfigPath();
+            _confDir = Password_helper.CheckConfDir();
             FillLanguage();
 
             if (File.Exists(_confDir))
@@ -72,21 +73,22 @@ namespace VeraCrypt_Mounter
             labelPassword_second.Text = LanguagePool.GetInstance().GetString(LanguageRegion, "labelPassword_second", _language);
             //LanguagePool.GetInstance().GetString(LanguageRegion, "", _language);
         }
-        private void checkConfigPath()
-        {
-            _confDir = string.Format("{0}\\TRM.config", Application.StartupPath);
-            if (!File.Exists(string.Format(_confDir)))
-                return;
-            try
-            {
-                using (FileStream fs = File.Create(Path.Combine(Application.StartupPath, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose))
-                { }
-            }
-            catch
-            {
-                _confDir = string.Format("{0}\\TRM.config", Application.LocalUserAppDataPath);
-            }
-        }
+        //private void checkConfigPath()
+        //{
+        //    _confDir = string.Format("{0}\\TRM.config", Application.StartupPath);
+            
+        //    try
+        //    {
+        //        using (FileStream fs = File.Create(Path.Combine(Application.StartupPath, Path.GetRandomFileName()), 1, FileOptions.DeleteOnClose))
+        //        { }
+        //    }
+        //    catch
+        //    {
+        //        _confDir = string.Format("{0}\\TRM.config", Application.LocalUserAppDataPath);
+        //    }
+        //    //if (File.Exists(string.Format(_confDir)))
+        //    //    return;
+        //}
 
         private void buttonOK_Click(object sender, EventArgs e)
         {

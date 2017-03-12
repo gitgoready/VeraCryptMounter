@@ -123,8 +123,25 @@ namespace VeraCrypt_Mounter
                 selectedlanguage = defaultlanguage;
             comboBoxLanguage.SelectedItem = selectedlanguage;
 
-            select_truecrypt.InitialDirectory =
+            if (!string.IsNullOrEmpty(_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, "")))
+            {
+                select_truecrypt.InitialDirectory = Path.GetDirectoryName(_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, ""));
                 textBoxTruecryptPath.Text = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, "");
+            }
+            else
+            {
+                string pp = Path.Combine(Environment.ExpandEnvironmentVariables("%ProgramW6432%"), "VeraCrypt", "VeraCrypt.exe");
+                if (File.Exists(pp))
+                {
+                    select_truecrypt.InitialDirectory = Path.GetDirectoryName(pp);
+                    textBoxTruecryptPath.Text = pp;
+                }
+                else
+                {
+                    select_truecrypt.InitialDirectory = textBoxTruecryptPath.Text = "";
+                }
+            }
+            
             select_konpath.InitialDirectory =
                 textBoxContainerPath.Text = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Kontainerpath, "");
             checkBoxSilentMode.Checked = !_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
