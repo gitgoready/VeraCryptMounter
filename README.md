@@ -12,11 +12,11 @@ Download
 
 [Version 0.9.9_build6280](https://github.com/LordSandwurm/VeraCryptMounter/releases/download/v0.9.9/VeracryptMounter-0.9.9_build6280.zip)
 
-    sha256: fc7162d91f9b2cafdcd190c1523042013665e8d6863cdc8d9f78da6c0a79c3bd
+    sha256: ca503bd4699194620c2c23dfed6ef4c7f3fcbdc0c0e42cc3b7ae93f99b666e4f
 
 [Version 0.9.9_build6280 Signatur](https://github.com/LordSandwurm/VeraCryptMounter/releases/download/v0.9.9/VeracryptMounter-0.9.9_build6280.zip.sig)
   
-    sha256: 8dfd180c9a2b752ef25388ff01bbd530bb523d4af89be3fa6a81ed362b7c42b5  
+    sha256: 98af61f670eacbe3d4689e956aa26f894186d67fd0c65c640342922ef9277c5a  
 
 
 Mit diesem Schlüssel ist die ZIP Datei signiert worden.
