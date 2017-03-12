@@ -257,7 +257,6 @@
       <DependentUpon>Version.cs</DependentUpon>
     </Compile>
     <Compile Include="WmiDriveInfo.cs" />
-    <None Include="VeraCrypt.p12" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="language.xml">
