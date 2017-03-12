@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguagePool>
   <Region name="Languages">
     <Text key="German">
@@ -182,7 +182,7 @@
       <E>Please first select or create </E>
     </Text>
     <Text key="NoKeyfileMessage">
-      <D>Schlüsselcontainer nicht eingebunden oder Schlüssel nicht vorhanden.</D>
+      <D>Keyfilecontainer nicht eingebunden oder Keyfile nicht vorhanden.</D>
       <E>Container for keyfiels not mounted or keyfile does not exist.</E>
     </Text>
     <Text key="DiskNotPresentMessage">
@@ -194,7 +194,7 @@
       <E>Error</E>
     </Text>
     <Text key="KyfilecontainerUsed">
-      <D>Laufwerksbuchstabe ist belegt oder Schlüsselcontainer ist schon eingebunden.</D>
+      <D>Laufwerksbuchstabe ist belegt oder Keyfilecontainer ist schon eingebunden.</D>
       <E>Drivletter is used or container for keyfiles is mounted.</E>
     </Text>
     <Text key="DriveNotMounted">
@@ -202,7 +202,7 @@
       <E>Drive not mounted.</E>
     </Text>
     <Text key="KeyfilecontainerNotMounted">
-      <D>Schlüsselcontainer ist nicht eingebunden.</D>
+      <D>Keyfilecontainer ist nicht eingebunden.</D>
       <E>Container for keyfiels is not mounted.</E>
     </Text>
     <Text key="ContainerNotMounted">
@@ -214,7 +214,7 @@
       <E>Drive containing the container is not connected</E>
     </Text>
     <Text key="MessageDriveDelete">
-      <D>Möchten sie das Laufwerk wirklich löschen?</D>
+      <D>Möchten sie das Lauferk wirklich löschen?</D>
       <E>Delete the Drive?</E>
     </Text>
     <Text key="MessageContainerDelete">
@@ -262,7 +262,7 @@
       <E>: is automaticaly mounted.</E>
     </Text>
     <Text key="Automountusbfailed">
-      <D>: konnte nicht automatisch eingebunden werden.</D>
+      <D>: konnte nicht automatisch eingebund werden.</D>
       <E>: automaticaly mounting failed.</E>
     </Text>
     <Text key="automountToolStripMenuItem">
@@ -314,15 +314,15 @@
       <E>Name for the Drive</E>
     </Text>
     <Text key="lablePartition">
-      <D>Verschlüsselte Partition</D>
+      <D>Ferschlüssselte Partition</D>
       <E>Encrypted partition</E>
     </Text>
     <Text key="lableKeyfile">
-      <D>Schlüssel für das Laufwerk</D>
+      <D>Keyfile für das Laufwerk</D>
       <E>Keyfile for the drive</E>
     </Text>
     <Text key="checkBoxNoKeyfile">
-      <D>Kein Schlüssel benutzen</D>
+      <D>Kein Keyfile benutzen</D>
       <E>No Keyfile used</E>
     </Text>
     <Text key="groupBoxMountoptions">
@@ -338,7 +338,7 @@
       <E>Readonly</E>
     </Text>
     <Text key="lableDriveletter">
-      <D>Laufwerksbuchstaben und Hash</D>
+      <D>Lauferksbuchstaben und Hash</D>
       <E>Driveletter and hash</E>
     </Text>
     <Text key="checkBoxPim">
@@ -362,7 +362,7 @@
       <E>New Drive</E>
     </Text>
     <Text key="DriveEdit">
-      <D>Laufwerk bearbeiten</D>
+      <D>Lauferk bearbeiten</D>
       <E>Edit Drive</E>
     </Text>
     <Text key="MessageMasterPasswordWrong">
@@ -370,11 +370,11 @@
       <E>wrong password</E>
     </Text>
     <Text key="MessagePimNotSet">
-      <D>Es wurde kein PIM angeben. OK PIM eingeben</D>
+      <D>Es wurde kein PIM angeben. OK PIM eingebenm</D>
       <E>PIM not set. OK enter PIM.</E>
     </Text>
     <Text key="MessageDriveExist">
-      <D>Beschreibung mit diesem Namen schon vorhanden.</D>
+      <D>Beschreibung mit diesem namen schon vorhanden.</D>
       <E>Description with this name exists.</E>
     </Text>
     <Text key="MessageDesciptionEmpty">
@@ -394,7 +394,7 @@
       <E>Partiton does not be empty.</E>
     </Text>
     <Text key="MessageKeyfileEmpty">
-      <D>Schlüsselcontainer darf nicht leer sein.</D>
+      <D>Keyfile darf nicht leer sein.</D>
       <E>Keyfile does not be empty.</E>
     </Text>
     <Text key="MessagePartitionWrongFormat">
@@ -406,7 +406,7 @@
       <E>Failed to get number of partition</E>
     </Text>
     <Text key="MessageDisknumberEmpty">
-      <D>Festplattennummer konnte nicht ermittelt werden.</D>
+      <D>Disknummer konnte nicht ermittelt werden.</D>
       <E>Failed to get number of disk.</E>
     </Text>
     <Text key="MessagePnpdeviceidEmpty">
@@ -432,11 +432,11 @@
         <E>Mainsettings</E>
       </Text>
       <Text key="groupBoxConfigPath">
-        <D>Konfigurationsordner</D>
+        <D>Config Ordner</D>
         <E>Config Path</E>
       </Text>
       <Text key="buttonShowConfig">
-        <D>Konfigurationsordner</D>
+        <D>Configordner</D>
         <E>Config path</E>
       </Text>
       <Text key="labelHash">
@@ -456,11 +456,11 @@
         <E>Choose</E>
       </Text>
       <Text key="groupBoxKeyfileContainer">
-        <D>Schlüsselcontainer Optionen</D>
+        <D>Keyfilecontainer Optionen</D>
         <E>Keyfilecontainer settings</E>
       </Text>
       <Text key="labelKeyfilecontainer">
-        <D>Pfad zum Schlüsselcontainer</D>
+        <D>Pfad zum Keyfilecontainer</D>
         <E>Path to Keyfikecontainer</E>
       </Text>
       <Text key="labelDriveletter">
@@ -480,7 +480,7 @@
         <E>Removable</E>
       </Text>
       <Text key="groupBoxUsesettings">
-        <D>Benutzereinstellungen</D>
+        <D>Benutereinstellungen</D>
         <E>Usersettings</E>
       </Text>
       <Text key="checkBoxPortable">
@@ -488,7 +488,7 @@
         <E>Portable</E>
       </Text>
       <Text key="checkBoxNoKeyfilecontainer">
-        <D>Schlüsselcontainer nicht benutzen</D>
+        <D>Keyfilecontainer nicht benutzen</D>
         <E>Do not use Keyfilecontainer</E>
       </Text>
       <Text key="groupBoxLanguage">
@@ -524,7 +524,7 @@
         <E>Please select Veracrypt.exe</E>
       </Text>
       <Text key="MesageSetPathContainer">
-        <D>Bitte Pfad zum Schlüsselcontainer angeben.</D>
+        <D>Bitte Pfad zum Keyfilecontainer angeben.</D>
         <E>Please set path to Keyfilecontainer.</E>
       </Text>
       <Text key="MessageSelectDriveletter">
@@ -542,7 +542,7 @@
     </Region>
   <Region name="NewContainer">
     <Text key="Form">
-      <D>Neuer Container</D>
+      <D>Neuer container</D>
       <E>New Container</E>
     </Text>
     <Text key="buttonShowPassword">
@@ -566,11 +566,11 @@
       <E>hash</E>
     </Text>
     <Text key="groupBoxDescription">
-      <D>Beschreibung des Containers</D>
+      <D>Beschreibung des containers</D>
       <E>Container description</E>
     </Text>
     <Text key="groupBoxPath">
-      <D>Pfad zum Container</D>
+      <D>Pfad zum container</D>
       <E>Path to the container</E>
     </Text>
     <Text key="groupBoxKyfilename">
@@ -586,7 +586,7 @@
       <E>Mountotions</E>
     </Text>
     <Text key="checkBoxNoKeyfile">
-      <D>Kein Schlüssel</D>
+      <D>Keinen Keyfile</D>
       <E>No Keyfile</E>
     </Text>
     <Text key="checkBoxRemovable">
@@ -708,7 +708,7 @@
   </Region>
   <Region name="Automount">
     <Text key="Form">
-      <D>Autoeinbinden Einstellungen</D>
+      <D>Autoeinbinden einstellungen</D>
       <E>Automount config</E>
     </Text>
     <Text key="checkBoxUseAutomount">
@@ -720,7 +720,7 @@
       <E>Mount drives from USB</E>
     </Text>
     <Text key="checkBoxContainer">
-      <D>Container einbinden von USB</D>
+      <D>container einbinden von USB</D>
       <E>Mount container from USB</E>
     </Text>
     <Text key="buttonOK">
@@ -752,11 +752,11 @@
       <E>Mount drives by programstart</E>
     </Text>
     <Text key="checkBoxSartContainer">
-      <D>Container beim Start einbinden</D>
+      <D>container beim Start einbinden</D>
       <E>Mount container by programstart</E>
     </Text>
     <Text key="groupBoxStartAutomount">
-      <D>Autoeinbinden Einstellungen</D>
+      <D>Autoeinbinden Einstellunge</D>
       <E>Automount settings</E>
     </Text>     
   </Region>
@@ -778,7 +778,7 @@
       <E>Please insert password : </E>
     </Text>
     <Text key="State">
-      <D> Einbindung: </D>
+      <D> einbindung: </D>
       <E> mounting: </E>
     </Text>
     <Text key="Faild">
@@ -790,7 +790,7 @@
       <E>succeed</E>
     </Text>
     <Text key="ContainerNotExist">
-      <D>: Containerdatei nicht vorhanden.</D>
+      <D>: containerdatei nicht vorhanden.</D>
       <E>: Containerfile not exist.</E>
     </Text>
     <Text key="KeyfilecontainerMounted">
@@ -802,7 +802,7 @@
       <E>Trying to mount Keyfilecontainer.</E>
     </Text>
     <Text key="KeyfilecontainerState">
-      <D>Schlüsselcontainer Einbindung: </D>
+      <D>Schlüsselcontainer einbindung: </D>
       <E>Mounting Keyfilecontainer: </E>
     </Text>
     <Text key="KeyfilecontainerNotExist">
@@ -831,7 +831,7 @@
   <Region name="SelectPartition">
     <Text key="labelDisk">
       <D>Laufwerk</D>
-      <E>Disk</E>
+      <E>disk</E>
     </Text>
     <Text key="labelPartition">
       <D>Partition</D>
@@ -842,7 +842,7 @@
       <E>OK</E>
     </Text>
     <Text key="buttonCancel">
-      <D>Abbrechen</D>
+      <D>Abrechen</D>
       <E>Cancel</E>
     </Text>
     <Text key="SelectPartition">
@@ -868,7 +868,7 @@
       <E>Keyfile not present</E>
     </Text>
     <Text key="Mountfail">
-      <D>Einbinden fehlgeschlagen. Wollen sie es nochmal versuchen?</D>
+      <D>Einbinden vehlgeschlagen. Wollen sie es nochmal versuchen?</D>
       <E>Mount failed. Retry mount process?</E>
     </Text>
   </Region>
@@ -894,11 +894,11 @@
       <E>Reset</E>
     </Text>
     <Text key="resetMessage">
-      <D>Um das Passwort zurückzusetzen, wird die Konfiguration gelöscht. Alle Einstellungen der angelegten Laufwerke und Container gehen verloren.</D>
-      <E>To reset the password all configurations of drives and Containers will be deleted.</E>
+      <D>Um das Passwort zurückzusetzen, wird die Konfig gelöscht. Alle Einstellungen der angelegeten Laufwerke und container gehen verlohren.</D>
+      <E>To reset the password all configurations of Drives and Containers will be deleted.</E>
     </Text>
     <Text key="equel">
-      <D>Passwort übereinstimmend</D>
+      <D>Passwort übereinstimment</D>
       <E>Password equel</E>
     </Text>
     <Text key="not equel">
