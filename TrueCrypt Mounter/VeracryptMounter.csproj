@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>tcm.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
     <SignAssembly>false</SignAssembly>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SccProjectName>Svn</SccProjectName>
@@ -115,9 +115,8 @@
     </ManifestTimestampUrl>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SecurityDriven.Inferno, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Inferno.1.2.0\lib\net452\SecurityDriven.Inferno.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SecurityDriven.Inferno, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Inferno.1.4.0\lib\net452\SecurityDriven.Inferno.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
