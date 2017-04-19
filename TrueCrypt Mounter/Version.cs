@@ -43,7 +43,7 @@ namespace VeraCrypt_Mounter
 
         private void Version_Load(object sender, EventArgs e)
         {
-            const string version = "Version: 0.9.9 (Beta)";
+            const string version = "Version: 0.9.10 (Beta)";
             var test = Assembly.GetEntryAssembly().GetName().Version;
             labelAssembly.Text = "Build: " + test.Build.ToString();
             label2.Text = version;

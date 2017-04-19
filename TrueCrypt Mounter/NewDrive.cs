@@ -525,7 +525,16 @@ namespace VeraCrypt_Mounter
                 if (Password_helper.Check_password(pin._password))
                 {
                     Passwordinput pinshow = new Passwordinput("drive", checkBoxPim.Checked, _password, _pim);
-                    pinshow.ShowDialog();
+                    DialogResult pinshowresult = pinshow.ShowDialog();
+                    if (pinshowresult == DialogResult.OK)
+                    {
+                        _password = pinshow._password;
+                        _pim = pinshow._pim;
+                        buttonShowPassword.Enabled = true;
+                    }
+                    pinshow._password = null;
+                    pinshow._pim = null;
+                    pinshow.Dispose();
                 }
                 else
                 {
