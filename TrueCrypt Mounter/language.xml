@@ -809,6 +809,10 @@
       <D>Schlüsselcontainer nicht vorhanden.</D>
       <E>Keyfilecontainer not exist.</E>
     </Text>
+    <Text key="Error">
+      <D>Fehler</D>
+      <E>Error</E>
+    </Text>
   </Region>
   <Region name="Automountform">
     <Text key="Form">
