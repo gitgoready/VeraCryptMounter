@@ -204,10 +204,7 @@ namespace VeraCrypt_Mounter
                         throw new Exception(LanguagePool.GetInstance().GetString(LanguageRegion, "MessageDrivletterIsUsed", _language)+usedriveletter);
 
                     string hash = (comboBoxHash.SelectedItem == null) ? "" : comboBoxHash.SelectedItem.ToString();
-                    bool autoright = false;
-
-                    autoright = WriteAutostartAtWindows(checkBox_startwithwin.Checked);
-
+                    
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, checkBoxPim.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Kontainerpath, textBoxContainerPath.Text);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, checkBoxRemovable.Checked);
@@ -217,9 +214,12 @@ namespace VeraCrypt_Mounter
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, checkBoxPim.Checked);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
                     _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, checkBoxAutomount.Checked);
-                    if (autoright)
-                        _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.AutostartWithWindows, checkBox_startwithwin.Checked);
-                }
+                    }
+                bool autoright = false;
+                autoright = WriteAutostartAtWindows(checkBox_startwithwin.Checked);
+                if (autoright)
+                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.AutostartWithWindows, checkBox_startwithwin.Checked);
+
                 _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig. Silentmode, !checkBoxSilentMode.Checked);
 
                 if (string.IsNullOrEmpty(textBoxTruecryptPath.Text))
@@ -279,8 +279,9 @@ namespace VeraCrypt_Mounter
                 else
                     targetRegistryKey.DeleteValue(dateipfad.Remove(0, dateipfad.LastIndexOf(@"\") + 1));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(this, ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 

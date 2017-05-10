@@ -74,6 +74,7 @@ namespace VeraCrypt_Mounter
             ArraySegment<byte> bytecyphertext = new ArraySegment<byte>(Convert.FromBase64String(cipherText));
             ArraySegment<byte> bytesalt = new ArraySegment<byte>(Convert.FromBase64String(salt));
 
+
             byte[] decout = EtM_CTR.Decrypt(key, bytecyphertext, bytesalt, rounds);
 
             if (decout == null)
