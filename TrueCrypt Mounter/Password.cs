@@ -166,7 +166,7 @@ namespace VeraCrypt_Mounter
 
         private void set_wrong()
         {
-            //close after 5 wrong inputs
+            //close after 3 wrong inputs
             if (fail <= 3)
                 fail++;
             else

@@ -40,7 +40,7 @@
             // textBoxPassword
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(15, 36);
-            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPassword.MaxLength = 100;
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(301, 22);
@@ -62,7 +62,7 @@
             // 
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOk.Location = new System.Drawing.Point(257, 66);
-            this.buttonOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonOk.Margin = new System.Windows.Forms.Padding(4);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(100, 28);
             this.buttonOk.TabIndex = 3;
@@ -73,7 +73,7 @@
             // textBoxPim
             // 
             this.textBoxPim.Location = new System.Drawing.Point(53, 70);
-            this.textBoxPim.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxPim.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPim.Name = "textBoxPim";
             this.textBoxPim.Size = new System.Drawing.Size(195, 22);
             this.textBoxPim.TabIndex = 2;
@@ -96,7 +96,7 @@
             // 
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(325, 37);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(32, 22);
             this.button1.TabIndex = 5;
@@ -116,7 +116,7 @@
             this.Controls.Add(this.textBoxPassword);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Passwordinput";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

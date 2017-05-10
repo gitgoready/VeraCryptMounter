@@ -80,7 +80,7 @@
             // button_ok
             // 
             this.button_ok.Location = new System.Drawing.Point(144, 233);
-            this.button_ok.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_ok.Margin = new System.Windows.Forms.Padding(4);
             this.button_ok.Name = "button_ok";
             this.button_ok.Size = new System.Drawing.Size(100, 28);
             this.button_ok.TabIndex = 3;
@@ -156,9 +156,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_ok);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Version";
             this.ShowInTaskbar = false;
