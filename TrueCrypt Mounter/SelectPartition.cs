@@ -72,6 +72,8 @@ namespace VeraCrypt_Mounter
                 comboBoxDisks.Items.Add(item.ToString());
                 i++;
             }
+            if (_drives.Keys.Count > 0)
+                comboBoxDisks.SelectedIndex = _drives.Keys.Count - 1;
             LanguageFill();
 
         }
@@ -132,6 +134,8 @@ namespace VeraCrypt_Mounter
                 
             }
             treeViewInfos.Nodes.Add(new TreeNode("Drive", drivenodestree));
+            if (comboBoxPartitions.Items.Count > 0)
+                comboBoxPartitions.SelectedIndex = 0;
         }
 
         private void SelectPartition_FormClosed(object sender, FormClosedEventArgs e)

@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguagePool>
   <Region name="Languages">
+        <Text key="English">
+      <E>E</E>
+    </Text>   
     <Text key="German">
       <E>D</E>
     </Text>
-    <Text key="English">
-      <E>E</E>
-    </Text>    
+ 
   </Region>
   <Region name="Main">
     <Text key="buttonMount">

@@ -157,7 +157,14 @@ namespace VeraCrypt_Mounter
                 _useddriveletters.Add(elemnt);
             // Set the datasource for the drivelettercobobox and select the first. 
             comboBoxDriveletter.DataSource = _driveletters;
-            comboBoxDriveletter.SelectedItem = _driveletters[0];
+            //comboBoxDriveletter.SelectedItem = _driveletters[0];
+            foreach (string element in DrivelettersHelper.GetDriveletters())
+            {
+                if(!_useddriveletters.Contains(element))
+                {
+                    comboBoxDriveletter.SelectedItem = element;
+                }
+            }
             comboBoxHash.Items.AddRange(_hashes);
 
             buttonShowPassword.Enabled = false;

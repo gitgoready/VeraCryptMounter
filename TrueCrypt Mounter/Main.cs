@@ -843,6 +843,8 @@ namespace VeraCrypt_Mounter
                 var dialogBox = new NewDrive();
                 dialogBox.ShowDialog(); // Returns when dialog box has closed
                 RefreshComboboxes();
+                if (comboBoxDrives.Items.Count > 0)
+                    comboBoxDrives.SelectedIndex = comboBoxDrives.Items.Count - 1;
             }
             catch (Exception ex)
             {

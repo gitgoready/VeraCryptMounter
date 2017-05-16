@@ -67,34 +67,35 @@ namespace VeraCrypt_Mounter
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(7, 32);
+            this.textBoxDescription.Location = new System.Drawing.Point(7, 30);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(276, 20);
+            this.textBoxDescription.Size = new System.Drawing.Size(276, 21);
             this.textBoxDescription.TabIndex = 1;
+            this.textBoxDescription.Text = "usbDefaultPartion";
             // 
             // lableDescription
             // 
             this.lableDescription.AutoSize = true;
-            this.lableDescription.Location = new System.Drawing.Point(10, 16);
+            this.lableDescription.Location = new System.Drawing.Point(10, 15);
             this.lableDescription.Name = "lableDescription";
-            this.lableDescription.Size = new System.Drawing.Size(94, 13);
+            this.lableDescription.Size = new System.Drawing.Size(113, 12);
             this.lableDescription.TabIndex = 2;
             this.lableDescription.Text = "Name for the drive";
             // 
             // lablePartition
             // 
             this.lablePartition.AutoSize = true;
-            this.lablePartition.Location = new System.Drawing.Point(10, 55);
+            this.lablePartition.Location = new System.Drawing.Point(10, 51);
             this.lablePartition.Name = "lablePartition";
-            this.lablePartition.Size = new System.Drawing.Size(96, 13);
+            this.lablePartition.Size = new System.Drawing.Size(119, 12);
             this.lablePartition.TabIndex = 3;
             this.lablePartition.Text = "Encrypted Partition";
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(210, 432);
+            this.buttonOk.Location = new System.Drawing.Point(210, 399);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(75, 23);
+            this.buttonOk.Size = new System.Drawing.Size(75, 21);
             this.buttonOk.TabIndex = 5;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
@@ -102,16 +103,16 @@ namespace VeraCrypt_Mounter
             // 
             // textBoxPartition
             // 
-            this.textBoxPartition.Location = new System.Drawing.Point(7, 71);
+            this.textBoxPartition.Location = new System.Drawing.Point(7, 66);
             this.textBoxPartition.Name = "textBoxPartition";
-            this.textBoxPartition.Size = new System.Drawing.Size(276, 20);
+            this.textBoxPartition.Size = new System.Drawing.Size(276, 21);
             this.textBoxPartition.TabIndex = 2;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(129, 432);
+            this.buttonCancel.Location = new System.Drawing.Point(129, 399);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.Size = new System.Drawing.Size(75, 21);
             this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -120,25 +121,28 @@ namespace VeraCrypt_Mounter
             // lableKeyfile
             // 
             this.lableKeyfile.AutoSize = true;
-            this.lableKeyfile.Location = new System.Drawing.Point(7, 106);
+            this.lableKeyfile.Location = new System.Drawing.Point(7, 98);
             this.lableKeyfile.Name = "lableKeyfile";
-            this.lableKeyfile.Size = new System.Drawing.Size(97, 13);
+            this.lableKeyfile.Size = new System.Drawing.Size(131, 12);
             this.lableKeyfile.TabIndex = 8;
             this.lableKeyfile.Text = "Keyfile for the drive";
             // 
             // textBoxKeyfile
             // 
-            this.textBoxKeyfile.Location = new System.Drawing.Point(7, 121);
+            this.textBoxKeyfile.Enabled = false;
+            this.textBoxKeyfile.Location = new System.Drawing.Point(7, 112);
             this.textBoxKeyfile.Name = "textBoxKeyfile";
-            this.textBoxKeyfile.Size = new System.Drawing.Size(276, 20);
+            this.textBoxKeyfile.Size = new System.Drawing.Size(276, 21);
             this.textBoxKeyfile.TabIndex = 3;
             // 
             // checkBoxNoKeyfile
             // 
             this.checkBoxNoKeyfile.AutoSize = true;
-            this.checkBoxNoKeyfile.Location = new System.Drawing.Point(7, 144);
+            this.checkBoxNoKeyfile.Checked = true;
+            this.checkBoxNoKeyfile.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxNoKeyfile.Location = new System.Drawing.Point(7, 133);
             this.checkBoxNoKeyfile.Name = "checkBoxNoKeyfile";
-            this.checkBoxNoKeyfile.Size = new System.Drawing.Size(81, 17);
+            this.checkBoxNoKeyfile.Size = new System.Drawing.Size(96, 16);
             this.checkBoxNoKeyfile.TabIndex = 9;
             this.checkBoxNoKeyfile.Text = "Kein Keyfile";
             this.checkBoxNoKeyfile.UseVisualStyleBackColor = true;
@@ -147,9 +151,9 @@ namespace VeraCrypt_Mounter
             // checkBoxRemovable
             // 
             this.checkBoxRemovable.AutoSize = true;
-            this.checkBoxRemovable.Location = new System.Drawing.Point(7, 19);
+            this.checkBoxRemovable.Location = new System.Drawing.Point(7, 18);
             this.checkBoxRemovable.Name = "checkBoxRemovable";
-            this.checkBoxRemovable.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxRemovable.Size = new System.Drawing.Size(78, 16);
             this.checkBoxRemovable.TabIndex = 10;
             this.checkBoxRemovable.Text = "Removable";
             this.checkBoxRemovable.UseVisualStyleBackColor = true;
@@ -166,15 +170,15 @@ namespace VeraCrypt_Mounter
             this.groupBox1.Controls.Add(this.lableKeyfile);
             this.groupBox1.Location = new System.Drawing.Point(2, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(292, 179);
+            this.groupBox1.Size = new System.Drawing.Size(292, 165);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
             // buttonChosePartition
             // 
-            this.buttonChosePartition.Location = new System.Drawing.Point(208, 94);
+            this.buttonChosePartition.Location = new System.Drawing.Point(208, 87);
             this.buttonChosePartition.Name = "buttonChosePartition";
-            this.buttonChosePartition.Size = new System.Drawing.Size(75, 23);
+            this.buttonChosePartition.Size = new System.Drawing.Size(75, 21);
             this.buttonChosePartition.TabIndex = 10;
             this.buttonChosePartition.Text = "Select";
             this.buttonChosePartition.UseVisualStyleBackColor = true;
@@ -188,9 +192,9 @@ namespace VeraCrypt_Mounter
             this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountUsb);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxReadonly);
             this.groupBoxMountoptions.Controls.Add(this.checkBoxRemovable);
-            this.groupBoxMountoptions.Location = new System.Drawing.Point(2, 185);
+            this.groupBoxMountoptions.Location = new System.Drawing.Point(2, 171);
             this.groupBoxMountoptions.Name = "groupBoxMountoptions";
-            this.groupBoxMountoptions.Size = new System.Drawing.Size(292, 103);
+            this.groupBoxMountoptions.Size = new System.Drawing.Size(292, 95);
             this.groupBoxMountoptions.TabIndex = 12;
             this.groupBoxMountoptions.TabStop = false;
             this.groupBoxMountoptions.Text = "Mountoptions";
@@ -198,9 +202,9 @@ namespace VeraCrypt_Mounter
             // checkBoxTruecrypt
             // 
             this.checkBoxTruecrypt.AutoSize = true;
-            this.checkBoxTruecrypt.Location = new System.Drawing.Point(179, 39);
+            this.checkBoxTruecrypt.Location = new System.Drawing.Point(179, 36);
             this.checkBoxTruecrypt.Name = "checkBoxTruecrypt";
-            this.checkBoxTruecrypt.Size = new System.Drawing.Size(72, 17);
+            this.checkBoxTruecrypt.Size = new System.Drawing.Size(78, 16);
             this.checkBoxTruecrypt.TabIndex = 15;
             this.checkBoxTruecrypt.Text = "TrueCrypt";
             this.checkBoxTruecrypt.UseVisualStyleBackColor = true;
@@ -208,9 +212,9 @@ namespace VeraCrypt_Mounter
             // checkBoxPim
             // 
             this.checkBoxPim.AutoSize = true;
-            this.checkBoxPim.Location = new System.Drawing.Point(179, 19);
+            this.checkBoxPim.Location = new System.Drawing.Point(179, 18);
             this.checkBoxPim.Name = "checkBoxPim";
-            this.checkBoxPim.Size = new System.Drawing.Size(45, 17);
+            this.checkBoxPim.Size = new System.Drawing.Size(42, 16);
             this.checkBoxPim.TabIndex = 8;
             this.checkBoxPim.Text = "PIM";
             this.checkBoxPim.UseVisualStyleBackColor = true;
@@ -218,9 +222,9 @@ namespace VeraCrypt_Mounter
             // checkBoxAutomountStart
             // 
             this.checkBoxAutomountStart.AutoSize = true;
-            this.checkBoxAutomountStart.Location = new System.Drawing.Point(7, 79);
+            this.checkBoxAutomountStart.Location = new System.Drawing.Point(7, 73);
             this.checkBoxAutomountStart.Name = "checkBoxAutomountStart";
-            this.checkBoxAutomountStart.Size = new System.Drawing.Size(152, 17);
+            this.checkBoxAutomountStart.Size = new System.Drawing.Size(174, 16);
             this.checkBoxAutomountStart.TabIndex = 14;
             this.checkBoxAutomountStart.Text = "Automount by programstart";
             this.checkBoxAutomountStart.UseVisualStyleBackColor = true;
@@ -228,9 +232,9 @@ namespace VeraCrypt_Mounter
             // checkBoxAutomountUsb
             // 
             this.checkBoxAutomountUsb.AutoSize = true;
-            this.checkBoxAutomountUsb.Location = new System.Drawing.Point(7, 59);
+            this.checkBoxAutomountUsb.Location = new System.Drawing.Point(7, 54);
             this.checkBoxAutomountUsb.Name = "checkBoxAutomountUsb";
-            this.checkBoxAutomountUsb.Size = new System.Drawing.Size(77, 17);
+            this.checkBoxAutomountUsb.Size = new System.Drawing.Size(78, 16);
             this.checkBoxAutomountUsb.TabIndex = 8;
             this.checkBoxAutomountUsb.Text = "Automount";
             this.checkBoxAutomountUsb.UseVisualStyleBackColor = true;
@@ -238,9 +242,9 @@ namespace VeraCrypt_Mounter
             // checkBoxReadonly
             // 
             this.checkBoxReadonly.AutoSize = true;
-            this.checkBoxReadonly.Location = new System.Drawing.Point(7, 39);
+            this.checkBoxReadonly.Location = new System.Drawing.Point(7, 36);
             this.checkBoxReadonly.Name = "checkBoxReadonly";
-            this.checkBoxReadonly.Size = new System.Drawing.Size(71, 17);
+            this.checkBoxReadonly.Size = new System.Drawing.Size(72, 16);
             this.checkBoxReadonly.TabIndex = 13;
             this.checkBoxReadonly.Text = "Readonly";
             this.checkBoxReadonly.UseVisualStyleBackColor = true;
@@ -249,9 +253,9 @@ namespace VeraCrypt_Mounter
             // 
             this.groupBoxDriveletter.Controls.Add(this.comboBoxHash);
             this.groupBoxDriveletter.Controls.Add(this.comboBoxDriveletter);
-            this.groupBoxDriveletter.Location = new System.Drawing.Point(2, 336);
+            this.groupBoxDriveletter.Location = new System.Drawing.Point(2, 310);
             this.groupBoxDriveletter.Name = "groupBoxDriveletter";
-            this.groupBoxDriveletter.Size = new System.Drawing.Size(292, 48);
+            this.groupBoxDriveletter.Size = new System.Drawing.Size(292, 44);
             this.groupBoxDriveletter.TabIndex = 13;
             this.groupBoxDriveletter.TabStop = false;
             this.groupBoxDriveletter.Text = "Driveletter";
@@ -259,9 +263,9 @@ namespace VeraCrypt_Mounter
             // comboBoxHash
             // 
             this.comboBoxHash.FormattingEnabled = true;
-            this.comboBoxHash.Location = new System.Drawing.Point(80, 19);
+            this.comboBoxHash.Location = new System.Drawing.Point(80, 18);
             this.comboBoxHash.Name = "comboBoxHash";
-            this.comboBoxHash.Size = new System.Drawing.Size(144, 21);
+            this.comboBoxHash.Size = new System.Drawing.Size(144, 20);
             this.comboBoxHash.TabIndex = 11;
             // 
             // comboBoxDriveletter
@@ -269,9 +273,9 @@ namespace VeraCrypt_Mounter
             this.comboBoxDriveletter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.comboBoxDriveletter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDriveletter.FormattingEnabled = true;
-            this.comboBoxDriveletter.Location = new System.Drawing.Point(7, 19);
+            this.comboBoxDriveletter.Location = new System.Drawing.Point(7, 18);
             this.comboBoxDriveletter.Name = "comboBoxDriveletter";
-            this.comboBoxDriveletter.Size = new System.Drawing.Size(59, 21);
+            this.comboBoxDriveletter.Size = new System.Drawing.Size(59, 22);
             this.comboBoxDriveletter.TabIndex = 7;
             this.comboBoxDriveletter.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxDriveletter_DrawItem);
             this.comboBoxDriveletter.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ComboBoxDriveletter_MeasureItem);
@@ -279,19 +283,19 @@ namespace VeraCrypt_Mounter
             // groupBox_PNPDeviceID
             // 
             this.groupBox_PNPDeviceID.Controls.Add(this.textBox_PNPDeviceID);
-            this.groupBox_PNPDeviceID.Location = new System.Drawing.Point(2, 384);
+            this.groupBox_PNPDeviceID.Location = new System.Drawing.Point(2, 354);
             this.groupBox_PNPDeviceID.Name = "groupBox_PNPDeviceID";
-            this.groupBox_PNPDeviceID.Size = new System.Drawing.Size(292, 42);
+            this.groupBox_PNPDeviceID.Size = new System.Drawing.Size(292, 39);
             this.groupBox_PNPDeviceID.TabIndex = 14;
             this.groupBox_PNPDeviceID.TabStop = false;
             this.groupBox_PNPDeviceID.Text = "PNPDeviceID";
             // 
             // textBox_PNPDeviceID
             // 
-            this.textBox_PNPDeviceID.Location = new System.Drawing.Point(7, 15);
+            this.textBox_PNPDeviceID.Location = new System.Drawing.Point(7, 14);
             this.textBox_PNPDeviceID.Name = "textBox_PNPDeviceID";
             this.textBox_PNPDeviceID.ReadOnly = true;
-            this.textBox_PNPDeviceID.Size = new System.Drawing.Size(276, 20);
+            this.textBox_PNPDeviceID.Size = new System.Drawing.Size(276, 21);
             this.textBox_PNPDeviceID.TabIndex = 0;
             // 
             // groupBoxSavePassword
@@ -299,9 +303,9 @@ namespace VeraCrypt_Mounter
             this.groupBoxSavePassword.Controls.Add(this.checkBoxPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonShowPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonSavePassword);
-            this.groupBoxSavePassword.Location = new System.Drawing.Point(2, 289);
+            this.groupBoxSavePassword.Location = new System.Drawing.Point(2, 267);
             this.groupBoxSavePassword.Name = "groupBoxSavePassword";
-            this.groupBoxSavePassword.Size = new System.Drawing.Size(292, 46);
+            this.groupBoxSavePassword.Size = new System.Drawing.Size(292, 42);
             this.groupBoxSavePassword.TabIndex = 20;
             this.groupBoxSavePassword.TabStop = false;
             this.groupBoxSavePassword.Text = "groupBox1";
@@ -309,9 +313,9 @@ namespace VeraCrypt_Mounter
             // checkBoxPassword
             // 
             this.checkBoxPassword.AutoSize = true;
-            this.checkBoxPassword.Location = new System.Drawing.Point(200, 20);
+            this.checkBoxPassword.Location = new System.Drawing.Point(200, 18);
             this.checkBoxPassword.Name = "checkBoxPassword";
-            this.checkBoxPassword.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxPassword.Size = new System.Drawing.Size(78, 16);
             this.checkBoxPassword.TabIndex = 2;
             this.checkBoxPassword.Text = "checkBox1";
             this.checkBoxPassword.UseVisualStyleBackColor = true;
@@ -319,9 +323,9 @@ namespace VeraCrypt_Mounter
             // 
             // buttonShowPassword
             // 
-            this.buttonShowPassword.Location = new System.Drawing.Point(103, 17);
+            this.buttonShowPassword.Location = new System.Drawing.Point(103, 16);
             this.buttonShowPassword.Name = "buttonShowPassword";
-            this.buttonShowPassword.Size = new System.Drawing.Size(90, 23);
+            this.buttonShowPassword.Size = new System.Drawing.Size(90, 21);
             this.buttonShowPassword.TabIndex = 1;
             this.buttonShowPassword.Text = "Show";
             this.buttonShowPassword.UseVisualStyleBackColor = true;
@@ -329,9 +333,9 @@ namespace VeraCrypt_Mounter
             // 
             // buttonSavePassword
             // 
-            this.buttonSavePassword.Location = new System.Drawing.Point(7, 17);
+            this.buttonSavePassword.Location = new System.Drawing.Point(7, 16);
             this.buttonSavePassword.Name = "buttonSavePassword";
-            this.buttonSavePassword.Size = new System.Drawing.Size(90, 23);
+            this.buttonSavePassword.Size = new System.Drawing.Size(90, 21);
             this.buttonSavePassword.TabIndex = 0;
             this.buttonSavePassword.Text = "Save Password";
             this.buttonSavePassword.UseVisualStyleBackColor = true;
@@ -340,9 +344,9 @@ namespace VeraCrypt_Mounter
             // NewDrive
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.DropList;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 461);
+            this.ClientSize = new System.Drawing.Size(297, 426);
             this.Controls.Add(this.groupBoxSavePassword);
             this.Controls.Add(this.groupBox_PNPDeviceID);
             this.Controls.Add(this.groupBoxDriveletter);
