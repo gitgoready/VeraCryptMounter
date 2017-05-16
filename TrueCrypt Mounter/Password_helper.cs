@@ -9,7 +9,7 @@ namespace VeraCrypt_Mounter
 {
     static class Password_helper
     {
-        private static string _password;
+        private static string _password="test";
         private static string _confDir;
 
         public static string Password

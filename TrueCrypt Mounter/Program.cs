@@ -83,16 +83,16 @@ namespace VeraCrypt_Mounter
                     Application.SetCompatibleTextRenderingDefault(false);
                     
                     //show password form to decrypt config
-                    var dialogBoxPassword = new Password();
-                    var result = dialogBoxPassword.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
+                    //var dialogBoxPassword = new Password();
+                    //var result = dialogBoxPassword.ShowDialog();
+                    //if (result == DialogResult.OK)
+                    //{
                         Application.Run(new VeraCryptMounter());
-                    }
-                    else
-                    {
-                        Application.Exit();
-                    }
+                    //}
+                    //else
+                    //{
+                    //    Application.Exit();
+                    //}
                     //w.EventArrived -= UsbEvent.UsbEventArrived;
                     //w.Stop();
                 }
