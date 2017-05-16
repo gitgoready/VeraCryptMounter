@@ -361,7 +361,7 @@ namespace VeraCrypt_Mounter
             this.Name = "NewDrive";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "New Drive";
+            this.Text = "选择磁盘分区";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBoxMountoptions.ResumeLayout(false);

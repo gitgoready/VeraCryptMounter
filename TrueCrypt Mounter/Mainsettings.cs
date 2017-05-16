@@ -147,7 +147,7 @@ namespace VeraCrypt_Mounter
             checkBoxSilentMode.Checked = !_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
             checkBoxReadonly.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly, false);
             checkBoxRemovable.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable, false);
-            checkBoxNoKeyfilecontainer.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
+            checkBoxNoKeyfilecontainer.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true);
             checkBoxAutomount.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Automount, false);
             checkBoxPim.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim, false);
             checkBox_startwithwin.Checked = _config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.AutostartWithWindows, false);

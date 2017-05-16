@@ -45,18 +45,18 @@ namespace VeraCrypt_Mounter
         {
             const string version = "Version: 0.9.10 (Beta)";
             var test = Assembly.GetEntryAssembly().GetName().Version;
-            labelAssembly.Text = "Build: " + test.Build.ToString();
+            //labelAssembly.Text = "Build: " + test.Build.ToString();
             label2.Text = version;
         }
 
         private void homepage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://blog.lordsandwurm.de/veracryptmounter");
+            Process.Start("http://www.365sec.com");//https://blog.lordsandwurm.de/veracryptmounter
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {         
-            Process.Start("https://github.com/LordSandwurm/VeraCryptMounter");
-        }
+        //private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        //{         
+        //    Process.Start("https://github.com/LordSandwurm/VeraCryptMounter");
+        //}
     }
 }

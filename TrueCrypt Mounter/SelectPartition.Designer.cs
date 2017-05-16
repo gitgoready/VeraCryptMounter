@@ -42,9 +42,9 @@
             // 
             this.comboBoxDisks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDisks.FormattingEnabled = true;
-            this.comboBoxDisks.Location = new System.Drawing.Point(12, 25);
+            this.comboBoxDisks.Location = new System.Drawing.Point(12, 23);
             this.comboBoxDisks.Name = "comboBoxDisks";
-            this.comboBoxDisks.Size = new System.Drawing.Size(231, 21);
+            this.comboBoxDisks.Size = new System.Drawing.Size(231, 20);
             this.comboBoxDisks.TabIndex = 0;
             this.comboBoxDisks.SelectedIndexChanged += new System.EventHandler(this.comboBoxDisks_SelectedIndexChanged);
             // 
@@ -52,24 +52,24 @@
             // 
             this.comboBoxPartitions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPartitions.FormattingEnabled = true;
-            this.comboBoxPartitions.Location = new System.Drawing.Point(12, 65);
+            this.comboBoxPartitions.Location = new System.Drawing.Point(12, 60);
             this.comboBoxPartitions.Name = "comboBoxPartitions";
-            this.comboBoxPartitions.Size = new System.Drawing.Size(231, 21);
+            this.comboBoxPartitions.Size = new System.Drawing.Size(231, 20);
             this.comboBoxPartitions.TabIndex = 1;
             // 
             // treeViewInfos
             // 
-            this.treeViewInfos.Location = new System.Drawing.Point(12, 105);
+            this.treeViewInfos.Location = new System.Drawing.Point(12, 97);
             this.treeViewInfos.Name = "treeViewInfos";
-            this.treeViewInfos.Size = new System.Drawing.Size(231, 233);
+            this.treeViewInfos.Size = new System.Drawing.Size(231, 215);
             this.treeViewInfos.TabIndex = 2;
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(87, 344);
+            this.buttonCancel.Location = new System.Drawing.Point(87, 318);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.Size = new System.Drawing.Size(75, 21);
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -77,9 +77,9 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(168, 344);
+            this.buttonOK.Location = new System.Drawing.Point(168, 318);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.Size = new System.Drawing.Size(75, 21);
             this.buttonOK.TabIndex = 4;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -88,26 +88,26 @@
             // labelDisk
             // 
             this.labelDisk.AutoSize = true;
-            this.labelDisk.Location = new System.Drawing.Point(12, 9);
+            this.labelDisk.Location = new System.Drawing.Point(12, 8);
             this.labelDisk.Name = "labelDisk";
-            this.labelDisk.Size = new System.Drawing.Size(33, 13);
+            this.labelDisk.Size = new System.Drawing.Size(35, 12);
             this.labelDisk.TabIndex = 5;
             this.labelDisk.Text = "Disks";
             // 
             // labelPartition
             // 
             this.labelPartition.AutoSize = true;
-            this.labelPartition.Location = new System.Drawing.Point(9, 49);
+            this.labelPartition.Location = new System.Drawing.Point(9, 45);
             this.labelPartition.Name = "labelPartition";
-            this.labelPartition.Size = new System.Drawing.Size(50, 13);
+            this.labelPartition.Size = new System.Drawing.Size(65, 12);
             this.labelPartition.TabIndex = 6;
             this.labelPartition.Text = "Partitions";
             // 
             // SelectPartition
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 376);
+            this.ClientSize = new System.Drawing.Size(255, 347);
             this.Controls.Add(this.treeViewInfos);
             this.Controls.Add(this.labelPartition);
             this.Controls.Add(this.labelDisk);
@@ -121,7 +121,7 @@
             this.Name = "SelectPartition";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SelectPartition";
+            this.Text = "选择磁盘分区";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectPartition_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -21,6 +21,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Management;
 using System.Windows.Forms;
+using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
 
 namespace VeraCrypt_Mounter
 {
@@ -285,7 +288,8 @@ namespace VeraCrypt_Mounter
 
             comboBoxDrives.ContextMenuStrip = contextMenuStripDrive;
             comboBoxContainer.ContextMenuStrip =contextMenuStripContainer ;
-            
+
+            config();
             // Get Singelton for config
             _config = Singleton<ConfigManager>.Instance.Init(_config);
 
@@ -296,7 +300,7 @@ namespace VeraCrypt_Mounter
             _bmbd = comboBoxDrives.BindingContext[_cbdrive];
             _bmbk = comboBoxContainer.BindingContext[_cbkontainer];
 
-            bool nokeyfile = !_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
+            bool nokeyfile = !_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true);
 
             ToolStripMenuItemNotifyKeyfilecontainer.Enabled = nokeyfile;
             groupBoxKeyfileContainer.Visible = nokeyfile;
@@ -355,7 +359,17 @@ namespace VeraCrypt_Mounter
             // Fill controls with selected language
             LanguageFill();
             ValidateTest();
+
+            
         }
+
+        //private void VeraCryptMounter_Shown(Object sender, EventArgs e)
+        //{
+
+        //    //MessageBox.Show("You are in the Form.Shown event.");
+        //    ShowSelectDriver();
+
+        //}
         /// <summary>
         /// Destructor set passwords and PIM to null.
         /// </summary>
@@ -461,6 +475,7 @@ namespace VeraCrypt_Mounter
             {
                 Normal();
                 toolStripLabelNotification.Visible = false;
+
             }
         }     
 
@@ -820,7 +835,7 @@ namespace VeraCrypt_Mounter
                 LanguageFill();
                 ToolStripMenuItemNotifyKeyfilecontainer.Enabled =
                 groupBoxKeyfileContainer.Visible =
-                !_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, false);
+                !_config.GetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true);
                 if (groupBoxKeyfileContainer.Visible)
                 {
                     EnableKeyfilekontainer();
@@ -1447,6 +1462,8 @@ namespace VeraCrypt_Mounter
             AutomountAtStart();
             Normal();
             toolStripLabelNotification.Visible = false;
+
+            ShowSelectDriver();
         }
 
         private void automountToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1461,5 +1478,67 @@ namespace VeraCrypt_Mounter
         }
 
         #endregion
+
+        private void config()
+        {
+            Config _config = new Config();
+            _config = Singleton<ConfigManager>.Instance.Init(_config);
+
+
+            try
+            {
+
+                _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Nokeyfile, true);
+                _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Kontainerpath);
+                _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Removable);
+                _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Readonly);
+                _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Driveletter);
+                _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Hash);
+                _config.RemoveEntry(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Pim);
+
+
+
+                _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Silentmode, true);
+
+                string pp = Path.Combine(Environment.ExpandEnvironmentVariables("%ProgramW6432%"), "VeraCrypt", "VeraCrypt.exe");
+                if (File.Exists(pp))
+                {
+                    //select_truecrypt.InitialDirectory = Path.GetDirectoryName(pp);
+                    _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Truecryptpath, pp);
+                }
+
+
+                _config.SetValue(ConfigTrm.Mainconfig.Section, ConfigTrm.Mainconfig.Language, "English");
+
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message, LanguagePool.GetInstance().GetString(LanguageRegion, "Error",_language), MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+        }
+
+        private void ShowSelectDriver()
+        {
+            if (comboBoxDrives.Items.Count > 0)
+                comboBoxDrives.SelectedIndex = comboBoxDrives.Items.Count - 1;
+            else
+            {
+                try
+                {
+                    var dialogBox = new NewDrive();
+                    dialogBox.ShowDialog(); // Returns when dialog box has closed
+                    RefreshComboboxes();
+                    if (comboBoxDrives.Items.Count > 0)
+                        comboBoxDrives.SelectedIndex = comboBoxDrives.Items.Count - 1;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source);
+                }
+            }
+
+
+        }
     }
 }
