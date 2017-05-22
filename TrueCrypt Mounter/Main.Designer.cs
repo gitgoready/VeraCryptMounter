@@ -134,7 +134,7 @@ namespace VeraCrypt_Mounter
             this.driveToolStripMenuItem,
             this.containerToolStripMenuItem});
             this.ToolStripMenuItemNew.Name = "ToolStripMenuItemNew";
-            this.ToolStripMenuItemNew.Size = new System.Drawing.Size(140, 22);
+            this.ToolStripMenuItemNew.Size = new System.Drawing.Size(139, 22);
             this.ToolStripMenuItemNew.Text = "Neu";
             // 
             // driveToolStripMenuItem
@@ -154,22 +154,22 @@ namespace VeraCrypt_Mounter
             // ToolStripMenuItemEditEntry
             // 
             this.ToolStripMenuItemEditEntry.Name = "ToolStripMenuItemEditEntry";
-            this.ToolStripMenuItemEditEntry.Size = new System.Drawing.Size(140, 22);
+            this.ToolStripMenuItemEditEntry.Size = new System.Drawing.Size(139, 22);
             this.ToolStripMenuItemEditEntry.Text = "Bearbeiten";
             this.ToolStripMenuItemEditEntry.Click += new System.EventHandler(this.ToolStripMenuEditEntry_Click);
             // 
             // ToolStripMenuItemRemove
             // 
             this.ToolStripMenuItemRemove.Name = "ToolStripMenuItemRemove";
-            this.ToolStripMenuItemRemove.Size = new System.Drawing.Size(140, 22);
+            this.ToolStripMenuItemRemove.Size = new System.Drawing.Size(139, 22);
             this.ToolStripMenuItemRemove.Text = "Löschen";
             this.ToolStripMenuItemRemove.Click += new System.EventHandler(this.ToolStripMenuDelete_Click);
             // 
             // automountToolStripMenuItem1
             // 
             this.automountToolStripMenuItem1.Name = "automountToolStripMenuItem1";
-            this.automountToolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
-            this.automountToolStripMenuItem1.Text = "Automount";
+            this.automountToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
+            this.automountToolStripMenuItem1.Text = "自动挂载";
             this.automountToolStripMenuItem1.Click += new System.EventHandler(this.automountToolStripMenuItem1_Click);
             // 
             // toolStripMenuItemSettings

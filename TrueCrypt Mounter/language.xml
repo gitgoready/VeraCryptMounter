@@ -12,19 +12,19 @@
   <Region name="Main">
     <Text key="buttonMount">
       <D>Einbinden</D>
-      <E>Mount</E>
+      <E>挂载</E>
     </Text>
     <Text key="buttonDismount">
       <D>Auswerfen</D>
-      <E>Dismount</E>
+      <E>卸载</E>
     </Text>
     <Text key="buttonMountContainer">
       <D>Einbinden</D>
-      <E>Mount</E>
+      <E>挂载</E>
     </Text>
     <Text key="buttonDismountContainer">
       <D>Auswerfen</D>
-      <E>Dismount</E>
+      <E>卸载</E>
     </Text>
     <Text key="buttonKeyfileContainerMount">
       <D>Schlüsselcontainer Einbinden</D>
@@ -36,11 +36,11 @@
     </Text>
     <Text key="groupBoxDrive">
       <D>Laufwerke</D>
-      <E>Drives</E>
+      <E>磁盘</E>
     </Text>
     <Text key="groupBoxContainer">
       <D>Container</D>
-      <E>Container</E>
+      <E>容器</E>
     </Text>
     <Text key="groupBoxKeyfileContainer">
       <D>Schlüsselcontainer</D>
@@ -48,51 +48,51 @@
     </Text>
     <Text key="ToolStripMenuItemNew">
       <D>Neu</D>
-      <E>New</E>
+      <E>新建</E>
     </Text>
     <Text key="ToolStripMenuItemFile">
       <D>Datei</D>
-      <E>File</E>
+      <E>文件</E>
     </Text>
     <Text key="ToolStripMenuItemClose">
       <D>Beenden</D>
-      <E>Close</E>
+      <E>关闭</E>
     </Text>
     <Text key="ToolStripMenuItemEdit">
       <D>Bearbeiten</D>
-      <E>Edit</E>
+      <E>编辑</E>
     </Text>
     <Text key="ContainerToolStripMenuItem">
       <D>Container</D>
-      <E>Container</E>
+      <E>容器</E>
     </Text>
     <Text key="ToolStripMenuItemEditEntry">
       <D>Bearbeiten</D>
-      <E>Edit</E>
+      <E>编辑</E>
     </Text>
     <Text key="ToolStripMenuItemRemove">
       <D>Löschen</D>
-      <E>Remove</E>
+      <E>删除</E>
     </Text>
     <Text key="DriveToolStripMenuItem">
       <D>Laufwerk</D>
-      <E>Drive</E>
+      <E>磁盘</E>
     </Text>
     <Text key="toolStripMenuItemSettings">
       <D>Einstellungen</D>
-      <E>Options</E>
+      <E>选项</E>
     </Text>
     <Text key="ToolStripMenuItemMainSettings">
       <D>Einstellungen</D>
-      <E>Settings</E>
+      <E>设置</E>
     </Text>
     <Text key="ToolStripMenuItemHelp">
       <D>Hilfe</D>
-      <E>Help</E>
+      <E>帮助</E>
     </Text>
     <Text key="toolStripMenuVersion">
       <D>Version</D>
-      <E>Version</E>
+      <E>版本</E>
     </Text>
     <Text key="ToolStripMenuItemNotifyKeyfilecontainer">
       <D>Schlüsselcontainer</D>
@@ -100,47 +100,47 @@
     </Text>
     <Text key="ToolStripMenuItemNotifyRestore">
       <D>Wiederherstellen</D>
-      <E>Restore</E>
+      <E>重置</E>
     </Text>
     <Text key="ToolStripMenuItemNotifyClose">
       <D>Schließen</D>
-      <E>Close</E>
+      <E>关闭</E>
     </Text>
     <Text key="ToolStripMenuItemNotifyMount">
       <D>Einbinden</D>
-      <E>Mount</E>
+      <E>挂载</E>
     </Text>
     <Text key="ToolStripMenuItemNotifyDismount">
       <D>Auswerfen</D>
-      <E>Dismount</E>
+      <E>卸载</E>
     </Text>
     <Text key="automountConfigToolStripMenuItem">
       <D>Autoeinbinden Einstellungen</D>
-      <E>Automount settings</E>
+      <E>自动挂载设置</E>
     </Text>
     <Text key="comboBoxDrives">
       <D>Bitte Laufwerk auswählen</D>
-      <E>Please select drive</E>
+      <E>请选择磁盘</E>
     </Text>
     <Text key="comboBoxContainer">
       <D>Bitte Container auswählen</D>
-      <E>Please select container</E>
+      <E>请选择容器</E>
     </Text>
     <Text key="NotificationDriveSucceed">
       <D>Laufwerk erfolgreich eingebunden</D>
-      <E>Drive mounted successfuly</E>
+      <E>磁盘挂载成功</E>
     </Text>
     <Text key="NotificationDriveFaild">
       <D>Laufwerk konnte nicht eingebunden werden</D>
-      <E>Drive mounting failed</E>
+      <E>磁盘挂载失败</E>
     </Text>
     <Text key="NotificationContainerFaild">
       <D>Container konnte nicht eingebunden werden</D>
-      <E>Mounting container failed</E>
+      <E>容器挂载失败</E>
     </Text>
     <Text key="NotificationContainerSucceed">
       <D>Container erfolgreich eingebunden</D>
-      <E>Container mounted successfuly</E>
+      <E>容器挂载成功</E>
     </Text>
     <Text key="NotificationKeyfilecontainerSucceed">
       <D>Schlüsselcontainer erfolgreich eingebunden</D>
@@ -152,19 +152,19 @@
     </Text>
     <Text key="NotificationDriveDismountSucceed">
       <D>Laufwerk erfolgreich ausgeworfen</D>
-      <E>Drive dismounted successfully</E>
+      <E>磁盘卸载成功</E>
     </Text>
     <Text key="NotificationDriveDismountFaild">
       <D>Laufwerk konnte nicht ausgeworfen werden</D>
-      <E>Dismounting drive failed</E>
+      <E>磁盘卸载失败</E>
     </Text>
     <Text key="NotificationContainerDismountFaild">
       <D>Container konnte nicht ausgeworfen werden</D>
-      <E>Dismounting container failed</E>
+      <E>卸载容器失败</E>
     </Text>
     <Text key="NotificationContainerDismountSucceed">
       <D>Container erfolgreich ausgeworfen</D>
-      <E>Container dismounted successfully</E>
+      <E>容器卸载成功</E>
     </Text>
     <Text key="NotificationKeyfilecontainerDismountSucceed">
       <D>Schlüsselcontainer erfolgreich ausgeworfen</D>
@@ -188,11 +188,11 @@
     </Text>
     <Text key="DiskNotPresentMessage">
       <D>Laufwerk nicht angeschlossen.</D>
-      <E>Drive not connected.</E>
+      <E>磁盘未连接</E>
     </Text>
     <Text key="Error">
       <D>Fehler</D>
-      <E>Error</E>
+      <E>错误</E>
     </Text>
     <Text key="KyfilecontainerUsed">
       <D>Laufwerksbuchstabe ist belegt oder Schlüsselcontainer ist schon eingebunden.</D>
@@ -264,11 +264,11 @@
     </Text>
     <Text key="Automountusbfailed">
       <D>: konnte nicht automatisch eingebunden werden.</D>
-      <E>: automaticaly mounting failed.</E>
+      <E>: 自动挂载失败.</E>
     </Text>
     <Text key="automountToolStripMenuItem">
       <D>Autoeinbinden</D>
-      <E>Automount</E>
+      <E>自动挂载</E>
     </Text>
     <Text key="Automount">
       <D>Automount wird ausgeführt</D>
@@ -288,19 +288,19 @@
   <Region name="NewDrive">
     <Text key="groupBoxSavePassword">
       <D>Passwort</D>
-      <E>Password</E>
+      <E>密码</E>
     </Text>
     <Text key="buttonSavePassword">
       <D>Speichern</D>
-      <E>Save</E>
+      <E>保存</E>
     </Text>
     <Text key="checkBoxPassword">
       <D>nicht speichern</D>
-      <E>don't save</E>
+      <E>不保存</E>
     </Text>
     <Text key="buttonShowPassword">
       <D>Anzeigen</D>
-      <E>Show</E>
+      <E>显示</E>
     </Text>
     <Text key="groupBoxPNPDeviceID">
       <D>PNPDeviceID</D>
@@ -312,23 +312,23 @@
     </Text>
     <Text key="lableDescription">
       <D>Name für das Laufwerk</D>
-      <E>Name for the Drive</E>
+      <E>挂载名</E>
     </Text>
     <Text key="lablePartition">
       <D>Verschlüsselte Partition</D>
-      <E>Encrypted partition</E>
+      <E>加密的分区</E>
     </Text>
     <Text key="lableKeyfile">
       <D>Schlüssel für das Laufwerk</D>
-      <E>Keyfile for the drive</E>
+      <E>磁盘Keyfile</E>
     </Text>
     <Text key="checkBoxNoKeyfile">
       <D>Kein Schlüssel benutzen</D>
-      <E>No Keyfile used</E>
+      <E>不使用Keyfile</E>
     </Text>
     <Text key="groupBoxMountoptions">
       <D>Einbindeoptionen</D>
-      <E>Mountoption</E>
+      <E>挂载选项</E>
     </Text>
     <Text key="checkBoxRemovable">
       <D>Wechsellaufwerk</D>
@@ -340,7 +340,7 @@
     </Text>
     <Text key="lableDriveletter">
       <D>Laufwerksbuchstaben und Hash</D>
-      <E>Driveletter and hash</E>
+      <E>挂载磁盘符及hash算法</E>
     </Text>
     <Text key="checkBoxPim">
       <D>PIM</D>
@@ -352,19 +352,19 @@
     </Text>
     <Text key="buttonOk">
       <D>OK</D>
-      <E>OK</E>
+      <E>确定</E>
     </Text>
     <Text key="buttonCancel">
       <D>Abbrechen</D>
-      <E>Cancel</E>
+      <E>取消</E>
     </Text>
     <Text key="NewDrive">
       <D>Neues Laufwerk</D>
-      <E>New Drive</E>
+      <E>新建加密盘</E>
     </Text>
     <Text key="DriveEdit">
       <D>Laufwerk bearbeiten</D>
-      <E>Edit Drive</E>
+      <E>编辑加密盘</E>
     </Text>
     <Text key="MessageMasterPasswordWrong">
       <D>Passwort falsch</D>
@@ -429,8 +429,8 @@
   </Region>
     <Region name="Mainsettings">
       <Text key="Form">
-        <D>Grundeinstellungen</D>
-        <E>Mainsettings</E>
+        <D>设置</D>
+        <E>设置</E>
       </Text>
       <Text key="groupBoxConfigPath">
         <D>Konfigurationsordner</D>
@@ -506,11 +506,11 @@
       </Text>
       <Text key="buttonOk">
         <D>OK</D>
-        <E>OK</E>
+        <E>确定</E>
       </Text>
       <Text key="buttonClose">
         <D>Schließen</D>
-        <E>Close</E>
+        <E>取消</E>
       </Text>
       <Text key="checkBox_startwithwin">
         <D>Starten mit Windows</D>
@@ -544,51 +544,51 @@
   <Region name="NewContainer">
     <Text key="Form">
       <D>Neuer Container</D>
-      <E>New Container</E>
+      <E>新建容器</E>
     </Text>
     <Text key="buttonShowPassword">
       <D>Zeigen</D>
-      <E>Show</E>
+      <E>显示</E>
     </Text>
     <Text key="checkBoxPassword">
       <D>nicht speichern</D>
-      <E>don't save</E>
+      <E>不显示</E>
     </Text>
     <Text key="groupBoxSavePassword">
       <D>Passwort Speichern</D>
-      <E>Save Password</E>
+      <E>保存密码</E>
     </Text>
     <Text key="buttonSavePassword">
       <D>Speicher</D>
-      <E>Save</E>
+      <E>保存</E>
     </Text>
     <Text key="groupBoxHash">
       <D>hash</D>
-      <E>hash</E>
+      <E>hash算法</E>
     </Text>
     <Text key="groupBoxDescription">
       <D>Beschreibung des Containers</D>
-      <E>Container description</E>
+      <E>容器名</E>
     </Text>
     <Text key="groupBoxPath">
       <D>Pfad zum Container</D>
-      <E>Path to the container</E>
+      <E>容器文件地址</E>
     </Text>
     <Text key="groupBoxKyfilename">
       <D>Schlüsseldateiname</D>
-      <E>Keyfilename</E>
+      <E>Keyfile文件</E>
     </Text>
     <Text key="groupBoxDriveletter">
       <D>Laufwerksbuchstabe</D>
-      <E>Driveletter</E>
+      <E>磁盘符</E>
     </Text>
     <Text key="groupBoxMountoptions">
       <D>Einbindeoptionen</D>
-      <E>Mountotions</E>
+      <E>加载选项</E>
     </Text>
     <Text key="checkBoxNoKeyfile">
       <D>Kein Schlüssel</D>
-      <E>No Keyfile</E>
+      <E>不使用Keyfile</E>
     </Text>
     <Text key="checkBoxRemovable">
       <D>Wechsellaufwerk</D>
@@ -600,15 +600,15 @@
     </Text>
     <Text key="buttonOk">
       <D>OK</D>
-      <E>OK</E>
+      <E>确定</E>
     </Text>
     <Text key="buttonClose">
       <D>Schließen</D>
-      <E>Close</E>
+      <E>关闭</E>
     </Text>
     <Text key="buttonOpenContainer">
       <D>Öffnen</D>
-      <E>Open</E>
+      <E>打开</E>
     </Text>
     <Text key="comboBoxDrives">
       <D>Bitte Laufwerk auswählen</D>
@@ -646,15 +646,15 @@
   <Region name="Passwordinput">
     <Text key="FormMaster">
       <D>Master Passwort</D>
-      <E>Master password</E>
+      <E>管理员密码</E>
     </Text>
     <Text key="Form">
       <D>Passworteingabe</D>
-      <E>Passwordinput</E>
+      <E>输入密码</E>
     </Text>
     <Text key ="labelPasswordMaster">
       <D>Bitte Master Passwort eingeben!</D>
-      <E>Please input master password!</E>
+      <E>请输入管理员密码!</E>
     </Text>
     <Text key="labelPim">
       <D>PIM</D>
@@ -662,15 +662,15 @@
     </Text>
     <Text key="labelPassword">
       <D>Bitte Passwort eingeben</D>
-      <E>Please input password</E>
+      <E>请输入密码</E>
     </Text>
     <Text key="buttonOk">
       <D>OK</D>
-      <E>OK</E>
+      <E>确定</E>
     </Text>
     <Text key="MessagePasswordEmty">
       <D>Passwort darf nicht leer sein</D>
-      <E>Password is emty</E>
+      <E>密码空</E>
     </Text>
     <Text key="MessagePimWrongValue">
       <D>PIM darf nur aus Zahlen bestehen. Bei einer Passwortlänge kleiner als 20 Zeichen, darf der PIM nicht kleiner als 485 sein.</D>
@@ -678,7 +678,7 @@
     </Text>
     <Text key="MessageDrivletterIsUsed">
       <D>Laufwerksbuchstabe ist benutzt von: </D>
-      <E>Driveletter is used by: </E>
+      <E>磁盘符被占用: </E>
     </Text>
   </Region>
   <Region name="ContainerselectionPortable">
@@ -692,11 +692,11 @@
     </Text>
     <Text key="buttonOk">
       <D>OK</D>
-      <E>OK</E>
+      <E>确定</E>
     </Text>
     <Text key="buttonClose">
       <D>Schließen</D>
-      <E>Close</E>
+      <E>关闭</E>
     </Text>
     <Text key="MessageNoSelection">
       <D>Bitte Schlüsselcontainer auswählen.</D>
@@ -836,31 +836,31 @@
   <Region name="SelectPartition">
     <Text key="labelDisk">
       <D>Laufwerk</D>
-      <E>Disk</E>
+      <E>磁盘</E>
     </Text>
     <Text key="labelPartition">
       <D>Partition</D>
-      <E>partition</E>
+      <E>分区</E>
     </Text>
     <Text key="buttonOK">
       <D>OK</D>
-      <E>OK</E>
+      <E>确定</E>
     </Text>
     <Text key="buttonCancel">
       <D>Abbrechen</D>
-      <E>Cancel</E>
+      <E>取消</E>
     </Text>
     <Text key="SelectPartition">
       <D>Partitionswahl</D>
-      <E>SelectPartition</E>
+      <E>选择分区</E>
     </Text>
     <Text key="MessageSelectPartition">
       <D>Bitte Laufwerk und Partition Auswählen</D>
-      <E>Please select drive and partition</E>
+      <E>请选择磁盘和分区</E>
     </Text>
     <Text key="MessageSelectDrive">
       <D>Bitte ein Laufwerk auswählen</D>
-      <E>Please select a drive.</E>
+      <E>请选择磁盘</E>
     </Text>
   </Region>
   <Region name="AutomountUsb">

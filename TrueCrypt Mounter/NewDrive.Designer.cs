@@ -180,7 +180,7 @@ namespace VeraCrypt_Mounter
             this.buttonChosePartition.Name = "buttonChosePartition";
             this.buttonChosePartition.Size = new System.Drawing.Size(75, 21);
             this.buttonChosePartition.TabIndex = 10;
-            this.buttonChosePartition.Text = "Select";
+            this.buttonChosePartition.Text = "选择";
             this.buttonChosePartition.UseVisualStyleBackColor = true;
             this.buttonChosePartition.Click += new System.EventHandler(this.buttonChosePartition_Click);
             // 

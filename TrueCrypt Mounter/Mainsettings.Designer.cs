@@ -156,7 +156,7 @@
             // groupBoxDebug
             // 
             this.groupBoxDebug.Controls.Add(this.checkBoxSilentMode);
-            this.groupBoxDebug.Location = new System.Drawing.Point(153, 254);
+            this.groupBoxDebug.Location = new System.Drawing.Point(153, 302);
             this.groupBoxDebug.Name = "groupBoxDebug";
             this.groupBoxDebug.Size = new System.Drawing.Size(146, 40);
             this.groupBoxDebug.TabIndex = 15;
@@ -320,7 +320,7 @@
             // groupBoxLanguage
             // 
             this.groupBoxLanguage.Controls.Add(this.comboBoxLanguage);
-            this.groupBoxLanguage.Location = new System.Drawing.Point(9, 254);
+            this.groupBoxLanguage.Location = new System.Drawing.Point(9, 302);
             this.groupBoxLanguage.Name = "groupBoxLanguage";
             this.groupBoxLanguage.Size = new System.Drawing.Size(138, 40);
             this.groupBoxLanguage.TabIndex = 13;
@@ -369,7 +369,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 296);
+            this.ClientSize = new System.Drawing.Size(465, 295);
             this.Controls.Add(this.groupBoxConfigPath);
             this.Controls.Add(this.groupBoxLanguage);
             this.Controls.Add(this.groupBoxUsesettings);

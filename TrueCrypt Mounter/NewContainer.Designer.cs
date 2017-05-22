@@ -195,7 +195,7 @@
             this.buttonSelectKeyfile.Name = "buttonSelectKeyfile";
             this.buttonSelectKeyfile.Size = new System.Drawing.Size(101, 28);
             this.buttonSelectKeyfile.TabIndex = 9;
-            this.buttonSelectKeyfile.Text = "open";
+            this.buttonSelectKeyfile.Text = "打开";
             this.buttonSelectKeyfile.UseVisualStyleBackColor = true;
             this.buttonSelectKeyfile.Click += new System.EventHandler(this.buttonSelectKeyfile_Click);
             // 
