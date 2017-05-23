@@ -179,6 +179,7 @@ namespace VeraCrypt_Mounter
             this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
             this.toolStripMenuItemSettings.Size = new System.Drawing.Size(96, 21);
             this.toolStripMenuItemSettings.Text = "Einstellungen";
+            this.toolStripMenuItemSettings.Visible = false;
             // 
             // ToolStripMenuItemMainSettings
             // 

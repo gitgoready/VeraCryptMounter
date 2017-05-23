@@ -224,7 +224,7 @@
     </Text>
     <Text key="DriveSelectionFaild">
       <D>Kein Laufwerk ausgewählt</D>
-      <E>No drive selected</E>
+      <E>未选择挂载盘</E>
     </Text>
     <Text key="MessageWarning">
       <D>Warnung</D>
@@ -232,7 +232,7 @@
     </Text>
     <Text key="EditMounted">
       <D>Laufwerk oder Container noch eingebunden. Bitte erst auswerfen.</D>
-      <E>Drive or container mounted. Please dismount first.</E>  
+      <E>磁盘或容器已挂载. 请先卸载.</E>  
     </Text>
     <Text key="toolStripMenuItem_Drive_new">
       <D>Neu</D>

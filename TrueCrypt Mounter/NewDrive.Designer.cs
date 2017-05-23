@@ -40,15 +40,8 @@ namespace VeraCrypt_Mounter
             this.lableKeyfile = new System.Windows.Forms.Label();
             this.textBoxKeyfile = new System.Windows.Forms.TextBox();
             this.checkBoxNoKeyfile = new System.Windows.Forms.CheckBox();
-            this.checkBoxRemovable = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonChosePartition = new System.Windows.Forms.Button();
-            this.groupBoxMountoptions = new System.Windows.Forms.GroupBox();
-            this.checkBoxTruecrypt = new System.Windows.Forms.CheckBox();
-            this.checkBoxPim = new System.Windows.Forms.CheckBox();
-            this.checkBoxAutomountStart = new System.Windows.Forms.CheckBox();
-            this.checkBoxAutomountUsb = new System.Windows.Forms.CheckBox();
-            this.checkBoxReadonly = new System.Windows.Forms.CheckBox();
             this.groupBoxDriveletter = new System.Windows.Forms.GroupBox();
             this.comboBoxHash = new System.Windows.Forms.ComboBox();
             this.comboBoxDriveletter = new System.Windows.Forms.ComboBox();
@@ -58,11 +51,18 @@ namespace VeraCrypt_Mounter
             this.checkBoxPassword = new System.Windows.Forms.CheckBox();
             this.buttonShowPassword = new System.Windows.Forms.Button();
             this.buttonSavePassword = new System.Windows.Forms.Button();
+            this.checkBoxRemovable = new System.Windows.Forms.CheckBox();
+            this.checkBoxReadonly = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutomountUsb = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutomountStart = new System.Windows.Forms.CheckBox();
+            this.checkBoxPim = new System.Windows.Forms.CheckBox();
+            this.checkBoxTruecrypt = new System.Windows.Forms.CheckBox();
+            this.groupBoxMountoptions = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
-            this.groupBoxMountoptions.SuspendLayout();
             this.groupBoxDriveletter.SuspendLayout();
             this.groupBox_PNPDeviceID.SuspendLayout();
             this.groupBoxSavePassword.SuspendLayout();
+            this.groupBoxMountoptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxDescription
@@ -93,7 +93,7 @@ namespace VeraCrypt_Mounter
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(210, 399);
+            this.buttonOk.Location = new System.Drawing.Point(210, 304);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 21);
             this.buttonOk.TabIndex = 5;
@@ -110,7 +110,7 @@ namespace VeraCrypt_Mounter
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(129, 399);
+            this.buttonCancel.Location = new System.Drawing.Point(129, 304);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 21);
             this.buttonCancel.TabIndex = 6;
@@ -148,16 +148,6 @@ namespace VeraCrypt_Mounter
             this.checkBoxNoKeyfile.UseVisualStyleBackColor = true;
             this.checkBoxNoKeyfile.CheckStateChanged += new System.EventHandler(this.CheckboxNoKeyfileCheckStateChanged);
             // 
-            // checkBoxRemovable
-            // 
-            this.checkBoxRemovable.AutoSize = true;
-            this.checkBoxRemovable.Location = new System.Drawing.Point(7, 18);
-            this.checkBoxRemovable.Name = "checkBoxRemovable";
-            this.checkBoxRemovable.Size = new System.Drawing.Size(78, 16);
-            this.checkBoxRemovable.TabIndex = 10;
-            this.checkBoxRemovable.Text = "Removable";
-            this.checkBoxRemovable.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.buttonChosePartition);
@@ -184,76 +174,11 @@ namespace VeraCrypt_Mounter
             this.buttonChosePartition.UseVisualStyleBackColor = true;
             this.buttonChosePartition.Click += new System.EventHandler(this.buttonChosePartition_Click);
             // 
-            // groupBoxMountoptions
-            // 
-            this.groupBoxMountoptions.Controls.Add(this.checkBoxTruecrypt);
-            this.groupBoxMountoptions.Controls.Add(this.checkBoxPim);
-            this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountStart);
-            this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountUsb);
-            this.groupBoxMountoptions.Controls.Add(this.checkBoxReadonly);
-            this.groupBoxMountoptions.Controls.Add(this.checkBoxRemovable);
-            this.groupBoxMountoptions.Location = new System.Drawing.Point(2, 171);
-            this.groupBoxMountoptions.Name = "groupBoxMountoptions";
-            this.groupBoxMountoptions.Size = new System.Drawing.Size(292, 95);
-            this.groupBoxMountoptions.TabIndex = 12;
-            this.groupBoxMountoptions.TabStop = false;
-            this.groupBoxMountoptions.Text = "Mountoptions";
-            // 
-            // checkBoxTruecrypt
-            // 
-            this.checkBoxTruecrypt.AutoSize = true;
-            this.checkBoxTruecrypt.Location = new System.Drawing.Point(179, 36);
-            this.checkBoxTruecrypt.Name = "checkBoxTruecrypt";
-            this.checkBoxTruecrypt.Size = new System.Drawing.Size(78, 16);
-            this.checkBoxTruecrypt.TabIndex = 15;
-            this.checkBoxTruecrypt.Text = "TrueCrypt";
-            this.checkBoxTruecrypt.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxPim
-            // 
-            this.checkBoxPim.AutoSize = true;
-            this.checkBoxPim.Location = new System.Drawing.Point(179, 18);
-            this.checkBoxPim.Name = "checkBoxPim";
-            this.checkBoxPim.Size = new System.Drawing.Size(42, 16);
-            this.checkBoxPim.TabIndex = 8;
-            this.checkBoxPim.Text = "PIM";
-            this.checkBoxPim.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAutomountStart
-            // 
-            this.checkBoxAutomountStart.AutoSize = true;
-            this.checkBoxAutomountStart.Location = new System.Drawing.Point(7, 73);
-            this.checkBoxAutomountStart.Name = "checkBoxAutomountStart";
-            this.checkBoxAutomountStart.Size = new System.Drawing.Size(174, 16);
-            this.checkBoxAutomountStart.TabIndex = 14;
-            this.checkBoxAutomountStart.Text = "Automount by programstart";
-            this.checkBoxAutomountStart.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAutomountUsb
-            // 
-            this.checkBoxAutomountUsb.AutoSize = true;
-            this.checkBoxAutomountUsb.Location = new System.Drawing.Point(7, 54);
-            this.checkBoxAutomountUsb.Name = "checkBoxAutomountUsb";
-            this.checkBoxAutomountUsb.Size = new System.Drawing.Size(78, 16);
-            this.checkBoxAutomountUsb.TabIndex = 8;
-            this.checkBoxAutomountUsb.Text = "Automount";
-            this.checkBoxAutomountUsb.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxReadonly
-            // 
-            this.checkBoxReadonly.AutoSize = true;
-            this.checkBoxReadonly.Location = new System.Drawing.Point(7, 36);
-            this.checkBoxReadonly.Name = "checkBoxReadonly";
-            this.checkBoxReadonly.Size = new System.Drawing.Size(72, 16);
-            this.checkBoxReadonly.TabIndex = 13;
-            this.checkBoxReadonly.Text = "Readonly";
-            this.checkBoxReadonly.UseVisualStyleBackColor = true;
-            // 
             // groupBoxDriveletter
             // 
             this.groupBoxDriveletter.Controls.Add(this.comboBoxHash);
             this.groupBoxDriveletter.Controls.Add(this.comboBoxDriveletter);
-            this.groupBoxDriveletter.Location = new System.Drawing.Point(2, 310);
+            this.groupBoxDriveletter.Location = new System.Drawing.Point(2, 215);
             this.groupBoxDriveletter.Name = "groupBoxDriveletter";
             this.groupBoxDriveletter.Size = new System.Drawing.Size(292, 44);
             this.groupBoxDriveletter.TabIndex = 13;
@@ -283,7 +208,7 @@ namespace VeraCrypt_Mounter
             // groupBox_PNPDeviceID
             // 
             this.groupBox_PNPDeviceID.Controls.Add(this.textBox_PNPDeviceID);
-            this.groupBox_PNPDeviceID.Location = new System.Drawing.Point(2, 354);
+            this.groupBox_PNPDeviceID.Location = new System.Drawing.Point(2, 259);
             this.groupBox_PNPDeviceID.Name = "groupBox_PNPDeviceID";
             this.groupBox_PNPDeviceID.Size = new System.Drawing.Size(292, 39);
             this.groupBox_PNPDeviceID.TabIndex = 14;
@@ -303,7 +228,7 @@ namespace VeraCrypt_Mounter
             this.groupBoxSavePassword.Controls.Add(this.checkBoxPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonShowPassword);
             this.groupBoxSavePassword.Controls.Add(this.buttonSavePassword);
-            this.groupBoxSavePassword.Location = new System.Drawing.Point(2, 267);
+            this.groupBoxSavePassword.Location = new System.Drawing.Point(2, 172);
             this.groupBoxSavePassword.Name = "groupBoxSavePassword";
             this.groupBoxSavePassword.Size = new System.Drawing.Size(292, 42);
             this.groupBoxSavePassword.TabIndex = 20;
@@ -341,12 +266,88 @@ namespace VeraCrypt_Mounter
             this.buttonSavePassword.UseVisualStyleBackColor = true;
             this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
             // 
+            // checkBoxRemovable
+            // 
+            this.checkBoxRemovable.AutoSize = true;
+            this.checkBoxRemovable.Location = new System.Drawing.Point(7, 18);
+            this.checkBoxRemovable.Name = "checkBoxRemovable";
+            this.checkBoxRemovable.Size = new System.Drawing.Size(78, 16);
+            this.checkBoxRemovable.TabIndex = 10;
+            this.checkBoxRemovable.Text = "Removable";
+            this.checkBoxRemovable.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxReadonly
+            // 
+            this.checkBoxReadonly.AutoSize = true;
+            this.checkBoxReadonly.Location = new System.Drawing.Point(7, 36);
+            this.checkBoxReadonly.Name = "checkBoxReadonly";
+            this.checkBoxReadonly.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxReadonly.TabIndex = 13;
+            this.checkBoxReadonly.Text = "Readonly";
+            this.checkBoxReadonly.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAutomountUsb
+            // 
+            this.checkBoxAutomountUsb.AutoSize = true;
+            this.checkBoxAutomountUsb.Location = new System.Drawing.Point(7, 54);
+            this.checkBoxAutomountUsb.Name = "checkBoxAutomountUsb";
+            this.checkBoxAutomountUsb.Size = new System.Drawing.Size(78, 16);
+            this.checkBoxAutomountUsb.TabIndex = 8;
+            this.checkBoxAutomountUsb.Text = "Automount";
+            this.checkBoxAutomountUsb.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAutomountStart
+            // 
+            this.checkBoxAutomountStart.AutoSize = true;
+            this.checkBoxAutomountStart.Location = new System.Drawing.Point(7, 73);
+            this.checkBoxAutomountStart.Name = "checkBoxAutomountStart";
+            this.checkBoxAutomountStart.Size = new System.Drawing.Size(174, 16);
+            this.checkBoxAutomountStart.TabIndex = 14;
+            this.checkBoxAutomountStart.Text = "Automount by programstart";
+            this.checkBoxAutomountStart.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPim
+            // 
+            this.checkBoxPim.AutoSize = true;
+            this.checkBoxPim.Location = new System.Drawing.Point(179, 18);
+            this.checkBoxPim.Name = "checkBoxPim";
+            this.checkBoxPim.Size = new System.Drawing.Size(42, 16);
+            this.checkBoxPim.TabIndex = 8;
+            this.checkBoxPim.Text = "PIM";
+            this.checkBoxPim.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTruecrypt
+            // 
+            this.checkBoxTruecrypt.AutoSize = true;
+            this.checkBoxTruecrypt.Location = new System.Drawing.Point(179, 36);
+            this.checkBoxTruecrypt.Name = "checkBoxTruecrypt";
+            this.checkBoxTruecrypt.Size = new System.Drawing.Size(78, 16);
+            this.checkBoxTruecrypt.TabIndex = 15;
+            this.checkBoxTruecrypt.Text = "TrueCrypt";
+            this.checkBoxTruecrypt.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxMountoptions
+            // 
+            this.groupBoxMountoptions.Controls.Add(this.checkBoxTruecrypt);
+            this.groupBoxMountoptions.Controls.Add(this.checkBoxPim);
+            this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountStart);
+            this.groupBoxMountoptions.Controls.Add(this.checkBoxAutomountUsb);
+            this.groupBoxMountoptions.Controls.Add(this.checkBoxReadonly);
+            this.groupBoxMountoptions.Controls.Add(this.checkBoxRemovable);
+            this.groupBoxMountoptions.Location = new System.Drawing.Point(2, 171);
+            this.groupBoxMountoptions.Name = "groupBoxMountoptions";
+            this.groupBoxMountoptions.Size = new System.Drawing.Size(292, 10);
+            this.groupBoxMountoptions.TabIndex = 12;
+            this.groupBoxMountoptions.TabStop = false;
+            this.groupBoxMountoptions.Text = "Mountoptions";
+            this.groupBoxMountoptions.Visible = false;
+            // 
             // NewDrive
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.DropList;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 426);
+            this.ClientSize = new System.Drawing.Size(297, 330);
             this.Controls.Add(this.groupBoxSavePassword);
             this.Controls.Add(this.groupBox_PNPDeviceID);
             this.Controls.Add(this.groupBoxDriveletter);
@@ -364,13 +365,13 @@ namespace VeraCrypt_Mounter
             this.Text = "选择磁盘分区";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBoxMountoptions.ResumeLayout(false);
-            this.groupBoxMountoptions.PerformLayout();
             this.groupBoxDriveletter.ResumeLayout(false);
             this.groupBox_PNPDeviceID.ResumeLayout(false);
             this.groupBox_PNPDeviceID.PerformLayout();
             this.groupBoxSavePassword.ResumeLayout(false);
             this.groupBoxSavePassword.PerformLayout();
+            this.groupBoxMountoptions.ResumeLayout(false);
+            this.groupBoxMountoptions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -386,17 +387,10 @@ namespace VeraCrypt_Mounter
         private System.Windows.Forms.Label lableKeyfile;
         private System.Windows.Forms.TextBox textBoxKeyfile;
         private CheckBox checkBoxNoKeyfile;
-        private CheckBox checkBoxRemovable;
         private GroupBox groupBox1;
-        private GroupBox groupBoxMountoptions;
-        private CheckBox checkBoxReadonly;
         private GroupBox groupBoxDriveletter;
         private ComboBox comboBoxDriveletter;
-        private CheckBox checkBoxAutomountUsb;
-        private CheckBox checkBoxAutomountStart;
         private Button buttonChosePartition;
-        private CheckBox checkBoxTruecrypt;
-        private CheckBox checkBoxPim;
         private ComboBox comboBoxHash;
         private GroupBox groupBox_PNPDeviceID;
         private TextBox textBox_PNPDeviceID;
@@ -404,5 +398,12 @@ namespace VeraCrypt_Mounter
         private Button buttonSavePassword;
         private CheckBox checkBoxPassword;
         private Button buttonShowPassword;
+        private CheckBox checkBoxRemovable;
+        private CheckBox checkBoxReadonly;
+        private CheckBox checkBoxAutomountUsb;
+        private CheckBox checkBoxAutomountStart;
+        private CheckBox checkBoxPim;
+        private CheckBox checkBoxTruecrypt;
+        private GroupBox groupBoxMountoptions;
     }
 }

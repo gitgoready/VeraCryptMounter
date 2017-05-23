@@ -24,6 +24,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using Microsoft.Win32;
 
 namespace VeraCrypt_Mounter
 {
@@ -288,6 +289,8 @@ namespace VeraCrypt_Mounter
 
             comboBoxDrives.ContextMenuStrip = contextMenuStripDrive;
             comboBoxContainer.ContextMenuStrip =contextMenuStripContainer ;
+
+            //_config  System.AppDomain.CurrentDomain.BaseDirectory+"tcm.ico"
 
             config();
             // Get Singelton for config
@@ -586,6 +589,24 @@ namespace VeraCrypt_Mounter
             toolStripProgressBar.MarqueeAnimationSpeed = 30;
             Busy();
             Cursor = Cursors.WaitCursor;
+
+            try
+            {
+                //string str7 = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+                RegistryKey key = Registry.LocalMachine;
+                RegistryKey divericonsubkey = key.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\DriveIcons\\" + mvd.driveletter[0] + "\\DefaultIcon");
+                divericonsubkey.SetValue("", System.AppDomain.CurrentDomain.BaseDirectory + "tcm.ico");
+                RegistryKey diverlabelsubkey = key.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\DriveIcons\\" + mvd.driveletter[0] + "\\DefaultLabel");
+                diverlabelsubkey.SetValue("", "安全磁盘");
+                key.Close();
+            }
+            catch (Exception ex)
+            {
+                RegistryKey key = Registry.LocalMachine;
+                key.DeleteSubKeyTree("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\DriveIcons\\" + mvd.driveletter[0], false); //该方法无返回值，直接调用即可
+                key.Close();
+            }
+
             return;
         }
 
@@ -627,6 +648,10 @@ namespace VeraCrypt_Mounter
             Busy();
 
             Cursor = Cursors.WaitCursor;
+
+            RegistryKey key = Registry.LocalMachine;
+            key.DeleteSubKeyTree("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\DriveIcons\\" + dletter[0], false); //该方法无返回值，直接调用即可
+            key.Close();
             return;
         }
 

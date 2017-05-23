@@ -42,11 +42,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(16, 9);
+            this.label1.Location = new System.Drawing.Point(5, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(243, 30);
+            this.label1.Size = new System.Drawing.Size(266, 30);
             this.label1.TabIndex = 0;
-            this.label1.Text = "国瑞信安磁盘加密软件";
+            this.label1.Text = "国瑞信安磁盘加解密软件";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
